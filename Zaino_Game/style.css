@@ -1,0 +1,195 @@
+
+
+
+p {
+  font-size:2ch;
+}
+
+h2 {
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 20px;
+  font-size: 2ch;
+}
+
+
+
+.grid-container {
+display: grid;
+grid-template-areas: 
+'tit tit tit tit tit' 
+'alg alg con usr usr';
+background-color: #eaeceb;
+width: 90%;
+margin: 0% 10%;
+
+}
+.grid-container div {
+
+  text-align: center;
+  padding: 5px 0;
+  border-radius:10px;
+
+}
+
+
+.game-space {
+    background-color: white;
+    cursor: pointer;
+    width: 100%;
+    height: 450px;
+    border: 2px dashed #330aea;
+    display: grid;
+    grid-template-areas: 
+    'items'
+    'zaino';
+    gap: 10px;
+}
+
+
+.itemContainer, .backpack {
+    width: 100%;
+    height: 95%;
+    border: 2px solid black;
+}
+
+
+.backpack {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  align-items: center;
+  column-gap: 0;
+  row-gap: 5px;
+  padding: 2px;
+  background-color: rgb(244, 201, 144);
+  grid-area: zaino;
+}
+
+.backpack-cell {
+  width: 100%;
+  height: 95%;
+  border: 1px solid #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+
+ .itemContainer {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  column-gap: 1px;
+  row-gap: 4px;
+  padding: 5px;
+  background-color: #f0f0f0;
+  position: relative;
+}
+
+.item , .item-part{
+
+  border-radius: 5px;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  align-items: center;
+  justify-content: center; 
+  gap: 1px; 
+  padding: 2px;
+  cursor: pointer;
+}
+
+
+ 
+.item-cell {
+  background-color: rgba(255, 255, 255, 0.218);
+  border: 1px solid rgba(0, 0, 0, 0.1); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.coin {
+  width: 21px;
+  height: 13px;
+  aspect-ratio: 1;
+  background-color: gold;
+  border-radius: 50%;
+}
+
+.selected {
+    outline: 3px solid green;
+}
+
+
+.message {
+  font-size: 1.5rem;
+  color: red;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+
+#algo-section {
+border:4px rgb(0, 0, 0) solid;
+color:#eaeceb;
+grid-area: alg;
+height:100%;
+margin-right:2%;
+gap: 5px;
+background-color: rgb(68,114,196);
+}
+
+
+
+#user-section {
+border:4px rgb(0, 0, 0) solid;
+color:#eaeceb;
+grid-area: usr;
+height:100%;
+margin-left: 10%;
+gap: 5px;
+background-color: rgb(68,114,196);
+}
+
+
+
+.controls {
+grid-area: con;
+display: flex;
+flex-direction:column;
+text-align: center;
+padding: 15%;
+gap: 10px;
+
+}
+
+select, button {
+  cursor: pointer;
+  background-color: rgb(109,176,63);
+  padding:5%;
+  border-radius: 10px;
+
+}
+
+button:hover {
+  background: #218838;
+}
+
+#game-results {
+  display: block;
+  padding: 5px 5px;
+  border-radius:10px;
+  font-size: medium;
+  font-weight: normal;
+  color: #218838;
+}
+
+

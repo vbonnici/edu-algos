@@ -1,0 +1,92 @@
+
+
+
+html{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eaeceb;
+    background-image: "logoGrigio.png";
+}
+
+
+.title{
+    grid-area: tit;
+    margin-top:2%;
+    height:60px;
+    position: inherit;
+    text-align: center;
+    
+    padding: 20px 0;
+    border-radius: 20px;
+    font-size: 3ch;
+    font-weight: bold;
+    font-style: italic;
+
+    
+}
+
+
+header{
+    background-color: rgb(68,114,196);
+    width:110%;
+    margin-left:-8px;
+    margin-top:-8px;
+    gap: 5px;
+    color:white;
+    font-family:Lato, Geneva, Tahoma, sans-serif;
+    display:flex;
+
+    height:fit-content;
+  
+  }
+  
+  #id_logo{
+    grid-area:logo;
+    float:left;
+    margin:20px 0px 20px 20px;
+    width:50%; 
+  }
+
+  #univ {
+    float: right;
+    align-items:center;
+   
+    text-align:center;
+    position: relative;
+    width: 50%;
+    padding-top: 25px;
+    font-size: 40px;
+    height: 60px;
+
+
+  }
+
+
+.subheader{
+background-color: rgb(109,176,63);
+color:white;
+
+width:110%;
+height:28px;
+
+margin-left:-8px;
+padding-top:5px;
+
+font-family:Lato, Geneva, Tahoma, sans-serif;
+font-size:2.5ch;
+
+text-align:center;
+
+}
+
+.button {
+  background-color: rgb(255, 170, 0); 
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+  padding: 5px;
+  text-decoration:none;
+  border-color: black;
+}
+
+.button:hover {
+  background: rgb(193, 132, 10);
+}
