@@ -322,6 +322,54 @@ class Algorithm {
         return false;
     }
 
+
+    executeDP() {
+        if (!this.items.length) return false;
+
+        const capacity = this.backpack.maxWeight - this.backpack.currentWeight;
+        if (capacity <= 0) return false;
+
+        const n = this.items.length;
+        const dp = Array.from({ length: n + 1 }, () => Array(capacity + 1).fill(0));
+
+        // Costruzione tabella DP
+        for (let i = 1; i <= n; i++) {
+            const { value, weight } = this.items[i - 1].itemData;
+            for (let w = 0; w <= capacity; w++) {
+                if (weight <= w) {
+                    dp[i][w] = Math.max(dp[i - 1][w], dp[i - 1][w - weight] + value);
+                } else {
+                    dp[i][w] = dp[i - 1][w];
+                }
+            }
+        }
+
+        // Individua l'oggetto scelto
+        let w = capacity;
+        let chosenIndex = -1;
+        for (let i = n; i > 0; i--) {
+            if (dp[i][w] !== dp[i - 1][w]) {
+                chosenIndex = i - 1;
+                break;
+            }
+        }
+
+        if (chosenIndex === -1) return false;
+
+        // Ottieni l'oggetto e tentativo di inserimento
+        const bestItem = this.items[chosenIndex];
+        const inserted = this.backpack.insertItem(bestItem, this.container);
+
+        if (inserted) {
+            this.updateDisplay();
+            this.items.splice(chosenIndex, 1); // Rimuovi oggetto usato
+            return true;
+        }
+
+        return false;
+    }
+
+
     reset() {
         this.items = [];
         this.sortedItems = [];
@@ -375,6 +423,7 @@ class GameController {
         this.algorithm.backpack.createGrid();
 
         const itemsDati = this.generateItemsDati(); // oppure usare la lista alternativa che si trova all'inizio
+       
         this.player.items = [];
         this.algorithm.items = [];
 
@@ -389,19 +438,39 @@ class GameController {
         this.algorithm.loadItems(this.algorithm.items);
     }
 
-    generateItemsDati() {
-        const numItems = 5;
-        const items = [];
+generateItemsDati() {
+    const numItems = 5;
+    const items = [];
+
+    let totalWeight = 0;
+
+    while (true) {
+        items.length = 0;
+        totalWeight = 0;
 
         for (let i = 0; i < numItems; i++) {
-            const weight = Math.floor(Math.random() * 10) + 1; 
-            const value = Math.floor(Math.random() * weight) + 1; 
+            let weight, value;
+
+            // Assicura weight > 1
+            weight = Math.floor(Math.random() * 8) + 2; // 2..9
+
+            // Assicura value < weight e value >= 1
+            value = Math.floor(Math.random() * (weight - 1)) + 1;
+
             const itemData = new ItemData(weight, value);
             items.push(itemData);
+            totalWeight += weight;
         }
 
-        return items;
+        // Esce dal ciclo solo se somma pesi è maggiore del limite
+        if (totalWeight > maxWeight) {
+            break;
+        }
     }
+
+    return items;
+}
+
 
     endGame() {
         if (!this.gameActive) return;
