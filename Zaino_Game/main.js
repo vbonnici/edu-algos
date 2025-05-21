@@ -483,7 +483,7 @@ function algoMove() {
     }
     
     if (!success) {
-        messaggio1.textContent = "L'algoritmo ha finoto di ordinare!";
+        messaggio1.textContent = "L'algoritmo ha finito di ordinare!";
         algoHasFinished = true;
     }
 
