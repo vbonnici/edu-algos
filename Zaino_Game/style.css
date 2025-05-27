@@ -100,10 +100,35 @@ margin: 0% 10%;
   justify-content: center; 
   gap: 1px; 
   padding: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
   cursor: pointer;
 }
 
+.item:hover .custom-tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+}
 
+.custom-tooltip {
+  position: absolute;
+  bottom: 0%;
+  left: 100%;
+  transform: translateX(-50%);
+  background: rgb(154, 201, 236);
+  color: black;
+  font-size:medium;
+  padding: 5px 5px;
+  border-radius: 1px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+  z-index: 100;
+  pointer-events: none;
+}
  
 .item-cell {
   background-color: rgba(255, 255, 255, 0.218);
@@ -121,6 +146,16 @@ margin: 0% 10%;
   aspect-ratio: 1;
   background-color: gold;
   border-radius: 50%;
+}
+
+.peso-cell {
+  background-color: rgb(244, 201, 144);
+  border: 2px solid rgba(0, 0, 0, 0.1); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 14px;
+  width: 22px;
 }
 
 .selected {
@@ -192,4 +227,8 @@ button:hover {
   color: #218838;
 }
 
-
+.valori-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px; 
+}

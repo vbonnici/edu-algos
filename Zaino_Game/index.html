@@ -47,13 +47,14 @@
                 </div>
 
                 <div class="punti">
-                    valore: <span id="algo-value">0</span> <br>
-                    Peso: <span id="algo-weight">0</span> / <span id="max-weight">20</span>
+                    valore: <span class="valori-display"><span id="algo-value">0</span><span class="coin"></span></span><br>
+                    Peso: <span class="valori-display"><span id="algo-weight">0</span> / <span id="max-weight">20</span><span class="peso-cell"></span></span>
                 </div>
             </div>
 
             <div class="controls">
-
+                
+                <button id="start-game">Reset e Inizia Partita</button><br>
                 <label for="algorithmSelect" style="font-weight: bold; display: block; margin-bottom: 5px;">
                     Scegli l'algoritmo da sfidare:
                 </label>
@@ -62,7 +63,7 @@
                     <option value="dp">Programmazione Dinamica</option>
                     <!--<option value="branch_bound">Branch and Bound</option>-->
                 </select><br>
-                <button id="start-game">Inizia Partita</button>
+                
                 <button id="insert-item">Inserisci</button>
                 <button id="remove-item">Rimuovi</button>
                 <button id="end-work">fine lavoro</button>    
@@ -82,8 +83,8 @@
                 </div>
 
                 <div class="punti">
-                    valore: <span id="user-value">0</span> <br>
-                    Peso: <span id="user-weight">0</span> / <span id="max-weight">20</span>
+                    valore: <span class="valori-display"><span id="user-value">0</span><span class="coin"></span></span><br>
+                    Peso: <span class="valori-display"><span id="user-weight">0</span> / <span id="max-weight">20</span><span class="peso-cell"></span></span>
                 </div>
 
             </div>

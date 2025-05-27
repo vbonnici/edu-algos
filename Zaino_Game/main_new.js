@@ -40,6 +40,29 @@ class Item {
         itemElement.style.gridTemplateColumns = `repeat(${weight}, 1fr)`;
         itemElement.style.gap = "2px";
         itemElement.style.position = "relative";
+        
+        // Aggiungi tooltip personalizzato
+        const tooltip = document.createElement("div");
+        tooltip.className = "custom-tooltip";
+        tooltip.innerHTML = `Peso: ${weight}<br>Valore: ${value}`;
+        itemElement.appendChild(tooltip);
+        // Aggiungi eventi per mostrare/nascondere
+        itemElement.addEventListener("mouseenter", () => {
+            tooltip.style.visibility = "visible";
+            tooltip.style.opacity = "1";
+        });
+        itemElement.addEventListener("mouseleave", () => {
+            tooltip.style.visibility = "hidden";
+            tooltip.style.opacity = "0";
+        });
+
+        itemElement.addEventListener("mouseenter", () => {
+            itemElement.style.transform = "scale(1.05)";
+        });
+        
+        itemElement.addEventListener("mouseleave", () => {
+            itemElement.style.transform = "scale(1)";
+        });
 
         const r = Math.floor(Math.random() * 256);
         const g = Math.floor(Math.random() * 256);
@@ -128,6 +151,11 @@ class Backpack {
     }
 
     insertItem(item, itemContainer) {
+
+        if (item.inBackpack) {
+            console.warn("Oggetto già nello zaino");
+            return false;
+        }
         const cells = [...this.container.querySelectorAll(".backpack-cell")];
         const weight = item.itemData.weight;
         const value = item.itemData.value;
@@ -199,7 +227,7 @@ class Backpack {
 class Player {
     constructor(name, container, backpackContainer, valueDisplay, weightDisplay, messaggio1) {
         this.name = name;
-        this.container = container;                   // contenitore dei suoi item
+        this.container = container;                   // contenitore dei suoi items
         this.backpack = backpackContainer;   
         this.valueDisplay = valueDisplay;             
         this.weightDisplay = weightDisplay;           
@@ -217,12 +245,9 @@ class Player {
         return this.items.find(item => item.itemData.id.toString() === itemId.toString());
     }
 
-    handleInsert(gameActive) {
-        if (!gameActive || !selectedItem) return;
+    handleInsert() {
 
         this.messaggio1.textContent = " ";
-
-        if (!this.container.contains(selectedItem)) return;
 
         const weight = parseInt(selectedItem.dataset.weight, 10);
         const itemId = selectedItem.dataset.itemId;
@@ -247,8 +272,7 @@ class Player {
         }
     }
 
-    handleRemove(gameActive) {
-        if (!gameActive || !selectedItem) return;
+    handleRemove() {
 
         this.messaggio1.textContent = " ";
 
@@ -275,6 +299,8 @@ class Player {
     }
 }
 
+
+
 let selectedAlgorithm = "greedy";
 
 class Algorithm {
@@ -286,6 +312,7 @@ class Algorithm {
         this.weightDisplay = weightDisplay; 
         this.items = [];                  // array di Item
         this.sortedItems = [];           // per greedy
+        this.dpSolution = null;
         this.finished = false;
     }
 
@@ -297,6 +324,7 @@ class Algorithm {
     loadItems(items) {
         this.items = [...items];
         this.sortedItems = [...items].sort((a, b) => b.itemData.getRatio() - a.itemData.getRatio());
+        this.dpSolution = null;
     }
 
     setName(name) {
@@ -322,31 +350,44 @@ class Algorithm {
         return false;
     }
 
-
     executeDP() {
         if (!this.items.length) return false;
 
         const capacity = this.backpack.maxWeight - this.backpack.currentWeight;
         if (capacity <= 0) return false;
 
-        const n = this.items.length;
-        const dp = Array.from({ length: n + 1 }, () => Array(capacity + 1).fill(0));
+        // Se dpSolution è già calcolata, usa quella altrimenti:
+        if (!this.dpSolution) {
+            // Calcola la soluzione DP una sola volta
+            const n = this.items.length;
+            const dp = Array.from({ length: n + 1 }, () => Array(capacity + 1).fill(0));
 
-        // Costruzione tabella DP
-        for (let i = 1; i <= n; i++) {
-            const { value, weight } = this.items[i - 1].itemData;
-            for (let w = 0; w <= capacity; w++) {
-                if (weight <= w) {
-                    dp[i][w] = Math.max(dp[i - 1][w], dp[i - 1][w - weight] + value);
-                } else {
-                    dp[i][w] = dp[i - 1][w];
+            for (let i = 1; i <= n; i++) {
+                const { value, weight } = this.items[i - 1].itemData;
+                for (let w = 0; w <= capacity; w++) {
+                    if (weight <= w) {
+                        dp[i][w] = Math.max(dp[i - 1][w], dp[i - 1][w - weight] + value);
+                    } else {
+                        dp[i][w] = dp[i - 1][w];
+                    }
                 }
             }
-        }
 
-        // Individua l'oggetto scelto
+            // Memorizza la soluzione
+            this.dpSolution = { dp, capacity };
+        }
+        
+        return this.applyDPSolution();
+    }
+
+    applyDPSolution() {
+        if (!this.dpSolution) return false;
+
+        const { dp, capacity } = this.dpSolution;
+        const n = this.items.length;
         let w = capacity;
         let chosenIndex = -1;
+
         for (let i = n; i > 0; i--) {
             if (dp[i][w] !== dp[i - 1][w]) {
                 chosenIndex = i - 1;
@@ -356,19 +397,19 @@ class Algorithm {
 
         if (chosenIndex === -1) return false;
 
-        // Ottieni l'oggetto e tentativo di inserimento
         const bestItem = this.items[chosenIndex];
         const inserted = this.backpack.insertItem(bestItem, this.container);
 
         if (inserted) {
             this.updateDisplay();
-            this.items.splice(chosenIndex, 1); // Rimuovi oggetto usato
+            this.items.splice(chosenIndex, 1);
+            this.dpSolution = null; // Invalida la soluzione dopo l'uso
             return true;
         }
 
         return false;
     }
-
+  
 
     reset() {
         this.items = [];
@@ -376,6 +417,7 @@ class Algorithm {
         this.valueDisplay.textContent = "0";
         this.weightDisplay.textContent = "0";
         this.backpack.clear();
+        this.dpSolution = null;
         this.finished = false;
     }
 }
@@ -406,7 +448,6 @@ class GameController {
         if (this.gameActive) return;
         this.gameActive = true;
 
-        algorithmSelect.disabled = true;
         toggleButtons(true);
 
         this.selectedItem = null;
@@ -438,38 +479,35 @@ class GameController {
         this.algorithm.loadItems(this.algorithm.items);
     }
 
-generateItemsDati() {
-    const numItems = 5;
-    const items = [];
+    generateItemsDati() {
+        const numItems = 5;
+        const items = [];
 
-    let totalWeight = 0;
+        let totalWeight = 0;
 
-    while (true) {
-        items.length = 0;
-        totalWeight = 0;
+        while (true) {
+            items.length = 0;
+            totalWeight = 0;
 
-        for (let i = 0; i < numItems; i++) {
-            let weight, value;
+            for (let i = 0; i < numItems; i++) {
+                let weight, value;
 
-            // Assicura weight > 1
-            weight = Math.floor(Math.random() * 8) + 2; // 2..9
+                // Assicura weight > 1
+                weight = Math.floor(Math.random() * 8) + 2; // 2..9
+                // Assicura value < weight e value >= 1
+                value = Math.floor(Math.random() * (weight - 1)) + 1;
+                const itemData = new ItemData(weight, value);
+                items.push(itemData);
+                totalWeight += weight;
+            }
 
-            // Assicura value < weight e value >= 1
-            value = Math.floor(Math.random() * (weight - 1)) + 1;
-
-            const itemData = new ItemData(weight, value);
-            items.push(itemData);
-            totalWeight += weight;
+            // Esce dal ciclo solo se somma pesi è maggiore del limite
+            if (totalWeight > maxWeight) {
+                break;
+            }
         }
-
-        // Esce dal ciclo solo se somma pesi è maggiore del limite
-        if (totalWeight > maxWeight) {
-            break;
-        }
+        return items;
     }
-
-    return items;
-}
 
 
     endGame() {
@@ -585,14 +623,14 @@ function deselectAll(userContainer, backpackContainer) {
 
 function selectById(itemId, userContainer, backpackContainer) {
     deselectAll(userContainer, backpackContainer);
-    const itemData = controller.player.findItemById(itemId); 
+    const itemFind = controller.player.findItemById(itemId); 
 
-    if (!itemData) {
+    if (!itemFind) {
         console.warn(`Elemento ${itemId} non trovato`);
         return;
     }
 
-    const itemElement = itemData.element;
+    const itemElement = itemFind.itemElement;
     if (userContainer.contains(itemElement)) {
         selectItem(itemElement);
         selectedItem = itemElement;
@@ -617,6 +655,7 @@ let controller = new GameController();
 let selectedItem = null; 
 
 let insertBtn, removeBtn, algorithmSelect;
+//**********************************************************
 
 document.addEventListener("DOMContentLoaded", () => {
     const startButton = document.getElementById("start-game");
@@ -631,14 +670,37 @@ document.addEventListener("DOMContentLoaded", () => {
     endWork.addEventListener("click", () => controller.endTurns());
 
     insertBtn.addEventListener("click", () => {
-        controller.player.handleInsert(controller.gameActive);
+        
+        if (!controller.gameActive || !selectedItem) {
+            console.warn ("Partita non attiva o nessun oggetto selezionato");
+            return;
+        }
+        if (!controller.player.container.contains(selectedItem)) {
+            console.warn("Oggetto non valido");
+            return;
+        }
+
+
+        algorithmSelect.disabled = true;
+        controller.player.handleInsert();
         if (!controller.player.finished && !controller.algorithm.finished) {
             setTimeout(() => controller.algoMove(), 1000);
         }
     });
 
     removeBtn.addEventListener("click", () => {
-        controller.player.handleRemove(controller.gameActive);
+        
+        if (!controller.gameActive || !selectedItem) {
+            console.warn ("Partita non attiva o nessun oggetto selezionato");
+            return;
+        }
+        if (!controller.player.backpack.container.contains(selectedItem)) {
+            console.warn("Oggetto non valido");
+            return;
+        }
+        
+        algorithmSelect.disabled = true;
+        controller.player.handleRemove();
         if (!controller.player.finished && !controller.algorithm.finished) {
             setTimeout(() => controller.algoMove(), 1000);
         }
