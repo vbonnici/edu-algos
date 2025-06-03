@@ -1,184 +1,603 @@
 
 
-let messaggio1 = document.getElementById("message1"); // Area per messaggi di stato
-let algoContainer = document.getElementById("algo-items"); // Contenitore per gli oggetti dell'algoritmo
-let userContainer = document.getElementById("user-items"); // Contenitore per gli oggetti dell'utente
-let algobackpack = document.getElementById("algo-backpack"); // Contenitore dello zaino dell'algoritmo
-let userbackpack = document.getElementById("user-backpack"); // Contenitore dello zaino dell'utente
 
-let userValue  = document.getElementById("user-value")  ;
-let userWeight = document.getElementById("user-weight") ;
-let algoValue  = document.getElementById("algo-value")  ;
-let algoWeight = document.getElementById("algo-weight") ;
-let maxWeight  = document.getElementById("max-weight")  ;
-let resultsContainer = document.getElementById("game-results");
 
-let N_items = 0 ; //contatore item
-// funzione per incrementare id
-function makeId () {
-    N_items += 1;
-    return N_items;
-}
-
-// Classe per rappresentare un oggetto "Item" (valore e peso)
-class Item {
-    constructor(value, weight) {
-        this.value = value;
+let N_items = 0; // contatore item
+// Classe dati dell'oggetto
+class ItemData {
+    constructor(weight, value) {
         this.weight = weight;
-        this.id = makeId ()
+        this.value = value;
+        this.id = ++N_items;
+    }
+
+    getRatio() {
+        return this.value / this.weight;
     }
 }
 
-// Lista di oggetti iniziali
-const items = [
-    new Item(5, 10),
-    new Item(5, 8),
-    new Item(3, 5),
-    new Item(2, 3),
-    new Item(4, 7)
+// Classe visuale + stato dell’oggetto
+class Item {
+    constructor(itemDati, rowIndex, container) {
+        this.row = rowIndex;
+        this.itemData = itemDati;     
+        this.itemElement = this.createElement(container);
+        this.inBackpack = false;
+    }
+
+    createElement(container) {
+        const { value, weight, id } = this.itemData;
+
+        let itemElement = document.createElement("div");
+        itemElement.classList.add("item");
+        itemElement.dataset.value = value;
+        itemElement.dataset.weight = weight;
+        itemElement.dataset.itemId = id;
+
+        itemElement.style.gridColumn = `1 / span ${weight}`;
+        itemElement.style.gridRow = `${this.row + 1}`;
+        itemElement.style.display = "grid";
+        itemElement.style.gridTemplateColumns = `repeat(${weight}, 1fr)`;
+        itemElement.style.gap = "2px";
+        itemElement.style.position = "relative";
+        
+        // Aggiungi tooltip personalizzato
+        const tooltip = document.createElement("div");
+        tooltip.className = "custom-tooltip";
+        tooltip.innerHTML = `Peso: ${weight}<br>Valore: ${value}`;
+        itemElement.appendChild(tooltip);
+        // Aggiungi eventi per mostrare/nascondere
+        itemElement.addEventListener("mouseenter", () => {
+            tooltip.style.visibility = "visible";
+            tooltip.style.opacity = "1";
+        });
+        itemElement.addEventListener("mouseleave", () => {
+            tooltip.style.visibility = "hidden";
+            tooltip.style.opacity = "0";
+        });
+
+        itemElement.addEventListener("mouseenter", () => {
+            itemElement.style.transform = "scale(1.05)";
+        });
+        
+        itemElement.addEventListener("mouseleave", () => {
+            itemElement.style.transform = "scale(1)";
+        });
+
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        itemElement.style.backgroundColor = `rgb(${r}, ${g}, 250)`;
+        itemElement.dataset.originalColor = itemElement.style.backgroundColor;
+
+        for (let i = 0; i < weight; i++) {
+            const cell = document.createElement("div");
+            cell.classList.add("item-cell");
+            cell.dataset.itemId = id;
+            cell.dataset.weight = weight;
+            cell.dataset.value = value;
+
+            if (i < value) {
+                const coin = document.createElement("div");
+                coin.classList.add("coin");
+                cell.appendChild(coin);
+            }
+            itemElement.appendChild(cell);
+        }
+
+        container.appendChild(itemElement);
+        return itemElement;
+    }
+}
+
+
+// Lista di items alternativa
+/*
+const itemsDati = [
+    new ItemData(8, 5),
+    new ItemData(5, 3),
+    new ItemData(10, 5),
+    new ItemData(3, 2),
+    new ItemData(7, 4)
 ];
+*/
 
-let algoItems = []; 
-let algoItemsSorted = [];
-let userItems = []; 
+// Classe Zaino
+class Backpack {
+    constructor(container, maxWeight) {
+        this.container = container;
+        this.grid = [];
+        this.maxWeight = maxWeight;
+        this.currentValue = 0;
+        this.currentWeight = 0;
+    }
 
-let selectedAlgorithm = "greedy"; // default
-let selectedItem = null; // Oggetto selezionato dal giocatore
-let gameActive = false; // per verificare lo stato della partita
-let userHasFinished = false; // per sapere se l’utente ha già terminato il suo turno
-let algoHasFinished = false;// per sapere se l’algoritmo ha già terminato il suo turno
+    clear() {
+        this.container.innerHTML = "";
+        this.grid = [];
+        this.currentValue = 0;
+        this.currentWeight = 0;
+    }
 
-function createItem(itemDati, container, existingItems, rowIndex) {
-    const { value, weight, id } = itemDati;
+    createGrid() {
+        this.clear();
+        for (let i = 0; i < this.maxWeight; i++) {
+            const cell = document.createElement("div");
+            cell.classList.add("backpack-cell");
+            this.container.appendChild(cell);
+            this.grid.push(cell);
+        }
+    }
 
-    // Crea il div item
-    let item = document.createElement("div");
-    item.classList.add("item");
-    item.dataset.value = value;
-    item.dataset.weight = weight;
-    item.dataset.itemId = id;
+    createItemPart(itemId, weight, value, originalColor, userContainer) {
+        const part = document.createElement("div");
+        part.classList.add("item-cell");
+        part.dataset.itemId = itemId;
+        part.dataset.weight = weight;
+        part.dataset.value = value;
+        part.style.backgroundColor = originalColor;
 
-    // Posiziona l'item in base alla riga e alla larghezza in celle
-    item.style.gridColumn = `1 / span ${weight}`;
-    item.style.gridRow = `${rowIndex + 1}`; 
-    item.style.display = "grid";
-    item.style.gridTemplateColumns = `repeat(${weight}, 1fr)`;
-    item.style.gap = "2px";
-    item.style.position = "relative";
-
-    // Colore dinamico in base a weight + value (limitato a 255)
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-    item.style.backgroundColor = `rgb(${r}, ${g}, 250)`;
-    item.dataset.originalColor = item.style.backgroundColor;
-
-    // Aggiunge i coin (fino al valore specificato)
-    for (let i = 0; i < weight; i++) {
-        const cell = document.createElement("div");
-        cell.classList.add("item-cell");
-        cell.dataset.itemId = item.dataset.itemId;
-        cell.dataset.weight = item.dataset.weight;
-        cell.dataset.value = item.dataset.value;
-
-        if (i < value) {
+        if (value > 0) {
             const coin = document.createElement("div");
             coin.classList.add("coin");
-            cell.appendChild(coin);
+            part.appendChild(coin);
         }
-        item.appendChild(cell);
+
+        part.addEventListener("click", () => {
+            selectById(itemId, userContainer, this.container); 
+        });
+
+        return part;
     }
 
-    container.appendChild(item);
+    insertItem(item, itemContainer) {
 
-    let itemData = {
-        row: rowIndex,
-        item: itemDati,     
-        element: item,
-        inBackpack: false
-    };
-    existingItems.push(itemData);
+        if (item.inBackpack) {
+            console.warn("Oggetto già nello zaino");
+            return false;
+        }
+        const cells = [...this.container.querySelectorAll(".backpack-cell")];
+        const weight = item.itemData.weight;
+        const value = item.itemData.value;
+        const itemId = item.itemData.id;
+        const originalColor = item.itemElement.dataset.originalColor;
 
-}
+        if (this.currentWeight + weight > this.maxWeight) {
+            console.warn("Zaino pieno");
+            return false;
+        }
 
+        let placed = 0;
+        let targetCells = [];
 
+        for (let i = 0; i < cells.length && placed < weight; i++) {
+            if (cells[i].children.length === 0) {
+                targetCells.push(cells[i]);
+                placed++;
+            }
+        }
 
-// funzione per creare zaino in grid di 20 celle
-function createBackpackGrid(backpackElement) {
-    for (let i = 0; i < 20; i++) {
-        const cell = document.createElement('div');
-        cell.classList.add('backpack-cell');
-        backpackElement.appendChild(cell);
+        if (placed < weight) {
+            console.warn("Non c’è spazio sufficiente nello zaino.");
+            return false;
+        }
+
+        for (let i = 0; i < weight; i++) {
+            const part = this.createItemPart(itemId, weight, value - i, originalColor, itemContainer);
+            targetCells[i].appendChild(part);
+        }
+
+        itemContainer.removeChild(item.itemElement);
+        this.currentValue += value;
+        this.currentWeight += weight;
+        item.inBackpack = true;
+        deselectItem(item.itemElement); 
+        selectedItem = null;
+        return true;
+    }
+
+    removeItem(item, itemContainer) {
+        const itemId = item.itemData.id;
+
+        const allCells = Array.from(this.container.querySelectorAll(".backpack-cell"));
+        const remainingParts = [];
+
+        for (let cell of allCells) {
+            const part = cell.firstChild;
+            if (part && part.dataset.itemId !== String(itemId)) {
+                remainingParts.push(part);
+            }
+        }
+
+        allCells.forEach(cell => cell.innerHTML = "");
+        remainingParts.forEach((part, i) => {
+            allCells[i].appendChild(part);
+        });
+
+        item.itemElement.style.position = "static";
+        itemContainer.appendChild(item.itemElement);
+
+        this.currentValue -= item.itemData.value;
+        this.currentWeight -= item.itemData.weight;
+        item.inBackpack = false;
     }
 }
 
 
-// Funzione per avviare la partita e generare gli oggetti nel gioco
-function startGame () {
+class Player {
+    constructor(name, container, backpackContainer, valueDisplay, weightDisplay, messaggio1) {
+        this.name = name;
+        this.container = container;                   // contenitore dei suoi items
+        this.backpack = backpackContainer;   
+        this.valueDisplay = valueDisplay;             
+        this.weightDisplay = weightDisplay;           
+        this.items = [];                              
+        this.finished = false;
+        this.messaggio1 = messaggio1;
+    }
 
-    if (gameActive) return; 
-    gameActive = true;
+    updateDisplay() {
+        this.valueDisplay.textContent = this.backpack.currentValue;
+        this.weightDisplay.textContent = this.backpack.currentWeight;
+    }
 
-    algorithmSelect.disabled = true;
+    findItemById(itemId) {
+        return this.items.find(item => item.itemData.id.toString() === itemId.toString());
+    }
 
-    toggleButtons(true);
+    handleInsert() {
 
-    userHasFinished = false;
-    algoHasFinished = false;
+        this.messaggio1.textContent = " ";
 
-    messaggio1.textContent = "La Partita ha iniziato!";
-    resultsContainer.innerHTML = " ";
-    algoContainer.innerHTML = "";
-    userContainer.innerHTML = "";
-    algobackpack.innerHTML = "";
-    userbackpack.innerHTML = "";
+        const weight = parseInt(selectedItem.dataset.weight, 10);
+        const itemId = selectedItem.dataset.itemId;
+        const newWeight = this.backpack.currentWeight + weight;
 
-    createBackpackGrid(algobackpack);
-    createBackpackGrid(userbackpack);
+        if (newWeight > this.backpack.maxWeight) {
+            this.messaggio1.textContent = "Il Peso massimo verrà superato!";
+            return;
+        }
 
-    algoValue.textContent = "0";
-    algoWeight.textContent = "0";
-    userValue.textContent = "0";
-    userWeight.textContent = "0";
+        const item = this.findItemById(itemId);
+        if (!item) {
+            console.warn("Item non trovato");
+            return;
+        }
 
-    algoItems = [];
-    userItems = [];   
+        const inserted = this.backpack.insertItem(item, this.container);
+        if (inserted) {
+            this.updateDisplay();
+            deselectItem(selectedItem); 
+            selectedItem = null;
+        }
+    }
 
-    // Crea oggetti per algoritmo e utente
-    items.forEach((item, index) => {
-        createItem(item, algoContainer, algoItems, index);
-        createItem(item, userContainer, userItems, index);
-    });
+    handleRemove() {
 
-    // Crea una copia ordinata di algoItems in base a value/weight decrescente
-    algoItemsSorted = [...algoItems].sort((a, b) => {
-        let ratioA = a.item.value / a.item.weight;
-        let ratioB = b.item.value / b.item.weight;
-        return ratioB - ratioA;
-    });
+        this.messaggio1.textContent = " ";
+
+        const itemId = selectedItem.dataset.itemId;
+        if (!itemId) return;
+
+        const item = this.findItemById(itemId);
+        if (!item || !item.inBackpack) {
+            console.warn(`Elemento non trovato o non nello zaino per itemId: ${itemId}`);
+            return;
+        }
+
+        this.backpack.removeItem(item, this.container);
+        this.updateDisplay();
+        selectedItem = null;
+    }
+
+    reset() {
+        this.items = [];
+        this.valueDisplay.textContent = "0";
+        this.weightDisplay.textContent = "0";
+        this.backpack.clear();
+        this.finished = false;
+    }
 }
 
 
-function getValue(Variable) {
-    return parseInt(Variable.textContent) ;
+
+let selectedAlgorithm = "greedy";
+
+class Algorithm {
+    constructor(name, container, backpack, valueDisplay, weightDisplay) {
+        this.name = name;
+        this.container = container;       // contenitore visivo
+        this.backpack = backpack;        
+        this.valueDisplay = valueDisplay; 
+        this.weightDisplay = weightDisplay; 
+        this.items = [];                  // array di Item
+        this.sortedItems = [];           // per greedy
+        this.dpSolution = null;
+        this.finished = false;
+    }
+
+    updateDisplay() {
+        this.valueDisplay.textContent = this.backpack.currentValue;
+        this.weightDisplay.textContent = this.backpack.currentWeight;
+    }
+
+    loadItems(items) {
+        this.items = [...items];
+        this.sortedItems = [...items].sort((a, b) => b.itemData.getRatio() - a.itemData.getRatio());
+        this.dpSolution = null;
+    }
+
+    setName(name) {
+        this.name = name;
+    }
+
+    executeGreedy() {
+        if (!this.sortedItems.length) return false;
+
+        const bestItem = this.sortedItems[0];
+        const { itemData } = bestItem;
+        const { value, weight } = itemData;
+
+        const canAdd = this.backpack.currentWeight + weight <= this.backpack.maxWeight;
+        if (canAdd) {
+            const inserted = this.backpack.insertItem(bestItem, this.container);
+            if (inserted) {
+                this.updateDisplay();
+                this.sortedItems.shift();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    executeDP() {
+        if (!this.items.length) return false;
+
+        const capacity = this.backpack.maxWeight - this.backpack.currentWeight;
+        if (capacity <= 0) return false;
+
+        // Se dpSolution è già calcolata, usa quella altrimenti:
+        if (!this.dpSolution) {
+            // Calcola la soluzione DP una sola volta
+            const n = this.items.length;
+            const dp = Array.from({ length: n + 1 }, () => Array(capacity + 1).fill(0));
+
+            for (let i = 1; i <= n; i++) {
+                const { value, weight } = this.items[i - 1].itemData;
+                for (let w = 0; w <= capacity; w++) {
+                    if (weight <= w) {
+                        dp[i][w] = Math.max(dp[i - 1][w], dp[i - 1][w - weight] + value);
+                    } else {
+                        dp[i][w] = dp[i - 1][w];
+                    }
+                }
+            }
+
+            // Memorizza la soluzione
+            this.dpSolution = { dp, capacity };
+        }
+        
+        return this.applyDPSolution();
+    }
+
+    applyDPSolution() {
+        if (!this.dpSolution) return false;
+
+        const { dp, capacity } = this.dpSolution;
+        const n = this.items.length;
+        let w = capacity;
+        let chosenIndex = -1;
+
+        for (let i = n; i > 0; i--) {
+            if (dp[i][w] !== dp[i - 1][w]) {
+                chosenIndex = i - 1;
+                break;
+            }
+        }
+
+        if (chosenIndex === -1) return false;
+
+        const bestItem = this.items[chosenIndex];
+        const inserted = this.backpack.insertItem(bestItem, this.container);
+
+        if (inserted) {
+            this.updateDisplay();
+            this.items.splice(chosenIndex, 1);
+            this.dpSolution = null; // Invalida la soluzione dopo l'uso
+            return true;
+        }
+
+        return false;
+    }
+  
+
+    reset() {
+        this.items = [];
+        this.sortedItems = [];
+        this.valueDisplay.textContent = "0";
+        this.weightDisplay.textContent = "0";
+        this.backpack.clear();
+        this.dpSolution = null;
+        this.finished = false;
+    }
 }
 
 
-function updateData(container, value, adding) { 
-    let currentValue = getValue(container); 
-    container.textContent = adding ? currentValue + value : currentValue - value;
+
+class GameController {
+    constructor() {
+        this.messaggio1 = document.getElementById("message1");
+        this.algoContainer = document.getElementById("algo-items");
+        this.userContainer = document.getElementById("user-items");
+        this.algoBackpack = new Backpack(document.getElementById("algo-backpack"), maxWeight);
+        this.userBackpack = new Backpack(document.getElementById("user-backpack"), maxWeight);
+        this.userValueDisplay = document.getElementById("user-value"); 
+        this.userWeightDisplay = document.getElementById("user-weight");
+        this.algoValueDisplay = document.getElementById("algo-value");
+        this.algoWeightDisplay = document.getElementById("algo-weight");
+        this.resultsContainer = document.getElementById("game-results");
+
+        this.player = new Player("Utente", this.userContainer, this.userBackpack, this.userValueDisplay, this.userWeightDisplay, this.messaggio1);
+        this.algorithm = new Algorithm(selectedAlgorithm, this.algoContainer, this.algoBackpack, this.algoValueDisplay, this.algoWeightDisplay, this.messaggio1);
+
+        this.selectedItem = null;
+        this.gameActive = false;
+    }
+
+    startGame() {
+        if (this.gameActive) return;
+        this.gameActive = true;
+
+        toggleButtons(true);
+
+        this.selectedItem = null;
+
+        this.messaggio1.textContent = "La Partita è iniziata!";
+        this.resultsContainer.innerHTML = "";
+
+        this.player.reset();
+        this.algorithm.reset();
+        this.algoContainer.innerHTML = "";
+        this.userContainer.innerHTML = "";
+
+        this.player.backpack.createGrid();
+        this.algorithm.backpack.createGrid();
+
+        const itemsDati = this.generateItemsDati(); // oppure usare la lista alternativa che si trova all'inizio
+       
+        this.player.items = [];
+        this.algorithm.items = [];
+
+        itemsDati.forEach((itemData, index) => {
+            const algoItem = new Item(itemData, index, this.algoContainer);
+            const userItem = new Item(itemData, index, this.userContainer);
+
+            this.algorithm.items.push(algoItem);
+            this.player.items.push(userItem);
+        });
+
+        this.algorithm.loadItems(this.algorithm.items);
+    }
+
+    generateItemsDati() {
+        const numItems = 5;
+        const items = [];
+
+        let totalWeight = 0;
+
+        while (true) {
+            items.length = 0;
+            totalWeight = 0;
+
+            for (let i = 0; i < numItems; i++) {
+                let weight, value;
+
+                // Assicura weight > 1
+                weight = Math.floor(Math.random() * 8) + 2; // 2..9
+                // Assicura value < weight e value >= 1
+                value = Math.floor(Math.random() * (weight - 1)) + 1;
+                const itemData = new ItemData(weight, value);
+                items.push(itemData);
+                totalWeight += weight;
+            }
+
+            // Esce dal ciclo solo se somma pesi è maggiore del limite
+            if (totalWeight > maxWeight) {
+                break;
+            }
+        }
+        return items;
+    }
+
+
+    endGame() {
+        if (!this.gameActive) return;
+        this.gameActive = false;
+        algorithmSelect.disabled = false;
+        this.displayEndgameResults();
+    }
+
+    displayEndgameResults() {
+        let message = "";
+        this.messaggio1.textContent = "La Partita è finita!";
+
+        const userValue = this.player.backpack.currentValue;
+        const algoValue = this.algorithm.backpack.currentValue;
+        const userWeight = this.player.backpack.currentWeight;
+        const algoWeight = this.algorithm.backpack.currentWeight;
+
+        if (userValue > algoValue) {
+            message = "Complimenti! Hai vinto la partita con un valore maggiore!";
+        } else if (userValue < algoValue) {
+            message = "L'algoritmo ha vinto! Ritenta per migliorare la tua strategia.";
+        } else {
+            if (userWeight < algoWeight) {
+                message = "Stesso valore, ma hai usato meno peso. Hai vinto!";
+            } else if (userWeight > algoWeight) {
+                message = "Stesso valore, ma l'algoritmo ha usato meno peso. Ha vinto!";
+            } else {
+                message = "Pareggio perfetto!";
+            }
+        }
+
+        this.resultsContainer.innerHTML = `<h3>${message}</h3>`;
+        this.resultsContainer.style.display = "block";
+    }
+
+    autoAlgoInsert() {
+        let success = false;
+
+        if (this.algorithm.name === "greedy") {
+            success = this.algorithm.executeGreedy();
+        } else if (this.algorithm.name === "dp") {
+            success = this.algorithm.executeDP();
+        }
+
+        if (success) {
+            setTimeout(() => this.autoAlgoInsert(), 1000);
+        } else {
+            this.endGame();
+        }
+    }
+
+    endTurns() {
+        if (!this.gameActive) return;
+        this.player.finished = true;
+
+        toggleButtons(false);  
+        this.autoAlgoInsert();
+    }
+
+    algoMove() {
+        if (!this.gameActive || this.player.finished) return;
+
+        toggleButtons(false);
+        let success = false;
+
+        if (this.algorithm.name === "greedy") {
+            success = this.algorithm.executeGreedy();
+        } else if (this.algorithm.name === "dp") {
+            success = this.algorithm.executeDP();
+        }
+
+        if (!success) {
+            this.messaggio1.textContent = "L'algoritmo ha finito di inserire!";
+            this.algorithm.finished = true;
+        }
+
+        toggleButtons(true);
+    }
+
+    setAlgorithm(name) {
+        this.algorithm.setName(name);
+    }
+
 }
 
-function toggleButtons(enabled) {
-    insertBtn.disabled = !enabled;
-    removeBtn.disabled = !enabled;
-}
 
-function findItemDataById(itemId, itemsArray) {
-    return itemsArray.find(itemData => itemData.item.id.toString() === itemId.toString());
-}
 
-// Funzione per selezionare un item o cella
+// Selezione e deselezione
 function selectItem(element) {
+    if (!element) return; 
     if (!element.dataset.originalColor) {
         element.dataset.originalColor = element.style.backgroundColor;
     }
@@ -186,13 +605,12 @@ function selectItem(element) {
     element.classList.add("selected");
 }
 
-// Funzione per deselezionare un item o cella
 function deselectItem(element) {
+    if (!element) return; 
     if (element.dataset.originalColor) {
         element.style.backgroundColor = element.dataset.originalColor;
     }
     element.classList.remove("selected");
-    
 }
 
 function deselectAll(userContainer, backpackContainer) {
@@ -203,17 +621,15 @@ function deselectAll(userContainer, backpackContainer) {
 }
 
 function selectById(itemId, userContainer, backpackContainer) {
-
     deselectAll(userContainer, backpackContainer);
-    const itemData = findItemDataById(itemId, userItems);
- 
-    if (!itemData) {
-        console.warn(`Elemento ${itemId} non trovato in userItems`);
+    const itemFind = controller.player.findItemById(itemId); 
+
+    if (!itemFind) {
+        console.warn(`Elemento ${itemId} non trovato`);
         return;
     }
 
-    const itemElement = itemData.element;
-
+    const itemElement = itemFind.itemElement;
     if (userContainer.contains(itemElement)) {
         selectItem(itemElement);
         selectedItem = itemElement;
@@ -221,411 +637,115 @@ function selectById(itemId, userContainer, backpackContainer) {
         const cells = backpackContainer.querySelectorAll(`.item-cell[data-item-id="${itemId}"]`);
         if (cells.length > 0) {
             cells.forEach(selectItem);
-            selectedItem = cells[0]; 
+            selectedItem = cells[0];
         }
     }
 }
 
-
-
-function createItemPart(itemId, weight, value, originalColor) {
-    const part = document.createElement("div");
-    part.classList.add("item-cell");
-    part.dataset.itemId = itemId;
-    part.dataset.weight = weight;
-    part.dataset.value = value;
-    part.dataset.originalColor = originalColor;
-    part.style.backgroundColor = originalColor;
-
-    if (value > 0) {
-        const coin = document.createElement("div");
-        coin.classList.add("coin");
-        part.appendChild(coin);
-    }
-
-    part.addEventListener("click", () => {
-        selectById(itemId, userContainer, userbackpack);
-    });
-
-    return part;
+// Bottone inserimento/rimozione
+function toggleButtons(enabled) {
+    insertBtn.disabled = !enabled;
+    removeBtn.disabled = !enabled;
 }
 
-
-// Funzione per determinare il vincitore e mostrare il risultato
-function displayEndgameResults() {
-    let message = "";
-    messaggio1.textContent = "La Partita è finita!";
-
-    if (getValue(userValue)  > getValue(algoValue)) {
-        message = "Complimenti! Hai vinto la partita con un valore maggiore!";
-    } else if (getValue(userValue) < getValue(algoValue)) {
-        message = "L'algoritmo ha vinto! Ritenta per migliorare la tua strategia.";
-    } else {
-        if (getValue(userWeight) < getValue(algoWeight)) {
-            message = "Stesso valore, ma hai usato meno peso. Hai vinto!";
-        } else if (getValue(userWeight) > getValue(algoWeight)) {
-            message = "Stesso valore, ma l'algoritmo ha usato meno peso. Ha vinto!.";   
-        }else{
-            message = "Pareggio uguale!";
-        }
-    }
-    
-    resultsContainer.innerHTML = `  <h3>${message}</h3>  `;
-    resultsContainer.style.display = "block";
-}
-
-// Termina la partita manualmente
-function endGame() {
-    if (!gameActive) return;
-    gameActive = false;
-    algorithmSelect.disabled = false;
-    displayEndgameResults();
- 
-}
-
-
-// L'algoritmo continua da solo finché può inserire item
-function autoAlgoInsert() {
-    let success = false;
-    if (selectedAlgorithm === "greedy") {
-        success = execute_Greedy_Algorithm();
-    } else if (selectedAlgorithm === "dp") {
-        success = execute_DP_Algorithm();
-    }
-
-    if (success) {
-        setTimeout(autoAlgoInsert, 1000); 
-    } else {
-        endGame(); 
-    }
-}
-
-
-function endTurns() {
-    if (!gameActive) return;
-    userHasFinished = true;
-    // Disabilita i pulsanti utente
-    toggleButtons(false);
-    autoAlgoInsert();
-}
-
-
-function insertItemIntoBackpack(itemData, backpackContainer, itemContainer) {
-    const cells = [...backpackContainer.querySelectorAll(".backpack-cell")];
-    const weight = parseInt(itemData.element.dataset.weight);
-    const value = parseInt(itemData.element.dataset.value);
-    const itemId = itemData.element.dataset.itemId;
-    const originalColor = itemData.element.dataset.originalColor;
-
-    let placed = 0;
-    let targetCells = [];
-
-    for (let i = 0; i < cells.length && placed < weight; i++) {
-        if (cells[i].children.length === 0) {
-            targetCells.push(cells[i]);
-            placed++;
-        }
-    }
-
-    if (placed < weight) {
-        console.warn("Non c'è spazio sufficiente nello zaino per questo oggetto.");
-        return;
-    }
-
-    for (let i = 0; i < weight; i++) {
-        const part = createItemPart(itemId, weight, value - i, originalColor);
-        targetCells[i].appendChild(part);
-    }
-
-    const itemElement = itemData.element;
-    if (itemContainer.contains(itemElement)) {
-        itemContainer.removeChild(itemElement);
-    }
-
-    itemData.inBackpack = true;
-    deselectItem(itemElement);
-    selectedItem = null;
-}
-
-
-function removeItemFromBackpack(itemData, backpackContainer, itemContainer) {
-    const itemId = itemData.element.dataset.itemId;
-
-    const allCells = Array.from(backpackContainer.querySelectorAll(".backpack-cell"));
-    
-    // Estrai le parti rimaste (tranne quelle dell'item rimosso)
-    const remainingParts = [];
-    for (let cell of allCells) {
-        const part = cell.firstChild;
-        if (part && part.dataset.itemId !== itemId) {
-            remainingParts.push(part);
-        }
-    }
-
-    allCells.forEach(cell => cell.innerHTML = "");
-
-    remainingParts.forEach((part, i) => {
-        allCells[i].appendChild(part);
-    });
-
-    deselectAll(userContainer, backpackContainer);
-
-    itemData.element.style.position = "static";
-    itemContainer.appendChild(itemData.element);
-
-    itemData.inBackpack = false;
-    selectedItem = null;
-}
-
-
-
-// Funzione per eseguire la logica dell'algoritmo di greedy su un unico item
-function execute_Greedy_Algorithm() {
-    if (!algoItemsSorted.length) return false;
-
-    let bestItemData = algoItemsSorted[0];  // prende il primo nella lista ordinata
-
-    const { item, element } = bestItemData;
-    const value = item.value;
-    const weight = item.weight;
-
-    // Verifica se c'è spazio nello zaino
-    let canAdd = getValue(algoWeight) + weight <= getValue(maxWeight);
-
-    if (canAdd) {
-      
-        insertItemIntoBackpack(bestItemData, algobackpack, algoContainer); 
-
-        element.style.position = "static"; 
-
-        updateData(algoValue, value, true);
-        updateData(algoWeight, weight, true);
-
-        algoItemsSorted.shift();   
-      
-        return true;
-    }
-    return false;
-}
-
-// Funzione per eseguire la logica dell'algoritmo di programmazione dinamica su un unico item
-function execute_DP_Algorithm() {
-    if (!algoItems.length) return false;
-
-    const capacity = getValue(maxWeight) - getValue(algoWeight);
-
-    if (capacity <= 0) {
-        return false;
-    }
-
-    // Costruisco la tabella DP
-    const n = algoItems.length;
-    const dp = Array.from({ length: n + 1 }, () => Array(capacity + 1).fill(0));
-
-    for (let i = 1; i <= n; i++) {
-        const { value, weight } = algoItems[i - 1].item;
-        for (let w = 0; w <= capacity; w++) {
-            if (weight <= w) {
-                dp[i][w] = Math.max(dp[i - 1][w], dp[i - 1][w - weight] + value);
-            } else {
-                dp[i][w] = dp[i - 1][w];
-            }
-        }
-    }
-
-    // Trova quale oggetto è stato scelto per ottenere il miglior valore
-    let w = capacity;
-    let chosenIndex = -1;
-    for (let i = n; i > 0; i--) {
-        if (dp[i][w] !== dp[i - 1][w]) {
-            chosenIndex = i - 1;
-            break;
-        }
-    }
-
-    if (chosenIndex === -1) {
-        return false; // Nessun oggetto può essere inserito
-    }
-
-    // Inserisco l'oggetto selezionato
-    const bestItemData = algoItems[chosenIndex];
-    const { item, element } = bestItemData;
-    const value = item.value;
-    const weight = item.weight;
-
-    //algobackpack.appendChild(element);
-    insertItemIntoBackpack(bestItemData, algobackpack, algoContainer);
-
-    element.style.position = "static";
-
-    updateData(algoValue, value, true);
-    updateData(algoWeight, weight, true);
-
-    // Rimuovo l'oggetto 
-    algoItems = algoItems.filter(i => i.item.id !== item.id);
-
-    return true;
-}
-
-
-// Mossa dell'algoritmo
-function algoMove() {
-    if (!gameActive || userHasFinished) return;
-
-    toggleButtons(false);
-    
-    let success = false;
-
-    if (selectedAlgorithm === "greedy") {
-        success = execute_Greedy_Algorithm();
-    } else if (selectedAlgorithm === "dp") {
-        success = execute_DP_Algorithm();
-    }
-    
-    if (!success) {
-        messaggio1.textContent = "L'algoritmo ha finito di ordinare!";
-        algoHasFinished = true;
-    }
-
-    toggleButtons(true);
-}
-
-
-function handleInsert () {
-    if (!gameActive || !selectedItem) return;
-
-    messaggio1.textContent = " "; 
-
-
-    if (!userContainer.contains(selectedItem) || userbackpack.contains(selectedItem)) return;
-
-
-    const value= parseInt(selectedItem.dataset.value, 10);
-    const weight= parseInt(selectedItem.dataset.weight, 10);
-    const itemId = selectedItem.dataset.itemId;
-
-    let newWeight = getValue(userWeight) + weight;
-
-    if ( newWeight > getValue(maxWeight) ) {
-        messaggio1.textContent = "Il Peso massimo verrà superato!";
-        return;
-
-    } else {
-        let itemData = findItemDataById(itemId, userItems);
-  
-        insertItemIntoBackpack(itemData, userbackpack, userContainer);
-        
-        updateData(userValue, value, true);
-        updateData(userWeight, weight, true);
-
-        const prevSelected = selectedItem;
-        selectedItem = null;
-
-        if (prevSelected && prevSelected.isConnected) {
-            deselectItem(prevSelected);
-        }
-
-        if (!userHasFinished && !algoHasFinished) {
-            setTimeout(algoMove, 1000);  
-        }
-     
-    }
-}
-
-function handleRemove() {
-    if (!gameActive || !selectedItem) return;
-
-    messaggio1.textContent = " ";
-
-    const itemId = selectedItem.dataset.itemId;
-    if (!itemId) return;
-
-    const itemData = findItemDataById(itemId, userItems);
-    if (!itemData || !itemData.inBackpack) {
-        console.warn(`Elemento non trovato o non nello zaino per itemId: ${itemId}`);
-        return;
-    }
-
-    const value = parseInt(itemData.item.value, 10);
-    const weight = parseInt(itemData.item.weight, 10);
-
-    removeItemFromBackpack(itemData, userbackpack, userContainer);
-
-    updateData(userValue, value, false);
-    updateData(userWeight, weight, false);
-
-    selectedItem = null;
-
-    if (!userHasFinished && !algoHasFinished) {
-        setTimeout(algoMove, 1000); 
-    }
-     
-}
-
-
-
-let insertBtn, removeBtn, algorithmSelect ;
+// **************** Variabili globali **********************
+let maxWeight = 20;
+let controller = new GameController();
+let selectedItem = null; 
+
+let insertBtn, removeBtn, algorithmSelect;
+//**********************************************************
 
 document.addEventListener("DOMContentLoaded", () => {
     const startButton = document.getElementById("start-game");
     const endButton = document.getElementById("endGame");
     const endWork = document.getElementById("end-work");
-     insertBtn = document.getElementById("insert-item");
-     removeBtn = document.getElementById("remove-item");
-     algorithmSelect = document.getElementById("algorithmSelect");
+    insertBtn = document.getElementById("insert-item");
+    removeBtn = document.getElementById("remove-item");
+    algorithmSelect = document.getElementById("algorithmSelect");
 
-    startButton.addEventListener("click", startGame);
-    endButton.addEventListener("click", endGame);
-    endWork.addEventListener("click", endTurns);
+    startButton.addEventListener("click", () => controller.startGame());
+    endButton.addEventListener("click", () => controller.endGame());
+    endWork.addEventListener("click", () => controller.endTurns());
 
-    insertBtn.addEventListener("click", () => handleInsert());
-    removeBtn.addEventListener("click", () => handleRemove());
+    insertBtn.addEventListener("click", () => {
+        
+        if (!controller.gameActive || !selectedItem) {
+            console.warn ("Partita non attiva o nessun oggetto selezionato");
+            return;
+        }
+        if (!controller.player.container.contains(selectedItem)) {
+            console.warn("Oggetto non valido");
+            return;
+        }
+
+
+        algorithmSelect.disabled = true;
+        controller.player.handleInsert();
+        if (!controller.player.finished && !controller.algorithm.finished) {
+            setTimeout(() => controller.algoMove(), 1000);
+        }
+    });
+
+    removeBtn.addEventListener("click", () => {
+        
+        if (!controller.gameActive || !selectedItem) {
+            console.warn ("Partita non attiva o nessun oggetto selezionato");
+            return;
+        }
+        if (!controller.player.backpack.container.contains(selectedItem)) {
+            console.warn("Oggetto non valido");
+            return;
+        }
+        
+        algorithmSelect.disabled = true;
+        controller.player.handleRemove();
+        if (!controller.player.finished && !controller.algorithm.finished) {
+            setTimeout(() => controller.algoMove(), 1000);
+        }
+    });
 
     algorithmSelect.addEventListener("change", () => {
-        selectedAlgorithm = algorithmSelect.value;
+        const selectedValue = algorithmSelect.value;
+        controller.setAlgorithm(selectedValue);  
     });
 
     // Click su un item nel contenitore utente
-    userContainer.addEventListener("click", (e) => {
+    controller.userContainer.addEventListener("click", (e) => {
         const target = e.target.closest(".item");
-        if (!target || !gameActive) return;
+        if (!target || !controller.gameActive) return;
 
         const itemId = target.dataset.itemId;
-
         if (selectedItem?.dataset.itemId === itemId) {
-            deselectAll(userContainer, userbackpack);
+            deselectAll(controller.userContainer, controller.userBackpack.container);
         } else {
-            deselectAll(userContainer, userbackpack);
+            deselectAll(controller.userContainer, controller.userBackpack.container);
             selectItem(target);
             selectedItem = target;
         }
     });
-   // Click su un item nello zaino utente
-    userbackpack.addEventListener("click", (e) => {
+
+    // Click su un item nello zaino utente
+    controller.userBackpack.container.addEventListener("click", (e) => {
         const target = e.target.closest(".item-cell");
-        if (!target || !gameActive) return;
+        if (!target || !controller.gameActive) return;
 
         const itemId = target.dataset.itemId;
-        const itemData = findItemDataById(itemId, userItems);
-
+        const itemData = controller.player.findItemById(itemId);
         if (!itemData) {
-            console.warn(`Elemento con itemId ${itemId} non trovato in userItems`);
+            console.warn(`Elemento con itemId ${itemId} non trovato`);
             return;
         }
 
-        const cells = userbackpack.querySelectorAll(`.item-cell[data-item-id="${itemId}"]`);
+        const cells = controller.userBackpack.container.querySelectorAll(`.item-cell[data-item-id="${itemId}"]`);
         const isAlreadySelected = [...cells].every(cell => cell.classList.contains("selected"));
-
-        console.log("Are all cells already selected?", isAlreadySelected);
 
         if (isAlreadySelected) {
             return;
         }
 
-        deselectAll(userContainer, userbackpack);
+        deselectAll(controller.userContainer, controller.userBackpack.container);
         cells.forEach(selectItem);
-        selectedItem = cells[0];        
+        selectedItem = cells[0];
     });
-
 });
-    
