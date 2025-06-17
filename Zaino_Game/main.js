@@ -91,15 +91,15 @@ class Item {
 
 
 // Lista di items alternativa
-/*
+
 const itemsDati = [
-    new ItemData(8, 5),
-    new ItemData(5, 3),
-    new ItemData(10, 5),
-    new ItemData(3, 2),
-    new ItemData(7, 4)
+    new ItemData(6, 5),
+    new ItemData(9, 3),
+    new ItemData(7, 3),
+    new ItemData(4, 2),
+    new ItemData(5, 4)
 ];
-*/
+
 
 // Classe Zaino
 class Backpack {
@@ -246,21 +246,21 @@ class Player {
 
     handleInsert() {
 
-        this.messaggio1.textContent = " ";
+        this.messaggio1.textContent = "turno attivo";
 
         const weight = parseInt(selectedItem.dataset.weight, 10);
         const itemId = selectedItem.dataset.itemId;
         const newWeight = this.backpack.currentWeight + weight;
 
         if (newWeight > this.backpack.maxWeight) {
-            this.messaggio1.textContent = "Il Peso massimo verrà superato!";
-            return;
+            this.messaggio1.innerHTML = "Attenzione!<br> Il Peso massimo verrà superato";
+            return false;
         }
 
         const item = this.findItemById(itemId);
         if (!item) {
             console.warn("Item non trovato");
-            return;
+            return false;
         }
 
         const inserted = this.backpack.insertItem(item, this.container);
@@ -268,12 +268,14 @@ class Player {
             this.updateDisplay();
             deselectItem(selectedItem); 
             selectedItem = null;
+            return true;
         }
+        return false;
     }
 
     handleRemove() {
 
-        this.messaggio1.textContent = " ";
+        this.messaggio1.textContent = "turno attivo";
 
         const itemId = selectedItem.dataset.itemId;
         if (!itemId) return;
@@ -451,7 +453,7 @@ class GameController {
 
         this.selectedItem = null;
 
-        this.messaggio1.textContent = "La Partita è iniziata!";
+        this.messaggio1.textContent = "La Partita è iniziata!\n";
         this.resultsContainer.innerHTML = "";
 
         this.player.reset();
@@ -462,7 +464,7 @@ class GameController {
         this.player.backpack.createGrid();
         this.algorithm.backpack.createGrid();
 
-        const itemsDati = this.generateItemsDati(); // oppure usare la lista alternativa che si trova all'inizio
+        //const itemsDati = this.generateItemsDati(); // oppure usare la lista alternativa che si trova all'inizio
        
         this.player.items = [];
         this.algorithm.items = [];
@@ -476,6 +478,8 @@ class GameController {
         });
 
         this.algorithm.loadItems(this.algorithm.items);
+
+        setTimeout(() => this.messaggio1.innerHTML += "<br> Turno attivo", 2000);
     }
 
     generateItemsDati() {
@@ -526,14 +530,14 @@ class GameController {
         const algoWeight = this.algorithm.backpack.currentWeight;
 
         if (userValue > algoValue) {
-            message = "Complimenti! Hai vinto la partita con un valore maggiore!";
+            message = "Complimenti!<br> Hai vinto la partita<br> con un valore maggiore!🏆";
         } else if (userValue < algoValue) {
-            message = "L'algoritmo ha vinto! Ritenta per migliorare la tua strategia.";
+            message = "L'algoritmo ha vinto!<br> Ritenta per migliorare la tua strategia.";
         } else {
             if (userWeight < algoWeight) {
-                message = "Stesso valore, ma hai usato meno peso. Hai vinto!";
+                message = "Stesso valore,<br> ma hai usato meno peso.<br> Hai vinto! 🏆";
             } else if (userWeight > algoWeight) {
-                message = "Stesso valore, ma l'algoritmo ha usato meno peso. Ha vinto!";
+                message = "Stesso valore,<br> ma l'algoritmo ha usato meno peso.<br> Ha vinto!";
             } else {
                 message = "Pareggio perfetto!";
             }
@@ -562,6 +566,7 @@ class GameController {
     endTurns() {
         if (!this.gameActive) return;
         this.player.finished = true;
+        this.messaggio1.textContent = "Hai finito!";
 
         toggleButtons(false);  
         this.autoAlgoInsert();
@@ -570,7 +575,6 @@ class GameController {
     algoMove() {
         if (!this.gameActive || this.player.finished) return;
 
-        toggleButtons(false);
         let success = false;
 
         if (this.algorithm.name === "greedy") {
@@ -580,11 +584,17 @@ class GameController {
         }
 
         if (!success) {
-            this.messaggio1.textContent = "L'algoritmo ha finito di inserire!";
+            this.messaggio1.textContent = "L'algoritmo ha finito!";
             this.algorithm.finished = true;
+
         }
 
         toggleButtons(true);
+        if (!this.algorithm.finished) {
+            this.messaggio1.textContent = "turno attivo"; 
+        }
+
+
     }
 
     setAlgorithm(name) {
@@ -679,11 +689,16 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        const successTurn = controller.player.handleInsert();
+        if (!successTurn) { 
+            return ;          
+        }
 
-        algorithmSelect.disabled = true;
-        controller.player.handleInsert();
         if (!controller.player.finished && !controller.algorithm.finished) {
-            setTimeout(() => controller.algoMove(), 1000);
+
+            controller.messaggio1.textContent = "Algoritmo in esecuzione";
+            toggleButtons(false);
+            setTimeout(() => controller.algoMove(), 3000);
         }
     });
 
@@ -698,16 +713,21 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         
-        algorithmSelect.disabled = true;
         controller.player.handleRemove();
         if (!controller.player.finished && !controller.algorithm.finished) {
-            setTimeout(() => controller.algoMove(), 1000);
+
+            controller.messaggio1.textContent = "Algoritmo in esecuzione";
+            toggleButtons(false);
+            setTimeout(() => controller.algoMove(), 3000);
         }
     });
 
     algorithmSelect.addEventListener("change", () => {
         const selectedValue = algorithmSelect.value;
         controller.setAlgorithm(selectedValue);  
+
+        algorithmSelect.disabled = true;
+
     });
 
     // Click su un item nel contenitore utente
@@ -723,6 +743,8 @@ document.addEventListener("DOMContentLoaded", () => {
             selectItem(target);
             selectedItem = target;
         }
+
+        algorithmSelect.disabled = true;
     });
 
     // Click su un item nello zaino utente
