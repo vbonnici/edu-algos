@@ -90,8 +90,8 @@ class Item {
 }
 
 
-// Lista di items alternativa
-
+// Lista di items alternativa per test
+/*
 const itemsDati = [
     new ItemData(6, 5),
     new ItemData(9, 3),
@@ -99,7 +99,7 @@ const itemsDati = [
     new ItemData(4, 2),
     new ItemData(5, 4)
 ];
-
+*/
 
 // Classe Zaino
 class Backpack {
@@ -464,7 +464,7 @@ class GameController {
         this.player.backpack.createGrid();
         this.algorithm.backpack.createGrid();
 
-        //const itemsDati = this.generateItemsDati(); // oppure usare la lista alternativa che si trova all'inizio
+        const itemsDati = this.generateItemsDati(); // oppure usare la lista alternativa che si trova all'inizio
        
         this.player.items = [];
         this.algorithm.items = [];
@@ -479,7 +479,7 @@ class GameController {
 
         this.algorithm.loadItems(this.algorithm.items);
 
-        setTimeout(() => this.messaggio1.innerHTML += "<br> Turno attivo", 2000);
+        setTimeout(() => this.messaggio1.innerHTML += "<br> Turno attivo", 1000);
     }
 
     generateItemsDati() {
