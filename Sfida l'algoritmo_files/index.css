@@ -1,0 +1,140 @@
+
+.title{
+  grid-area: tit;
+  margin-top:2%;
+  height:60px;
+}
+
+.Selection{
+  border:4px rgb(68,114,196) solid;
+  color:#eaeceb;
+  grid-area: sel;
+  height:500%;
+  margin-right:10%;
+  background-color: rgb(68,114,196);
+}
+
+.Bubble{
+  background-color: rgb(68,114,196);
+  border:4px rgb(68,114,196) solid;
+  color:#eaeceb;
+  grid-area: bub;
+  height:500%;
+  margin-left: 10%;
+
+}
+.grid-container {
+  display: grid;
+  grid-template-areas:
+  'tit tit'
+  'sel bub';
+  gap: 5px;
+  background-color: #eaeceb;
+  width:90%;
+  margin:0% 10%;
+}
+
+  .grid-container > div {
+
+    text-align: center;
+    padding: 20px 0;
+    border-radius:20px;
+    font-size:3ch;
+  }
+
+
+  html{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #eaeceb;
+  background-image: "logoGrigio.png";
+}
+
+
+header{
+  background-color: rgb(68,114,196);
+  width:110%;
+  margin-left:-8px;
+  margin-top:-8px;
+  color:white;
+  font-family:Lato, Geneva, Tahoma, sans-serif;
+  display:flex;
+  height:fit-content;
+
+}
+
+#id_logo{
+  grid-area:logo;
+  float:left;
+  margin:20px 0px 20px 20px;
+  width:10%;
+}
+
+/* va bene per pc 
+p#uno{
+  grid-area:uno;
+  font-size:4ch;
+  float:left;
+  align-items:center;
+  position: absolute;
+  left: 50%;
+  transform: translate( -50%);
+  border:1px solid black;
+}*/
+
+p#uno{
+  font-size:4.1ch;
+  float:left;
+  align-items:center;
+  position: absolute;
+  margin-left:30%;
+  /* border:1px solid black; */
+}
+
+
+
+#due{
+  grid-area:due;
+  font-size:3.2ch;
+}
+
+
+
+.subheader{
+  background-color: rgb(109,176,63);
+  color:white;
+  
+  width:110%;
+  height:28px;
+  
+  margin-left:-8px;
+  padding-top:5px;
+  
+  font-family:Lato, Geneva, Tahoma, sans-serif;
+  font-size:2.5ch;
+}
+
+.subheader>span{
+  left: 50%;
+  transform: translate( -50%);
+  align-items:center;
+  position: absolute;
+}
+
+.shp{
+  background-color: rgb(109,176,63);
+  color:white;
+  
+  width:110%;
+  height:37px;
+
+  text-align:center;
+
+  margin-left:-8px;
+  padding-top:5px;
+
+  font-family:Lato, Geneva, Tahoma, sans-serif;
+  font-size:3.5ch;
+}
+
+
+

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<!-- saved from url=(0070)https://francescorosi3.github.io/NotteRicercatori/grid/bubblesort.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+        <title>BUBBLE SORT</title>
+        
+        <link rel="icon" type="image/ico" href="https://francescorosi3.github.io/NotteRicercatori/logo%20-%20Copia.png">
+        <link rel="stylesheet" href="gioco.css">
+        <link rel="stylesheet" href="stileHeader.css">
+
+        <!-- <link rel="stylesheet" href="stileIndex.css">
+        <link rel="stylesheet" href="stileGioco.css"> -->
+        <link rel="stylesheet" href="css">
+        <script src="jquery-3.6.0.min.js.download"></script>
+        <script src="jquery-ui.js.download"></script>
+    </head>
+    <body cz-shortcut-listen="true" data-new-gr-c-s-check-loaded="14.1264.0" data-gr-ext-installed="">
+        <header>
+            <div id="cont">
+                <a href="https://francescorosi3.github.io/NotteRicercatori/grid/index.html">
+                    <img id="id_logo" src="logo.svg" style="width: 260px;">
+                </a>                        
+                <p id="uno" style="margin-top: 5px;"> Corso di Laurea in <span id="due"> Informatica</span></p>
+            </div>
+        </header>
+        <div class="subheader"><span>DIPARTIMENTO SCIENZE MATEMATICHE, FISICHE E INFORMATICHE</span></div>
+
+        <!-- //////////////        elementi aggiuntivi    ////////////////////////////////////////////// -->
+        <div id="vai" class="vai_pc" style="display: none;"> VIA!</div>
+        <p id="wait" style="height:1px; width:1px; position:absolute;"></p>
+
+        <div class="tutorial" id="t1" style="margin-left: 772.5px; display: none;"> 
+            <div class="tutorial_header">
+                Tutorial
+                <button class="chiudi"> X </button>
+            </div>
+
+            <div class="tutorialcontainer">
+                <div class="testotutorial" style="font-size:1.5ch;">
+                    <p></p>
+                    Clicca su uno degli elementi del riquadro con scritto TU
+                    <p>Poi Clicca sulle frecce <img src="frecciasx.png" style="width:24px;"><img src="freccia1.png" style="width:24px;"> per spostarlo, </p>
+                    <p>oppure premi i pulsanti sulla tastiera del tuo pc</p>
+                </div>
+                <div class="fototutorial">
+                    <img src="tutorial1.gif" style="width:100%;">
+                </div>
+                <div class="avantitutorial"><button class="avanti"> AVANTI </button></div>
+                <div class="indietrotutorial"><button class="indietro"> INDIETRO </button></div>
+            </div>
+
+
+        </div>
+
+        <div class="tutorial" id="t2" style="margin-left: 772.5px; display: none;"> 
+            <div class="tutorial_header">
+                Tutorial
+                <button class="chiudi"> X </button>
+            </div>
+
+            <div class="tutorialcontainer">
+                <div class="testotutorial">
+                    <p>L'obiettivo è quello di ordinare gli elementi in ordine dal più piccolo al più grande prima che lo faccia il computer</p>
+                    <p>Premi VIA ALLA SFIDA per iniziare la sfida contro l'algoritmo</p> 
+                    <p>Vince chi impiega meno mosse [swap]. </p>
+                    <br> Buon Divertimento!
+                </div>
+                <div class="fototutorial">
+                    <img src="ordinato.png" style="width:100%;border-radius:15px;padding-top:35px;">
+                </div>
+                <div class="avantitutorial" style="padding-top:105px;"><button class="gioca"> GIOCA </button></div>
+                <div class="indietrotutorial" style="padding-top:105px;"><button class="indietro"> INDIETRO </button></div>
+            </div>
+
+        </div>
+
+        <div id="risultato" style="display: none;">
+            <button id="riprova">Riprova</button>
+            <a href="https://francescorosi3.github.io/NotteRicercatori/grid/funzionamentoB.html"> <button id="scopri"> Scopri il funzionamento</button> </a>
+        </div>
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+        
+
+<div class="grid-container" style="margin: 2% 15%;">
+            <div class="titolo">Bubble  Sort</div>
+            <div class="pulsanti"> 
+                <a href="https://francescorosi3.github.io/NotteRicercatori/grid/index.html">HOME</a>
+                <a href="https://francescorosi3.github.io/NotteRicercatori/grid/selectionsort.html"> CAMBIA ALGORITMO </a>
+                <div id="tutorial"> TUTORIAL </div>
+            </div>
+
+            <div class="indicatore">
+                <span id="computer">COMPUTER </span> <span id="tu">TU </span>
+            </div>
+
+            <div class="spazio"> </div> 
+
+            <div class="gioco" id="cpu">
+                <div class="obj" id="10" ord="10" dist="0" style="width: 87.1875px; margin-left: 8.61111px; height: 92px; margin-top: 298px;">23</div>
+                <div class="obj" id="20" ord="20" dist="0" style="width: 87.1875px; margin-left: 104.41px; height: 216px; margin-top: 174px;">54</div>
+                <div class="obj" id="30" ord="30" dist="0" style="width: 87.1875px; margin-left: 200.208px; height: 348px; margin-top: 42px;">87</div>
+                <div class="obj" id="40" ord="40" dist="0" style="width: 87.1875px; margin-left: 296.007px; height: 116px; margin-top: 274px;">29</div>
+                <div class="obj" id="50" ord="50" dist="0" style="width: 87.1875px; margin-left: 391.806px; height: 76px; margin-top: 314px;">19</div>
+                <div class="obj" id="60" ord="60" dist="0" style="width: 87.1875px; margin-left: 487.604px; height: 32px; margin-top: 358px;">8</div>
+                <div class="obj" id="70" ord="70" dist="0" style="width: 87.1875px; margin-left: 583.403px; height: 152px; margin-top: 238px;">38</div>
+                <div class="obj" id="80" ord="80" dist="0" style="width: 87.1875px; margin-left: 679.201px; height: 44px; margin-top: 346px;">11</div>
+            </div>  
+
+            <div class="gioco" id="user">
+                <div class="elem" id="1" ord="1" dist="0" style="width: 87.1875px; margin-left: 8.61111px; height: 92px; margin-top: 298px;">23</div>
+                <div class="elem" id="2" ord="2" dist="0" style="width: 87.1875px; margin-left: 104.41px; height: 216px; margin-top: 174px;">54</div>
+                <div class="elem" id="3" ord="3" dist="0" style="width: 87.1875px; margin-left: 200.208px; height: 348px; margin-top: 42px;">87</div>
+                <div class="elem" id="4" ord="4" dist="0" style="width: 87.1875px; margin-left: 296.007px; height: 116px; margin-top: 274px;">29</div>
+                <div class="elem" id="5" ord="5" dist="0" style="width: 87.1875px; margin-left: 391.806px; height: 76px; margin-top: 314px;">19</div>
+                <div class="elem" id="6" ord="6" dist="0" style="width: 87.1875px; margin-left: 487.604px; height: 32px; margin-top: 358px;">8</div>
+                <div class="elem" id="7" ord="7" dist="0" style="width: 87.1875px; margin-left: 583.403px; height: 152px; margin-top: 238px;">38</div>
+                <div class="elem" id="8" ord="8" dist="0" style="width: 87.1875px; margin-left: 679.201px; height: 44px; margin-top: 346px;">11</div>
+            </div>
+
+
+            <div class="footer">
+                <div id="swap1"> Swap: 0</div>
+                <div id="via">VIA ALLA SFIDA </div>
+                <div id="swap2">Swap: <span id="sswap2">0</span>
+                    <br>
+                    <div class="comandi">
+                        <br>
+                        <img id="sx" src="frecciasx.png">
+                        <img id="dx" src="freccia1.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        
+
+
+
+
+
+          
+        <script>
+            var stop;
+            var slide_tutorial=1;
+            var fermitutti=false;
+            var iniziato=false;
+            var elemento_selezionato=false;
+            
+            var bubblesort=true;
+            var selectionsort;
+            var swap_utente=0;
+            var swap_cpu=0;
+              
+            var id_attivo, ord_attivo, dist_attivo, val_attivo;
+            var id_altro, ord_altro, dist_altro, val_altro, spost;
+              
+            var n_elem=8;//////////////////////////ocioooo
+              
+            var valore, altezza, alt_tot, dim_tot, dim_unit, fatt,spazio,spazio_singolo;
+            var perc=100/n_elem;/////anche qua andra' cambiato  ^^
+              
+              // var usate da algoritmi
+            var id_at, ord_at, dist_at, val_at;
+            var id_sx, ord_sx, dist_sx, val_sx;
+            var min, id_min, ord_min, dist_min, spostamento;
+            var i=10;
+            var j;
+            var temp=0;
+
+            ///////////////////////////////////// CARICAMENTO PAGINA //////////////////////////////////////////////////
+
+            if(parseInt($("#id_logo").css('width').slice(0,-2))<150){
+                $("#id_logo").css('width','260px');       
+            } 
+
+             if(parseInt($("html").css('width').slice(0,-2))>1200){
+                //se sono su pc
+                $(".grid-container").css('margin','2% 15%');
+                $("#uno").css('margin-top','5px');
+                $(".subheader").html("<span>DIPARTIMENTO SCIENZE MATEMATICHE, FISICHE E INFORMATICHE</span>");
+                $("#vai").addClass("vai_pc");
+             }
+             else{ //se sono su tablet cell
+                $(".grid-container").css('width','100%');
+                $(".grid-container").css('margin-left','5%');
+                $(".subheader").addClass('shp');
+                $(".pulsanti").children().css('font-size','2.6ch');
+                $(".titolo").css('font-size','3.2ch');
+
+                $("#user").css('margin-left','-15%');
+                $("#cpu").css('margin-right','-15%');
+                $(".gioco").css('font-size','2.4ch');
+
+                $("#via").css('font-size','2.6ch');
+
+                $(".tutorial").css('margin-left','50px');
+
+                $("#vai").addClass("vai_smart");
+                $("#vai").css('line-height',$("#vai").css('height'));
+
+                $("#risultato").css('height','fit-content');
+                $("#risultato").css('padding-bottom','20px');
+            }
+            ////////////////////////////////////////////////////////////////////////////////////
+
+            $("#vai").fadeOut(1);
+            $("#risultato").fadeOut(1);
+            $(".tutorial").fadeOut(1);
+
+            function set_dim(){    //potrei togliere la funzione per alleggerirlo
+                dim_tot=$("#user").css('width');
+                dim_unit=parseInt(dim_tot)/n_elem*0.9;//90%
+                spazio_singolo=parseInt(dim_tot)/(n_elem-(-1))*0.10;//10%
+                spazio=spazio_singolo;
+                
+                alt_tot=$("#user").css('height');
+                alt_tot=parseInt(alt_tot.slice(0,-2));
+            };
+
+            set_dim();
+            //larghezza
+            for(i=1;i<=n_elem;i++){
+                $("#"+i).css('width',dim_unit+'px');
+                $("#"+i).css('margin-left',spazio+'px');
+
+                $("#"+(i*10)).css('width',dim_unit+'px');
+                $("#"+(i*10)).css('margin-left',spazio+'px');
+
+                spazio+=dim_unit+spazio_singolo;
+            }
+
+            //altezze
+            for(i=1;i<=n_elem;i++){
+                valore=$(".elem:nth-child("+i+")").html();
+                altezza=alt_tot*valore/100;
+                $(".elem:nth-child("+i+")").css("height",""+altezza+"px");
+                $(".elem:nth-child("+i+")").css("margin-top",""+alt_tot-altezza-10+"px");
+
+                valore=$(".obj:nth-child("+i+")").html();
+                altezza=alt_tot*valore/100;
+                $(".obj:nth-child("+i+")").css("height",""+altezza+"px");
+                $(".obj:nth-child("+i+")").css("margin-top",""+alt_tot-altezza-10+"px");
+            }
+
+
+            function disattiva_pulsanti(){
+                fermitutti=true;
+                $("#sx").css('opacity','30%');
+                $("#dx").css('opacity','30%');
+            };
+        
+            function attiva_pulsanti(){
+                fermitutti=false;
+                $("#sx").css('opacity','100%');
+                $("#dx").css('opacity','100%');
+            };
+
+            function reset(){
+                swap_utente=0;
+                swap_cpu=0;
+                $("#swap1").html("Swap: "+swap_cpu);
+                $("#sswap2").html(swap_utente);
+        
+                for(i=1;i<=n_elem;i++){
+                    $("#"+i).attr('dist',0);
+                    $("#"+i).animate({left: '0px'});
+                    $("#"+i).css('background-color','aliceblue');
+                    $("#"+i).attr('ord',i);
+                }
+                            
+                for(i=10;i<=n_elem*10;i+=10){
+                    $("#"+i).attr('dist',0);
+                    $("#"+i).animate({left: '0px'});
+                    $("#"+i).css('background-color','aliceblue');
+                    $("#"+i).attr('ord',i);
+                }
+                            
+                j=undefined;
+                temp=20;
+                id_attivo=undefined;
+                ord_attivo=undefined;
+                dist_attivo=undefined;
+                dist_altro=undefined;
+                spost=undefined;
+                dist_min=undefined;
+                i=0;
+            }
+        
+            //parto col tutorial non visibile
+            $(".tutorial").fadeOut(1);
+            var margine=$("html").css('width');
+            margine=parseInt(margine.slice(0,-2));
+            margine=(margine-1000)/2;
+            $(".tutorial").css('margin-left',margine+'px');
+
+
+            $("#tutorial").click(function(){
+                fermitutti=true;
+                $("header").animate({opacity: "70%"},800);
+                $("#subheader").animate({opacity: "70%"},800);
+                $(".grid-container").animate({opacity: "30%"},800);
+                $("#t"+slide_tutorial).fadeIn(800);
+                $(".chiudi").fadeIn(800);
+            });
+
+            $(".chiudi").on({
+
+                click:function(){
+                    $(".tutorial").fadeOut(400);
+                    $("header").animate({opacity: "100%"},800);
+                    $("#subheader").animate({opacity: "100%"},800);
+                    $(".grid-container").animate({opacity: "100%"},800);
+                    fermitutti=false;
+                    slide_tutorial=1;
+                }
+            });
+
+            $(".gioca").on({
+
+                mouseenter:function(){
+                    $(this).css('color','#497BD1');
+                    $(this).css('background-color','white');
+                },
+
+                mouseleave:function(){
+                    $(this).css('color','white');
+                    $(this).css('background-color','#497BD1');
+                },
+
+                click:function(){
+                    $(".tutorial").fadeOut(400);
+                    $(".tutorial").fadeOut(400);
+                    $("header").animate({opacity: "100%"},800);
+                    $("#subheader").animate({opacity: "100%"},800);
+                    $(".grid-container").animate({opacity: "100%"},800);
+                    fermitutti=false;
+                    slide_tutorial=1;
+                }
+            });
+
+            $(".avanti").on({
+                
+                mouseenter:function(){
+                    $(this).css('color','#497BD1');
+                    $(this).css('background-color','white');
+                },
+
+                mouseleave:function(){
+                    $(this).css('color','white');
+                    $(this).css('background-color','#497BD1');
+                },
+                
+                click:function(){
+                    $("#t"+slide_tutorial).fadeOut(200);
+                    slide_tutorial++;
+                    $("#t"+slide_tutorial).fadeIn(200);
+                }
+            });
+
+            $(".indietro").on({
+                mouseenter:function(){
+                    $(this).css('color','#497BD1');
+                    $(this).css('background-color','white');
+                },
+
+                mouseleave:function(){
+                    $(this).css('color','white');
+                    $(this).css('background-color','#497BD1');
+                },
+
+                click:function(){
+                    if(slide_tutorial>1){
+                        $("#t"+slide_tutorial).fadeOut(200);
+                        slide_tutorial--;
+                        $("#t"+slide_tutorial).fadeIn(200);
+                    }
+                    else{
+                        $(".tutorial").fadeOut(400);
+                        $("header").animate({opacity: "100%"},800);
+                        $("#subheader").animate({opacity: "100%"},800);
+                        $(".grid-container").animate({opacity: "100%"},800);
+                        fermitutti=false;
+                    }
+                }
+            });
+
+
+            $(".elem").click(function(){
+                if(fermitutti==false){
+                    id_attivo=$(this).attr("id");
+                    ord_attivo=$(this).attr("ord");
+                    dist_attivo=$(this).attr("dist");
+                    
+                    elemento_selezionato=true;
+                    spost=0;
+                    
+                    $(this).css("background-color","rgb(238,156,54)");
+                    $(this).nextUntil(":last").css("background-color","aliceblue");
+                    $(this).prevUntil(":first").css("background-color","aliceblue");
+                }
+            });
+
+            $("#sx").click(function(){
+                if(fermitutti==false && elemento_selezionato==true)
+                    Sinistra();
+            });
+            $("#dx").click(function(){
+                if(fermitutti==false && elemento_selezionato==true)
+                    Destra();
+            });
+
+            function Sinistra(){
+                //set_dim();
+                if(stop==1)
+                    return false;
+                if(fermitutti==false && elemento_selezionato==true){
+                    if(ord_attivo!=1){
+
+                        disattiva_pulsanti();
+                        swap_utente++;
+                        $("#sswap2").html(swap_utente);
+
+                        ord_altro=ord_attivo-1;
+                        id_altro=$("[ord="+ord_altro+"]").attr("id");
+                        dist_altro=$("[ord="+ord_altro+"]").attr("dist");
+                        dist_attivo=dist_attivo-dim_unit-spazio_singolo;
+                        dist_altro=+dist_altro + +dim_unit + +spazio_singolo;
+                        
+                        //animazione
+                        $("#"+id_attivo).animate({left: ''+ dist_attivo +'px'},700);
+                        $("[ord="+ ord_altro +"]").animate({left: ''+dist_altro+'px'},700);
+                        
+                        //aggiornamento ordinamento
+                        $("#"+id_attivo).attr("ord",ord_altro);
+                        $("#"+id_altro).attr("ord",ord_attivo);
+                        ord_attivo=ord_attivo-1;
+                        
+                        //aggiornamento distanze
+                        $("#"+id_attivo).attr("dist",dist_attivo);
+                        $("#"+id_altro).attr("dist",dist_altro);
+                        
+                        
+                        
+                        //passo della cpu
+                        if(!is_sorted(10)){
+                            BubbleSort();
+                            $("#wait").toggle(400,function(){
+                                attiva_pulsanti();
+                            });
+                        }
+                        else{
+                            $("#wait").toggle(500,function(){
+                                attiva_pulsanti();
+                            });
+                        }
+
+                        if(is_sorted(1)){
+                            BubbleSort();
+                            finito();
+                        }
+                    } 
+                }
+            };
+
+            function Destra(){
+                //disattiva_pulsanti();
+                if(stop==1)
+                    return false;
+                set_dim();
+                if(fermitutti==false && elemento_selezionato==true){
+                    if(ord_attivo!=n_elem){
+                        disattiva_pulsanti();
+                        swap_utente++;
+                        $("#sswap2").html(swap_utente);
+                        
+                        ord_altro=+ord_attivo + +1;
+                        id_altro=$("[ord="+ord_altro+"]").attr("id");
+                        dist_altro=$("[ord="+ord_altro+"]").attr("dist");
+                        dist_attivo=+dist_attivo + +dim_unit + +spazio_singolo;
+                        dist_altro=dist_altro-dim_unit-spazio_singolo;
+        
+                        //animazione
+                        $("#"+id_attivo).animate({left: ''+ dist_attivo +'px'},700);
+                        $("[ord="+ ord_altro +"]").animate({left: ''+dist_altro+'px'},700);
+                        
+                        //aggiornamento ordinamento
+                        $("#"+id_attivo).attr("ord",ord_altro);
+                        $("#"+id_altro).attr("ord",ord_attivo);
+                        ord_attivo= +ord_attivo + +1;
+                        
+                        //aggiornamento distanze
+                        $("#"+id_attivo).attr("dist",dist_attivo);
+                        $("#"+id_altro).attr("dist",dist_altro);
+                        
+                        
+                        if(is_sorted(1)){
+                            BubbleSort();
+                            finito();                       
+                        }
+                        
+                        //passo della cpu
+                        if(!is_sorted(10)){
+                            BubbleSort();
+                            $("#wait").toggle(400,function(){
+                                attiva_pulsanti();
+                            });
+                        }
+                        else{
+                            $("#wait").toggle(600,function(){
+                                attiva_pulsanti();
+                            });
+                        }
+                    }
+                }
+            };
+
+            document.onkeydown = function(e) {
+                switch(e.which) {
+                    case 37: 
+                    if(fermitutti==false && elemento_selezionato==true)
+                        Sinistra();
+                    break;
+                
+                    case 39: 
+                    if(fermitutti==false && elemento_selezionato==true)
+                        Destra();
+                    break;
+                
+                    // case 13: // enter
+                    // if(fermitutti==true){
+                    //     $("#intro").fadeOut(500);
+                    //     $("header").animate({opacity: "70%"},800);
+                    //     $("#subheader").animate({opacity: "70%"},800);
+                    //     $(".grid-container").animate({opacity: "30%"},800);
+                    //     fermitutti=false;
+                    // }
+                    // break;
+                
+                    default: return; // exit this handler for other keys
+                }e.preventDefault(); // prevent the default action (scroll / move caret)
+            };
+            
+            
+            
+            function BubbleSort(){
+                if(iniziato==false || is_sorted(10))
+                    return false;
+                j=temp;
+                for(i;i<=100;i+=10){ 
+                    for(j;j<=(n_elem*10);j=j+10){
+                        ord_at=j;
+                        ord_sx=j-10;
+                        
+                        val_at=parseInt($("[ord="+ ord_at +"]").html());
+                        val_sx=parseInt($("[ord="+ ord_sx +"]").html());
+                        
+                        if(val_at<val_sx){ //se devo fare lo swap                            
+                            swap_cpu++;
+                            $("#swap1").html("Swap: "+swap_cpu);
+                            
+                            id_at=$("[ord="+ ord_at +"]").attr('id');
+                            id_sx=$("[ord="+ ord_sx +"]").attr('id');
+                            
+                            dist_at=$("#"+id_at).attr("dist");
+                            dist_sx=$("#"+id_sx).attr("dist");
+                            
+                            dist_at=dist_at-dim_unit-spazio_singolo; //l'elem a destra deve indietreggiare di dim_unit
+                            dist_sx=+dist_sx + +dim_unit + +spazio_singolo;// l'elem a sx deve avanzare di dim_unit
+                            
+                            //colorazione elem swappati
+                            $("#"+id_at).css("background-color","#C43B3B"); 
+                            $("#"+id_sx).css("background-color","#C43B3B"); 
+                            
+                            //animazione dello swap
+                            $("#wait").toggle(150,function(){
+                                $("#"+id_at).animate({left: ''+ dist_at +'px'},500);
+                                $("#"+id_sx).animate({left: ''+dist_sx+'px'},500);
+                            });
+                            
+                            //aggiornamento ordine
+                            $("#"+id_at).attr("ord",ord_sx);
+                            $("#"+id_sx).attr("ord",ord_at);
+                            
+                            //aggiorno distanze
+                            $("#"+id_at).attr("dist",dist_at);
+                            $("#"+id_sx).attr("dist",dist_sx);
+                            
+                            $("#wait").toggle(700,function(){
+                                $("#"+id_at).css("background-color","aliceblue"); //////aliceblue
+                                $("#"+id_sx).css("background-color","aliceblue"); //////aliceblue
+                            });
+                            
+                            if(j>=80){
+                                temp=20;
+                                i+=10;
+                            }else{
+                                temp=j+10;
+                            }                                               
+                            return;
+                        }  
+                    }                
+                    if(j>=80){
+                        j=20;
+                        i+=10;
+                    }
+                }
+                //attiva_pulsanti();
+            }
+
+            function is_sorted(x){
+                for(sor=x;sor<(n_elem*x);sor+=x){ //se e' cpu fa da 10 a 70 incrementandosi di 10 altrimenti da 1 a 7 incrementandosi di 1
+                if( parseInt( $("[ord="+ sor +"]").html() ) > parseInt( $("[ord="+ (+sor + +x) +"]").html() ) )
+                    return false;
+                }
+                return true;
+            }
+
+            function finito(){
+                stop=1;
+                if(swap_cpu >= swap_utente)
+                    utente_vince();
+                else
+                    cpu_vince();     
+            }
+
+            function cpu_vince(){
+                $("#risultato").prepend("<h1> Hai Perso.. </h1> <h2>Le tue Mosse:"+swap_utente+" </h2><h2>Mosse del computer:"+swap_cpu+" </h2><h3> Vuoi riprovare? </h3> ");///////////non funzona il tasto riprova
+                $("#risultato").css('background-color','#C43B3B');
+                $("#risultato").fadeIn(300);
+                
+                $("header").animate({opacity: "50%"},300);
+                $("#subheader").animate({opacity: "50%"},300);
+                $(".grid-container").animate({opacity: "30%"},300);
+                fermitutti=true;
+            }
+        
+            function utente_vince(){
+                $("#risultato").prepend("<h1> Hai Vinto! </h1> <h2>Le tue Mosse:"+swap_utente+" </h2><h2>Mosse del computer:"+swap_cpu+" </h2><h3> Vuoi riprovare? </h3>"); ///////////non funzona il tasto riprova
+                $("#risultato").css('background-color','rgb(109,176,63)');
+                $("#risultato").fadeIn(300);
+
+                $("header").animate({opacity: "50%"},300);
+                $("#subheader").animate({opacity: "50%"},300);
+                $(".grid-container").animate({opacity: "30%"},300);
+                fermitutti=true;                
+            }
+
+            $("#riprova").click(function(){
+                $("#risultato").fadeOut(500);
+                $("#general").children().animate({opacity:'100%'},500);
+                reset();
+                location.reload();
+                fermitutti=false;
+                // $("#wait").toggle(450,function(){
+                //     $("#risultato").html('<button id="riprova">Riprova</button>');
+                // });
+        
+            });
+
+
+
+
+
+
+
+            //sono i pulsanti gialli del menu
+            $(".pulsanti").children().on({
+
+                mouseenter:function(){
+                    $(this).css("background-color","white");
+                    $(this).css("color","#1E3F78");
+                },
+                mouseleave:function(){
+                    $(this).css("background-color","#FFAA00");
+                    $(this).css("color","black");
+                }
+            });
+
+            $("#via").on({
+                mouseenter:function(){
+                    $(this).css("background-color","white");
+                    $(this).css("color","#1E3F78");
+                },
+                mouseleave:function(){
+                    $(this).css("background-color","#FFAA00");
+                    $(this).css("color","black");
+                },
+
+                click:function(){
+                    if(fermitutti==false){
+                        $("#vai").fadeIn(0);
+                        $("#vai").fadeOut(3000);
+                        
+                        $("#wait").toggle(2000,function(){
+                            $("#via").html("RICOMINCIA");
+                        });
+                        
+                        reset();
+                        iniziato=true;
+                        elemento_selezionato=false;
+                    }
+                }
+
+            })
+
+            $(".comandi").children().on({
+                mouseenter:function(){
+                    $(this).css("opacity","60%");
+                },
+                mouseleave:function(){
+                    $(this).css("opacity","100%");
+                }
+            })
+
+// var testmob = (/iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
+
+// //alert(window.navigator.userAgent);
+// if (testmob) {
+//     /*Si sta utilizzando un dispositivo riconosciuto mobile*/ 
+//     console.log("mobile ")
+// } else if(/ipad/i.test(navigator.userAgent.toLowerCase())){
+//     console.log('tablet');
+// }else {
+//     /* E' un dispositivo Laptop o desktop non motible*/ 
+//     console.log("pc ")
+// }
+        </script>
+
+    
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

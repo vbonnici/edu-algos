@@ -1,0 +1,95 @@
+html{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eaeceb;
+  }
+  
+  
+  header{
+    background-color: rgb(68,114,196);
+    width:110%;
+    margin-left:-8px;
+    margin-top:-8px;
+    color:white;
+    font-family:Lato, Geneva, Tahoma, sans-serif;
+    display:flex;
+    height:fit-content;
+  
+  }
+  
+  #id_logo{
+    grid-area:logo;
+    float:left;
+    margin:20px 0px 20px 20px;
+    width:10%;
+  }
+  
+  /* va bene per pc 
+  p#uno{
+    grid-area:uno;
+    font-size:4ch;
+    float:left;
+    align-items:center;
+    position: absolute;
+    left: 50%;
+    transform: translate( -50%);
+    border:1px solid black;
+  }*/
+  
+  p#uno{
+    font-size:4.1ch;
+    float:left;
+    align-items:center;
+    position: absolute;
+    margin-left:30%;
+    /* border:1px solid black; */
+  }
+  
+  
+  
+  #due{
+    grid-area:due;
+    font-size:3.2ch;
+  }
+  
+  
+  
+  .subheader{
+    background-color: rgb(109,176,63);
+    color:white;
+    
+    width:110%;
+    height:28px;
+    
+    margin-left:-8px;
+    padding-top:5px;
+    
+    font-family:Lato, Geneva, Tahoma, sans-serif;
+    font-size:2.2ch;
+  }
+  
+  .subheader>span{
+    left: 50%;
+    transform: translate( -50%);
+    align-items:center;
+    position: absolute;
+  }
+  
+  .shp{
+    background-color: rgb(109,176,63);
+    color:white;
+    
+    width:110%;
+    height:37px;
+  
+    text-align:center;
+  
+    margin-left:-8px;
+    padding-top:5px;
+  
+    font-family:Lato, Geneva, Tahoma, sans-serif;
+    font-size:3ch;
+  }
+  
+  
+  
+  
