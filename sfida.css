@@ -202,5 +202,12 @@ p#uno{
   font-size:3.5ch;
 }
 
+.game-grid {
+    display: grid;
+    /* Creates exactly 2 columns of equal width */
+    grid-template-columns: 1fr 1fr;
+    /* Adds consistent spacing between all items */
+    gap: 20px;
+}
 
 

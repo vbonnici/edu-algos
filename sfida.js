@@ -22,35 +22,27 @@ $(document).ready(function () {
       }
       ////////////////////////////////////////////////////////////////////////////////////
 
-      $(".Selection").on({
+      $("#selection").on({
         click: function () {
           $(location).attr("href", "./SELECTION SORT_files/SELECTION SORT.html");
         },
-
-        mouseenter: function () {
-          $(this).css("background-color", "white");
-          $(this).css("color", "rgb(68,114,196)");
-        },
-
-        mouseleave: function () {
-          $(this).css("background-color", "rgb(68,114,196)");
-          $(this).css("color", "white");
-        },
       });
 
-      $(".Bubble").on({
+      $("#bubble").on({
         click: function () {
           $(location).attr("href", "./BUBBLE SORT_files/BUBBLE SORT.html");
         },
+      });
 
-        mouseenter: function () {
-          $(this).css("background-color", "white");
-          $(this).css("color", "rgb(68,114,196)");
+      $("#zaino").on({
+        click: function () {
+          $(location).attr("href", "./Zaino_Game/index.html");
         },
+      });
 
-        mouseleave: function () {
-          $(this).css("background-color", "rgb(68,114,196)");
-          $(this).css("color", "white");
+      $("#heap").on({
+        click: function () {
+          $(location).attr("href", "./HEAP SORT_files/HEAP SORT.html");
         },
       });
 
