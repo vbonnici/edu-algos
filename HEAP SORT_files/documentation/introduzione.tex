@@ -1,0 +1,161 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage{amsmath}
+
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+}
+
+
+\begin{document}
+
+\tableofcontents
+\newpage
+
+\vspace*{\fill}
+
+\phantomsection
+\addcontentsline{toc}{section}{Introduzione}
+\section*{\centering Introduzione}
+
+L'informatica è una disciplina che, negli ultimi decenni, ha assunto un ruolo centrale e imprescindibile nella formazione degli studenti di ogni ordine e grado. Non si tratta più soltanto di apprendere l'utilizzo strumentale del calcolatore, ma di acquisire una nuova forma mentis, un modo di pensare strutturato e analitico volto alla risoluzione di problemi complessi: il \textbf{pensiero computazionale}. In questo scenario educativo in rapida evoluzione, l'apprendimento degli algoritmi fondamentali e delle strutture dati rappresenta un passaggio cruciale per comprendere le logiche profonde con cui le macchine elaborano, organizzano e trasformano le informazioni.
+
+Tuttavia, lo studio di concetti astratti come gli algoritmi di ordinamento può risultare ostico per molti studenti se affrontato esclusivamente sui libri di testo. La mancanza di un riscontro visivo immediato e l'astrazione logica richiesta possono creare una barriera all'apprendimento. È qui che si inserisce il presente progetto, nato con l'obiettivo di colmare questo divario tra teoria e pratica attraverso l'uso delle moderne tecnologie web.
+
+Questo progetto di tirocinio si propone di progettare e sviluppare un'applicazione web interattiva dedicata all'apprendimento dell'algoritmo \textbf{Heap Sort}. Sfruttando le potenzialità di HTML, CSS e JavaScript, e adottando un approccio basato sulla \textit{gamification}, l'applicazione trasforma lo studio di una struttura dati complessa (lo Heap) in una sfida coinvolgente. L'utente non è più un osservatore passivo, ma diventa protagonista attivo del processo di ordinamento, sfidando un'intelligenza artificiale (CPU) in una gara di velocità e logica.
+
+L'obiettivo didattico primario è rendere tangibili e manipolabili concetti che altrimenti rimarrebbero astratti, come la struttura ad albero binario, la verifica della proprietà di heap e le operazioni di scambio (swap) e riordinamento. Attraverso l'esperienza diretta, l'errore e la competizione ludica, lo studente può interiorizzare i meccanismi dell'algoritmo in modo naturale e duraturo.
+
+Nel seguito di questo documento verranno dettagliati i principi teorici che hanno guidato la progettazione, l'analisi dei requisiti tecnici e didattici, le scelte architetturali (come l'adozione del pattern Model-View-Presenter) e le fasi di implementazione che hanno portato alla realizzazione del prodotto finale.
+
+
+\vspace*{\fill}
+\newpage
+
+
+
+\begin{center}
+    \LARGE \textbf{Capitolo 1}
+\end{center}
+\vspace*{-1em}
+\section{Orientamento al Pensiero Computazionale}
+
+\subsection{Cos'è il pensiero computazionale}
+Il pensiero computazionale è un processo mentale che consente di formulare problemi e le loro soluzioni in modo che possano essere rappresentati come sequenze di istruzioni eseguibili da un agente che elabora informazioni (come un computer). Non è limitato alla programmazione, ma è una competenza trasversale che include:
+\begin{itemize}
+    \item \textbf{Astrazione}: Semplificare la realtà per concentrarsi sugli aspetti essenziali.
+    \item \textbf{Decomposizione}: Suddividere un problema complesso in parti più piccole e gestibili.
+    \item \textbf{Riconoscimento di pattern}: Identificare somiglianze e regolarità nei dati.
+    \item \textbf{Algoritmica}: Definire una serie di passi precisi per raggiungere un obiettivo.
+\end{itemize}
+
+\subsection{Perché insegnarlo: obiettivi educativi e formativi}
+L'introduzione del pensiero computazionale nelle scuole risponde alla necessità di formare cittadini consapevoli in una società digitale. Gli obiettivi principali includono:
+\begin{itemize}
+    \item Sviluppare la capacità di \textbf{analisi logica} e \textbf{problem solving}.
+    \item Promuovere la \textbf{creatività} nel trovare soluzioni innovative.
+    \item Incoraggiare la \textbf{perseveranza} e la capacità di gestire l'errore (debugging) come parte del processo di apprendimento.
+    \item Fornire gli strumenti per passare da consumatori passivi a \textbf{creatori attivi} di tecnologia.
+\end{itemize}
+
+\subsection{Metodologie didattiche per l'orientamento}
+Per insegnare efficacemente questi concetti, è necessario adottare metodologie attive che coinvolgano direttamente gli studenti.
+
+\subsubsection{Programmazione visuale e attività unplugged}
+La programmazione visuale (a blocchi) riduce il carico cognitivo legato alla sintassi del codice, permettendo di concentrarsi sulla logica. Le attività \textit{unplugged} (senza computer) utilizzano giochi, carte o movimenti fisici per introdurre concetti informatici in modo analogico, rendendoli accessibili anche senza infrastrutture costose.
+
+\subsubsection{Learning-by-doing e problem solving}
+L'approccio "imparare facendo" è fondamentale. Invece di memorizzare definizioni, gli studenti affrontano problemi reali e costruiscono la loro conoscenza attraverso la sperimentazione pratica. L'errore diventa un'opportunità di apprendimento e non un fallimento.
+
+\subsubsection{Gamification e ambienti interattivi}
+La \textit{gamification} applica meccaniche di gioco (punti, livelli, sfide) a contesti non ludici per aumentare la motivazione. Gli ambienti interattivi offrono feedback immediato, permettendo allo studente di vedere subito l'effetto delle proprie azioni, rinforzando il ciclo di apprendimento.
+
+\subsubsection{Game-based learning}
+A differenza della gamification, il \textit{Game-Based Learning} utilizza veri e propri giochi come veicolo principale per l'apprendimento. Il gioco diventa il "libro di testo" interattivo, dove il contenuto didattico è intrinseco alle meccaniche di gioco stesse.
+
+\subsection{L'algoritmo Heap Sort come strumento didattico}
+
+\subsubsection{Fondamenti teorici}
+L'Heap Sort è un algoritmo di ordinamento basato su confronto che utilizza una struttura dati chiamata \textbf{Heap} (o mucchio). Un Heap è un albero binario quasi completo che soddisfa la \textit{proprietà di heap}.
+
+\paragraph{Struttura e Proprietà}
+Un albero binario si dice \textit{quasi completo} se tutti i livelli, tranne eventualmente l'ultimo, sono completamente riempiti e tutti i nodi dell'ultimo livello sono il più a sinistra possibile. Questa proprietà permette di rappresentare efficientemente l'heap tramite un array $A$, dove per ogni nodo all'indice $i$:
+\begin{itemize}
+    \item Il figlio sinistro si trova a $2i + 1$
+    \item Il figlio destro si trova a $2i + 2$
+    \item Il genitore si trova a $\lfloor \frac{i-1}{2} \rfloor$
+\end{itemize}
+
+Esistono due varianti principali di Heap:
+\begin{itemize}
+    \item \textbf{Max-Heap}: Per ogni nodo $i$ diverso dalla radice, il valore del nodo è minore o uguale a quello del padre: $A[\text{parent}(i)] \ge A[i]$. La radice contiene il valore massimo.
+    \item \textbf{Min-Heap}: Per ogni nodo $i$ diverso dalla radice, il valore del nodo è maggiore o uguale a quello del padre: $A[\text{parent}(i)] \le A[i]$. La radice contiene il valore minimo.
+\end{itemize}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwIn{Array $A$, indice $i$}
+\KwOut{Sottoalbero radicato in $i$ conforme alla proprietà di Max-Heap}
+$left \leftarrow 2i + 1$\;
+$right \leftarrow 2i + 2$\;
+$largest \leftarrow i$\;
+\If{$left < A.heapSize \land A[left] > A[largest]$}{
+    $largest \leftarrow left$\;
+}
+\If{$right < A.heapSize \land A[right] > A[largest]$}{
+    $largest \leftarrow right$\;
+}
+\If{$largest \neq i$}{
+    Swap $A[i]$ with $A[largest]$\;
+    Heapify($A, largest$)\;
+}
+\caption{Max-Heapify}
+\end{algorithm}
+
+\paragraph{Procedura Heapify}
+La procedura \texttt{Heapify} è fondamentale per mantenere la proprietà di heap. Essa assume che gli alberi binari radicati nei figli del nodo $i$ siano già degli heap, ma che $A[i]$ possa essere più piccolo dei suoi figli, violando la proprietà di Max-Heap. La procedura fa "scendere" il valore di $A[i]$ nell'albero fino a ripristinare la proprietà corretta. La complessità temporale di Heapify è $O(\log n)$, proporzionale all'altezza dell'albero.
+
+\paragraph{L'Algoritmo Heap Sort}
+L'algoritmo Heap Sort combina la costruzione dell'heap e l'estrazione ripetuta della radice per ordinare l'array.
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwIn{Array $A$ da ordinare}
+\KwOut{Array $A$ ordinato}
+\tcc{Costruzione dell'Heap (Build-Max-Heap)}
+\For{$i \leftarrow \lfloor A.length / 2 \rfloor - 1$ \KwTo $0$}{
+    Max-Heapify($A, i$)\;
+}
+\tcc{Fase di ordinamento}
+\For{$i \leftarrow A.length - 1$ \KwTo $1$}{
+    Swap $A[0]$ with $A[i]$\;
+    $A.heapSize \leftarrow A.heapSize - 1$\;
+    Max-Heapify($A, 0$)\;
+}
+\caption{Heap Sort}
+\end{algorithm}
+
+L'algoritmo si divide in due fasi principali:
+\begin{enumerate}
+    \item \textbf{Build Heap}: Si costruisce un Max-Heap partendo dall'array disordinato. Si itera dai nodi interni verso la radice applicando \texttt{Heapify}.
+    \item \textbf{Estrazione e Ordinamento}: Poiché la radice ($A[0]$) di un Max-Heap contiene sempre il valore massimo, lo si scambia con l'ultimo elemento dell'array ($A[i]$), riducendo la dimensione dell'heap considerato di 1. Il nuovo elemento in $A[0]$ potrebbe violare la proprietà di heap, quindi si chiama \texttt{Heapify} sulla radice per ripristinarla. Si ripete il processo fino a quando l'heap è vuoto.
+\end{enumerate}
+La complessità totale dell'Heap Sort è $O(n \log n)$, rendendolo un algoritmo di ordinamento molto efficiente, anche nel caso peggiore.
+
+\subsubsection{Valore educativo dell'ordinamento a heap}
+L'Heap Sort si presta eccellentemente alla didattica per diversi motivi:
+\begin{itemize}
+    \item \textbf{Visualizzazione}: La struttura ad albero semplifica la comprensione delle relazioni gerarchiche tra i dati rispetto alla sola visualizzazione lineare di un array.
+    \item \textbf{Complessità}: Introduce concetti di efficienza algoritmica ($O(n \log n)$) in modo intuitivo, mostrando come una struttura dati intelligente possa velocizzare le operazioni rispetto a metodi più semplici ma lenti (come il Bubble Sort).
+    \item \textbf{Pensiero Ricorsivo}: La procedura di \textit{heapify} (ripristino dell'ordine) è un classico esempio di logica ricorsiva o iterativa applicata a sotto-alberi.
+\end{itemize}
+
+\end{document}

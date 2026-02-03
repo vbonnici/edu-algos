@@ -1,0 +1,17 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {section}{Introduzione}{2}{section*.2}%
+\contentsline {section}{\numberline {1}Orientamento al Pensiero Computazionale}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Cos'è il pensiero computazionale}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Perché insegnarlo: obiettivi educativi e formativi}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Metodologie didattiche per l'orientamento}{3}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Programmazione visuale e attività unplugged}{3}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}Learning-by-doing e problem solving}{3}{subsubsection.1.3.2}%
+\contentsline {subsubsection}{\numberline {1.3.3}Gamification e ambienti interattivi}{4}{subsubsection.1.3.3}%
+\contentsline {subsubsection}{\numberline {1.3.4}Game-based learning}{4}{subsubsection.1.3.4}%
+\contentsline {subsection}{\numberline {1.4}L'algoritmo Heap Sort come strumento didattico}{4}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}Fondamenti teorici}{4}{subsubsection.1.4.1}%
+\contentsline {paragraph}{Struttura e Proprietà}{4}{section*.4}%
+\contentsline {paragraph}{Procedura Heapify}{5}{section*.5}%
+\contentsline {paragraph}{L'Algoritmo Heap Sort}{5}{section*.6}%
+\contentsline {subsubsection}{\numberline {1.4.2}Valore educativo dell'ordinamento a heap}{5}{subsubsection.1.4.2}%

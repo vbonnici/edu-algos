@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heap Sort Challenge</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Heap Sort Challenge</h1>
+            <div class="controls">
+                <select id="heap-type" class="btn secondary">
+                    <option value="min">Min Heap</option>
+                    <option value="max">Max Heap</option>
+                </select>
+                <button id="start-btn" class="btn primary">Start Game</button>
+                <button id="reset-btn" class="btn secondary" disabled>Reset</button>
+                <div id="game-status" style="font-weight: 600; color: var(--accent-color);">Select settings and start!</div>
+            </div>
+        </header>
+
+        <div class="game-board">
+            <!-- Player Zone -->
+            <div class="player-zone">
+                <div class="zone-header">
+                    <h2>You</h2>
+                    <div>Moves: <span id="player-moves">0</span></div>
+                </div>
+                <div id="player-heap-container" class="heap-container"></div>
+                <div class="sorted-list-container">
+                    <div id="player-sorted-list" class="sorted-list"></div>
+                </div>
+            </div>
+
+            <!-- Computer Zone -->
+            <div class="computer-zone">
+                <div class="zone-header">
+                    <h2>Computer</h2>
+                    <div>Moves: <span id="computer-moves">0</span></div>
+                </div>
+                <div id="computer-heap-container" class="heap-container"></div>
+                <div class="sorted-list-container">
+                    <div id="computer-sorted-list" class="sorted-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Victory/Info Modal -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal">
+            <h2 id="modal-title">Title</h2>
+            <p id="modal-message">Message</p>
+            <button id="modal-close-btn" class="btn primary">Close</button>
+        </div>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>
