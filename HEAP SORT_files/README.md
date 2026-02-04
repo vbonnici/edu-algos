@@ -51,11 +51,11 @@ Poiché il progetto utilizza moduli ES6 (`type="module"`), è consigliabile util
   - **Manutenibilità**: Codice modulare (MVP) per facilitare estensioni future.
 
 - **Requisiti Funzionali**:
-  - L'utente deve poter scegliere tra Min Heap e Max Heap.
-  - L'utente deve poter selezionare nodi per scambiarli.
-  - Il sistema deve validare le mosse dell'utente (solo scambi padre-figlio).
-  - Il computer deve giocare in autonomia con una logica ottimizzata.
-  - Il gioco deve determinare un vincitore basandosi sul numero di mosse.
+  - **RF01 - Selezione Modalità**: Il sistema deve permettere all'utente di scegliere tra Min-Heap e Max-Heap.
+  - **RF02 - Generazione Heap**: All'inizio del gioco, il sistema deve generare un array casuale di numeri interi e visualizzarlo come albero binario.
+  - **RF03 - Interazione Utente**: L'utente deve poter selezionare due nodi (padre e figlio) per scambiarli. Il sistema deve validare la mossa.
+  - **RF04 - Logica CPU**: La CPU deve essere in grado di risolvere l'heap autonomamente applicando l'algoritmo corretto.
+  - **RF05 - Condizione di Vittoria**: Il sistema deve rilevare quando l'array è completamente ordinato e dichiarare il vincitore.
 
 ### 3. Architettura del Sistema
 - **Pattern MVP**:

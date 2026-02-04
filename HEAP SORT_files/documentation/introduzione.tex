@@ -1,40 +1,57 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass{theme/uniprthesis}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[italian]{babel}
-\usepackage{hyperref}
-\usepackage{geometry}
-\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
 \usepackage{amsmath}
 
-\geometry{
- a4paper,
- total={170mm,257mm},
- left=20mm,
- top=20mm,
-}
-
+%%%%%%%%%%% THESIS / TITLE PAGE INFORMATION %%%%%%%%%%%
+\title{Metodologie per l'Orientamento al Pensiero Computazionale: un Caso di Studio basato sull'Algoritmo Heap Sort}
+\author{Kenneth James Nna Minkousse}
+\advisor{Prof. Vincenzo Bonnici}
+\college{Dipartimento di Scienze Matematiche, Fisiche e Informatiche}
+\degree{Corso di Laurea Triennale in Informatica}
+\degreeyears{2025--2026}
+\university{Università degli Studi di Parma}
+\newcommand{\subTitle}{Methodologies for Computational Thinking Orientation: A Case Study based on the Heap Sort Algorithm}
 
 \begin{document}
 
+\maketitle
+
+
+\pagenumbering{roman}
+\pagestyle{plain}
 \tableofcontents
 \newpage
 
-\vspace*{\fill}
+\pagenumbering{arabic}
 
-\phantomsection
-\addcontentsline{toc}{section}{Introduzione}
-\section*{\centering Introduzione}
 
-L'informatica è una disciplina che, negli ultimi decenni, ha assunto un ruolo centrale e imprescindibile nella formazione degli studenti di ogni ordine e grado. Non si tratta più soltanto di apprendere l'utilizzo strumentale del calcolatore, ma di acquisire una nuova forma mentis, un modo di pensare strutturato e analitico volto alla risoluzione di problemi complessi: il \textbf{pensiero computazionale}. In questo scenario educativo in rapida evoluzione, l'apprendimento degli algoritmi fondamentali e delle strutture dati rappresenta un passaggio cruciale per comprendere le logiche profonde con cui le macchine elaborano, organizzano e trasformano le informazioni.
+\chapter*{Introduzione}
+\markboth{Introduzione}{Introduzione}
+\addcontentsline{toc}{chapter}{Introduzione}
 
-Tuttavia, lo studio di concetti astratti come gli algoritmi di ordinamento può risultare ostico per molti studenti se affrontato esclusivamente sui libri di testo. La mancanza di un riscontro visivo immediato e l'astrazione logica richiesta possono creare una barriera all'apprendimento. È qui che si inserisce il presente progetto, nato con l'obiettivo di colmare questo divario tra teoria e pratica attraverso l'uso delle moderne tecnologie web.
+L'informatica e il \textbf{pensiero computazionale} hanno assunto un ruolo centrale nella formazione moderna, diventando competenze imprescindibili per la comprensione della realtà digitale che ci circonda. Tuttavia, l'apprendimento delle strutture dati e degli algoritmi fondamentali rappresenta spesso uno scoglio significativo per gli studenti universitari e delle scuole superiori. Concetti astratti come la ricorsione, la complessità asintotica o la manipolazione di alberi binari, se affrontati esclusivamente attraverso lo studio teorico sui libri di testo o tramite diagrammi statici, possono risultare ostici, aridi e privi di un riscontro concreto immediato.
 
-Questo progetto di tirocinio si propone di progettare e sviluppare un'applicazione web interattiva dedicata all'apprendimento dell'algoritmo \textbf{Heap Sort}. Sfruttando le potenzialità di HTML, CSS e JavaScript, e adottando un approccio basato sulla \textit{gamification}, l'applicazione trasforma lo studio di una struttura dati complessa (lo Heap) in una sfida coinvolgente. L'utente non è più un osservatore passivo, ma diventa protagonista attivo del processo di ordinamento, sfidando un'intelligenza artificiale (CPU) in una gara di velocità e logica.
+Un esempio emblematico di questa difficoltà è rappresentato dall'algoritmo di ordinamento \textbf{Heap Sort}. Sebbene sia uno degli algoritmi più eleganti ed efficienti (con una complessità temporale di $O(n \log n)$), la sua comprensione richiede uno sforzo cognitivo notevole: lo studente deve visualizzare mentalmente una struttura dati (l'array) che viene interpretata logica come un'altra (un albero binario quasi completo), mantenendo costantemente traccia delle relazioni matematiche tra gli indici (padre, figlio sinistro, figlio destro). Questa "doppia natura" dell'Heap crea spesso confusione e ostacola l'interiorizzazione profonda del meccanismo di ordinamento.
 
-L'obiettivo didattico primario è rendere tangibili e manipolabili concetti che altrimenti rimarrebbero astratti, come la struttura ad albero binario, la verifica della proprietà di heap e le operazioni di scambio (swap) e riordinamento. Attraverso l'esperienza diretta, l'errore e la competizione ludica, lo studente può interiorizzare i meccanismi dell'algoritmo in modo naturale e duraturo.
+Questo divario tra teoria astratta e comprensione pratica è il punto di partenza del presente progetto di tirocinio. L'obiettivo primario è stato quello di progettare e sviluppare un'applicazione web interattiva, denominata \textbf{"Heap Sort Challenge"}, che funga da ponte tra la definizione formale dell'algoritmo e la sua esecuzione dinamica. Sfruttando le moderne tecnologie web (HTML5, CSS3, JavaScript ES6) e adottando un approccio pedagogico basato sulla \textbf{Gamification}, il progetto trasforma il processo di apprendimento da un'attività passiva di studio a una sfida attiva e coinvolgente.
 
-Nel seguito di questo documento verranno dettagliati i principi teorici che hanno guidato la progettazione, l'analisi dei requisiti tecnici e didattici, le scelte architetturali (come l'adozione del pattern Model-View-Presenter) e le fasi di implementazione che hanno portato alla realizzazione del prodotto finale.
+A differenza delle tradizionali animazioni algoritmiche (presenti in molti siti didattici), dove l'utente si limita a premere "Play" e osservare le barre muoversi, "Heap Sort Challenge" pone lo studente al centro dell'azione. L'applicazione implementa una modalità "Uomo contro Macchina": l'utente deve competere contro una CPU simulata, prendendo decisioni in tempo reale su quali nodi scambiare per soddisfare le proprietà matematiche del Max-Heap. Questo approccio \textit{"Learning-by-Doing"} costringe l'utente a ragionare come l'algoritmo, valutando le condizioni e prevedendo le conseguenze di ogni scambio, favorendo così un apprendimento più duraturo e profondo.
+
+Dal punto di vista tecnico, il progetto è stato l'occasione per applicare metodologie di ingegneria del software rigorose in un contesto frontend. L'applicazione è stata architettata seguendo il pattern \textbf{Model-View-Presenter (MVP)}, garantendo una netta separazione tra la logica algoritmica (il Modello), la rappresentazione visiva nel DOM (la Vista) e la logica di controllo e interazione (il Presenter). Questa scelta non solo ha facilitato lo sviluppo e il testing, ma rappresenta di per sé un caso di studio interessante su come strutturare applicazioni web client-side moderne e manutenibili senza l'ausilio di framework pesanti.
+
+Nel seguito di questo elaborato, il lavoro svolto verrà presentato secondo la seguente strutturazione:
+
+Nel \textbf{Capitolo 1} verrà introdotto il contesto teorico del Pensiero Computazionale, analizzando come gli strumenti interattivi possano potenziare le capacità di astrazione, decomposizione e riconoscimento di pattern, competenze chiave per ogni informatico.
+
+Il \textbf{Capitolo 2} sarà dedicato all'analisi approfondita dell'algoritmo Heap Sort. Verranno richiamati i fondamenti teorici, le proprietà della struttura dati Heap e la logica matematica che ne governa il funzionamento, fornendo il background necessario per comprendere le scelte implementative.
+
+Nel \textbf{Capitolo 3} si affronterà la fase di Progettazione e Design. Verranno illustrati i diagrammi UML che descrivono l'architettura del sistema, le scelte di User Interface (UI) e User Experience (UX) mirate a massimizzare l'usabilità, e la struttura del pattern MVP adottato.
+
+Il \textbf{Capitolo 4} entrerà nel dettaglio dell'Implementazione tecnica. Verranno discussi gli aspetti più rilevanti del codice sorgente, come la gestione del ciclo di vita del gioco, l'implementazione della "Intelligenza Artificiale" avversaria e le tecniche CSS utilizzate per garantire animazioni fluide e performanti.
+
+Infine, nel \textbf{Capitolo 5}, verranno tratte le Conclusioni, analizzando i risultati ottenuti rispetto agli obiettivi prefissati, discutendo le limitazioni attuali del sistema e proponendo possibili sviluppi futuri per estendere la piattaforma ad altri algoritmi o modalità di gioco.
 
 
 \vspace*{\fill}
@@ -42,120 +59,289 @@ Nel seguito di questo documento verranno dettagliati i principi teorici che hann
 
 
 
-\begin{center}
-    \LARGE \textbf{Capitolo 1}
-\end{center}
-\vspace*{-1em}
-\section{Orientamento al Pensiero Computazionale}
+\chapter{Orientamento al Pensiero Computazionale}
 
-\subsection{Cos'è il pensiero computazionale}
-Il pensiero computazionale è un processo mentale che consente di formulare problemi e le loro soluzioni in modo che possano essere rappresentati come sequenze di istruzioni eseguibili da un agente che elabora informazioni (come un computer). Non è limitato alla programmazione, ma è una competenza trasversale che include:
-\begin{itemize}
-    \item \textbf{Astrazione}: Semplificare la realtà per concentrarsi sugli aspetti essenziali.
-    \item \textbf{Decomposizione}: Suddividere un problema complesso in parti più piccole e gestibili.
-    \item \textbf{Riconoscimento di pattern}: Identificare somiglianze e regolarità nei dati.
-    \item \textbf{Algoritmica}: Definire una serie di passi precisi per raggiungere un obiettivo.
-\end{itemize}
+\section{Cos'è il pensiero computazionale}
+Il pensiero computazionale, termine reso celebre da Jeannette Wing nel 2006, rappresenta "un approccio fondamentale per la risoluzione di problemi, la progettazione di sistemi e la comprensione del comportamento umano che attinge ai concetti fondamentali dell'informatica".
+Non si tratta semplicemente di "pensare come un computer", che è un mero esecutore di istruzioni, ma piuttosto di pensare con i livelli di astrazione necessari per rendere un problema risolvibile da una macchina.
+È un processo cognitivo che coinvolge diverse dimensioni chiave:
 
-\subsection{Perché insegnarlo: obiettivi educativi e formativi}
-L'introduzione del pensiero computazionale nelle scuole risponde alla necessità di formare cittadini consapevoli in una società digitale. Gli obiettivi principali includono:
-\begin{itemize}
-    \item Sviluppare la capacità di \textbf{analisi logica} e \textbf{problem solving}.
-    \item Promuovere la \textbf{creatività} nel trovare soluzioni innovative.
-    \item Incoraggiare la \textbf{perseveranza} e la capacità di gestire l'errore (debugging) come parte del processo di apprendimento.
-    \item Fornire gli strumenti per passare da consumatori passivi a \textbf{creatori attivi} di tecnologia.
-\end{itemize}
-
-\subsection{Metodologie didattiche per l'orientamento}
-Per insegnare efficacemente questi concetti, è necessario adottare metodologie attive che coinvolgano direttamente gli studenti.
-
-\subsubsection{Programmazione visuale e attività unplugged}
-La programmazione visuale (a blocchi) riduce il carico cognitivo legato alla sintassi del codice, permettendo di concentrarsi sulla logica. Le attività \textit{unplugged} (senza computer) utilizzano giochi, carte o movimenti fisici per introdurre concetti informatici in modo analogico, rendendoli accessibili anche senza infrastrutture costose.
-
-\subsubsection{Learning-by-doing e problem solving}
-L'approccio "imparare facendo" è fondamentale. Invece di memorizzare definizioni, gli studenti affrontano problemi reali e costruiscono la loro conoscenza attraverso la sperimentazione pratica. L'errore diventa un'opportunità di apprendimento e non un fallimento.
-
-\subsubsection{Gamification e ambienti interattivi}
-La \textit{gamification} applica meccaniche di gioco (punti, livelli, sfide) a contesti non ludici per aumentare la motivazione. Gli ambienti interattivi offrono feedback immediato, permettendo allo studente di vedere subito l'effetto delle proprie azioni, rinforzando il ciclo di apprendimento.
-
-\subsubsection{Game-based learning}
-A differenza della gamification, il \textit{Game-Based Learning} utilizza veri e propri giochi come veicolo principale per l'apprendimento. Il gioco diventa il "libro di testo" interattivo, dove il contenuto didattico è intrinseco alle meccaniche di gioco stesse.
-
-\subsection{L'algoritmo Heap Sort come strumento didattico}
-
-\subsubsection{Fondamenti teorici}
-L'Heap Sort è un algoritmo di ordinamento basato su confronto che utilizza una struttura dati chiamata \textbf{Heap} (o mucchio). Un Heap è un albero binario quasi completo che soddisfa la \textit{proprietà di heap}.
-
-\paragraph{Struttura e Proprietà}
-Un albero binario si dice \textit{quasi completo} se tutti i livelli, tranne eventualmente l'ultimo, sono completamente riempiti e tutti i nodi dell'ultimo livello sono il più a sinistra possibile. Questa proprietà permette di rappresentare efficientemente l'heap tramite un array $A$, dove per ogni nodo all'indice $i$:
-\begin{itemize}
-    \item Il figlio sinistro si trova a $2i + 1$
-    \item Il figlio destro si trova a $2i + 2$
-    \item Il genitore si trova a $\lfloor \frac{i-1}{2} \rfloor$
-\end{itemize}
-
-Esistono due varianti principali di Heap:
-\begin{itemize}
-    \item \textbf{Max-Heap}: Per ogni nodo $i$ diverso dalla radice, il valore del nodo è minore o uguale a quello del padre: $A[\text{parent}(i)] \ge A[i]$. La radice contiene il valore massimo.
-    \item \textbf{Min-Heap}: Per ogni nodo $i$ diverso dalla radice, il valore del nodo è maggiore o uguale a quello del padre: $A[\text{parent}(i)] \le A[i]$. La radice contiene il valore minimo.
-\end{itemize}
-
-\begin{algorithm}[H]
-\SetAlgoLined
-\KwIn{Array $A$, indice $i$}
-\KwOut{Sottoalbero radicato in $i$ conforme alla proprietà di Max-Heap}
-$left \leftarrow 2i + 1$\;
-$right \leftarrow 2i + 2$\;
-$largest \leftarrow i$\;
-\If{$left < A.heapSize \land A[left] > A[largest]$}{
-    $largest \leftarrow left$\;
-}
-\If{$right < A.heapSize \land A[right] > A[largest]$}{
-    $largest \leftarrow right$\;
-}
-\If{$largest \neq i$}{
-    Swap $A[i]$ with $A[largest]$\;
-    Heapify($A, largest$)\;
-}
-\caption{Max-Heapify}
-\end{algorithm}
-
-\paragraph{Procedura Heapify}
-La procedura \texttt{Heapify} è fondamentale per mantenere la proprietà di heap. Essa assume che gli alberi binari radicati nei figli del nodo $i$ siano già degli heap, ma che $A[i]$ possa essere più piccolo dei suoi figli, violando la proprietà di Max-Heap. La procedura fa "scendere" il valore di $A[i]$ nell'albero fino a ripristinare la proprietà corretta. La complessità temporale di Heapify è $O(\log n)$, proporzionale all'altezza dell'albero.
-
-\paragraph{L'Algoritmo Heap Sort}
-L'algoritmo Heap Sort combina la costruzione dell'heap e l'estrazione ripetuta della radice per ordinare l'array.
-
-\begin{algorithm}[H]
-\SetAlgoLined
-\KwIn{Array $A$ da ordinare}
-\KwOut{Array $A$ ordinato}
-\tcc{Costruzione dell'Heap (Build-Max-Heap)}
-\For{$i \leftarrow \lfloor A.length / 2 \rfloor - 1$ \KwTo $0$}{
-    Max-Heapify($A, i$)\;
-}
-\tcc{Fase di ordinamento}
-\For{$i \leftarrow A.length - 1$ \KwTo $1$}{
-    Swap $A[0]$ with $A[i]$\;
-    $A.heapSize \leftarrow A.heapSize - 1$\;
-    Max-Heapify($A, 0$)\;
-}
-\caption{Heap Sort}
-\end{algorithm}
-
-L'algoritmo si divide in due fasi principali:
+\subsection{I quattro pilastri del Pensiero Computazionale}
 \begin{enumerate}
-    \item \textbf{Build Heap}: Si costruisce un Max-Heap partendo dall'array disordinato. Si itera dai nodi interni verso la radice applicando \texttt{Heapify}.
-    \item \textbf{Estrazione e Ordinamento}: Poiché la radice ($A[0]$) di un Max-Heap contiene sempre il valore massimo, lo si scambia con l'ultimo elemento dell'array ($A[i]$), riducendo la dimensione dell'heap considerato di 1. Il nuovo elemento in $A[0]$ potrebbe violare la proprietà di heap, quindi si chiama \texttt{Heapify} sulla radice per ripristinarla. Si ripete il processo fino a quando l'heap è vuoto.
+    \item \textbf{Astrazione}: È la capacità di filtrare i dettagli superflui per concentrarsi sugli aspetti essenziali di un problema. 
+    \textit{Esempio nel progetto}: Nel gioco Heap Sort, l'astrazione è rappresentata dal modo in cui i numeri vengono visualizzati come nodi di un albero. I dettagli di basso livello (come i bit che compongono il numero in memoria) sono nascosti; ciò che conta è la relazione logica padre-figlio.
+    
+    \item \textbf{Decomposizione}: Consiste nel suddividere un problema complesso in sotto-problemi più piccoli e gestibili.
+    \textit{Esempio nel progetto}: L'ordinamento di un intero array viene decomposto in due fasi principali (Heapify e Sorting), e a sua volta ogni fase è composta da singole operazioni atomiche di "swap" e "confronto". Lo studente impara che risolvere un problema grande significa risolverne tanti piccoli in sequenza.
+    
+    \item \textbf{Riconoscimento di pattern}: La capacità di identificare somiglianze, tendenze e regolarità nei dati.
+    \textit{Esempio nel progetto}: Riconoscere che ogni sotto-albero deve soddisfare la stessa proprietà (es. Max-Heap) permette di applicare la stessa logica ricorsivamente a tutta la struttura.
+    
+    \item \textbf{Algoritmica}: La definizione di una serie di passi ordinati e precisi (un algoritmo) per raggiungere un obiettivo. Non basta "sapere" la soluzione, bisogna saperla descrivere in modo che sia replicabile.
 \end{enumerate}
-La complessità totale dell'Heap Sort è $O(n \log n)$, rendendolo un algoritmo di ordinamento molto efficiente, anche nel caso peggiore.
 
-\subsubsection{Valore educativo dell'ordinamento a heap}
-L'Heap Sort si presta eccellentemente alla didattica per diversi motivi:
+\section{Perché insegnarlo: obiettivi educativi e formativi}
+L'introduzione del pensiero computazionale nelle scuole risponde alla necessità di formare cittadini consapevoli in una società digitale (Digital Literacy). 
+Tuttavia, il valore educativo trascende l'alfabetizzazione informatica:
 \begin{itemize}
-    \item \textbf{Visualizzazione}: La struttura ad albero semplifica la comprensione delle relazioni gerarchiche tra i dati rispetto alla sola visualizzazione lineare di un array.
-    \item \textbf{Complessità}: Introduce concetti di efficienza algoritmica ($O(n \log n)$) in modo intuitivo, mostrando come una struttura dati intelligente possa velocizzare le operazioni rispetto a metodi più semplici ma lenti (come il Bubble Sort).
-    \item \textbf{Pensiero Ricorsivo}: La procedura di \textit{heapify} (ripristino dell'ordine) è un classico esempio di logica ricorsiva o iterativa applicata a sotto-alberi.
+    \item \textbf{Meta-cognizione}: Imparare a programmare o a simulare algoritmi aiuta gli studenti a riflettere sul proprio modo di pensare ("thinking about thinking").
+    \item \textbf{Problem Solving Trasversale}: Le tecniche apprese (decomposizione, astrazione) sono applicabili in matematica, scienze, linguistica e persino nella gestione di progetti quotidiani.
+    \item \textbf{Gestione dell'Errore}: In informatica, l'errore (bug) non è un fallimento, ma un'informazione utile per correggere il processo. Questo approccio favorisce una "Growth Mindset" (mentalità di crescita), riducendo l'ansia da prestazione scolastica.
+    \item \textbf{Creatività Computazionale}: Fornire gli strumenti per passare da consumatori passivi di tecnologia (fruitori di app) a creatori attivi, capaci di esprimere le proprie idee attraverso il codice o la logica algoritmica.
+\end{itemize}
+
+\section{Metodologie didattiche per l'orientamento}
+Per insegnare efficacemente questi concetti, è necessario allontanarsi dalla lezione frontale trasmissiva ("Instructionism") per abbracciare metodologie costruttiviste ("Constructionism" di Seymour Papert).
+
+\subsection{Programmazione visuale e attività unplugged}
+La programmazione visuale (es. Scratch, Blockly) riduce il carico cognitivo legato alla sintassi del codice (punti e virgola, parentesi), permettendo di concentrarsi sulla semantica e sulla logica. 
+Le attività \textit{CS Unplugged} (senza computer) utilizzano giochi fisici, carte, corda o movimenti corporei per introdurre concetti informatici. Ad esempio, ordinare una fila di studenti per altezza è un modo fisico per spiegare un algoritmo di sorting. Queste attività rendono l'informatica accessibile anche in contesti con scarse risorse tecnologiche.
+
+\subsection{Learning-by-doing e problem solving}
+L'approccio "imparare facendo" è fondamentale. Invece di memorizzare definizioni astratte di "ciclo" o "variabile", gli studenti affrontano problemi reali. La conoscenza emerge come sottoprodotto dell'attività di risoluzione del problema. Nel contesto del nostro progetto, lo studente non "studia" l'Heap Sort, ma lo "esegue", internalizzando le regole attraverso la pratica.
+
+\subsection{Gamification e Ambienti Interattivi}
+La \textit{gamification} applica meccaniche di gioco (punti, livelli, classifiche, sfide a tempo) a contesti non ludici per aumentare la motivazione intrinseca ed estrinseca. 
+Gli ambienti interattivi offrono un \textbf{feedback immediato}. Nel modello tradizionale (compito in classe), il feedback (voto) arriva giorni dopo l'esecuzione, quando ormai il momento di apprendimento è passato. In un software educativo, se lo studente sbaglia un passaggio, il sistema lo notifica istantaneamente (es. nodo rosso), permettendo una correzione in tempo reale. Questo ciclo di feedback rapido è essenziale per l'apprendimento profondo.
+
+\subsection{Game-based learning (GBL)}
+A differenza della gamification che "aggiunge" elementi di gioco a un processo esistente, il \textit{Game-Based Learning} utilizza veri e propri giochi come veicolo principale per l'apprendimento. Il gioco diventa il "libro di testo" interattivo. In "Heap Sort Challenge", il contenuto didattico (l'algoritmo) è intrinseco alle meccaniche di gioco: per vincere, devi necessariamente comprendere l'algoritmo.
+
+\section{L'algoritmo Heap Sort come strumento didattico}
+L'Heap Sort è stato scelto come oggetto di questo progetto per la sua ricchezza concettuale. Non è il più semplice (come il Bubble Sort) né sempre il più veloce nella pratica (come il QuickSort), ma offre spunti didattici unici sulla gestione efficiente dei dati.
+
+\subsection{Fondamenti teorici dell'Heap}
+Un \textbf{Binary Heap} è una struttura dati che può essere vista come un albero binario quasi completo. Un albero si dice "quasi completo" se tutti i livelli sono riempiti completamente, tranne eventualmente l'ultimo, che viene riempito da sinistra a destra.
+Questa proprietà strutturale è cruciale perché permette di memorizzare l'albero in un array compatto senza l'uso di puntatori espliciti, garantendo un'efficienza spaziale ottimale.
+
+Dato un nodo all'indice $i$ (0-indexed):
+\begin{itemize}
+    \item Il figlio sinistro è a: $2i + 1$
+    \item Il figlio destro è a: $2i + 2$
+    \item Il genitore è a: $\lfloor \frac{i-1}{2} \rfloor$
+\end{itemize}
+
+Oltre alla proprietà strutturale, l'Heap deve soddisfare la \textit{Proprietà di Ordine}:
+\begin{itemize}
+    \item \textbf{Max-Heap}: Ogni nodo è maggiore o uguale ai suoi figli ($A[parent(i)] \ge A[i]$). Di conseguenza, l'elemento massimo è sempre nella radice.
+    \item \textbf{Min-Heap}: Ogni nodo è minore o uguale ai suoi figli ($A[parent(i)] \le A[i]$). L'elemento minimo è nella radice.
+\end{itemize}
+
+\subsection{Analisi dell'Algoritmo}
+L'algoritmo Heap Sort procede in due fasi distinte, entrambe visualizzate nel software:
+
+\subsubsection{Fase 1: Build-Max-Heap (Costruzione)}
+Si parte da un array disordinato. Si interpretano i dati come un albero binario. Partendo dall'ultimo nodo non-foglia (indice $n/2 - 1$) e risalendo fino alla radice (indice 0), si applica la procedura \texttt{Heapify} verso il basso.
+Questa fase trasforma l'array caotico in un Max-Heap valido.
+La complessità di questa fase, con un'analisi attenta, risulta essere lineare: $O(n)$.
+
+\subsubsection{Fase 2: Sorting (Ordinamento)}
+Una volta costruito l'Heap:
+\begin{enumerate}
+    \item Si scambia la radice (massimo attuale) con l'ultimo elemento dell'heap ($A[n-1]$).
+    \item Si riduce la dimensione considerata dell'heap di 1 (l'elemento massimo è ora "congelato" nella sua posizione finale corretta).
+    \item La nuova radice probabilmente viola la proprietà di Max-Heap, quindi si esegue \texttt{Heapify} sulla radice per far "affondare" il valore nella posizione corretta.
+    \item Si ripete fino a quando l'heap ha dimensione 1.
+\end{enumerate}
+
+\subsection{Analisi della Complessità (Big O Notation)}
+Uno degli obiettivi formativi avanzati è far comprendere agli studenti l'efficienza degli algoritmi.
+\begin{itemize}
+    \item \textbf{Tempo}: La procedura \texttt{Heapify} su un nodo richiede tempo proporzionale all'altezza dell'albero, ovvero $O(\log n)$. Poiché nella fase di sorting eseguiamo \texttt{Heapify} $n$ volte, la complessità totale è $O(n \log n)$.
+    Questo vale per tutti i casi:
+    \begin{itemize}
+        \item \textbf{Best Case}: $O(n \log n)$ (o $O(n)$ se le chiavi sono uguali, ma generalmente domina il logaritmo).
+        \item \textbf{Average Case}: $O(n \log n)$.
+        \item \textbf{Worst Case}: $O(n \log n)$. Questa è una proprietà molto importante rispetto al QuickSort, che nel caso peggiore degrada a $O(n^2)$.
+    \end{itemize}
+    \item \textbf{Spazio}: L'Heap Sort è un algoritmo \textbf{in-place}. Richiede solo una quantità costante di memoria ausiliaria $O(1)$ per lo scambio delle variabili, a differenza del MergeSort che richiede $O(n)$ spazio extra per gli array di appoggio.
+    \item \textbf{Stabilità}: È un algoritmo \textbf{instabile}. Lo scambio di elementi distanti può alterare l'ordine relativo di elementi con chiavi uguali. Questo è un dettaglio tecnico importante che viene spesso discusso in corsi universitari.
+\end{itemize}
+
+\begin{algorithm}
+\caption{Max-Heapify (Versione Ricorsiva)}
+\begin{algorithmic}[1]
+\Require Array $A$, indice $i$
+\Ensure Sottoalbero radicato in $i$ conforme alla proprietà di Max-Heap
+\State $left \gets 2i + 1$
+\State $right \gets 2i + 2$
+\State $largest \gets i$
+\If{$left < A.heapSize \land A[left] > A[largest]$}
+    \State $largest \gets left$
+\EndIf
+\If{$right < A.heapSize \land A[right] > A[largest]$}
+    \State $largest \gets right$
+\EndIf
+\If{$largest \neq i$}
+    \State Swap $A[i]$ with $A[largest]$
+    \State Heapify($A, largest$)
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Heap Sort Completo}
+\begin{algorithmic}[1]
+\Require Array $A$ da ordinare
+\Ensure Array $A$ ordinato in senso crescente
+\State \emph{Fase 1: Costruzione dell'Heap}
+\For{$i \gets \lfloor A.length / 2 \rfloor - 1$ \textbf{downto} $0$}
+    \State Max-Heapify($A, i$)
+\EndFor
+\State \emph{Fase 2: Estrazione e Ordinamento}
+\For{$i \gets A.length - 1$ \textbf{downto} $1$}
+    \State Swap $A[0]$ with $A[i]$
+    \State $A.heapSize \gets A.heapSize - 1$
+    \State Max-Heapify($A, 0$)
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+
+\newpage
+
+\chapter{Descrizione e Analisi del Progetto}
+
+\section{Obiettivi del Progetto di Tirocinio}
+Il progetto "Heap Sort Challenge" nasce dalla convergenza di due esigenze: una didattica (migliorare l'apprendimento degli algoritmi) e una tecnica (sfruttare le potenzialità del web moderno).
+L'obiettivo primario è decostruire la complessità dell'Heap Sort, trasformandolo da "concetto astratto da memorizzare" a "sistema dinamico da esplorare".
+
+Gli obiettivi sono stati categorizzati secondo tre direttrici principali:
+
+\subsection{1. Obiettivi Didattici e Cognitivi}
+Basandosi sulla tassonomia di Bloom rivisitata, il software mira a supportare diversi livelli di apprendimento:
+\begin{itemize}
+    \item \textbf{Ricordare e Capire (Livelli base)}: Attraverso la visualizzazione, lo studente memorizza la struttura dell'albero e comprende le relazioni padre-figlio.
+    \item \textbf{Applicare (Livello intermedio)}: Nella modalità di gioco, lo studente deve applicare attivamente le regole di swap per risolvere le violazioni di heap.
+    \item \textbf{Analizzare e Valutare (Livelli avanzati)}: Confrontando la propria strategia con quella della CPU, lo studente valuta l'efficienza delle proprie mosse e analizza gli errori commessi.
+\end{itemize}
+Specificamente, ci si attende che alla fine dell'utilizzo lo studente sappia:
+\begin{enumerate}
+    \item Identificare visivamente una violazione della proprietà di Max-Heap o Min-Heap.
+    \item Prevedere l'effetto di uno scambio sulla struttura globale dell'albero.
+    \item Spiegare perché l'estrazione avviene sempre dalla radice.
+\end{enumerate}
+
+\subsection{2. Obiettivi Tecnici e Architetturali}
+La sfida tecnica non riguardava solo la "traduzione" dell'algoritmo in codice, ma la creazione di un sistema software robusto e manutenibile.
+\begin{itemize}
+    \item \textbf{Architettura Disaccoppiata}: Implementare rigorosamente il pattern MVP (Model-View-Presenter). Il \textit{Model} (logica dell'heap) non deve sapere nulla dell'HTML; la \textit{View} (DOM) non deve contenere logica di business; il \textit{Presenter} funge da direttore d'orchestra. Questo permette, ad esempio, di cambiare completamente l'interfaccia grafica senza toccare una riga dell'algoritmo.
+    \item \textbf{Performance delle Animazioni}: Garantire i 60fps (frame per secondo) durante le animazioni di swap. Questo ha richiesto l'uso attento di proprietà CSS performanti (come `transform` e `opacity`) evitando quelle che causano il "reflow" della pagina (come `top`, `left`, `margin`).
+    \item \textbf{Responsive Design}: L'albero binario deve adattarsi a schermi di diverse dimensioni senza sovrapposizioni dei nodi, una sfida non banale data la natura espansiva delle strutture ad albero.
+\end{itemize}
+
+\subsection{3. Obiettivi di User Experience (Gamification)}
+Per mantenere alto l'engagement ("coinvolgimento"), sono state applicate le euristiche di Nielsen e principi di Gamification:
+\begin{itemize}
+    \item \textbf{Visibilità dello Stato}: L'utente deve sempre sapere di chi è il turno e qual è lo stato corrente dell'heap.
+    \item \textbf{Feedback Immediato}: Ogni azione deve avere una reazione. Un click valido "accende" il nodo; un click invalido lo fa "tremare" (shake animation) in rosso.
+    \item \textbf{Challenge (Sfida)}: La presenza della CPU non è cosmetica. L'algoritmo avversario è stato tarato per essere veloce ma non istantaneo, creando una "race condition" psicologica che spinge l'utente a pensare più in fretta.
+\end{itemize}
+
+\section{Descrizione Dettagliata dell'Applicazione}
+L'applicazione si presenta come una "Single Page Application" (SPA), dove l'intero flusso di gioco avviene senza ricaricamenti di pagina, garantendo un'esperienza fluida simile a un'app nativa.
+
+\subsection{Interfaccia Utente (UI) e Layout}
+L'interfaccia è divisa logicamente in tre macro-aree:
+\begin{enumerate}
+    \item \textbf{Header e Controlli (Top Bar)}:
+    Qui risiedono i controlli globali. Un selettore (dropdown) permette di scegliere tra "Min Heap" e "Max Heap". Un pulsante prominente "Start Game" avvia la simulazione. Un display del tempo e dei turni tiene traccia della partita.
+    
+    \item \textbf{Area di Gioco (Main Stage)}:
+    Lo schermo è spaccato verticalmente (Split Screen):
+    \begin{itemize}
+        \item \textbf{Sinistra (Player Zone)}: È l'area interattiva. L'utente vede il proprio heap. I nodi sono cerchi cliccabili, connessi da linee (SVG o bordi CSS) che rappresentano gli archi dell'albero. Sotto l'albero, viene visualizzata la rappresentazione lineare (Array View) che si aggiorna in sincronia, fondamentale per far capire la corrispondenza Albero $\leftrightarrow$ Array.
+        \item \textbf{Destra (CPU Zone)}: È l'area speculare ma non interattiva. Qui l'utente osserva l'algoritmo eseguito dalla macchina. I nodi si muovono da soli, offrendo un esempio visivo corretto da imitare.
+    \end{itemize}
+
+    \item \textbf{Area di Feedback (Overlay/Toast)}:
+    Messaggi temporanei appaiono per notificare eventi critici: "Mossa non valida!", "Heap Costruito!", "Hai Vinto!".
+\end{enumerate}
+
+\subsection{Flusso di Interazione (User Journey)}
+Immaginiamo una sessione tipica di uno studente:
+\begin{enumerate}
+    \item \textbf{Ingresso}: Lo studente apre la pagina. L'albero è vuoto. Seleziona "Max Heap".
+    \item \textbf{Setup}: Preme "Start". L'algoritmo genera 15 numeri casuali. I nodi appaiono sullo schermo con un'animazione di entrata ("pop-in").
+    \item \textbf{Fase 1 - Heapify}:
+        \begin{itemize}
+            \item Lo studente esamina l'albero. Nota che il nodo 40 è figlio del nodo 20. In un Max-Heap, il padre deve essere maggiore.
+            \item Clicca sul 40 (si illumina). Clicca sul 20.
+            \item I nodi si scambiano di posto con un'animazione fluida. L'array sottostante si aggiorna: `[..., 40, ...]` prende il posto di `[..., 20, ...]`.
+            \item Contemporaneamente, la CPU fa la sua mossa sulla destra.
+        \end{itemize}
+    \item \textbf{Fase 2 - Extract}:
+        \begin{itemize}
+            \item Una volta che tutto l'albero è verde (proprietà soddisfatta), lo studente clicca sulla radice (il massimo).
+            \item La radice vola via verso l'array ordinato finale. L'ultimo nodo dell'heap prende il posto della radice (diventando temporaneamente viola per indicare la violazione).
+            \item Il gioco riprende con la fase di Heapify sul nuovo, più piccolo, heap.
+        \end{itemize}
+    \item \textbf{Endgame}: Quando l'ultimo nodo è ordinato, compare la schermata di riepilogo: "Vittoria! Tempo: 45s - Mosse: 24".
+\end{enumerate}
+
+\section{Strumenti e Tecnologie: Analisi Tecnica}
+La scelta dello stack tecnologico non è stata casuale, ma guidata dal requisito di \textit{Universalità} e \textit{Longevità}.
+
+\subsection{HTML5: Semantica e Accessibilità}
+Non abbiamo usato `div` generici per tutto. L'uso di tag come `<main>`, `<section>`, `<header>` e `<button>` garantisce che l'applicazione sia interpretabile correttamente anche dagli Screen Reader per utenti ipovedenti. Ogni nodo dell'albero ha attributi `aria-label` e `data-value` per esporre il proprio contenuto sia agli strumenti di assistenza che agli script di test.
+
+\subsection{CSS3 Avanzato: Grid, Flexbox e Variabili}
+Il layout dell'albero binario è una delle parti più complesse.
+\begin{itemize}
+    \item \textbf{CSS Grid}: È stato utilizzato per disegnare la struttura dell'albero. Ogni livello dell'albero corrisponde a una riga della griglia; le colonne sono calcolate per centrare perfettamente ogni nodo rispetto ai suoi figli.
+    \item \textbf{CSS Variables (Custom Properties)}: Definire colori come \texttt{-{}-primary-color: \#4CAF50} o \texttt{-{}-node-size: 50px} in un unico punto (il blocco \texttt{:root}) ha permesso di implementare facilmente temi diversi e di mantenere la coerenza visiva.
+    \item \textbf{Hardware Acceleration}: Per le animazioni di movimento (`transform: translate`), il browser delega il calcolo alla GPU invece che alla CPU, garantendo fluidità anche su dispositivi mobili meno potenti.
+\end{itemize}
+
+\subsection{JavaScript (ES6+) Moderno}
+Il codice è scritto aderendo allo standard ECMAScript 2015+.
+\begin{itemize}
+    \item \textbf{Classi e OOP}: Il paradigma a oggetti mappa perfettamente la realtà del problema. `class Node` ha proprietà `value` e `element` (riff. DOM). `class Heap` contiene la logica matematica.
+    \item \textbf{Async/Await e Promises}: La gestione del tempo è cruciale. L'animazione dura 500ms. Il codice JavaScript non può "bloccarsi" aspettando l'animazione. Abbiamo usato le `Promise` per dire al codice: "Aspetta che la transizione CSS finisca prima di aggiornare logico i dati".
+    \item \textbf{Modularity}: L'uso di `import/export` nativi permette di avere file piccoli e focalizzati (`Heap.js`, `Renderer.js`, `Game.js`) invece di un unico file monolitico ("Spaghetti Code"), facilitando enormemente il debugging.
+\end{itemize}
+
+\section{Analisi Approfondita dei Requisiti}
+
+\subsection{Requisiti Funzionali (RF)}
+Dettagliamo ulteriormente il comportamento atteso:
+
+\noindent
+\textbf{RF01 - Configurazione Partita}
+Il sistema deve impedire l'avvio della partita se non è stata selezionata una modalità valida. Il cambio di modalità a partita in corso deve resettare lo stato corrente per evitare incoerenze (es. un Min-Heap parzialmente ordinato trattato come Max-Heap).
+
+\noindent
+\textbf{RF02 - Generazione Heap e Rendering}
+L'algoritmo di generazione deve produrre numeri pseudo-casuali in un range leggibile (es. 1-100) per evitare nodi con numeri troppo lunghi che uscirebbero dai cerchi grafici. La visualizzazione deve supportare almeno 4 livelli di profondità (fino a 15 nodi).
+
+\noindent
+\textbf{RF03 - Interazione e Validazione Mosse}
+Il core del gioco. Il sistema deve intercettare il click.
+\begin{itemize}
+    \item \textit{Primo Click}: Il nodo viene evidenziato (stato "Selected").
+    \item \textit{Secondo Click}:
+    \begin{itemize}
+        \item Se è lo stesso nodo: Deseleziona.
+        \item Se è un nodo non adiacente (non padre/figlio): Errore visivo, reset selezione.
+        \item Se è adiacente ma non viola la proprietà di heap (swap inutile): Errore visivo ("Mossa non necessaria!").
+        \item Se è adiacente e viola la proprietà: Esegui swap, aggiorna punteggio.
+    \end{itemize}
+\end{itemize}
+
+\noindent
+\textbf{RF04 - Intelligenza Artificiale (CPU)}
+La CPU non deve "barare" risolvendo istantaneamente l'array. Deve simulare un "tempo di pensiero" e un "tempo di azione" per essere umanamente seguibile. Deve implementare una coda di azioni per non sovrapporre le animazioni.
+
+\noindent
+\textbf{RF05 - Rilevamento Fine Gioco e Vittoria}
+Il sistema deve verificare la condizione di vittoria ad ogni completamento di una mossa. La vittoria è definita come: `heapSize == 0` E `array` è ordinato correttamente.
+
+\subsection{Requisiti Non Funzionali (RNF)}
+\begin{itemize}
+    \item \textbf{RNF01 - Performance}: Il Time-to-Interactive (TTI) all'avvio deve essere sotto 1 secondo. Le animazioni non devono scendere sotto i 30fps su mobile.
+    \item \textbf{RNF02 - Usabilità}: Il design deve seguire il principio di "Affordance": ciò che è cliccabile deve sembrare cliccabile (cursor pointer, hover effects). I colori devono essere distinguibili anche da utenti daltonici (uso di simboli o pattern oltre al colore rosso/verde).
+    \item \textbf{RNF03 - Portabilità}: Il layout Grid deve "collassare" in modo grazioso su tablet (Responsive Breakpoints).
+    \item \textbf{RNF04 - Manutenibilità}: Il codice deve essere commentato seguendo lo standard JSDoc. Non devono esserci "Magic Numbers" nel codice; tutti i parametri di configurazione (velocità animazione, colori, dimensione heap) devono essere in costanti o file di configurazione.
 \end{itemize}
 
 \end{document}
