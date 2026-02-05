@@ -1,8 +1,14 @@
-\documentclass{theme/uniprthesis}
+\documentclass[openany]{theme/uniprthesis}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[italian]{babel}
 \usepackage{amsmath}
+\usepackage{xltabular}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage[section]{placeins}
+\let\cleardoublepage\clearpage
+\usetikzlibrary{shapes,positioning}
 
 %%%%%%%%%%% THESIS / TITLE PAGE INFORMATION %%%%%%%%%%%
 \title{Metodologie per l'Orientamento al Pensiero Computazionale: un Caso di Studio basato sull'Algoritmo Heap Sort}
@@ -343,5 +349,436 @@ Il sistema deve verificare la condizione di vittoria ad ogni completamento di un
     \item \textbf{RNF03 - Portabilità}: Il layout Grid deve "collassare" in modo grazioso su tablet (Responsive Breakpoints).
     \item \textbf{RNF04 - Manutenibilità}: Il codice deve essere commentato seguendo lo standard JSDoc. Non devono esserci "Magic Numbers" nel codice; tutti i parametri di configurazione (velocità animazione, colori, dimensione heap) devono essere in costanti o file di configurazione.
 \end{itemize}
+
+\chapter{Progettazione tramite Diagrammi UML}
+
+\section{Diagrammi dei Casi d'Uso}
+Il Diagramma dei Casi d'Uso (Use Case Diagram) rappresenta le funzionalità del sistema dal punto di vista degli attori che vi interagiscono. Nel contesto di "Heap Sort Challenge", l'attore principale è lo \textbf{Studente} (o Utente Generico), mentre il sistema reagisce alle sue azioni.
+
+\subsection{Casi d'Uso Principali}
+Di seguito vengono descritti i casi d'uso principali identificati durante l'analisi dei requisiti funzionali, mappando le interazioni chiave dell'applicazione.
+
+\subsection{Dettaglio Casi d'Uso}
+
+\subsubsection{UC01 - Selezione Tipo Heap}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        actor/.style={circle, fill=white, draw=black, minimum size=0.5cm},
+        usecase/.style={ellipse, draw=black, minimum width=3cm, minimum height=1.5cm, align=center, fill=white},
+        box/.style={rectangle, draw=black, minimum width=6cm, minimum height=5cm}
+    ]
+        % Actor
+        \node[actor] (head) at (0, 0) {};
+        \draw[thick] (head.south) -- ++(0, -0.8) coordinate (body); % Body
+        \draw[thick] (0, -0.3) -- ++(-0.4, 0); % Arms
+        \draw[thick] (0, -0.3) -- ++(0.4, 0);
+        \draw[thick] (body) -- ++(-0.3, -0.4); % Legs
+        \draw[thick] (body) -- ++(0.3, -0.4);
+        \node[below=1.4cm of head] {Studente};
+
+        % System Boundary
+        \node at (5, 2.3) {Heap Sort Challenge};
+        \draw (2, -2.5) rectangle (8, 2.5);
+
+        % Use Case
+        \node[usecase] (uc1) at (5, 0) {Seleziona Tipo Heap\\(Min/Max)};
+
+        % Connection
+        \draw (0.5, -0.3) -- (uc1.west);
+
+    \end{tikzpicture}
+    \caption{Diagramma dei Casi d'Uso per UC01 - Selezione Tipo Heap}
+    \label{fig:uc01_uc}
+\end{figure}
+
+\noindent
+Di seguito vengono riportati i dettagli formali del caso d'uso:
+
+\begin{xltabular}{\textwidth}{|l|X|}
+\hline
+\textbf{ID Caso d'Uso} & UC01 \\
+\hline
+\textbf{Nome} & Selezione Modalità Heap (Min/Max) \\
+\hline
+\textbf{Attori Primari} & Studente \\
+\hline
+\textbf{Descrizione} & L'utente configura l'applicazione per operare in modalità Min-Heap (minimo in radice) o Max-Heap (massimo in radice). \\
+\hline
+\textbf{Precondizioni} & \begin{itemize}
+    \item L'applicazione è avviata.
+    \item L'interfaccia grafica è caricata correttamente.
+\end{itemize} \\
+\hline
+\textbf{Postcondizioni} & \begin{itemize}
+    \item La variabile di stato \texttt{currentHeapType} è aggiornata.
+    \item L'area di gioco viene resettata per coerenza.
+    \item Il feedback visivo della modalità è aggiornato.
+\end{itemize} \\
+\hline
+\textbf{Scenario Principale} & \begin{enumerate}
+    \item L'utente accede al menu di configurazione.
+    \item Il sistema mostra le opzioni disponibili: "Max Heap" e "Min Heap".
+    \item L'utente seleziona l'opzione desiderata.
+    \item Il sistema cattura l'evento di cambio selezione (\textit{change event}).
+    \item Il Presenter invoca il metodo di reset del Model passando la nuova modalità.
+    \item La View aggiorna il titolo della pagina e i colori tematici (es. Rosso per Max, Blu per Min).
+\end{enumerate} \\
+\hline
+\textbf{Scenario Alternativo} & \textbf{Cambio durante una partita in corso}:
+\begin{enumerate}
+    \item L'utente cambia modalità mentre sono presenti nodi nell'area di gioco.
+    \item Il sistema rileva che lo stato non è vuoto.
+    \item Il sistema forza un "Reset" completo (vedi UC05) prima di applicare la nuova modalità, per evitare che un Max-Heap parziale venga valutato con le regole del Min-Heap.
+\end{enumerate} \\
+\hline
+\end{xltabular}
+
+\subsubsection{UC02 - Inizio Partita}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        actor/.style={circle, fill=white, draw=black, minimum size=0.5cm},
+        usecase/.style={ellipse, draw=black, minimum width=3cm, minimum height=1.5cm, align=center, fill=white},
+        box/.style={rectangle, draw=black, minimum width=6cm, minimum height=5cm}
+    ]
+        % Actor
+        \node[actor] (head) at (0, 0) {};
+        \draw[thick] (head.south) -- ++(0, -0.8) coordinate (body);
+        \draw[thick] (0, -0.3) -- ++(-0.4, 0);
+        \draw[thick] (0, -0.3) -- ++(0.4, 0);
+        \draw[thick] (body) -- ++(-0.3, -0.4);
+        \draw[thick] (body) -- ++(0.3, -0.4);
+        \node[below=1.4cm of head] {Studente};
+
+        % System Boundary
+        \node at (5, 2.3) {Heap Sort Challenge};
+        \draw (2, -2.5) rectangle (8, 2.5);
+
+        % Use Case
+        \node[usecase] (uc2) at (5, 0) {Inizio Partita};
+
+        % Connection
+        \draw (0.5, -0.3) -- (uc2.west);
+    \end{tikzpicture}
+    \caption{Diagramma dei Casi d'Uso per UC02 - Inizio Partita}
+    \label{fig:uc02_uc}
+\end{figure}
+
+\begin{xltabular}{\textwidth}{|l|X|}
+\hline
+\textbf{ID Caso d'Uso} & UC02 \\
+\hline
+\textbf{Nome} & Inizio Partita (Start Game) \\
+\hline
+\textbf{Attori Primari} & Studente \\
+\hline
+\textbf{Descrizione} & L'utente avvia una nuova sessione di gioco. Il sistema genera un array di nodi casuali (o accetta input manuale) e li visualizza in una struttura ad albero binario. \\
+\hline
+\textbf{Precondizioni} & \begin{itemize}
+    \item L'utente ha selezionato la modalità di Heap (UC01).
+    \item L'applicazione è pronta (stato idle).
+\end{itemize} \\
+\hline
+\textbf{Postcondizioni} & \begin{itemize}
+    \item L'albero è popolato con nodi.
+    \item I controlli di gioco (Swap, Step Successivo) sono abilitati.
+    \item Il timer è avviato o resettato.
+\end{itemize} \\
+\hline
+\textbf{Scenario Principale} & \begin{enumerate}
+    \item L'utente preme il pulsante "Start" o inserisce una lista di numeri e conferma.
+    \item Il sistema valida l'input (se presente).
+    \item Il Model crea l'istanza dell'Heap iniziale.
+    \item La View renderizza i nodi nell'area di canvas.
+    \item Il sistema abilita le interazioni sui nodi.
+\end{enumerate} \\
+\hline
+\textbf{Scenario Alternativo} & \textbf{Input non valido}:
+\begin{enumerate}
+    \item L'utente inserisce caratteri non numerici.
+    \item Il sistema mostra un messaggio di errore.
+    \item La partita non inizia.
+\end{enumerate} \\
+\hline
+\end{xltabular}
+
+\subsubsection{UC03 - Swap Nodi}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        actor/.style={circle, fill=white, draw=black, minimum size=0.5cm},
+        usecase/.style={ellipse, draw=black, minimum width=3cm, minimum height=1.5cm, align=center, fill=white},
+        box/.style={rectangle, draw=black, minimum width=6cm, minimum height=5cm}
+    ]
+        % Actor
+        \node[actor] (head) at (0, 0) {};
+        \draw[thick] (head.south) -- ++(0, -0.8) coordinate (body);
+        \draw[thick] (0, -0.3) -- ++(-0.4, 0);
+        \draw[thick] (0, -0.3) -- ++(0.4, 0);
+        \draw[thick] (body) -- ++(-0.3, -0.4);
+        \draw[thick] (body) -- ++(0.3, -0.4);
+        \node[below=1.4cm of head] {Studente};
+
+        % System Boundary
+        \node at (5, 2.3) {Heap Sort Challenge};
+        \draw (2, -2.5) rectangle (8, 2.5);
+
+        % Use Case
+        \node[usecase] (uc3) at (5, 0) {Swap Nodi};
+
+        % Connection
+        \draw (0.5, -0.3) -- (uc3.west);
+    \end{tikzpicture}
+    \caption{Diagramma dei Casi d'Uso per UC03 - Swap Nodi}
+    \label{fig:uc03_uc}
+\end{figure}
+
+\begin{xltabular}{\textwidth}{|l|X|}
+\hline
+\textbf{ID Caso d'Uso} & UC03 \\
+\hline
+\textbf{Nome} & Swap Nodi (Scambio) \\
+\hline
+\textbf{Attori Primari} & Studente \\
+\hline
+\textbf{Descrizione} & L'utente seleziona due nodi (normalmente un genitore e un figlio) per scambiarne la posizione nell'albero. \\
+\hline
+\textbf{Precondizioni} & \begin{itemize}
+    \item Partita in corso.
+    \item L'albero contiene almeno due nodi.
+\end{itemize} \\
+\hline
+\textbf{Postcondizioni} & \begin{itemize}
+    \item I valori dei due nodi sono scambiati.
+    \item Il contatore delle mosse viene incrementato.
+\end{itemize} \\
+\hline
+\textbf{Scenario Principale} & \begin{enumerate}
+    \item L'utente clicca sul primo nodo (Source).
+    \item Il sistema evidenzia il nodo selezionato.
+    \item L'utente clicca sul secondo nodo (Target).
+    \item Il sistema esegue lo scambio visivo.
+    \item Il sistema verifica la correttezza della mossa (opzionale, per feedback immediato).
+\end{enumerate} \\
+\hline
+\textbf{Scenario Alternativo} & \textbf{Deselezione}:
+\begin{enumerate}
+    \item L'utente clicca nuovamente sul nodo selezionato.
+    \item La selezione viene annullata.
+\end{enumerate} \\
+\hline
+\end{xltabular}
+
+\subsubsection{UC04 - Estrazione Radice}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        actor/.style={circle, fill=white, draw=black, minimum size=0.5cm},
+        usecase/.style={ellipse, draw=black, minimum width=3cm, minimum height=1.5cm, align=center, fill=white},
+        box/.style={rectangle, draw=black, minimum width=6cm, minimum height=5cm}
+    ]
+        % Actor
+        \node[actor] (head) at (0, 0) {};
+        \draw[thick] (head.south) -- ++(0, -0.8) coordinate (body);
+        \draw[thick] (0, -0.3) -- ++(-0.4, 0);
+        \draw[thick] (0, -0.3) -- ++(0.4, 0);
+        \draw[thick] (body) -- ++(-0.3, -0.4);
+        \draw[thick] (body) -- ++(0.3, -0.4);
+        \node[below=1.4cm of head] {Studente};
+
+        % System Boundary
+        \node at (5, 2.3) {Heap Sort Challenge};
+        \draw (2, -2.5) rectangle (8, 2.5);
+
+        % Use Case
+        \node[usecase] (uc4) at (5, 0) {Estrazione Radice};
+
+        % Connection
+        \draw (0.5, -0.3) -- (uc4.west);
+    \end{tikzpicture}
+    \caption{Diagramma dei Casi d'Uso per UC04 - Estrazione Radice}
+    \label{fig:uc04_uc}
+\end{figure}
+
+\begin{xltabular}{\textwidth}{|l|X|}
+\hline
+\textbf{ID Caso d'Uso} & UC04 \\
+\hline
+\textbf{Nome} & Estrazione della Radice (Extract Root) \\
+\hline
+\textbf{Attori Primari} & Studente \\
+\hline
+\textbf{Descrizione} & Quando la proprietà di Heap è soddisfatta (es. Max-Heap completo), l'utente estrae la radice per spostarla nell'array ordinato. \\
+\hline
+\textbf{Precondizioni} & \begin{itemize}
+    \item L'albero rispetta la proprietà di Heap (tutti i padri >= figli).
+    \item È il turno dell'utente.
+\end{itemize} \\
+\hline
+\textbf{Postcondizioni} & \begin{itemize}
+    \item La radice viene rimossa e spostata nell'array ordinato.
+    \item L'ultimo nodo foglia prende il posto della radice.
+    \item La dimensione dell'Heap diminuisce di 1.
+\end{itemize} \\
+\hline
+\textbf{Scenario Principale} & \begin{enumerate}
+    \item L'utente clicca sul pulsante "Estrai Radice" (o sulla radice stessa).
+    \item Il sistema verifica che l'albero sia un Heap valido.
+    \item Il nodo radice si sposta nell'area "Ordinati".
+    \item L'ultimo nodo diventa la nuova radice.
+\end{enumerate} \\
+\hline
+\textbf{Scenario Alternativo} & \textbf{Heap non valido}:
+\begin{enumerate}
+    \item L'utente tenta l'estrazione ma l'albero non è ordinato correttamente.
+    \item Il sistema mostra un errore: "La proprietà di Heap non è soddisfatta".
+\end{enumerate} \\
+\hline
+\end{xltabular}
+
+\subsubsection{UC05 - Reset Gioco}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        actor/.style={circle, fill=white, draw=black, minimum size=0.5cm},
+        usecase/.style={ellipse, draw=black, minimum width=3cm, minimum height=1.5cm, align=center, fill=white},
+        box/.style={rectangle, draw=black, minimum width=6cm, minimum height=5cm}
+    ]
+        % Actor
+        \node[actor] (head) at (0, 0) {};
+        \draw[thick] (head.south) -- ++(0, -0.8) coordinate (body);
+        \draw[thick] (0, -0.3) -- ++(-0.4, 0);
+        \draw[thick] (0, -0.3) -- ++(0.4, 0);
+        \draw[thick] (body) -- ++(-0.3, -0.4);
+        \draw[thick] (body) -- ++(0.3, -0.4);
+        \node[below=1.4cm of head] {Studente};
+
+        % System Boundary
+        \node at (5, 2.3) {Heap Sort Challenge};
+        \draw (2, -2.5) rectangle (8, 2.5);
+
+        % Use Case
+        \node[usecase] (uc5) at (5, 0) {Reset Gioco};
+
+        % Connection
+        \draw (0.5, -0.3) -- (uc5.west);
+    \end{tikzpicture}
+    \caption{Diagramma dei Casi d'Uso per UC05 - Reset Gioco}
+    \label{fig:uc05_uc}
+\end{figure}
+
+\begin{xltabular}{\textwidth}{|l|X|}
+\hline
+\textbf{ID Caso d'Uso} & UC05 \\
+\hline
+\textbf{Nome} & Reset Gioco \\
+\hline
+\textbf{Attori Primari} & Studente \\
+\hline
+\textbf{Descrizione} & L'utente interrompe la partita corrente e riporta l'applicazione allo stato iniziale. \\
+\hline
+\textbf{Precondizioni} & Nessuna. \\
+\hline
+\textbf{Postcondizioni} & \begin{itemize}
+    \item L'albero viene svuotato.
+    \item L'array di input viene pulito.
+    \item Il timer e i contatori vengono azzerati.
+\end{itemize} \\
+\hline
+\textbf{Scenario Principale} & \begin{enumerate}
+    \item L'utente preme il pulsante "Reset".
+    \item Il sistema chiede conferma (opzionale).
+    \item Il sistema ripristina lo stato iniziale.
+\end{enumerate} \\
+\hline
+\end{xltabular}
+
+\subsubsection{UC06 - Vittoria/Sconfitta}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        actor/.style={rectangle, fill=white, draw=black, minimum size=1cm}, % System as box
+        usecase/.style={ellipse, draw=black, minimum width=3cm, minimum height=1.5cm, align=center, fill=white},
+        box/.style={rectangle, draw=black, minimum width=6cm, minimum height=5cm}
+    ]
+        % Actor (System)
+        \node[actor] (sys) at (0, 0) {Sistema};
+
+        % System Boundary
+        \node at (5, 2.3) {Heap Sort Challenge};
+        \draw (2, -2.5) rectangle (8, 2.5);
+
+        % Use Case
+        \node[usecase] (uc6) at (5, 0) {Vittoria/Sconfitta};
+
+        % Connection
+        \draw (sys.east) -- (uc6.west);
+    \end{tikzpicture}
+    \caption{Diagramma dei Casi d'Uso per UC06 - Vittoria/Sconfitta}
+    \label{fig:uc06_uc}
+\end{figure}
+
+\begin{xltabular}{\textwidth}{|l|X|}
+\hline
+\textbf{ID Caso d'Uso} & UC06 \\
+\hline
+\textbf{Nome} & Fine Partita (Vittoria/Sconfitta) \\
+\hline
+\textbf{Attori Primari} & Sistema (Trigger temporale o di stato) \\
+\hline
+\textbf{Descrizione} & Il sistema decreta la fine della partita quando l'array è completamente ordinato (Vittoria) o quando scade il tempo/mosse (Sconfitta). \\
+\hline
+\textbf{Precondizioni} & Partita in corso. \\
+\hline
+\textbf{Postcondizioni} & \begin{itemize}
+    \item Il gioco si ferma.
+    \item Viene mostrato un modal con il risultato.
+    \item Le statistiche vengono salvate (se previsto).
+\end{itemize} \\
+\hline
+\textbf{Scenario Principale} & \begin{enumerate}
+    \item L'array diventa vuoto (tutti elementi estratti).
+    \item Il sistema rileva \texttt{heapSize == 0}.
+    \item Il sistema calcola il punteggio.
+    \item Il sistema mostra "Vittoria!".
+\end{enumerate} \\
+\hline
+\textbf{Scenario Alternativo} & \textbf{Sconfitta}:
+\begin{enumerate}
+    \item Il tempo a disposizione scade.
+    \item Il sistema interrompe le interazioni.
+    \item Il sistema mostra "Game Over".
+\end{enumerate} \\
+\hline
+\end{xltabular}
+
+\section{Matrice di Tracciabilità}
+La matrice di tracciabilità è uno strumento fondamentale per verificare la completezza dell'analisi. Essa mette in relazione i Requisiti Funzionali (RF) definiti nel Capitolo 2 con i Casi d'Uso (UC) progettati in questo capitolo, garantendo che ogni funzionalità richiesta sia effettivamente coperta da un flusso di interazione utente.
+
+\begin{xltabular}{\textwidth}{|l| *{5}{>{\centering\arraybackslash}X|}}
+\hline
+\textbf{Case d'Uso} & \textbf{RF01} & \textbf{RF02} & \textbf{RF03} & \textbf{RF04} & \textbf{RF05} \\
+\hline
+\endhead
+UC01 - Selezione & \textbf{X} & & & & \\
+\hline
+UC02 - Inizio & & \textbf{X} & & & \\
+\hline
+UC03 - Swap & & & \textbf{X} & & \\
+\hline
+UC04 - Estrazione & & & \textbf{X} & & \\
+\hline
+UC05 - Reset & \textbf{X} & & & & \\
+\hline
+UC06 - Fine Gioco & & & & \textbf{X} & \textbf{X} \\
+\hline
+\end{xltabular}
 
 \end{document}

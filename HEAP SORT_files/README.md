@@ -65,10 +65,38 @@ Poiché il progetto utilizza moduli ES6 (`type="module"`), è consigliabile util
 
 ### 4. Use Cases
 
-- **UC01 - Selezione Tipo Heap**: L'utente seleziona "Min Heap" o "Max Heap" dal menu a tendina.
-- **UC02 - Inizio Partita**: L'utente clicca "Start Game" per generare una nuova heap casuale e iniziare la sfida.
-- **UC03 - Swap Nodi**: L'utente clicca su due nodi (un padre e un figlio) per scambiarne la posizione e correggere la heap.
-- **UC04 - Estrazione Radice**: Quando la radice è l'estremo valido (min o max), l'utente (o il sistema automaticamente) estrae la radice e la sposta nella lista ordinata.
-- **UC05 - Reset Gioco**: L'utente clicca "Reset" per interrompere la partita corrente e pulire l'area di gioco.
-- **UC06 - Vittoria/Sconfitta**: Il sistema confronta il numero di mosse dell'utente con quelle del computer e dichiara il vincitore.
+### UC01 - Selezione Tipo Heap
+![Diagramma UC01](./documentation/Diagrams/UC1.svg)
+**Descrizione**: L'utente seleziona "Min Heap" o "Max Heap" dal menu a tendina.
+
+### UC02 - Inizio Partita
+![Diagramma UC02](./documentation/Diagrams/UC2.svg)
+**Descrizione**: L'utente clicca "Start Game" per generare una nuova heap casuale e iniziare la sfida.
+
+### UC03 - Swap Nodi
+![Diagramma UC03](./documentation/Diagrams/UC3.svg)
+**Descrizione**: L'utente clicca su due nodi (un padre e un figlio) per scambiarne la posizione e correggere la heap.
+
+### UC04 - Estrazione Radice
+![Diagramma UC04](./documentation/Diagrams/UC4.svg)
+**Descrizione**: Quando la radice è l'estremo valido (min o max), l'utente (o il sistema automaticamente) estrae la radice e la sposta nella lista ordinata.
+
+### UC05 - Reset Gioco
+![Diagramma UC05](./documentation/Diagrams/UC5.svg)
+**Descrizione**: L'utente clicca "Reset" per interrompere la partita corrente e pulire l'area di gioco.
+
+### UC06 - Vittoria/Sconfitta
+![Diagramma UC06](./documentation/Diagrams/UC6.svg)
+**Descrizione**: Il sistema confronta il numero di mosse dell'utente con quelle del computer e dichiara il vincitore.
+
+### 5. Matrice di Tracciabilità
+
+| Case d'Uso | RF01 | RF02 | RF03 | RF04 | RF05 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| [UC01](#uc01---selezione-tipo-heap) | X | | | | |
+| [UC02](#uc02---inizio-partita) | | X | | | |
+| [UC03](#uc03---swap-nodi) | | | X | | |
+| [UC04](#uc04---estrazione-radice) | | | X | | |
+| [UC05](#uc05---reset-gioco) | X | | | | |
+| [UC06](#uc06---vittoriasconfitta) | | | | X | X |
 
