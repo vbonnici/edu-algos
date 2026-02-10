@@ -704,12 +704,18 @@ Di seguito vengono riportati i dettagli formali del caso d'uso:
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[
-        actor/.style={rectangle, fill=white, draw=black, minimum size=1cm}, % System as box
+        actor/.style={circle, fill=white, draw=black, minimum size=0.5cm},
         usecase/.style={ellipse, draw=black, minimum width=3cm, minimum height=1.5cm, align=center, fill=white},
         box/.style={rectangle, draw=black, minimum width=6cm, minimum height=5cm}
     ]
-        % Actor (System)
-        \node[actor] (sys) at (0, 0) {Sistema};
+        % Actor (System as Stick Figure)
+        \node[actor] (head) at (0, 0) {};
+        \draw[thick] (head.south) -- ++(0, -0.8) coordinate (body);
+        \draw[thick] (0, -0.3) -- ++(-0.4, 0);
+        \draw[thick] (0, -0.3) -- ++(0.4, 0);
+        \draw[thick] (body) -- ++(-0.3, -0.4);
+        \draw[thick] (body) -- ++(0.3, -0.4);
+        \node[below=1.4cm of head] {Sistema};
 
         % System Boundary
         \node at (5, 2.3) {Heap Sort Challenge};
@@ -719,7 +725,7 @@ Di seguito vengono riportati i dettagli formali del caso d'uso:
         \node[usecase] (uc6) at (5, 0) {Vittoria/Sconfitta};
 
         % Connection
-        \draw (sys.east) -- (uc6.west);
+        \draw (0.5, -0.3) -- (uc6.west);
     \end{tikzpicture}
     \caption{Diagramma dei Casi d'Uso per UC06 - Vittoria/Sconfitta}
     \label{fig:uc06_uc}
@@ -759,7 +765,8 @@ Di seguito vengono riportati i dettagli formali del caso d'uso:
 \hline
 \end{xltabular}
 
-\section{Matrice di Tracciabilità}
+
+\subsection{Matrice di Tracciabilità}
 La matrice di tracciabilità è uno strumento fondamentale per verificare la completezza dell'analisi. Essa mette in relazione i Requisiti Funzionali (RF) definiti nel Capitolo 2 con i Casi d'Uso (UC) progettati in questo capitolo, garantendo che ogni funzionalità richiesta sia effettivamente coperta da un flusso di interazione utente.
 
 \begin{xltabular}{\textwidth}{|l| *{5}{>{\centering\arraybackslash}X|}}
@@ -780,5 +787,152 @@ UC05 - Reset & \textbf{X} & & & & \\
 UC06 - Fine Gioco & & & & \textbf{X} & \textbf{X} \\
 \hline
 \end{xltabular}
+
+\section{Diagramma delle Attività}
+Il Diagramma delle Attività (Activity Diagram) è un diagramma comportamentale UML che descrive il flusso di lavoro (workflow) o di operazioni step-by-step di un sistema. A differenza dei Diagrammi dei Casi d'Uso che si concentrano su "chi fa cosa", gli Activity Diagram dettagliano "come" si susseguono le azioni, evidenziando decisioni, parallelismi e loop. È particolarmente utile per modellare la logica algoritmica e le regole di transizione di stato del gioco.
+
+\subsection{Attività Principali}
+Nel contesto di "Heap Sort Challenge", il flusso principale modella l'interazione ciclica tra Utente e Sistema durante una partita. Il diagramma seguente illustra il ciclo di vita di una sessione di gioco, dalla selezione della modalità fino alla proclamazione del vincitore.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Diagrams/.ActivityDiagram.pdf}
+    \caption{Diagramma delle Attività - Flusso di Gioco}
+    \label{fig:activity_main}
+\end{figure}
+
+Il flusso inizia con il \textbf{nodo iniziale} (cerchio pieno). L'utente configura la modalità e il sistema inizializza l'ambiente. Successivamente si entra nel \textbf{loop di gioco} (Decision Diamond): finché l'heap non è completamente ordinato, il controllo passa alternativamente all'Utente e alla CPU. Quando la condizione `heapSize == 0` è soddisfatta, il flusso termina nel \textbf{nodo finale} (cerchio bordato).
+
+\subsection{Dettaglio del Flusso Principale (Workflow)}
+Per garantire una corretta esecuzione dell'algoritmo e un'esperienza utente fluida, l'applicazione implementa il seguente workflow dettagliato:
+
+\begin{enumerate}
+    \item \textbf{Fase di Configurazione (Setup)}
+    \begin{itemize}
+        \item L'utente seleziona la modalità di ordinamento desiderata (\textit{Min-Heap} o \textit{Max-Heap}) tramite l'interfaccia.
+        \item Il sistema inibisce i controlli di gioco finché non viene premuto il pulsante di avvio.
+    \end{itemize}
+
+    \item \textbf{Fase di Inizializzazione}
+    \begin{itemize}
+        \item Alla pressione di "Start Game", il sistema genera un array di 15 numeri interi pseudo-casuali (range 1-99).
+        \item Viene costruita la struttura ad albero binario visuale corrispondente all'array disordinato.
+        \item Il timer di gioco viene avviato.
+    \end{itemize}
+
+    \item \textbf{Core Loop (Ciclo di Gioco)}
+    \begin{itemize}
+        \item \textit{Turno Utente}: L'utente deve identificare e correggere le violazioni della proprietà di heap. Seleziona un nodo padre e un figlio; se lo scambio è valido (cioè rispetta l'algoritmo), il sistema anima lo spostamento nodale.
+        \item \textit{Validazione Continua}: Dopo ogni mossa, il sistema verifica se la radice è un estremo valido (minimo o massimo globale). In caso affermativo, la radice viene estratta automaticamente e spostata nella lista ordinata.
+        \item \textit{Turno CPU}: Se la modalità competitiva è attiva, la CPU esegue la sua mossa immediatamente dopo l'utente, simulando un "tempo di ragionamento" per realismo.
+    \end{itemize}
+
+    \item \textbf{Fase di Terminazione}
+    \begin{itemize}
+        \item Il ciclo continua finché l'heap non è vuoto (`heapSize = 0`).
+        \item Il sistema confronta le metriche di performance (numero di mosse) tra Utente e CPU.
+        \item Viene mostrato un modale di riepilogo con l'esito della partita (Vittoria/Sconfitta) e le statistiche dettagliate.
+    \end{itemize}
+\end{enumerate}
+
+\section{Diagramma delle Classi}
+Il Diagramma delle Classi (Class Diagram) è un diagramma strutturale UML che descrive l'architettura del sistema rappresentando le classi, i loro attributi, i metodi e le relazioni tra oggetti. È fondamentale per la progettazione orientata agli oggetti (OOP) in quanto mappa direttamente l'implementazione del codice, fungendo da "blueprint" per lo sviluppo software.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Diagrams/.ClassDiagram.pdf}
+    \caption{Diagramma delle Classi - Architettura MVP}
+    \label{fig:class_diagram}
+\end{figure}
+
+Nel dettaglio dell'applicazione "Heap Sort Challenge", il diagramma evidenzia l'adozione del pattern architettonale \textbf{Model-View-Presenter (MVP)} per separare la logica di business dalla rappresentazione visiva. Di seguito vengono analizzate in profondità le componenti principali:
+
+\subsection{GamePresenter (Presenter)}
+La classe \texttt{GamePresenter} funge da "orchestratore" dell'intera applicazione. Situata nel layer di presentazione, essa media le comunicazioni tra il modello dati (Heap) e la vista (Renderer), garantendo che la logica di gioco rimanga disaccoppiata dall'interfaccia utente.
+
+\subsubsection*{Responsabilità Principali}
+\begin{itemize}
+    \item \textbf{Gestione del Ciclo di Vita}: Inizializza le istanze di gioco (\texttt{start()}), gestisce il reset (\texttt{reset()}) e monitora lo stato della partita (\texttt{isPlaying}, \texttt{isComputerTurn}).
+    \item \textbf{Gestione Eventi}: Tramite il metodo \texttt{bindEvents()}, intercetta le azioni dell'utente (click sui nodi, pulsanti di controllo) e le traduce in comandi per il modello.
+    \item \textbf{Coordinamento Turni}: Alterna i turni tra Utente e CPU. Quando l'utente completa una mossa, il presenter invoca \texttt{computerTurn()} dopo un delay artificiale per migliorare l'esperienza utente.
+    \item \textbf{Validazione e Feedback}: Verifica se le mosse dell'utente sono lecite (es. scambio padre-figlio) e fornisce feedback visivo immediato tramite il Renderer.
+\end{itemize}
+
+\subsubsection*{Metodi Chiave}
+\begin{description}
+    \item[\texttt{start()}] Configura una nuova partita istanziando gli Heap con la strategia selezionata (Min o Max). Genera i dati casuali e avvia il timer.
+    \item[\texttt{handlePlayerClick(index)}] Gestisce la logica di selezione multipla. Mantiene un array \texttt{selectedIndices}; quando due nodi sono selezionati, verifica la relazione di parentela e tenta lo scambio.
+    \item[\texttt{checkAutoExtraction()}] Verifica se la radice dell'heap soddisfa la proprietà di ordinamento. In caso positivo, scatena l'estrazione automatica e incrementa il contatore delle mosse.
+    \item[\texttt{checkWinCondition()}] Confronta la dimensione degli heap di giocatore e computer. Se uno dei due è vuoto, determina il vincitore basandosi sul numero di mosse e mostra il modale di fine partita.
+\end{description}
+
+\subsection{Heap (Model)}
+La classe \texttt{Heap} incapsula la struttura dati e la logica algoritmica. È il cuore matematico dell'applicazione, responsabile del mantenimento della "Heap Property".
+
+\subsubsection*{Design Pattern: Strategy}
+Per supportare sia Min-Heap che Max-Heap senza duplicare il codice, la classe \texttt{Heap} utilizza il \textbf{Strategy Pattern}. Al momento dell'istanziazione, riceve un oggetto che implementa l'interfaccia \texttt{Strategy} (con metodi \texttt{shouldSwap} e \texttt{isValid}). Questo permette all'Heap di delegare la logica di confronto, rimanendo agnostico rispetto al tipo di ordinamento specifico.
+
+\subsubsection*{Attributi e Struttura}
+\begin{itemize}
+    \item \texttt{nodes}: Un array dinamico di oggetti \texttt{Node}. Rappresenta l'albero binario completo, dove per un nodo all'indice $i$, i figli si trovano a $2i+1$ e $2i+2$.
+    \item \texttt{strategy}: Riferimento all'istanza della strategia corrente (\texttt{MinHeapStrategy} o \texttt{MaxHeapStrategy}).
+    \item \texttt{sorted}: Array che raccoglie gli elementi mano a mano che vengono estratti dalla radice, formando la lista ordinata finale.
+\end{itemize}
+
+\subsubsection*{Metodi Chiave}
+\begin{description}
+    \item[\texttt{initRandom(count)}] Popola l'heap con $N$ numeri interi unici generati pseudo-casualmente. Garantisce che non ci siano duplicati per semplificare l'apprendimento.
+    \item[\texttt{swap(i, j)}] Esegue lo scambio fisico di due nodi nell'array interno. È l'operazione atomica fondamentale dell'algoritmo.
+    \item[\texttt{isRootValid()}] Scansiona linearmente l'heap per verificare se la radice è l'estremo globale (minimo o massimo) rispetto a tutti gli altri nodi. Utilizza \texttt{strategy.isValid()}.
+    \item[\texttt{extractRoot()}] Rimuove la radice, sposta l'ultimo elemento in cima (o gestisce il caso di heap vuoto) e restituisce il nodo estratto per l'inserimento nella lista ordinata.
+\end{description}
+
+% Continues from previous chunk...
+
+\subsection{Renderer (View)}
+La classe \texttt{Renderer} è responsabile della rappresentazione grafica dello stato del gioco. Disaccoppiata dalla logica di business, si limita a riflettere visivamente i dati forniti dal Model, gestendo il Document Object Model (DOM) del browser.
+
+\subsubsection*{Rendering Dinamico}
+Il rendering avviene in due fasi: calcolo posizionale e disegno.
+\begin{itemize}
+    \item \textbf{Algoritmo di Posizionamento}: Per rappresentare l'heap come un albero binario bilanciato, il renderer calcola le coordinate $(x, y)$ di ogni nodo. La larghezza disponibile viene suddivisa ricorsivamente in base alla profondità del nodo, garantendo che l'albero si adatti dinamicamente al container HTML.
+    \item \textbf{Gestione SVG/DOM}: Utilizza elementi HTML/SVG per disegnare nodi e archi. Ogni volta che lo stato cambia (es. dopo uno swap), il renderer ridisegna le connessioni ma ottimizza l'aggiornamento dei nodi esistenti per permettere animazioni CSS fluide (transizioni di posizione).
+\end{itemize}
+
+\subsubsection*{Metodi Chiave}
+\begin{description}
+    \item[\texttt{render(heap, selectedIndices)}] Metodo principale invocato dal Presenter. Riceve l'oggetto Heap completo e la lista degli indici selezionati.
+    \item[\texttt{calculatePositions(nodes)}] Assegna le coordinate spaziali ad ogni nodo. Il livello $L$ determina la coordinata $Y$, mentre la posizione nell'array determina l'offset $X$.
+    \item[\texttt{drawEdge(parent, child)}] Utilizza SVG o CSS transforms per tracciare una linea di connessione tra due nodi, aggiornandola dinamicamente durante le animazioni.
+    \item[\texttt{renderSorted(heap)}] Visualizza separatamente l'array \texttt{sorted}, mostrando all'utente i "frutti" del lavoro di ordinamento (es. i numeri estratti in ordine crescente o decrescente).
+\end{description}
+
+\subsection{ComputerAI}
+La classe \texttt{ComputerAI} implementa l'intelligenza artificiale dell'avversario. Nonostante sia un'applicazione educativa, l'IA deve simulare un comportamento "competente" per fornire una sfida.
+
+\subsubsection*{Logica Decisionale}
+L'IA opera su una propria istanza di \texttt{Heap}, speculare a quella del giocatore all'inizio.
+\begin{enumerate}
+    \item \textbf{Priorità all'Estrazione}: Il metodo \texttt{makeMove()} controlla prima di tutto se la radice è valida (\texttt{isRootValid()}). Se lo è, l'IA "attende" il prossimo ciclo per estrarre, massimizzando il punteggio.
+    \item \textbf{Strategia di Correzione}: Se la radice non è pronta, l'IA cerca attivamente violazioni della proprietà di heap. Scansiona l'albero per trovare nodi che violano la regola rispetto ai propri figli e propone uno scambio correttivo.
+    \item \textbf{Simulazione Umana}: Introduce ritardi artificiali per rendere le mosse visibili e comprensibili all'utente, evitando che il computer completi il gioco istantaneamente.
+\end{enumerate}
+
+\subsection{Node}
+La classe \texttt{Node} è una struttura dati semplice (POJO - Plain Old JavaScript Object) che funge da contenitore di informazioni.
+\begin{itemize}
+    \item \texttt{value}: Il valore numerico intero da ordinare.
+    \item \texttt{id}: Un identificativo univoco per tracciare l'elemento nel DOM durante i ri-ordinamenti, essenziale per le animazioni (chiave di riconciliazione).
+    \item \texttt{x, y}: Coordinate calcolate dal Renderer, memorizzate nel nodo per evitare ricalcoli costanti durante un singolo frame di rendering.
+\end{itemize}
+
+\subsection{Interfaccia Strategy e Implementazioni}
+Il pattern Strategy è cruciale per la flessibilità del gioco.
+\begin{itemize}
+    \item \textbf{MinHeapStrategy}: Implementa \texttt{shouldSwap(a, b)} restituendo \texttt{true} se $a > b$ (il padre è maggiore del figlio, violazione Min-Heap). Implementa \texttt{isValid} verificando $parent \leq child$.
+    \item \textbf{MaxHeapStrategy}: Inverte la logica, restituendo \texttt{shouldSwap = true} se $a < b$.
+\end{itemize}
+Questa astrazione permette di cambiare la modalità di gioco (dal "Min Game" al "Max Game") iniettando semplicemente una diversa istanza di strategia nel costruttore dell'Heap, senza modificare una riga della logica centrale dell'Heap stesso.
+
 
 \end{document}

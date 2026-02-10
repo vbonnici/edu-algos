@@ -1,11 +1,13 @@
 import Heap from '../Model/Heap.js';
+import MinHeapStrategy from '../Model/MinHeapStrategy.js';
+import MaxHeapStrategy from '../Model/MaxHeapStrategy.js';
 import ComputerAI from '../Model/ComputerAI.js';
 import Renderer from '../View/Renderer.js';
 
 export default class GamePresenter {
     constructor() {
-        this.playerHeap = new Heap();
-        this.computerHeap = new Heap();
+        this.playerHeap = new Heap(new MinHeapStrategy());
+        this.computerHeap = new Heap(new MinHeapStrategy());
         this.ai = new ComputerAI(this.computerHeap);
         
         this.playerRenderer = new Renderer('player-heap-container', 'player-sorted-list');
@@ -40,8 +42,9 @@ export default class GamePresenter {
 
     start() {
         const type = document.getElementById('heap-type').value;
-        this.playerHeap = new Heap(type);
-        this.computerHeap = new Heap(type);
+        const strategy = type === 'max' ? new MaxHeapStrategy() : new MinHeapStrategy();
+        this.playerHeap = new Heap(strategy);
+        this.computerHeap = new Heap(strategy);
         
         this.playerHeap.initRandom(15);
         this.computerHeap.setNodes(this.playerHeap.getValues());

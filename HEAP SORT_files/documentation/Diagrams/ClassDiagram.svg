@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700" viewBox="0 0 900 700">
+  <defs>
+    <style>
+      .class-box { fill: #ffffff; stroke: #000000; stroke-width: 1.5; }
+      .class-name { font-family: Arial, sans-serif; font-weight: bold; font-size: 14px; text-anchor: middle; }
+      .separator { stroke: #000000; stroke-width: 1; }
+      .method-text { font-family: Arial, sans-serif; font-size: 11px; }
+      .arrow { stroke: #000000; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #000000; }
+      .diamond { fill: #ffffff; stroke: #000000; stroke-width: 1.5; }
+    </style>
+    <marker id="diamond-agg" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto">
+      <path d="M0,6 L6,0 L12,6 L6,12 z" class="diamond" />
+    </marker>
+    <marker id="arrow-solid" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow-head" />
+    </marker>
+    <marker id="arrow-open" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+       <path d="M0,0 L10,5 L0,10" fill="none" stroke="black" />
+    </marker>
+  </defs>
+
+  <!-- GamePresenter -->
+  <rect x="300" y="20" width="220" height="240" class="class-box" />
+  <text x="410" y="40" class="class-name">GamePresenter</text>
+  <line x1="300" y1="50" x2="520" y2="50" class="separator" />
+  <text x="310" y="65" class="method-text">- playerHeap: Heap</text>
+  <text x="310" y="77" class="method-text">- computerHeap: Heap</text>
+  <text x="310" y="89" class="method-text">- ai: ComputerAI</text>
+  <line x1="300" y1="100" x2="520" y2="100" class="separator" />
+  <text x="310" y="115" class="method-text">+ constructor()</text>
+  <text x="310" y="127" class="method-text">+ bindEvents()</text>
+  <text x="310" y="139" class="method-text">+ start()</text>
+  <text x="310" y="151" class="method-text">+ reset()</text>
+  <text x="310" y="163" class="method-text">+ checkAutoExtraction()</text>
+  <text x="310" y="175" class="method-text">+ handlePlayerClick(index)</text>
+  <text x="310" y="187" class="method-text">+ endTurn()</text>
+  <text x="310" y="199" class="method-text">+ computerTurn()</text>
+  <text x="310" y="211" class="method-text">+ checkWinCondition()</text>
+  <text x="310" y="223" class="method-text">+ showModal(title, msg)</text>
+  <text x="310" y="235" class="method-text">+ updateUI()</text>
+
+  <!-- Renderer -->
+  <rect x="20" y="300" width="220" height="130" class="class-box" />
+  <text x="130" y="320" class="class-name">Renderer</text>
+  <line x1="20" y1="330" x2="240" y2="330" class="separator" />
+  <text x="30" y="345" class="method-text">+ constructor(container, list)</text>
+  <text x="30" y="357" class="method-text">+ render(heap, selected)</text>
+  <text x="30" y="369" class="method-text">+ calculatePositions(nodes)</text>
+  <text x="30" y="381" class="method-text">+ drawEdge(parent, child)</text>
+  <text x="30" y="393" class="method-text">+ renderSorted(heap)</text>
+
+  <!-- Heap -->
+  <rect x="300" y="300" width="220" height="220" class="class-box" />
+  <text x="410" y="320" class="class-name">Heap</text>
+  <line x1="300" y1="330" x2="520" y2="330" class="separator" />
+  <text x="310" y="345" class="method-text">- strategy: Strategy</text>
+  <text x="310" y="357" class="method-text">- nodes: Node[]</text>
+  <line x1="300" y1="365" x2="520" y2="365" class="separator" />
+  <text x="310" y="380" class="method-text">+ constructor(strategy)</text>
+  <text x="310" y="392" class="method-text">+ parent(i): int</text>
+  <text x="310" y="404" class="method-text">+ left(i): int</text>
+  <text x="310" y="416" class="method-text">+ right(i): int</text>
+  <text x="310" y="428" class="method-text">+ shouldSwap(a, b): bool</text>
+  <text x="310" y="440" class="method-text">+ swap(i, j)</text>
+  <text x="310" y="452" class="method-text">+ initRandom(count)</text>
+  <text x="310" y="464" class="method-text">+ setNodes(values)</text>
+  <text x="310" y="476" class="method-text">+ isRootValid(): bool</text>
+  <text x="310" y="488" class="method-text">+ extractRoot(): Node</text>
+
+  <!-- ComputerAI -->
+  <rect x="600" y="300" width="200" height="80" class="class-box" />
+  <text x="700" y="320" class="class-name">ComputerAI</text>
+  <line x1="600" y1="330" x2="800" y2="330" class="separator" />
+  <text x="610" y="345" class="method-text">+ constructor(heap)</text>
+  <text x="610" y="357" class="method-text">+ makeMove(): string</text>
+
+  <!-- Node -->
+  <rect x="330" y="560" width="160" height="80" class="class-box" />
+  <text x="410" y="580" class="class-name">Node</text>
+  <line x1="330" y1="590" x2="490" y2="590" class="separator" />
+  <text x="340" y="605" class="method-text">+ value: int</text>
+  <text x="340" y="617" class="method-text">+ id: int</text>
+  <text x="340" y="629" class="method-text">+ x: float, y: float</text>
+
+  <!-- Strategy Interface -->
+  <rect x="650" y="420" width="200" height="70" class="class-box" />
+  <text x="750" y="440" class="class-name">&lt;&lt;Interface&gt;&gt; Strategy</text>
+  <line x1="650" y1="450" x2="850" y2="450" class="separator" />
+  <text x="660" y="465" class="method-text">+ shouldSwap(a, b): bool</text>
+  <text x="660" y="477" class="method-text">+ isValid(root, node): bool</text>
+
+  <!-- Concrete Strategies -->
+  <rect x="580" y="540" width="180" height="80" class="class-box" />
+  <text x="670" y="560" class="class-name">MinHeapStrategy</text>
+  <line x1="580" y1="565" x2="760" y2="565" class="separator" />
+  <text x="590" y="580" class="method-text">+ constructor()</text>
+  <text x="590" y="595" class="method-text">+ shouldSwap(a, b): bool</text>
+  <text x="590" y="610" class="method-text">+ isValid(root, node): bool</text>
+
+  <rect x="780" y="540" width="180" height="80" class="class-box" />
+  <text x="870" y="560" class="class-name">MaxHeapStrategy</text>
+  <line x1="780" y1="565" x2="960" y2="565" class="separator" />
+  <text x="790" y="580" class="method-text">+ constructor()</text>
+  <text x="790" y="595" class="method-text">+ shouldSwap(a, b): bool</text>
+  <text x="790" y="610" class="method-text">+ isValid(root, node): bool</text>
+
+  <!-- Connections -->
+  
+  <!-- Presenter -> Renderer -->
+  <line x1="300" y1="140" x2="130" y2="300" class="arrow" marker-end="url(#arrow-solid)" />
+  
+  <!-- Presenter -> Heap -->
+  <line x1="410" y1="260" x2="410" y2="300" class="arrow" marker-end="url(#arrow-solid)" />
+  
+  <!-- Presenter -> AI -->
+  <line x1="520" y1="140" x2="700" y2="300" class="arrow" marker-end="url(#arrow-solid)" />
+
+  <!-- Heap -> Node (Aggregation) -->
+  <line x1="410" y1="520" x2="410" y2="560" class="arrow" marker-start="url(#diamond-agg)" />
+
+  <!-- Heap -> Strategy -->
+  <line x1="520" y1="410" x2="650" y2="455" class="arrow" stroke-dasharray="5,5" marker-end="url(#arrow-open)" />
+
+  <!-- Strategies Implement -->
+  <path d="M670,540 L670,520 L750,520 L750,490" class="arrow" fill="none" marker-end="url(#arrow-open)" />
+  <path d="M870,540 L870,520 L750,520" class="arrow" fill="none" />
+
+</svg>

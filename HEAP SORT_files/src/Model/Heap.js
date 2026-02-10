@@ -1,20 +1,20 @@
 import Node from './Node.js';
 
 export default class Heap {
-    constructor(type = 'min') {
-        this.type = type; // 'min' or 'max'
+    constructor(strategy) {
+        this.strategy = strategy;
         this.nodes = [];
         this.sorted = [];
+        this.type = strategy.type; // Keep for backward compatibility if needed, or better to remove spread usages
     }
 
     parent(i) { return Math.floor((i - 1) / 2); }
     left(i) { return 2 * i + 1; }
     right(i) { return 2 * i + 2; }
 
-    // Compare: returns true if a should be above b (e.g. a < b for min heap)
+    // Compare: returns true if a should be above b
     shouldSwap(a, b) {
-        if (this.type === 'min') return a > b;
-        return a < b;
+        return this.strategy.shouldSwap(a, b);
     }
 
     swap(i, j) {
@@ -48,8 +48,7 @@ export default class Heap {
         if (this.nodes.length === 0) return false;
         const rootVal = this.nodes[0].value;
         for (let i = 1; i < this.nodes.length; i++) {
-            if (this.type === 'min' && this.nodes[i].value < rootVal) return false;
-            if (this.type === 'max' && this.nodes[i].value > rootVal) return false;
+            if (!this.strategy.isValid(rootVal, this.nodes[i].value)) return false;
         }
         return true;
     }

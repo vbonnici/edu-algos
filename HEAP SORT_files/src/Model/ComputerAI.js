@@ -41,18 +41,14 @@ export default class ComputerAI {
             // Let's find the target child to swap with
             let target = i;
             if (l < this.heap.nodes.length) {
-                if (this.heap.type === 'min') {
-                    if (this.heap.nodes[l].value < this.heap.nodes[target].value) target = l;
-                } else {
-                    if (this.heap.nodes[l].value > this.heap.nodes[target].value) target = l;
+                if (this.heap.shouldSwap(this.heap.nodes[target].value, this.heap.nodes[l].value)) {
+                    target = l;
                 }
             }
             
             if (r < this.heap.nodes.length) {
-                if (this.heap.type === 'min') {
-                    if (this.heap.nodes[r].value < this.heap.nodes[target].value) target = r;
-                } else {
-                    if (this.heap.nodes[r].value > this.heap.nodes[target].value) target = r;
+                if (this.heap.shouldSwap(this.heap.nodes[target].value, this.heap.nodes[r].value)) {
+                    target = r;
                 }
             }
             
