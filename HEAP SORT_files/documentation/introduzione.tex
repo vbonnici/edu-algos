@@ -838,9 +838,9 @@ Per garantire una corretta esecuzione dell'algoritmo e un'esperienza utente flui
 \section{Diagramma delle Classi}
 Il Diagramma delle Classi (Class Diagram) è un diagramma strutturale UML che descrive l'architettura del sistema rappresentando le classi, i loro attributi, i metodi e le relazioni tra oggetti. È fondamentale per la progettazione orientata agli oggetti (OOP) in quanto mappa direttamente l'implementazione del codice, fungendo da "blueprint" per lo sviluppo software.
 
-\begin{figure}[H]
+\begin{figure}[ht!]
     \centering
-    \includegraphics[width=\textwidth]{Diagrams/.ClassDiagram.pdf}
+    \includegraphics[width=0.9\textwidth]{Diagrams/.ClassDiagram.pdf}
     \caption{Diagramma delle Classi - Architettura MVP}
     \label{fig:class_diagram}
 \end{figure}
@@ -896,14 +896,14 @@ La classe \texttt{Renderer} è responsabile della rappresentazione grafica dello
 Il rendering avviene in due fasi: calcolo posizionale e disegno.
 \begin{itemize}
     \item \textbf{Algoritmo di Posizionamento}: Per rappresentare l'heap come un albero binario bilanciato, il renderer calcola le coordinate $(x, y)$ di ogni nodo. La larghezza disponibile viene suddivisa ricorsivamente in base alla profondità del nodo, garantendo che l'albero si adatti dinamicamente al container HTML.
-    \item \textbf{Gestione SVG/DOM}: Utilizza elementi HTML/SVG per disegnare nodi e archi. Ogni volta che lo stato cambia (es. dopo uno swap), il renderer ridisegna le connessioni ma ottimizza l'aggiornamento dei nodi esistenti per permettere animazioni CSS fluide (transizioni di posizione).
+    \item \textbf{Gestione DOM}: Utilizza elementi HTML standard (div) per disegnare nodi e archi. Ogni volta che lo stato cambia (es. dopo uno swap), il renderer ridisegna le connessioni ma ottimizza l'aggiornamento dei nodi esistenti per permettere animazioni CSS fluide (transizioni di posizione).
 \end{itemize}
 
 \subsubsection*{Metodi Chiave}
 \begin{description}
     \item[\texttt{render(heap, selectedIndices)}] Metodo principale invocato dal Presenter. Riceve l'oggetto Heap completo e la lista degli indici selezionati.
     \item[\texttt{calculatePositions(nodes)}] Assegna le coordinate spaziali ad ogni nodo. Il livello $L$ determina la coordinata $Y$, mentre la posizione nell'array determina l'offset $X$.
-    \item[\texttt{drawEdge(parent, child)}] Utilizza SVG o CSS transforms per tracciare una linea di connessione tra due nodi, aggiornandola dinamicamente durante le animazioni.
+    \item[\texttt{drawEdge(parent, child)}] Utilizza CSS transforms per tracciare una linea di connessione tra due nodi, aggiornandola dinamicamente durante le animazioni.
     \item[\texttt{renderSorted(heap)}] Visualizza separatamente l'array \texttt{sorted}, mostrando all'utente i "frutti" del lavoro di ordinamento (es. i numeri estratti in ordine crescente o decrescente).
 \end{description}
 
@@ -926,7 +926,7 @@ La classe \texttt{Node} è una struttura dati semplice (POJO - Plain Old JavaScr
     \item \texttt{x, y}: Coordinate calcolate dal Renderer, memorizzate nel nodo per evitare ricalcoli costanti durante un singolo frame di rendering.
 \end{itemize}
 
-\subsection{Interfaccia Strategy e Implementazioni}
+\subsection{Interfaccia Strategy}
 Il pattern Strategy è cruciale per la flessibilità del gioco.
 \begin{itemize}
     \item \textbf{MinHeapStrategy}: Implementa \texttt{shouldSwap(a, b)} restituendo \texttt{true} se $a > b$ (il padre è maggiore del figlio, violazione Min-Heap). Implementa \texttt{isValid} verificando $parent \leq child$.
