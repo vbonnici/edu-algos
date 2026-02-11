@@ -59,7 +59,7 @@ Poiché il progetto utilizza moduli ES6 (`type="module"`), è consigliabile util
 
 ### 3. Architettura del Sistema
 - **Pattern MVP**:
-  - **Model**: `Heap.js`, `Node.js`, `ComputerAI.js`
+  - **Model**: `Heap.js`, `Node.js`, `Computer.js`
   - **View**: `Renderer.js`
   - **Presenter**: `GamePresenter.js`
 

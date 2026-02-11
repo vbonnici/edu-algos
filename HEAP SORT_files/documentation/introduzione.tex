@@ -9,6 +9,8 @@
 \usepackage[section]{placeins}
 \let\cleardoublepage\clearpage
 \usetikzlibrary{shapes,positioning}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
 
 %%%%%%%%%%% THESIS / TITLE PAGE INFORMATION %%%%%%%%%%%
 \title{Metodologie per l'Orientamento al Pensiero Computazionale: un Caso di Studio basato sull'Algoritmo Heap Sort}
@@ -232,7 +234,7 @@ Specificamente, ci si attende che alla fine dell'utilizzo lo studente sappia:
 La sfida tecnica non riguardava solo la "traduzione" dell'algoritmo in codice, ma la creazione di un sistema software robusto e manutenibile.
 \begin{itemize}
     \item \textbf{Architettura Disaccoppiata}: Implementare rigorosamente il pattern MVP (Model-View-Presenter). Il \textit{Model} (logica dell'heap) non deve sapere nulla dell'HTML; la \textit{View} (DOM) non deve contenere logica di business; il \textit{Presenter} funge da direttore d'orchestra. Questo permette, ad esempio, di cambiare completamente l'interfaccia grafica senza toccare una riga dell'algoritmo.
-    \item \textbf{Performance delle Animazioni}: Garantire i 60fps (frame per secondo) durante le animazioni di swap. Questo ha richiesto l'uso attento di proprietà CSS performanti (come `transform` e `opacity`) evitando quelle che causano il "reflow" della pagina (come `top`, `left`, `margin`).
+    \item \textbf{Performance delle Animazioni}: Garantire i 60fps (frame per secondo) durante le animazioni di swap. Questo ha richiesto l'uso attento di proprietà CSS performanti (come \texttt{transform} e \texttt{opacity}) evitando quelle che causano il "reflow" della pagina (come \texttt{top}, \texttt{left}, \texttt{margin}).
     \item \textbf{Responsive Design}: L'albero binario deve adattarsi a schermi di diverse dimensioni senza sovrapposizioni dei nodi, una sfida non banale data la natura espansiva delle strutture ad albero.
 \end{itemize}
 
@@ -273,7 +275,7 @@ Immaginiamo una sessione tipica di uno studente:
         \begin{itemize}
             \item Lo studente esamina l'albero. Nota che il nodo 40 è figlio del nodo 20. In un Max-Heap, il padre deve essere maggiore.
             \item Clicca sul 40 (si illumina). Clicca sul 20.
-            \item I nodi si scambiano di posto con un'animazione fluida. L'array sottostante si aggiorna: `[..., 40, ...]` prende il posto di `[..., 20, ...]`.
+            \item I nodi si scambiano di posto con un'animazione fluida. L'array sottostante si aggiorna: \texttt{[..., 40, ...]} prende il posto di \texttt{[..., 20, ...]}.
             \item Contemporaneamente, la CPU fa la sua mossa sulla destra.
         \end{itemize}
     \item \textbf{Fase 2 - Extract}:
@@ -296,15 +298,15 @@ Il layout dell'albero binario è una delle parti più complesse.
 \begin{itemize}
     \item \textbf{CSS Grid}: È stato utilizzato per disegnare la struttura dell'albero. Ogni livello dell'albero corrisponde a una riga della griglia; le colonne sono calcolate per centrare perfettamente ogni nodo rispetto ai suoi figli.
     \item \textbf{CSS Variables (Custom Properties)}: Definire colori come \texttt{-{}-primary-color: \#4CAF50} o \texttt{-{}-node-size: 50px} in un unico punto (il blocco \texttt{:root}) ha permesso di implementare facilmente temi diversi e di mantenere la coerenza visiva.
-    \item \textbf{Hardware Acceleration}: Per le animazioni di movimento (`transform: translate`), il browser delega il calcolo alla GPU invece che alla CPU, garantendo fluidità anche su dispositivi mobili meno potenti.
+    \item \textbf{Hardware Acceleration}: Per le animazioni di movimento (\texttt{transform: translate}), il browser delega il calcolo alla GPU invece che alla CPU, garantendo fluidità anche su dispositivi mobili meno potenti.
 \end{itemize}
 
 \subsection{JavaScript (ES6+) Moderno}
 Il codice è scritto aderendo allo standard ECMAScript 2015+.
 \begin{itemize}
-    \item \textbf{Classi e OOP}: Il paradigma a oggetti mappa perfettamente la realtà del problema. `class Node` ha proprietà `value` e `element` (riff. DOM). `class Heap` contiene la logica matematica.
-    \item \textbf{Async/Await e Promises}: La gestione del tempo è cruciale. L'animazione dura 500ms. Il codice JavaScript non può "bloccarsi" aspettando l'animazione. Abbiamo usato le `Promise` per dire al codice: "Aspetta che la transizione CSS finisca prima di aggiornare logico i dati".
-    \item \textbf{Modularity}: L'uso di `import/export` nativi permette di avere file piccoli e focalizzati (`Heap.js`, `Renderer.js`, `Game.js`) invece di un unico file monolitico ("Spaghetti Code"), facilitando enormemente il debugging.
+    \item \textbf{Classi e OOP}: Il paradigma a oggetti mappa perfettamente la realtà del problema. \texttt{class Node} ha proprietà \texttt{value} e \texttt{element} (riff. DOM). \texttt{class Heap} contiene la logica matematica.
+    \item \textbf{Async/Await e Promises}: La gestione del tempo è cruciale. L'animazione dura 500ms. Il codice JavaScript non può "bloccarsi" aspettando l'animazione. Abbiamo usato le \texttt{Promise} per dire al codice: "Aspetta che la transizione CSS finisca prima di aggiornare logico i dati".
+    \item \textbf{Modularity}: L'uso di \texttt{import/export} nativi permette di avere file piccoli e focalizzati (\texttt{Heap.js}, \texttt{Renderer.js}, \texttt{Game.js}) invece di un unico file monolitico ("Spaghetti Code"), facilitando enormemente il debugging.
 \end{itemize}
 
 \section{Analisi Approfondita dei Requisiti}
@@ -340,7 +342,7 @@ La CPU non deve "barare" risolvendo istantaneamente l'array. Deve simulare un "t
 
 \noindent
 \textbf{RF05 - Rilevamento Fine Gioco e Vittoria}
-Il sistema deve verificare la condizione di vittoria ad ogni completamento di una mossa. La vittoria è definita come: `heapSize == 0` E `array` è ordinato correttamente.
+Il sistema deve verificare la condizione di vittoria ad ogni completamento di una mossa. La vittoria è definita come: \texttt{heapSize == 0} E \texttt{array} è ordinato correttamente.
 
 \subsection{Requisiti Non Funzionali (RNF)}
 \begin{itemize}
@@ -801,7 +803,7 @@ Nel contesto di "Heap Sort Challenge", il flusso principale modella l'interazion
     \label{fig:activity_main}
 \end{figure}
 
-Il flusso inizia con il \textbf{nodo iniziale} (cerchio pieno). L'utente configura la modalità e il sistema inizializza l'ambiente. Successivamente si entra nel \textbf{loop di gioco} (Decision Diamond): finché l'heap non è completamente ordinato, il controllo passa alternativamente all'Utente e alla CPU. Quando la condizione `heapSize == 0` è soddisfatta, il flusso termina nel \textbf{nodo finale} (cerchio bordato).
+Il flusso inizia con il \textbf{nodo iniziale} (cerchio pieno). L'utente configura la modalità e il sistema inizializza l'ambiente. Successivamente si entra nel \textbf{loop di gioco} (Decision Diamond): finché l'heap non è completamente ordinato, il controllo passa alternativamente all'Utente e alla CPU. Quando la condizione \texttt{heapSize == 0} è soddisfatta, il flusso termina nel \textbf{nodo finale} (cerchio bordato).
 
 \subsection{Dettaglio del Flusso Principale (Workflow)}
 Per garantire una corretta esecuzione dell'algoritmo e un'esperienza utente fluida, l'applicazione implementa il seguente workflow dettagliato:
@@ -829,7 +831,7 @@ Per garantire una corretta esecuzione dell'algoritmo e un'esperienza utente flui
 
     \item \textbf{Fase di Terminazione}
     \begin{itemize}
-        \item Il ciclo continua finché l'heap non è vuoto (`heapSize = 0`).
+        \item Il ciclo continua finché l'heap non è vuoto (\texttt{heapSize = 0}).
         \item Il sistema confronta le metriche di performance (numero di mosse) tra Utente e CPU.
         \item Viene mostrato un modale di riepilogo con l'esito della partita (Vittoria/Sconfitta) e le statistiche dettagliate.
     \end{itemize}
@@ -840,7 +842,7 @@ Il Diagramma delle Classi (Class Diagram) è un diagramma strutturale UML che de
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.9\textwidth]{Diagrams/.ClassDiagram.pdf}
+    \includegraphics[width=0.9\textwidth]{Diagrams/ClassDiagram.png}
     \caption{Diagramma delle Classi - Architettura MVP}
     \label{fig:class_diagram}
 \end{figure}
@@ -907,14 +909,14 @@ Il rendering avviene in due fasi: calcolo posizionale e disegno.
     \item[\texttt{renderSorted(heap)}] Visualizza separatamente l'array \texttt{sorted}, mostrando all'utente i "frutti" del lavoro di ordinamento (es. i numeri estratti in ordine crescente o decrescente).
 \end{description}
 
-\subsection{ComputerAI}
-La classe \texttt{ComputerAI} implementa l'intelligenza artificiale dell'avversario. Nonostante sia un'applicazione educativa, l'IA deve simulare un comportamento "competente" per fornire una sfida.
+\subsection{Computer}
+La classe \texttt{Computer} implementa la logica dell'avversario. Nonostante sia un'applicazione educativa, il computer deve simulare un comportamento "competente" per fornire una sfida.
 
 \subsubsection*{Logica Decisionale}
-L'IA opera su una propria istanza di \texttt{Heap}, speculare a quella del giocatore all'inizio.
+Il computer opera su una propria istanza di \texttt{Heap}, speculare a quella del giocatore all'inizio.
 \begin{enumerate}
-    \item \textbf{Priorità all'Estrazione}: Il metodo \texttt{makeMove()} controlla prima di tutto se la radice è valida (\texttt{isRootValid()}). Se lo è, l'IA "attende" il prossimo ciclo per estrarre, massimizzando il punteggio.
-    \item \textbf{Strategia di Correzione}: Se la radice non è pronta, l'IA cerca attivamente violazioni della proprietà di heap. Scansiona l'albero per trovare nodi che violano la regola rispetto ai propri figli e propone uno scambio correttivo.
+    \item \textbf{Priorità all'Estrazione}: Il metodo \texttt{makeMove()} controlla prima di tutto se la radice è valida (\texttt{isRootValid()}). Se lo è, il computer "attende" il prossimo ciclo per estrarre, massimizzando il punteggio.
+    \item \textbf{Strategia di Correzione}: Se la radice non è pronta, il computer cerca attivamente violazioni della proprietà di heap. Scansiona l'albero per trovare nodi che violano la regola rispetto ai propri figli e propone uno scambio correttivo.
     \item \textbf{Simulazione Umana}: Introduce ritardi artificiali per rendere le mosse visibili e comprensibili all'utente, evitando che il computer completi il gioco istantaneamente.
 \end{enumerate}
 
@@ -934,5 +936,168 @@ Il pattern Strategy è cruciale per la flessibilità del gioco.
 \end{itemize}
 Questa astrazione permette di cambiare la modalità di gioco (dal "Min Game" al "Max Game") iniettando semplicemente una diversa istanza di strategia nel costruttore dell'Heap, senza modificare una riga della logica centrale dell'Heap stesso.
 
+\section{Diagramma di Sequenza}
+Il Diagramma di Sequenza (Sequence Diagram) è un diagramma di interazione UML che illustra come gli oggetti collaborano in un determinato scenario, ponendo l'accento sull'ordine temporale dei messaggi scambiati. A differenza del Diagramma delle Classi (statico) o del Diagramma delle Attività (flusso di lavoro), il Diagramma di Sequenza cattura la dinamica "runtime" del sistema.
+
+Nel contesto di questa applicazione, l'adozione dei Diagrammi di Sequenza è fondamentale per documentare e comprendere due aspetti critici che non emergono dagli altri diagrammi:
+\begin{itemize}
+    \item \textbf{Il Flusso MVP}: Visualizza chiaramente il percorso "round-trip" di un'azione. Ad esempio, un click dell'utente (View) viene intercettato dal Presenter, che interroga il Model, applica la logica di business, e infine comanda alla View di aggiornarsi. Questo assicura che il principio di "Separation of Concerns" sia rispettato rigorosamente.
+    \item \textbf{Gestione Temporale e Animazioni}: L'applicazione utilizza transizioni visive per mostrare gli scambi e introduce ritardi funzionali durante il turno dell'avversario per migliorare la comprensione dell'algoritmo. Il diagramma esplicita come il sistema coordini questi eventi asincroni, assicurando che l'aggiornamento dello stato logico avvenga solo al termine delle animazioni, garantendo così la coerenza visiva.
+\end{itemize}
+L'utilizzo di questo diagramma ci permette di verificare la correttezza della logica di coordinamento, specialmente nelle fasi più complesse come l'estrazione ricorsiva della radice o il turno automatizzato del computer.
+
+
+\subsection{Sequenza Principale del Gioco}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{Diagrams/sequenceDiagram1.png}
+    \caption{Diagramma di Sequenza - Scenario: Selezione e Swap Utente}
+    \label{fig:sequence_diagram}
+\end{figure}
+
+
+Il diagramma di sequenza in Figura \ref{fig:sequence_diagram} descrive dettagliatamente il flusso di interazione durante una mossa di gioco, specificamente lo scambio (\texttt{swap}) tra due nodi deciso dall'utente.
+Questa operazione, apparentemente semplice, innesca una catena complessa di eventi che attraversa tutti i livelli dell'architettura MVP.
+
+Di seguito analizziamo nel dettaglio le fasi che compongono questo scenario:
+
+\phantomsection
+\subsubsection{1. Gestione degli Eventi e Selezione (View -> Presenter)}
+Tutto ha inizio nel livello della Vista (\texttt{Renderer}).
+L'applicazione implementa il pattern \textbf{Event Delegation}: invece di attaccare un listener a ogni singolo nodo (che sarebbe dispendioso in termini di memoria), un unico event listener è collegato al contenitore padre dell'albero.
+Quando l'utente clicca su un nodo (identificato come \texttt{idxA}):
+\begin{itemize}
+    \item L'evento \texttt{click} risale il DOM fino al contenitore.
+    \item Il \texttt{Renderer} estrae l'ID del nodo target dall'attributo \texttt{data-index}.
+    \item Il controllo viene passato al \texttt{GamePresenter} tramite il metodo \texttt{handlePlayerClick(idxA)}.
+\end{itemize}
+
+Il Presenter mantiene lo stato della selezione interna.
+Se è il primo click, il nodo viene semplicemente marcato come "selezionato" e il Renderer viene istruito di evidenziarlo visivamente (cambio di colore e spessore del bordo).
+Il diagramma si concentra sul caso del \textbf{secondo click} (\texttt{idxB}), che innesca il tentativo di mossa.
+
+\phantomsection
+\subsubsection{2. Validazione Logica (Presenter -> Model)}
+Prima di modificare qualsiasi dato, il sistema deve garantire l'integrità delle regole del gioco.
+Il \texttt{Presenter} interroga il \texttt{Model} (\texttt{Heap}) per validare la mossa:
+\begin{enumerate}
+    \item \textbf{Adiacenza}: I due nodi devono essere adiacenti nell'albero (padre-figlio). La formula matematica $parent = \lfloor (child - 1) / 2 \rfloor$ permette una verifica istantanea $O(1)$.
+    \item \textbf{Proprietà di Heap}: Non basta che i nodi siano vicini; il loro scambio deve essere "utile".
+    \begin{itemize}
+        \item In un \textit{Max-Heap}, se il figlio è maggiore del padre ($A[child] > A[parent]$), lo scambio è necessario.
+        \item In un \textit{Min-Heap}, se il figlio è minore del padre ($A[child] < A[parent]$), lo scambio è necessario.
+    \end{itemize}
+\end{enumerate}
+Questa logica di validazione è incapsulata nel metodo \texttt{shouldSwap()} della Strategy attiva. Se la validazione fallisce, il Presenter innesca un feedback di errore (animazione "shake") e resetta la selezione senza toccare il Modello.
+
+\phantomsection
+\subsubsection{3. Manipolazione dei Dati e Coerenza (Model)}
+Se la validazione ha successo (il percorso marcato come \texttt{true} nel diagramma), il Presenter invoca il comando \texttt{swap(idxA, idxB)} sul Modello.
+Questa è un'operazione critica che modifica lo stato persistente dell'applicazione:
+\begin{itemize}
+    \item L'array sottostante viene aggiornato: i valori alle posizioni $A$ e $B$ vengono scambiati.
+    \item Gli oggetti \texttt{Node} mantengono i loro ID univoci ma cambiano posizione nell'array. Questo è fondamentale per permettere al framework di rendering di tracciare l'identità degli elementi (Object Identity) e animarli correttamente.
+\end{itemize}
+
+\phantomsection
+\subsubsection{4. Riconciliazione della Vista (Presenter -> View)}
+Una volta mutato il Modello, la Vista deve essere sincronizzata.
+Invece di ridisegnare tutto l'albero da zero (che causerebbe un "flash" sgradevole e la perdita del contesto visivo), il sistema adotta un approccio differenziale:
+\begin{itemize}
+    \item Il Presenter chiama \texttt{render(heap)}.
+    \item Il \texttt{Renderer} calcola le nuove coordinate $(x, y)$ target per ogni nodo.
+    \item Poiché i nodi DOM hanno un ID stabile, il browser può interpolare la posizione vecchia e quella nuova.
+    \item Viene applicata una transizione CSS (\texttt{transition: transform 0.5s}).
+\end{itemize}
+Durante questa fase di animazione, l'input utente viene temporaneamente disabilitato per evitare "Race Conditions" (es. l'utente clicca su un nodo che si sta muovendo).
+
+\phantomsection
+\subsubsection{5. Verifica Post-Mossa e Automazione (Chain Reaction)}
+Il diagramma termina con una fase di verifica globale (\texttt{isRootValid} e \texttt{checkAutoExtraction}).
+Dopo uno scambio, la nuova configurazione potrebbe aver sbloccato nuove possibilità:
+\begin{itemize}
+    \item La radice potrebbe essere diventata il massimo/minimo assoluto. In tal caso, il sistema deve procedere all'estrazione automatica.
+    \item Potrebbero essersi create nuove violazioni a cascata nei sotto-alberi (anche se nel caso del giocatore singolo, le mosse sono puntuali).
+\end{itemize}
+Se la radice è valida, il Presenter scatena l'evento di estrazione, che a sua volta genererà un nuovo ciclo di aggiornamenti (rimozione nodo, spostamento ultimo elemento, nuova fase di heapify), dimostrando la natura ricorsiva e ciclica dell'algoritmo Heap Sort.
+
+In sintesi, la Figura \ref{fig:sequence_diagram} non mostra solo uno "spostamento di numeri", ma la coreografia precisa tra input asincrono dell'utente, validazione sincrona della logica matematica e rendering differito per l'esperienza utente.
+
+
+
+\newpage
+\subsection{Interazione tra Classi - Turno Computer}
+Il diagramma seguente (Figura \ref{fig:class_comm}) illustra le interazioni tra le componenti del sistema durante il turno del Computer.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{Diagrams/ClassCommunication.png}
+    \caption{Diagramma di Sequenza - Comunicazione tra Classi (Turno Computer)}
+    \label{fig:class_comm}
+\end{figure}
+
+
+
+Il flusso di esecuzione delle operazioni durante il turno del Computer, rappresentato nella Figura \ref{fig:class_comm}, è un esempio paradigmatico di come un'architettura Model-View-Presenter possa gestire la logica asincrona e algoritmica senza compromettere la fluidità dell'interfaccia. Di seguito viene presentata un'analisi tecnica approfondita, suddivisa in fasi logiche che mappano gli 11 passaggi del diagramma.
+
+\phantomsection
+\subsubsection{1. Orchestrazione Temporale e Innesco (Timer -> Presenter)}
+A differenza del turno del giocatore, che è guidato da input diretti (click), il turno del computer è un processo \textbf{time-driven}. 
+Tutto ha inizio con un'interazione tra un timer asincrono (\texttt{setTimeout}) e il \texttt{GamePresenter}:
+\begin{itemize}
+    \item \textbf{Decoupling}: L'invocazione di \texttt{computerTurn()} avviene dopo un ritardo variabile (tipicamente 1000-1500ms). Questo è fondamentale per la User Experience, poiché permette all'utente di "vedere" il computer che pensa, evitando un'esecuzione istantanea che risulterebbe confusionaria.
+    \item \textbf{State Management}: Il Presenter imposta internamente il flag \texttt{isComputerTurn} a \texttt{true}. Questo blocca temporaneamente gli input del giocatore, prevenendo "Race Conditions" dove l'utente e il computer potrebbero tentare di modificare lo stesso Heap contemporaneamente.
+\end{itemize}
+
+\phantomsection
+\subsubsection{2. Analisi Strategica e Scansione del Modello (Computer -> Heap)}
+Ricevuto il comando dal Presenter (\texttt{makeMove()}), la classe \texttt{Computer} inizia la fase di analisi. Il computer non "vede" l'interfaccia grafica; esso interagisce esclusivamente con l'interfaccia pubblica del Modello (\texttt{Heap}):
+\begin{itemize}
+    \item \textbf{Ricerca di Violazioni}: Il computer scansiona l'array dello heap cercando la prima coppia di nodi (padre-figlio) che viola la proprietà fondamentale dell'algoritmo (es. un padre più piccolo di un figlio in un Max-Heap).
+    \item \textbf{Agnosticismo dei Dati}: Il computer non sa se sta giocando con un Min-Heap o un Max-Heap. Esso si limita a chiedere allo Heap: \texttt{shouldSwap(parent, child)}. Questa astrazione è il primo livello di difesa contro la duplicazione del codice.
+\end{itemize}
+
+\phantomsection
+\subsubsection{3. Il Pattern Strategy in Azione (Model -> Strategy)}
+Il diagramma evidenzia il ruolo cruciale del \textbf{Pattern Strategy} (passaggi 5 e 6). Lo \texttt{Heap} riceve la richiesta di validazione dal Computer e la delega immediatamente alla strategia attiva:
+\begin{itemize}
+    \item \textbf{Delegazione Pura}: Lo \texttt{Heap} possiede un riferimento a un'interfaccia \texttt{Strategy}. Se la strategia è \texttt{MinHeapStrategy}, il confronto restituirà \texttt{true} se il figlio è minore del padre. Se è \texttt{MaxHeapStrategy}, la logica sarà opposta.
+    \item \textbf{Separazione delle Preoccupazioni}: Questa fase dimostra come la logica matematica pura sia isolata dalla struttura dati. Lo Heap gestisce l'albero (posizioni, indici), mentre la Strategy gestisce la verità matematica (confronto).
+\end{itemize}
+
+\phantomsection
+\subsubsection{4. Esecuzione della Mutazione e Integrità del Modello (Model Execution)}
+Una volta ottenuta la conferma (\texttt{boolean: true}), il Computer passa all'azione (passaggio 8). Invocando \texttt{swap(i, j)}, il computer modifica lo stato interno del sistema:
+\begin{itemize}
+    \item \textbf{Atomicità}: Lo scambio dei valori nell'array è un'operazione atomica che garantisce che il Modello sia sempre in uno stato consistente prima di passare alla fase successiva.
+    \item \textbf{Preservazione dell'Identità}: Nonostante i valori vengano scambiati, gli oggetti \texttt{Node} coinvolti mantengono il loro ID univoco. Questo permetterà successivamente al Renderer di tracciare il movimento "fisico" del nodo sullo schermo invece di limitarsi a cambiare un testo.
+\end{itemize}
+
+\phantomsection
+\subsubsection{5. Feedback Loop e Ritorno del Controllo (Computer -> Presenter)}
+Terminata la mossa, il Computer restituisce un segnale al Presenter (passaggio 9). Questo passaggio è vitale per la comunicazione inter-livello:
+\begin{itemize}
+    \item \textbf{Signal Handling}: Il ritorno della stringa \texttt{'swap'} comunica al Presenter che un'azione è stata effettivamente compiuta e che è necessario un aggiornamento visivo.
+    \item \textbf{Analisi Post-Mossa}: Se il computer non avesse trovato mosse valide, avrebbe restituito un valore diverso (es. \texttt{'no-move'}), indicando al Presenter che il turno del computer è terminato o che è necessaria un'estrazione.
+\end{itemize}
+
+\phantomsection
+\subsubsection{6. Sincronizzazione della Vista e Rendering Differenziale (View Phase)}
+L'ultima fase del diagramma descrive il passaggio dal dato logico all'immagine visiva:
+\begin{enumerate}
+    \item \textbf{Comando di Rendering}: Il Presenter chiama \texttt{render(heap)}. È importante notare che il Presenter passa l'intero stato dello Heap alla Vista, mantenendo la Vista "stupida": essa non deve calcolare cosa è successo, ma solo "dipingere" lo stato attuale.
+    \item \textbf{Ottimizzazione del DOM}: Il \texttt{Renderer} calcola le nuove coordinate $(x, y)$ per i nodi modificati. Grazie alla persistenza degli ID degli elementi DOM, il CSS può applicare transizioni fluide tra le vecchie coordinate e le nuove, creando l'illusione di un movimento fluido che aiuta l'apprendimento dell'utente.
+\end{enumerate}
+
+\phantomsection
+\subsubsection{7. Considerazioni Finali sul Flusso Computer}
+In conclusione, la densità di messaggi mostrata in Figura \ref{fig:class_comm} riflette la robustezza dell'architettura. Suddividere il turno del computer in 11 passaggi permette di:
+\begin{itemize}
+    \item \textbf{Testability}: Ogni passaggio (validazione, scambio, rendering) può essere testato unitariamente.
+    \item \textbf{Scalability}: È possibile aggiungere nuove strategie di gioco o nuovi tipi di computer (es. un computer "difficile") semplicemente implementando nuove sottoclassi di \texttt{Computer} o \texttt{Strategy}, senza mai toccare il codice del Presenter o del Renderer.
+\end{itemize}
+Il risultato finale è un sistema dove la "macchina" gioca contro l'utente seguendo le stesse rigide regole matematiche, garantendo un'esperienza educativa coerente e priva di errori logici.
 
 \end{document}
+

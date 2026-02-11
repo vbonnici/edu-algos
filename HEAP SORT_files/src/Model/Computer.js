@@ -1,4 +1,4 @@
-export default class ComputerAI {
+export default class Computer {
     constructor(heap) {
         this.heap = heap;
     }
