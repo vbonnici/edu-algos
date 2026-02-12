@@ -6,9 +6,10 @@
 \usepackage{xltabular}
 \usepackage{float}
 \usepackage{tikz}
+\usepackage{dirtree}
 \usepackage[section]{placeins}
 \let\cleardoublepage\clearpage
-\usetikzlibrary{shapes,positioning}
+\usetikzlibrary{shapes,positioning,arrows.meta}
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
 
@@ -963,7 +964,7 @@ Questa operazione, apparentemente semplice, innesca una catena complessa di even
 Di seguito analizziamo nel dettaglio le fasi che compongono questo scenario:
 
 \phantomsection
-\subsubsection{1. Gestione degli Eventi e Selezione (View -> Presenter)}
+\subsubsection{Gestione degli Eventi e Selezione (View -> Presenter)}
 Tutto ha inizio nel livello della Vista (\texttt{Renderer}).
 L'applicazione implementa il pattern \textbf{Event Delegation}: invece di attaccare un listener a ogni singolo nodo (che sarebbe dispendioso in termini di memoria), un unico event listener è collegato al contenitore padre dell'albero.
 Quando l'utente clicca su un nodo (identificato come \texttt{idxA}):
@@ -978,7 +979,7 @@ Se è il primo click, il nodo viene semplicemente marcato come "selezionato" e i
 Il diagramma si concentra sul caso del \textbf{secondo click} (\texttt{idxB}), che innesca il tentativo di mossa.
 
 \phantomsection
-\subsubsection{2. Validazione Logica (Presenter -> Model)}
+\subsubsection{Validazione Logica (Presenter -> Model)}
 Prima di modificare qualsiasi dato, il sistema deve garantire l'integrità delle regole del gioco.
 Il \texttt{Presenter} interroga il \texttt{Model} (\texttt{Heap}) per validare la mossa:
 \begin{enumerate}
@@ -992,7 +993,7 @@ Il \texttt{Presenter} interroga il \texttt{Model} (\texttt{Heap}) per validare l
 Questa logica di validazione è incapsulata nel metodo \texttt{shouldSwap()} della Strategy attiva. Se la validazione fallisce, il Presenter innesca un feedback di errore (animazione "shake") e resetta la selezione senza toccare il Modello.
 
 \phantomsection
-\subsubsection{3. Manipolazione dei Dati e Coerenza (Model)}
+\subsubsection{Manipolazione dei Dati e Coerenza (Model)}
 Se la validazione ha successo (il percorso marcato come \texttt{true} nel diagramma), il Presenter invoca il comando \texttt{swap(idxA, idxB)} sul Modello.
 Questa è un'operazione critica che modifica lo stato persistente dell'applicazione:
 \begin{itemize}
@@ -1001,7 +1002,7 @@ Questa è un'operazione critica che modifica lo stato persistente dell'applicazi
 \end{itemize}
 
 \phantomsection
-\subsubsection{4. Riconciliazione della Vista (Presenter -> View)}
+\subsubsection{Riconciliazione della Vista (Presenter -> View)}
 Una volta mutato il Modello, la Vista deve essere sincronizzata.
 Invece di ridisegnare tutto l'albero da zero (che causerebbe un "flash" sgradevole e la perdita del contesto visivo), il sistema adotta un approccio differenziale:
 \begin{itemize}
@@ -1013,7 +1014,7 @@ Invece di ridisegnare tutto l'albero da zero (che causerebbe un "flash" sgradevo
 Durante questa fase di animazione, l'input utente viene temporaneamente disabilitato per evitare "Race Conditions" (es. l'utente clicca su un nodo che si sta muovendo).
 
 \phantomsection
-\subsubsection{5. Verifica Post-Mossa e Automazione (Chain Reaction)}
+\subsubsection{Verifica Post-Mossa e Automazione (Chain Reaction)}
 Il diagramma termina con una fase di verifica globale (\texttt{isRootValid} e \texttt{checkAutoExtraction}).
 Dopo uno scambio, la nuova configurazione potrebbe aver sbloccato nuove possibilità:
 \begin{itemize}
@@ -1042,7 +1043,7 @@ Il diagramma seguente (Figura \ref{fig:class_comm}) illustra le interazioni tra 
 Il flusso di esecuzione delle operazioni durante il turno del Computer, rappresentato nella Figura \ref{fig:class_comm}, è un esempio paradigmatico di come un'architettura Model-View-Presenter possa gestire la logica asincrona e algoritmica senza compromettere la fluidità dell'interfaccia. Di seguito viene presentata un'analisi tecnica approfondita, suddivisa in fasi logiche che mappano gli 11 passaggi del diagramma.
 
 \phantomsection
-\subsubsection{1. Orchestrazione Temporale e Innesco (Timer -> Presenter)}
+\subsubsection{Orchestrazione Temporale e Innesco (Timer -> Presenter)}
 A differenza del turno del giocatore, che è guidato da input diretti (click), il turno del computer è un processo \textbf{time-driven}. 
 Tutto ha inizio con un'interazione tra un timer asincrono (\texttt{setTimeout}) e il \texttt{GamePresenter}:
 \begin{itemize}
@@ -1051,7 +1052,7 @@ Tutto ha inizio con un'interazione tra un timer asincrono (\texttt{setTimeout}) 
 \end{itemize}
 
 \phantomsection
-\subsubsection{2. Analisi Strategica e Scansione del Modello (Computer -> Heap)}
+\subsubsection{Analisi Strategica e Scansione del Modello (Computer -> Heap)}
 Ricevuto il comando dal Presenter (\texttt{makeMove()}), la classe \texttt{Computer} inizia la fase di analisi. Il computer non "vede" l'interfaccia grafica; esso interagisce esclusivamente con l'interfaccia pubblica del Modello (\texttt{Heap}):
 \begin{itemize}
     \item \textbf{Ricerca di Violazioni}: Il computer scansiona l'array dello heap cercando la prima coppia di nodi (padre-figlio) che viola la proprietà fondamentale dell'algoritmo (es. un padre più piccolo di un figlio in un Max-Heap).
@@ -1059,7 +1060,7 @@ Ricevuto il comando dal Presenter (\texttt{makeMove()}), la classe \texttt{Compu
 \end{itemize}
 
 \phantomsection
-\subsubsection{3. Il Pattern Strategy in Azione (Model -> Strategy)}
+\subsubsection{Il Pattern Strategy in Azione (Model -> Strategy)}
 Il diagramma evidenzia il ruolo cruciale del \textbf{Pattern Strategy} (passaggi 5 e 6). Lo \texttt{Heap} riceve la richiesta di validazione dal Computer e la delega immediatamente alla strategia attiva:
 \begin{itemize}
     \item \textbf{Delegazione Pura}: Lo \texttt{Heap} possiede un riferimento a un'interfaccia \texttt{Strategy}. Se la strategia è \texttt{MinHeapStrategy}, il confronto restituirà \texttt{true} se il figlio è minore del padre. Se è \texttt{MaxHeapStrategy}, la logica sarà opposta.
@@ -1067,7 +1068,7 @@ Il diagramma evidenzia il ruolo cruciale del \textbf{Pattern Strategy} (passaggi
 \end{itemize}
 
 \phantomsection
-\subsubsection{4. Esecuzione della Mutazione e Integrità del Modello (Model Execution)}
+\subsubsection{Esecuzione della Mutazione e Integrità del Modello (Model Execution)}
 Una volta ottenuta la conferma (\texttt{boolean: true}), il Computer passa all'azione (passaggio 8). Invocando \texttt{swap(i, j)}, il computer modifica lo stato interno del sistema:
 \begin{itemize}
     \item \textbf{Atomicità}: Lo scambio dei valori nell'array è un'operazione atomica che garantisce che il Modello sia sempre in uno stato consistente prima di passare alla fase successiva.
@@ -1075,7 +1076,7 @@ Una volta ottenuta la conferma (\texttt{boolean: true}), il Computer passa all'a
 \end{itemize}
 
 \phantomsection
-\subsubsection{5. Feedback Loop e Ritorno del Controllo (Computer -> Presenter)}
+\subsubsection{Feedback Loop e Ritorno del Controllo (Computer -> Presenter)}
 Terminata la mossa, il Computer restituisce un segnale al Presenter (passaggio 9). Questo passaggio è vitale per la comunicazione inter-livello:
 \begin{itemize}
     \item \textbf{Signal Handling}: Il ritorno della stringa \texttt{'swap'} comunica al Presenter che un'azione è stata effettivamente compiuta e che è necessario un aggiornamento visivo.
@@ -1083,7 +1084,7 @@ Terminata la mossa, il Computer restituisce un segnale al Presenter (passaggio 9
 \end{itemize}
 
 \phantomsection
-\subsubsection{6. Sincronizzazione della Vista e Rendering Differenziale (View Phase)}
+\subsubsection{Sincronizzazione della Vista e Rendering Differenziale (View Phase)}
 L'ultima fase del diagramma descrive il passaggio dal dato logico all'immagine visiva:
 \begin{enumerate}
     \item \textbf{Comando di Rendering}: Il Presenter chiama \texttt{render(heap)}. È importante notare che il Presenter passa l'intero stato dello Heap alla Vista, mantenendo la Vista "stupida": essa non deve calcolare cosa è successo, ma solo "dipingere" lo stato attuale.
@@ -1091,7 +1092,7 @@ L'ultima fase del diagramma descrive il passaggio dal dato logico all'immagine v
 \end{enumerate}
 
 \phantomsection
-\subsubsection{7. Considerazioni Finali sul Flusso Computer}
+\subsubsection{Considerazioni Finali sul Flusso Computer}
 In conclusione, la densità di messaggi mostrata in Figura \ref{fig:class_comm} riflette la robustezza dell'architettura. Suddividere il turno del computer in 11 passaggi permette di:
 \begin{itemize}
     \item \textbf{Testability}: Ogni passaggio (validazione, scambio, rendering) può essere testato unitariamente.
@@ -1099,5 +1100,177 @@ In conclusione, la densità di messaggi mostrata in Figura \ref{fig:class_comm} 
 \end{itemize}
 Il risultato finale è un sistema dove la "macchina" gioca contro l'utente seguendo le stesse rigide regole matematiche, garantendo un'esperienza educativa coerente e priva di errori logici.
 
+\newpage
+\section{Diagramma dei Componenti}
+Il diagramma dei componenti illustra l'organizzazione logico-funzionale del sistema, evidenziando la scomposizione dell'applicazione in moduli indipendenti e la loro strutturazione in livelli (layers). Questa visione architetturale permette di comprendere come le diverse parti del software collaborino per fornire un'esperienza utente coerente e performante.
+
+L'applicazione segue un'architettura a tre livelli (\textit{Three-Tier Architecture}), dove ogni layer ha responsabilità ben definite e comunica con gli altri tramite interfacce standardizzate.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.85\textheight,keepaspectratio]{Diagrams/ComponentDiagram.png}
+    \caption{Diagramma dei Componenti - Architettura Three-Tier}
+    \label{fig:component_diagram}
+\end{figure}
+
+Di seguito viene riportata una descrizione dettagliata dei tre livelli rappresentati in Figura \ref{fig:component_diagram}:
+
+\phantomsection
+\subsection{Presentation Layer}
+Questo livello costituisce la "pelle" dell'applicazione, gestendo l'interazione diretta con l'utente finale.
+\begin{itemize}
+    \item \textbf{UI Renderer}: È il modulo incaricato di tradurre lo stato logico in elementi grafici. Utilizza tecniche di manipolazione del DOM per visualizzare l'albero binario e gestire le transizioni fluide durante gli scambi di nodi.
+    \item \textbf{Styles \& Assets}: Definisce l'estetica del software tramite CSS3 (utilizzando Flexbox e Grid) e la struttura portante tramite HTML5 semantico.
+\end{itemize}
+
+\phantomsection
+\subsection{Business Logic Layer}
+Situato al centro dell'architettura, questo layer coordina il flusso dei dati e le regole del gioco.
+\begin{itemize}
+    \item \textbf{Game Presenter}: Funge da mediatore tra la Vista e il Modello (pattern MVP). Gestisce la coda degli eventi, il calcolo del punteggio e la sincronizzazione dei turni.
+    \item \textbf{Computer Engine}: Un modulo specializzato che isola la logica decisionale dell'avversario virtuale. Esso analizza lo stato dello heap e determina la mossa ottimale basandosi sulla strategia corrente.
+\end{itemize}
+
+\phantomsection
+\subsection{Data Layer}
+Sebbene l'applicazione non utilizzi un database persistente esterno, il Data Layer gestisce la persistenza in-memory e l'integrità algoritmica.
+\begin{itemize}
+    \item \textbf{Heap Model}: La componente che custodisce l'array dei nodi. Implementa le operazioni matematiche di \textit{sift-up} e \textit{sift-down}, garantendo che lo stato interno sia sempre coerente.
+    \item \textbf{Strategies}: Rappresenta l'astrazione delle regole di confronto (Pattern Strategy). Questo componente permette di trasformare istantaneamente il comportamento di tutto l'albero da Min-Heap a Max-Heap senza riavviare l'applicazione.
+\end{itemize}
+
+
+\newpage
+\section{Architettura del Progetto}
+L'architettura proposta per il sistema è stata progettata seguendo i principi del pattern Model-View-Presenter (MVP), con l'obiettivo di garantire una netta separazione delle responsabilità e facilitare la manutenibilità futura.
+
+La Figura \ref{fig:layered_architecture} presenta lo schema logico di questa suddivisione a livelli, definendo le interazioni previste tra l'interfaccia utente (View), la logica di controllo (Presenter) e la gestione dei dati (Model).
+
+A supporto di questa architettura, la Figura \ref{fig:dir_structure} propone l'organizzazione strutturale delle directory, dettagliando come i vari componenti logici verranno mappati nel file system:
+
+
+\noindent\textbf{Schema dell'Architettura Model-View-Presenter:}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=0cm,
+    layer/.style={
+        rectangle,
+        draw=black,
+        minimum width=12cm,
+        minimum height=2.0cm,
+        text width=2.5cm,
+        align=center,
+        font=\bfseries,
+        anchor=north west
+    },
+    component/.style={
+        rectangle,
+        draw=black,
+        fill=white,
+        minimum width=3cm,
+        minimum height=1.0cm,
+        align=center,
+        font=\small,
+        rounded corners
+    }
+]
+
+    % --- LAYERS ---
+    % 1. View Layer (Yellow)
+    \node [layer, fill=yellow!30] (presentation) at (0,0) {View Layer \\ (Presentation)};
+    
+    % 2. Presenter Layer (Green)
+    \node [layer, fill=green!30] (business) at (0,-2.0) {Presenter Layer \\ (Business Logic)};
+    
+    % 3. Model Layer (Blue)
+    \node [layer, fill=blue!30] (data) at (0,-4.0) {Model Layer \\ (Data \& State)};
+
+
+    % --- COMPONENTS ---
+    
+    % Presentation Components (Far Right)
+    \node [component] (renderer) at (10.5, -1.0) {Renderer.js \\ (View)};
+    
+    % Business Logic Components (Presenter Far Left)
+    \node [component] (presenter) at (3.0, -3.0) {GamePresenter.js \\ (Presenter)};
+    \node [component] (computer) at (9.0, -3.0) {Computer.js \\ (Engine)};
+    
+    % Data Components (Right)
+    \node [component] (heap) at (9.0, -5.0) {Heap.js \\ (Model)};
+
+
+    % --- ARROWS ---
+    % View <-> Presenter
+    \draw [-latex, thick] (renderer.south) -- ++(0,-0.4) -| (presenter.north);
+    \draw [-latex, thick] (presenter.north) |- ++(0,0.4) -| (renderer.south);
+    
+    % Presenter -> Model
+    \draw [-latex, thick] (presenter.south) -- ++(0,-0.4) -| (heap.north);
+    \draw [-latex, thick] (heap.north) |- ++(0,0.4) -| (presenter.south);
+    
+    % Computer -> Heap
+    \draw [-latex, thick] (computer.south) -- ++(0,-0.4) -| (heap.north);
+
+    % Presenter <-> Computer
+    \draw [-latex, thick] (presenter.east) -- (computer.west);
+
+\end{tikzpicture}
+\caption{Diagramma Architetturale a Livelli (Layered Architecture)}
+\label{fig:layered_architecture}
+\end{figure}
+
+\noindent\textbf{Struttura delle Directory:}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.8\textwidth}
+\dirtree{%
+.1 src/.
+.2 main.js \DTcomment{Entry Point, inizializzazione app}.
+.2 style.css \DTcomment{Stili globali e layout}.
+.2 Model/ \DTcomment{Logica di Business}.
+.3 Heap.js \DTcomment{Struttura dati e algoritmi}.
+.3 Node.js \DTcomment{Entità e stato dei nodi}.
+.3 Computer.js \DTcomment{AI e decisioni}.
+.3 *Strategy.js \DTcomment{Strategie Min/Max}.
+.2 View/ \DTcomment{Rappresentazione Visiva}.
+.3 Renderer.js \DTcomment{Manipolazione DOM e animazioni}.
+.2 Presenter/ \DTcomment{Logica di Controllo}.
+.3 GamePresenter.js \DTcomment{Orchestrazione eventi}.
+}
+\end{minipage}
+\caption{Struttura del File System del Progetto}
+\label{fig:dir_structure}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{src/}: La radice del codice sorgente contiene i moduli principali e il punto di ingresso dell'applicazione.
+    \begin{itemize}
+        \item \texttt{main.js}: Il punto di ingresso (Entry Point). Inizializza l'applicazione, istanzia le classi principali e avvia il ciclo di vita del software.
+        \item \texttt{style.css}: Il foglio di stile globale che definisce il look \& feel, le animazioni e il layout responsivo.
+    \end{itemize}
+    
+    \item \textbf{src/Model/}: Contiene la logica di business e la gestione dei dati.
+    \begin{itemize}
+        \item \texttt{Heap.js}: La classe che gestisce la struttura dati vera e propria (l'array) e implementa gli algoritmi di ordinamento e mantenimento delle proprietà di heap.
+        \item \texttt{Node.js}: Rappresenta la singola entità (nodo) dell'albero, incapsulando il valore e l'identificativo univoco.
+        \item \texttt{Computer.js}: Implementa l'intelligenza artificiale dell'avversario.
+        \item \texttt{MinHeapStrategy.js} e \texttt{MaxHeapStrategy.js}: Implementazioni concrete delle strategie di confronto (Pattern Strategy).
+    \end{itemize}
+    
+    \item \textbf{src/View/}: Responsabile della rappresentazione visiva.
+    \begin{itemize}
+        \item \texttt{Renderer.js}: Gestisce la manipolazione del DOM, disegnando l'albero e animando i movimenti dei nodi in risposta ai cambiamenti di stato.
+    \end{itemize}
+    
+    \item \textbf{src/Presenter/}: Il mediatore tra Model e View.
+    \begin{itemize}
+        \item \texttt{GamePresenter.js}: Il cuore pulsante dell'applicazione. Coordin le interazioni utente, invoca la logica del Modello e aggiorna la Vista.
+    \end{itemize}
+\end{itemize}
+
 \end{document}
+
 
