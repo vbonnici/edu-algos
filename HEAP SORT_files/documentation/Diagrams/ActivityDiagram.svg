@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="black"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="300" y="30" font-family="Arial" font-size="20" text-anchor="middle" font-weight="bold">Activity Diagram: Game Flow</text>
+
+  <!-- Start Node -->
+  <circle cx="300" cy="80" r="15" fill="black"/>
+
+  <!-- Arrow -->
+  <line x1="300" y1="95" x2="300" y2="130" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Config Partita -->
+  <rect x="225" y="130" width="150" height="50" rx="10" ry="10" fill="white" stroke="black" stroke-width="2"/>
+  <text x="300" y="155" font-family="Arial" font-size="14" text-anchor="middle">Configura Partita</text>
+  <text x="300" y="170" font-family="Arial" font-size="12" text-anchor="middle">(Min/Max)</text>
+
+  <!-- Arrow -->
+  <line x1="300" y1="180" x2="300" y2="220" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Init Heap -->
+  <rect x="225" y="220" width="150" height="50" rx="10" ry="10" fill="white" stroke="black" stroke-width="2"/>
+  <text x="300" y="250" font-family="Arial" font-size="14" text-anchor="middle">Genera Heap</text>
+
+  <!-- Arrow -->
+  <line x1="300" y1="270" x2="300" y2="310" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Decision: Heap Sorted? -->
+  <polygon points="300,310 375,360 300,410 225,360" fill="white" stroke="black" stroke-width="2"/>
+  <text x="300" y="355" font-family="Arial" font-size="12" text-anchor="middle">Heap</text>
+  <text x="300" y="375" font-family="Arial" font-size="12" text-anchor="middle">Ordinato?</text>
+
+  <!-- YES Path (To End) -->
+  <text x="310" y="430" font-family="Arial" font-size="12">Sì</text>
+  <line x1="300" y1="410" x2="300" y2="500" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- End Node -->
+  <circle cx="300" cy="515" r="15" fill="white" stroke="black" stroke-width="3"/>
+  <circle cx="300" cy="515" r="10" fill="black"/>
+  <text x="340" y="520" font-family="Arial" font-size="14">Fine Gioco</text>
+
+  <!-- NO Path (To Player) -->
+  <text x="180" y="350" font-family="Arial" font-size="12">No</text>
+  <line x1="225" y1="360" x2="150" y2="360" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Player Move -->
+  <rect x="50" y="335" width="100" height="50" rx="10" ry="10" fill="white" stroke="black" stroke-width="2"/>
+  <text x="100" y="360" font-family="Arial" font-size="12" text-anchor="middle">Mossa Utente</text>
+  <text x="100" y="375" font-family="Arial" font-size="10" text-anchor="middle">(Swap/Extract)</text>
+
+  <!-- Loop back to CPU -->
+  <line x1="100" y1="385" x2="100" y2="450" stroke="black" stroke-width="2"/>
+  <line x1="100" y1="450" x2="500" y2="450" stroke="black" stroke-width="2"/>
+  <line x1="500" y1="450" x2="500" y2="385" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- CPU Move -->
+  <rect x="450" y="335" width="100" height="50" rx="10" ry="10" fill="white" stroke="black" stroke-width="2"/>
+  <text x="500" y="360" font-family="Arial" font-size="12" text-anchor="middle">Mossa CPU</text>
+  <text x="500" y="375" font-family="Arial" font-size="10" text-anchor="middle">(Simulazione)</text>
+
+  <!-- Loop back to Decision -->
+  <line x1="500" y1="335" x2="500" y2="290" stroke="black" stroke-width="2"/>
+  <line x1="500" y1="290" x2="300" y2="290" stroke="black" stroke-width="2"/>
+  <line x1="300" y1="290" x2="300" y2="310" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+</svg>

@@ -12,6 +12,7 @@
 \usetikzlibrary{shapes,positioning,arrows.meta}
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
 
 %%%%%%%%%%% THESIS / TITLE PAGE INFORMATION %%%%%%%%%%%
 \title{Metodologie per l'Orientamento al Pensiero Computazionale: un Caso di Studio basato sull'Algoritmo Heap Sort}
@@ -935,7 +936,7 @@ Il pattern Strategy è cruciale per la flessibilità del gioco.
     \item \textbf{MinHeapStrategy}: Implementa \texttt{shouldSwap(a, b)} restituendo \texttt{true} se $a > b$ (il padre è maggiore del figlio, violazione Min-Heap). Implementa \texttt{isValid} verificando $parent \leq child$.
     \item \textbf{MaxHeapStrategy}: Inverte la logica, restituendo \texttt{shouldSwap = true} se $a < b$.
 \end{itemize}
-Questa astrazione permette di cambiare la modalità di gioco (dal "Min Game" al "Max Game") iniettando semplicemente una diversa istanza di strategia nel costruttore dell'Heap, senza modificare una riga della logica centrale dell'Heap stesso.
+Questa astrazione permette di cambiare la modalità di gioco (dal "Min Heap" al "Max Heap") iniettando semplicemente una diversa istanza di strategia nel costruttore dell'Heap, senza modificare una riga della logica centrale dell'Heap stesso.
 
 \section{Diagramma di Sequenza}
 Il Diagramma di Sequenza (Sequence Diagram) è un diagramma di interazione UML che illustra come gli oggetti collaborano in un determinato scenario, ponendo l'accento sull'ordine temporale dei messaggi scambiati. A differenza del Diagramma delle Classi (statico) o del Diagramma delle Attività (flusso di lavoro), il Diagramma di Sequenza cattura la dinamica "runtime" del sistema.
@@ -1027,7 +1028,7 @@ In sintesi, la Figura \ref{fig:sequence_diagram} non mostra solo uno "spostament
 
 
 
-\newpage
+
 \subsection{Interazione tra Classi - Turno Computer}
 Il diagramma seguente (Figura \ref{fig:class_comm}) illustra le interazioni tra le componenti del sistema durante il turno del Computer.
 
@@ -1100,7 +1101,7 @@ In conclusione, la densità di messaggi mostrata in Figura \ref{fig:class_comm} 
 \end{itemize}
 Il risultato finale è un sistema dove la "macchina" gioca contro l'utente seguendo le stesse rigide regole matematiche, garantendo un'esperienza educativa coerente e priva di errori logici.
 
-\newpage
+
 \section{Diagramma dei Componenti}
 Il diagramma dei componenti illustra l'organizzazione logico-funzionale del sistema, evidenziando la scomposizione dell'applicazione in moduli indipendenti e la loro strutturazione in livelli (layers). Questa visione architetturale permette di comprendere come le diverse parti del software collaborino per fornire un'esperienza utente coerente e performante.
 
@@ -1108,7 +1109,7 @@ L'applicazione segue un'architettura a tre livelli (\textit{Three-Tier Architect
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth,height=0.85\textheight,keepaspectratio]{Diagrams/ComponentDiagram.png}
+    \includegraphics[width=0.92\textwidth,height=0.60\textheight,keepaspectratio]{Diagrams/ComponentDiagram.png}
     \caption{Diagramma dei Componenti - Architettura Three-Tier}
     \label{fig:component_diagram}
 \end{figure}
@@ -1153,6 +1154,7 @@ A supporto di questa architettura, la Figura \ref{fig:dir_structure} propone l'o
 
 \begin{figure}[H]
 \centering
+\scalebox{0.85}{
 \begin{tikzpicture}[
     node distance=0cm,
     layer/.style={
@@ -1217,6 +1219,7 @@ A supporto di questa architettura, la Figura \ref{fig:dir_structure} propone l'o
     \draw [-latex, thick] (presenter.east) -- (computer.west);
 
 \end{tikzpicture}
+}
 \caption{Diagramma Architetturale a Livelli (Layered Architecture)}
 \label{fig:layered_architecture}
 \end{figure}

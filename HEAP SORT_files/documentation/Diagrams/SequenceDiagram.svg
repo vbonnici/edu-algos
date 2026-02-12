@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600">
+  <defs>
+    <style>
+      .message-line { stroke: #000; stroke-width: 1.5; stroke-dasharray: 4,4; }
+      .lifeline { stroke: #000; stroke-width: 1.5; stroke-dasharray: 5,5; }
+      .activation { fill: #fff; stroke: #000; stroke-width: 1; }
+      .actor { fill: #fff; stroke: #000; stroke-width: 1.5; }
+      .arrow { stroke: #000; stroke-width: 1.5; marker-end: url(#arrowhead); }
+      .arrow-dashed { stroke: #000; stroke-width: 1.5; stroke-dasharray: 4,4; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+    </marker>
+  </defs>
+
+  <!-- Lifelines (Wider Spacing) -->
+  <line x1="100" y1="50" x2="100" y2="550" class="lifeline" />
+  <line x1="350" y1="50" x2="350" y2="550" class="lifeline" /> <!-- Gap 250 -->
+  <line x1="600" y1="50" x2="600" y2="550" class="lifeline" /> <!-- Gap 250 -->
+  <line x1="850" y1="50" x2="850" y2="550" class="lifeline" /> <!-- Gap 250 -->
+
+  <!-- Headers -->
+  <rect x="50" y="20" width="100" height="40" class="actor" />
+  <text x="100" y="45" text-anchor="middle" font-family="Arial" font-size="14">User</text>
+
+  <rect x="300" y="20" width="100" height="40" class="actor" />
+  <text x="350" y="45" text-anchor="middle" font-family="Arial" font-size="14">Presenter</text>
+
+  <rect x="550" y="20" width="100" height="40" class="actor" />
+  <text x="600" y="45" text-anchor="middle" font-family="Arial" font-size="14">Heap (Model)</text>
+
+  <rect x="800" y="20" width="100" height="40" class="actor" />
+  <text x="850" y="45" text-anchor="middle" font-family="Arial" font-size="14">Renderer (View)</text>
+
+  <!-- Messages -->
+  
+  <!-- 1. User clicks Node A -->
+  <line x1="100" y1="100" x2="350" y2="100" class="arrow" />
+  <text x="225" y="95" text-anchor="middle" font-family="Arial" font-size="12">1. handlePlayerClick(idxA)</text>
+  <rect x="345" y="100" width="10" height="40" class="activation" />
+
+  <!-- 2. Presenter updates selection -->
+  <line x1="350" y1="130" x2="850" y2="130" class="arrow" />
+  <text x="600" y="125" text-anchor="middle" font-family="Arial" font-size="12">2. render(heap, [idxA])</text>
+  <rect x="845" y="130" width="10" height="20" class="activation" />
+
+  <!-- 3. User clicks Node B -->
+  <line x1="100" y1="180" x2="350" y2="180" class="arrow" />
+  <text x="225" y="175" text-anchor="middle" font-family="Arial" font-size="12">3. handlePlayerClick(idxB)</text>
+  <rect x="345" y="180" width="10" height="150" class="activation" />
+
+  <!-- 4. Presenter checks validity -->
+  <line x1="350" y1="210" x2="600" y2="210" class="arrow" />
+  <text x="475" y="205" text-anchor="middle" font-family="Arial" font-size="12">4. parent(idxA) == idxB?</text>
+  <rect x="595" y="210" width="10" height="30" class="activation" />
+  
+  <line x1="600" y1="240" x2="350" y2="240" class="arrow-dashed" />
+  <text x="475" y="235" text-anchor="middle" font-family="Arial" font-size="12">true</text>
+
+  <!-- 5. Presenter swaps -->
+  <line x1="350" y1="270" x2="600" y2="270" class="arrow" />
+  <text x="475" y="265" text-anchor="middle" font-family="Arial" font-size="12">5. swap(idxA, idxB)</text>
+  <rect x="595" y="270" width="10" height="30" class="activation" />
+
+  <!-- 6. Presenter updates view -->
+  <line x1="350" y1="320" x2="850" y2="320" class="arrow" />
+  <text x="600" y="315" text-anchor="middle" font-family="Arial" font-size="12">6. render(heap, [])</text>
+  <rect x="845" y="320" width="10" height="30" class="activation" />
+
+  <!-- 7. Presenter checks root -->
+  <line x1="350" y1="380" x2="600" y2="380" class="arrow" />
+  <text x="475" y="375" text-anchor="middle" font-family="Arial" font-size="12">7. isRootValid()</text>
+  <rect x="595" y="380" width="10" height="30" class="activation" />
+
+  <line x1="600" y1="410" x2="350" y2="410" class="arrow-dashed" />
+  <text x="475" y="405" text-anchor="middle" font-family="Arial" font-size="12">true</text>
+
+  <!-- 8. Auto Extraction Trigger -->
+  <line x1="350" y1="440" x2="350" y2="470" class="arrow" />
+  <path d="M 350 440 L 380 440 L 380 470 L 356 470" fill="none" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <text x="410" y="455" text-anchor="start" font-family="Arial" font-size="12">8. checkAutoExtraction()</text>
+
+</svg>
