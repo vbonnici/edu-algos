@@ -1,0 +1,17 @@
+
+				All what I modified after the meeting of the 16 febuary 2026 at 10AM .
+				–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+								(1)
+I have modified the Computer.js file to make the computer be more competitive and the computer follow now the following priority:
+Move the global extremum to the root
+Find the global target (Min or Max depending on strategy) and move it towards the root 
+by swapping with its parent.
+This guarantees competition by prioritizing the "best" node.
+
+1.Scan the entire heap 
+2.Prioritize moving this node up
+3.Extract
+		================================================================================================
+								(2)
+Added the file of labirinto in the project to integrate it on the dashboard
+

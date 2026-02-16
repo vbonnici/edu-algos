@@ -4,29 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heap Sort Challenge</title>
+    <link rel="stylesheet" href="../sfida.css">
     <link rel="stylesheet" href="src/style.css">
 </head>
 <body>
-    <div class="app-container">
-        <header>
-            <h1>Heap Sort Challenge</h1>
-            <div class="controls">
-                <select id="heap-type" class="btn secondary">
-                    <option value="min">Min Heap</option>
-                    <option value="max">Max Heap</option>
-                </select>
-                <button id="start-btn" class="btn primary">Start Game</button>
-                <button id="reset-btn" class="btn secondary" disabled>Reset</button>
-                <div id="game-status" style="font-weight: 600; color: var(--accent-color);">Select settings and start!</div>
-            </div>
-        </header>
+    <header>
+      <div id="cont">
+        <a
+          href="https://francescorosi3.github.io/NotteRicercatori/grid/index.html"
+        >
+          <img
+            id="id_logo"
+            src="../Sfida l&#39;algoritmo_files/logo.svg"
+            style="width: 260px"
+          />
+        </a>
+        <p id="uno" style="margin-top: 5px">
+          Corso di Laurea in <span id="due"> Informatica</span>
+        </p>
+      </div>
+    </header>
+     <div class="subheader">
+      <span>DIPARTIMENTO SCIENZE MATEMATICHE, FISICHE E INFORMATICHE</span>
+    </div>
 
+    <div class="app-container">
         <div class="game-board">
             <!-- Player Zone -->
             <div class="player-zone">
                 <div class="zone-header">
-                    <h2>You</h2>
-                    <div>Moves: <span id="player-moves">0</span></div>
+                    <h2>Your Tree</h2>
+                    <span class="score">Moves: <span id="player-moves">0</span></span>
                 </div>
                 <div id="player-heap-container" class="heap-container"></div>
                 <div class="sorted-list-container">
@@ -34,17 +42,106 @@
                 </div>
             </div>
 
+            <!-- Central Controls -->
+            <div class="central-controls">
+                <div class="control-group">
+                    <label for="heap-type" class="control-label">Game Mode</label>
+                    <div class="select-wrapper">
+                         <select id="heap-type" class="btn secondary">
+                            <option value="min">Min Heap</option>
+                            <option value="max">Max Heap</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="game-actions">
+                    <button id="info-btn" class="btn icon-btn" title="Come Giocare">
+                        <img src="src/img/info.png" alt="Info" style="width: 100%; height: 100%; object-fit: contain;">
+                    </button>
+                    <button id="start-btn" class="btn icon-btn" title="Start Game">
+                        <img src="src/img/play.png" alt="Play" style="width: 100%; height: 100%; object-fit: contain;">
+                    </button>
+                    <button id="reset-btn" class="btn icon-btn" title="Reset" disabled>
+                        <img src="src/img/restart.png" alt="Reset" style="width: 100%; height: 100%; object-fit: contain;">
+                    </button>
+                </div>
+
+                <div id="game-status">Select settings and start!</div>
+            </div>
+
             <!-- Computer Zone -->
             <div class="computer-zone">
                 <div class="zone-header">
                     <h2>Computer</h2>
-                    <div>Moves: <span id="computer-moves">0</span></div>
+                    <span class="score">Moves: <span id="computer-moves">0</span></span>
                 </div>
                 <div id="computer-heap-container" class="heap-container"></div>
                 <div class="sorted-list-container">
                     <div id="computer-sorted-list" class="sorted-list"></div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Instructions Modal -->
+    <div id="instructions-modal" class="modal-overlay">
+        <div class="modal instructions-modal-content">
+            <h2>Come Giocare a Heap Sort</h2>
+            
+            <div class="instruction-section">
+                <h3>Obiettivo del Gioco</h3>
+                <p>Sposta i numeri nell'albero finché non seguono la regola magica! <strong>Attenzione</strong>, l'obiettivo cambia in base al gioco:</p>
+                <ul>
+                    <li>
+                        <strong>Min Heap:</strong> Il numero in alto (Genitore) deve essere più <strong>PICCOLO</strong> dei numeri sotto (Figli).
+                        <div class="mini-heap-example">
+                            <div class="mini-edge left"></div><div class="mini-edge right"></div>
+                            <div class="mini-node root correct">1</div>
+                            <div class="mini-node left">5</div>
+                            <div class="mini-node right">10</div>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Max Heap:</strong> Il numero in alto (Genitore) deve essere più <strong>GRANDE</strong> dei numeri sotto (Figli).
+                        <div class="mini-heap-example">
+                            <div class="mini-edge left"></div><div class="mini-edge right"></div>
+                            <div class="mini-node root correct">50</div>
+                            <div class="mini-node left">20</div>
+                            <div class="mini-node right">30</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="instruction-section">
+                <h3>Comandi</h3>
+                <div class="legend-item">
+                    <span class="key-mouse">Clicca Genitore</span> + <span class="key-mouse">Clicca Figlio</span> = <strong>Scambia</strong>
+                </div>
+                
+                <div class="swap-demo-container">
+                    <div class="demo-edge"></div>
+                    <div class="demo-node parent">10</div>
+                    <div class="demo-node child">5</div>
+                    <!-- Mouse Cursor -->
+                    <div class="demo-cursor">
+                        <svg viewBox="0 0 24 24" fill="var(--text-color)" stroke="white" stroke-width="1">
+                            <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="instruction-section">
+                <h3>Legenda Simboli</h3>
+                <div class="legend-grid">
+                    <div class="legend-item"><div class="node-preview normal">10</div> <span>Nodo Normale</span></div>
+                    <div class="legend-item"><div class="node-preview selected">10</div> <span>Selezionato</span></div>
+                    <div class="legend-item"><div class="node-preview correct">10</div> <span>Posizione Corretta</span></div>
+                </div>
+            </div>
+
+            <button id="start-game-btn" class="btn primary large">Vai al gioco</button>
         </div>
     </div>
 

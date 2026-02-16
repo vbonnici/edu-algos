@@ -17,53 +17,43 @@ export default class Computer {
             return 'extract';
         }
 
-        // Priority 2: Fix Heap Property
-        // We scan from the last non-leaf node up to root to find a violation (standard build-heap approach)
-        // Or we scan from root down? 
-        // Let's try to fix the "worst" violation or just the first one we find to simulate a move.
-        // A human would likely spot a local violation.
-        
-        // Let's look for a violation: Parent vs Child
-        for (let i = Math.floor(this.heap.nodes.length / 2) - 1; i >= 0; i--) {
-            let largest = i;
-            const l = this.heap.left(i);
-            const r = this.heap.right(i);
-            
-            // Check left
-            if (l < this.heap.nodes.length) {
-                if (this.heap.shouldSwap(this.heap.nodes[i].value, this.heap.nodes[l].value)) {
-                     // Violation found!
-                     // But wait, we need to find the *correct* child to swap with
-                     // If min-heap, we want smallest child. If max-heap, largest child.
+        // Priority 2: Improve Competition - Move the global extremum to the root
+        // Strategy: Find the global target (Min or Max depending on strategy) and move it towards the root 
+        // by swapping with its parent. This guarantees competition by prioritizing the "best" node.
+
+        let bestIndex = 0;
+        let bestValue = this.heap.nodes[0].value;
+        const isMin = this.heap.type === 'min';
+
+        for (let i = 1; i < this.heap.nodes.length; i++) {
+            const val = this.heap.nodes[i].value;
+            if (isMin) {
+                if (val < bestValue) {
+                    bestValue = val;
+                    bestIndex = i;
                 }
-            }
-            
-            // Let's find the target child to swap with
-            let target = i;
-            if (l < this.heap.nodes.length) {
-                if (this.heap.shouldSwap(this.heap.nodes[target].value, this.heap.nodes[l].value)) {
-                    target = l;
+            } else {
+                if (val > bestValue) {
+                    bestValue = val;
+                    bestIndex = i;
                 }
-            }
-            
-            if (r < this.heap.nodes.length) {
-                if (this.heap.shouldSwap(this.heap.nodes[target].value, this.heap.nodes[r].value)) {
-                    target = r;
-                }
-            }
-            
-            if (target !== i) {
-                this.heap.swap(i, target);
-                return 'swap';
             }
         }
-        
-        // If no violations found but root wasn't valid? Impossible if logic is correct.
-        // But just in case, swap random to shake things up? No, that's bad AI.
-        // If we are here, it means the heap IS valid, so we should have extracted.
-        // The isRootValid check is O(N), but heap property check is local.
-        // If heap property holds for all nodes, root MUST be valid.
-        
+
+        // If the best node is not at the root, move it up
+        if (bestIndex > 0) {
+            // We swap the best node with its parent to bubble it up
+            const parentIndex = this.heap.parent(bestIndex);
+            
+            // Note: In a standard heap, a child violating heap property can always swap with parent.
+            // Since this is the global extremum, it is guaranteed to be "better" than its parent 
+            // (unless parent is already the same value, in which case swap is harmless or we skip).
+            // But strict inequality check in loop ensures we find *a* best.
+            // Let's just swap.
+            this.heap.swap(bestIndex, parentIndex);
+            return 'swap';
+        }
+
         return 'wait';
     }
 }

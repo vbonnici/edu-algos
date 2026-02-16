@@ -46,5 +46,11 @@ $(document).ready(function () {
         },
       });
 
+      $("#labirano").on({
+        click: function () {
+          $(location).attr("href", "./labirinto/index.html");
+        },
+      });
+
    
 });
