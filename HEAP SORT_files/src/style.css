@@ -85,16 +85,15 @@ body {
 
 .central-controls {
     width: 200px;
-    background: var(--card-bg);
-    border-radius: 1rem;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: transparent; /* Removed card background */
+    border: none; /* Removed border */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 1rem;
     gap: 1.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    /* Removed box-shadow */
 }
 
 .control-group {
@@ -103,15 +102,18 @@ body {
 
 .control-label {
     color: var(--secondary-color);
-    font-size: 0.9rem;
+    font-size: 1rem; /* Slightly larger */
     margin-bottom: 5px;
     display: block;
     text-align: center;
+    font-weight: 600;
 }
 
-#heap-type {
+#heap-type, #tree-depth {
     width: 100%;
     margin-bottom: 20px;
+    font-size: 1.1rem; /* Larger font */
+    padding: 0.8rem 1rem; /* Larger padding */
 }
 
 .game-actions {
@@ -124,8 +126,9 @@ body {
 }
 
 #game-status {
-    font-weight: 600;
-    color: var(--accent-color);
+    font-weight: 700;
+    font-size: 1.1rem; /* Larger font */
+    color: var(--primary-color); /* Changed to blue */
     text-align: center;
 }
 
@@ -167,6 +170,14 @@ body {
     flex-direction: column;
     padding: 1rem;
     position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.player-zone.active-turn, .computer-zone.active-turn {
+    transform: scale(1.02);
+    box-shadow: 0 8px 30px rgba(52, 152, 219, 0.3);
+    border-color: var(--primary-color);
+    z-index: 10;
 }
 
 .zone-header {
@@ -570,20 +581,170 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px; /* Padding for image */
-    width: 40px;
-    height: 40px;
+    padding: 8px; /* Slightly more padding */
+    width: 60px; /* Increased from 40px */
+    height: 60px; /* Increased from 40px */
     border-radius: 50%;
     background: transparent;
     border: 1px solid transparent;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .icon-btn:hover {
     background-color: rgba(0,0,0,0.05);
+    transform: scale(1.1); /* Add a little pop */
 }
 
 .icon-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
     background-color: transparent;
+}
+
+/* Modal Pagination Styles */
+.instruction-step {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.instruction-step.hidden {
+    display: none;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 20px;
+}
+
+.modal-buttons .btn {
+    flex: 1;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Depth 2 Tree Visualization */
+.depth-example {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.depth-example h4 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.mini-tree-depth-2 {
+    position: relative;
+    width: 350px; /* Increased width for labels + tree */
+    height: 180px;
+    margin: 0 auto;
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
+
+/* ... labels remain same ... */
+.depth-label {
+    position: absolute;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    left: 10px;
+    z-index: 5;
+}
+
+.depth-label.d0 { top: 20px; }
+.depth-label.d1 { top: 70px; }
+.depth-label.d2 { top: 120px; }
+
+.mt-node {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--node-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    position: absolute;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* COMPACT TREE RELAYOUT (Root Center: 235px) */
+/* Root */
+.mt-node.root { top: 15px; left: 220px; }
+
+/* Level 1 (+/- 40px from Root) */
+.mt-node.l1-left { top: 65px; left: 180px; }
+.mt-node.l1-right { top: 65px; left: 260px; }
+
+/* Level 2 (+/- 20px from L1) */
+.mt-node.l2-1 { top: 115px; left: 160px; }
+.mt-node.l2-2 { top: 115px; left: 200px; }
+.mt-node.l2-3 { top: 115px; left: 240px; }
+.mt-node.l2-4 { top: 115px; left: 280px; }
+
+/* Edges */
+.mt-edge {
+    position: absolute;
+    background: var(--node-border);
+    height: 2px;
+    transform-origin: 0 50%;
+    z-index: 1;
+}
+
+/* Root (235, 30) to L1-Left (195, 80): dx=-40, dy=50 */
+.mt-edge.l1-l { 
+    width: 64px; 
+    top: 30px; 
+    left: 235px; 
+    transform: rotate(129deg); 
+}
+
+/* Root (235, 30) to L1-Right (275, 80): dx=40, dy=50 */
+.mt-edge.l1-r { 
+    width: 64px; 
+    top: 30px; 
+    left: 235px; 
+    transform: rotate(51deg); 
+}
+
+/* L1-Left (195, 80) to L2-1 (175, 130): dx=-20, dy=50 */
+.mt-edge.l2-ll { 
+    width: 54px; 
+    top: 80px; 
+    left: 195px; 
+    transform: rotate(112deg); 
+}
+
+/* L1-Left (195, 80) to L2-2 (215, 130): dx=20, dy=50 */
+.mt-edge.l2-lr { 
+    width: 54px; 
+    top: 80px; 
+    left: 195px; 
+    transform: rotate(68deg); 
+}
+
+/* L1-Right (275, 80) to L2-3 (255, 130): dx=-20, dy=50 */
+.mt-edge.l2-rl { 
+    width: 54px; 
+    top: 80px; 
+    left: 275px; 
+    transform: rotate(112deg); 
+}
+
+/* L1-Right (275, 80) to L2-4 (295, 130): dx=20, dy=50 */
+.mt-edge.l2-rr { 
+    width: 54px; 
+    top: 80px; 
+    left: 275px; 
+    transform: rotate(68deg); 
 }

@@ -68,8 +68,18 @@ export default class Renderer {
     calculatePositions(nodes) {
         if (nodes.length === 0) return;
         
+        // Update width/height on every render to be responsive
+        this.width = this.container.clientWidth;
+        const height = this.container.clientHeight;
+        
         const levels = Math.floor(Math.log2(nodes.length)) + 1;
-        const verticalSpacing = 55;
+        const verticalSpacing = 60; // Slightly increased spacing
+        const treeHeight = (levels - 1) * verticalSpacing;
+        
+        // Calculate startY to center vertically
+        // Ensure some minimum padding so it doesn't go off-screen top
+        let startY = (height - treeHeight) / 2;
+        if (startY < 40) startY = 40; // Minimum top margin
         
         nodes.forEach((node, index) => {
             const level = Math.floor(Math.log2(index + 1));
@@ -78,7 +88,7 @@ export default class Renderer {
             
             const sliceWidth = this.width / (levelCapacity + 1);
             node.x = sliceWidth * (indexInLevel + 1);
-            node.y = level * verticalSpacing + 50;
+            node.y = startY + (level * verticalSpacing);
         });
     }
 

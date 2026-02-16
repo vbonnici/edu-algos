@@ -21,13 +21,37 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     // Handle Start Game from Modal
+    // Navigation Elements
+    const step1 = document.getElementById('instruction-step-1');
+    const step2 = document.getElementById('instruction-step-2');
+    const nextBtn = document.getElementById('next-step-btn');
+    const prevBtn = document.getElementById('prev-step-btn');
+
+    // Navigation Logic
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            step1.classList.add('hidden');
+            step2.classList.remove('hidden');
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            step2.classList.add('hidden');
+            step1.classList.remove('hidden');
+        });
+    }
+
     if (startGameBtn) {
         startGameBtn.addEventListener('click', () => {
             if (instructionsModal) {
                 instructionsModal.classList.add('hidden');
+                // Reset to step 1 for next time
+                setTimeout(() => {
+                    step1.classList.remove('hidden');
+                    step2.classList.add('hidden');
+                }, 300);
             }
-            // Optional: Start the game logic here if it wasn't already running in background
-            // For now, the game is initialized but waiting for user input, so just closing modal is enough.
         });
     }
 
@@ -35,6 +59,14 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('modal-close-btn').addEventListener('click', () => {
         document.getElementById('modal-overlay').classList.add('hidden');
     });
+
+    // Home Button Logic
+    const homeBtn = document.getElementById('home-btn');
+    if (homeBtn) {
+        homeBtn.addEventListener('click', () => {
+            window.location.href = '../index.html';
+        });
+    }
 
     const game = new GamePresenter();
 });

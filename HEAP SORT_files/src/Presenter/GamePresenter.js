@@ -43,10 +43,20 @@ export default class GamePresenter {
     start() {
         const type = document.getElementById('heap-type').value;
         const strategy = type === 'max' ? new MaxHeapStrategy() : new MinHeapStrategy();
+        
+        // Read depth and calculate node count
+        let depth = parseInt(document.getElementById('tree-depth').value);
+        if (isNaN(depth) || depth < 1) depth = 1;
+        if (depth > 4) depth = 4;
+        
+        // User definition: Depth 1 = 3 nodes, Depth 2 = 7 nodes, etc.
+        // Formula: 2^(depth + 1) - 1
+        const nodeCount = Math.pow(2, depth + 1) - 1;
+
         this.playerHeap = new Heap(strategy);
         this.computerHeap = new Heap(strategy);
         
-        this.playerHeap.initRandom(15);
+        this.playerHeap.initRandom(nodeCount);
         this.computerHeap.setNodes(this.playerHeap.getValues());
         this.ai = new Computer(this.computerHeap);
         
@@ -61,7 +71,8 @@ export default class GamePresenter {
         document.getElementById('start-btn').disabled = true;
         document.getElementById('reset-btn').disabled = false;
         document.getElementById('heap-type').disabled = true;
-        document.getElementById('game-status').textContent = "Your Turn!";
+        document.getElementById('tree-depth').disabled = true; // Disable depth input
+        document.getElementById('game-status').textContent = "Tocca a te!";
         
         this.checkAutoExtraction();
     }
@@ -71,13 +82,14 @@ export default class GamePresenter {
         document.getElementById('start-btn').disabled = false;
         document.getElementById('reset-btn').disabled = true;
         document.getElementById('heap-type').disabled = false;
+        document.getElementById('tree-depth').disabled = false; // Enable depth input
         document.getElementById('player-heap-container').innerHTML = '';
         document.getElementById('computer-heap-container').innerHTML = '';
         document.getElementById('player-sorted-list').innerHTML = '';
         document.getElementById('computer-sorted-list').innerHTML = '';
         document.getElementById('player-moves').textContent = '0';
         document.getElementById('computer-moves').textContent = '0';
-        document.getElementById('game-status').textContent = "Select settings and start!";
+        document.getElementById('game-status').textContent = "Seleziona le impostazioni e inizia!";
     }
 
     checkAutoExtraction() {
@@ -86,6 +98,7 @@ export default class GamePresenter {
         if (this.playerHeap.isRootValid()) {
             // Disable interaction during auto-move
             this.isComputerTurn = true; 
+            this.updateActiveTurnVisuals(); // Immediate visual feedback
             
             setTimeout(() => {
                 this.playerHeap.extractRoot();
@@ -95,7 +108,7 @@ export default class GamePresenter {
                 
                 if (this.isPlaying) {
                     // Pass to computer
-                    document.getElementById('game-status').textContent = "Computer's Turn...";
+                    document.getElementById('game-status').textContent = "Turno del Computer...";
                     setTimeout(() => this.computerTurn(), 800);
                 }
             }, 800); // Delay to let user see the green root
@@ -141,7 +154,7 @@ export default class GamePresenter {
                     }
                 }, 300);
             } else {
-                alert("Invalid Move! You can only swap a node with its parent.");
+                alert("Mossa non valida! Puoi scambiare un nodo solo con suo padre.");
                 this.selectedIndices = [];
                 this.updateUI();
             }
@@ -149,11 +162,11 @@ export default class GamePresenter {
     }
     
     endTurn() {
-        this.updateUI();
         this.checkWinCondition();
         if (this.isPlaying) {
             this.isComputerTurn = true;
-            document.getElementById('game-status').textContent = "Computer's Turn...";
+            this.updateActiveTurnVisuals(); // Update visuals immediately after state change
+            document.getElementById('game-status').textContent = "Turno del Computer...";
             setTimeout(() => this.computerTurn(), 800);
         }
     }
@@ -185,7 +198,8 @@ export default class GamePresenter {
              this.checkWinCondition();
              if (this.isPlaying) {
                  this.isComputerTurn = false;
-                 document.getElementById('game-status').textContent = "Your Turn!";
+                 document.getElementById('game-status').textContent = "Tocca a te!";
+                 this.updateActiveTurnVisuals();
                  this.checkAutoExtraction();
              }
         }
@@ -201,7 +215,8 @@ export default class GamePresenter {
         
         if (this.isPlaying) {
              this.isComputerTurn = false;
-             document.getElementById('game-status').textContent = "Your Turn!";
+             document.getElementById('game-status').textContent = "Tocca a te!";
+             this.updateActiveTurnVisuals();
              this.checkAutoExtraction();
         }
     }
@@ -216,22 +231,22 @@ export default class GamePresenter {
             let title = '';
             
             if (playerDone && !computerDone) {
-                title = "You Win!";
-                msg = `You finished first! (${this.playerMoves} moves)`;
+                title = "Hai Vinto!";
+                msg = `Hai finito prima! (${this.playerMoves} mosse)`;
             } else if (computerDone && !playerDone) {
-                title = "Computer Wins!";
-                msg = `Computer finished first! (${this.computerMoves} moves)`;
+                title = "Ha Vinto il Computer!";
+                msg = `Il Computer ha finito prima! (${this.computerMoves} mosse)`;
             } else {
                 // Tie (both finished same turn)
                 if (this.playerMoves < this.computerMoves) {
-                    title = "You Win!";
-                    msg = `You finished with fewer moves! (${this.playerMoves} vs ${this.computerMoves})`;
+                    title = "Hai Vinto!";
+                    msg = `Hai finito con meno mosse! (${this.playerMoves} vs ${this.computerMoves})`;
                 } else if (this.computerMoves < this.playerMoves) {
-                    title = "Computer Wins!";
-                    msg = `Computer finished with fewer moves! (${this.computerMoves} vs ${this.playerMoves})`;
+                    title = "Ha Vinto il Computer!";
+                    msg = `Il Computer ha finito con meno mosse! (${this.computerMoves} vs ${this.playerMoves})`;
                 } else {
-                    title = "It's a Tie!";
-                    msg = `Both finished with ${this.playerMoves} moves!`;
+                    title = "Pareggio!";
+                    msg = `Entrambi hanno finito con ${this.playerMoves} mosse!`;
                 }
             }
             this.showModal(title, msg);
@@ -243,7 +258,7 @@ export default class GamePresenter {
         document.getElementById('modal-message').textContent = message;
         document.getElementById('modal-overlay').classList.remove('hidden');
         
-        if (title.includes("You Win")) {
+        if (title.includes("Hai Vinto")) {
             this.triggerVictory();
         }
     }
@@ -268,5 +283,25 @@ export default class GamePresenter {
         this.computerRenderer.render(this.computerHeap);
         document.getElementById('player-moves').textContent = this.playerMoves;
         document.getElementById('computer-moves').textContent = this.computerMoves;
+        this.updateActiveTurnVisuals();
+    }
+
+    updateActiveTurnVisuals() {
+        const playerZone = document.querySelector('.player-zone');
+        const computerZone = document.querySelector('.computer-zone');
+        
+        if (this.isPlaying) {
+            if (this.isComputerTurn) {
+                computerZone.classList.add('active-turn');
+                playerZone.classList.remove('active-turn');
+            } else {
+                playerZone.classList.add('active-turn');
+                computerZone.classList.remove('active-turn');
+            }
+        } else {
+            // Reset if not playing
+            playerZone.classList.remove('active-turn');
+            computerZone.classList.remove('active-turn');
+        }
     }
 }
