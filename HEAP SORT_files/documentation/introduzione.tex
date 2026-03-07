@@ -8,6 +8,8 @@
 \usepackage{tikz}
 \usepackage{dirtree}
 \usepackage[section]{placeins}
+\usepackage{listings}
+\usepackage{xcolor}
 \let\cleardoublepage\clearpage
 \usetikzlibrary{shapes,positioning,arrows.meta}
 \setcounter{secnumdepth}{3}
@@ -28,10 +30,21 @@
 
 \maketitle
 
+\clearpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{flushright}
+\textit{Dedico questo lavoro a mia madre e alla famiglia Yewo, per il loro amore incondizionato e il loro sostegno costante.}
+\end{flushright}
+\vspace*{\fill}
+\clearpage
 
 \pagenumbering{roman}
 \pagestyle{plain}
 \tableofcontents
+\newpage
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
 \newpage
 
 \pagenumbering{arabic}
@@ -1274,6 +1287,509 @@ A supporto di questa architettura, la Figura \ref{fig:dir_structure} propone l'o
     \end{itemize}
 \end{itemize}
 
+\chapter{Implementazione e Validazione}
+In questo capitolo viene analizzata in dettaglio l'implementazione pratica del progetto "Heap Sort Challenge". L'obiettivo è duplice: da un lato descrivere le scelte tecniche e architetturali adottate per la costruzione del software didattico; dall'altro, illustrare analiticamente il comportamento delle strutture dati, l'orchestrazione degli algoritmi e le meccaniche di interazione con l'utente. Attraverso una dissezione tecnica approfondita, verrà spiegata come l'astrazione concettuale del pensiero computazionale sia stata tradotta in codice sorgente funzionale ed efficiente.
+
+\section{Introduzione alle Scelte Tecnologiche}
+La realizzazione di un'applicazione web interattiva richiede un'attenta valutazione dello stack tecnologico. Nel panorama moderno dello sviluppo frontend, si assiste spesso all'adozione pervasiva di framework e librerie strutturate (come React, Angular, o Vue) e di astrazioni complesse come TypeScript. Sebbene questi strumenti offrano indiscutibili vantaggi per applicazioni Enterprise di larga scala gestite da team numerosi, per il presente caso di studio si è optato consapevolmente per un approccio diverso: lo sviluppo interamente in \textbf{Vanilla JavaScript (ES6+)}, supportato unicamente da HTML5 e CSS3 nativi, senza alcuna dipendenza esterna (Zero-Dependencies Approach).
+
+Questa scelta architetturale è motivata da diverse ragioni didattiche ed ingegneristiche:
+\begin{enumerate}
+    \item \textbf{Leggerezza e Accessibilità:} L'applicazione deve essere fruibile da qualsiasi dispositivo (anche mobile o scolastico datato) senza tempi di caricamento dovuti allo scaricamento di voluminose librerie JavaScript. L'assenza di framework abbatte il \textit{bundle size} a pochi kilobyte, garantendo tempi di esecuzione praticamente istantanei.
+    \item \textbf{Trasparenza Didattica:} In un progetto focalizzato sull'insegnamento degli algoritmi e delle logiche di programmazione nuda, l'impiego di un framework che astrae pesantemente l'interazione con il \textit{Document Object Model (DOM)} rischierebbe di offuscare la purezza algoritmica. Con Vanilla JS, il flusso di controllo è palese e tracciabile linearmente: dalla logica puramente matematica allo stato visivo finale, non esistono meccanismi "magici" (come il Virtual DOM di React o la digest cycle di AngularJS) a frapporsi.
+    \item \textbf{Potenziale Espressivo nativo:} Gli standard moderni di JavaScript (come ECMAScript 6 e versioni successive) hanno introdotto feature native (Classi, Map/Set, Destructuring assignment, Arrow functions, Modules) che colmano in gran parte le lacune architetturali del passato, consentendo lo sviluppo di script perfettamente organizzati, testabili e modulari, in modo totalmente object-oriented, rendendo superflua la sovrascrittura fornita dalle librerie in molti scenari limitati.
+\end{enumerate}
+
+Le \textbf{Web API} native (precisamente \texttt{document.createElement}, \texttt{dataset}, \texttt{classList}, \texttt{requestAnimationFrame}) sono risultate sufficienti ed estremamente performanti per la gestione della scacchiera algoritmica che anima questo progetto.
+
+\section{Architettura Model-View-Presenter (MVP)}
+In assenza dell'infrastruttura rigida di un framework, l'intera onere di strutturare logicamente il codice ricade sullo sviluppatore. Affinché il software possieda caratteristiche di \textit{manutenibilità}, \textit{scalabilità} e \textit{basso accoppiamento} (loose coupling), si è deciso di implementare un'architettura rigorosa seguendo il Pattern Architetturale \textbf{Model-View-Presenter (MVP)}, storicamente usato nella costruzione di applicazioni desktop (es. in ambienti Microsoft .NET, Java Swing) ed estremamente efficace in Vanilla JS.
+
+\subsection{Distinzione dal framework MVC (Model-View-Controller)}
+Sebbene fortemente affine al pattern MVC largamente standardizzato sul web (Specialmente via Back-End), il pattern MVP fornisce una topografia d'interazione \textit{strettamente gerarchica}.
+Nel Pattern MVC tradizionale implementato nel frontend, molto spesso la Vista è "attiva": osserva direttamente i cambiamenti di stato emessi dal Modello globale e si ri-renderizza automaticamente.
+Al contrario, nell'MVP adottato, la Vista è rigorosamente identificata come \textbf{Passive View}. Il flusso circola esplicitamente come segue:
+\begin{enumerate}
+    \item L'Utente (Studente) interagisce con il DOM (la Vista).
+    \item La Vista non ha intelligenza propria né conoscenza della partita logica; si auto-limita a registrare un click fisico e, passivamente, notifica il \textbf{Presenter}.
+    \item Il Presenter incapsula la totale "Business Logic" temporale: interpreta il comando dell'utente, lo traduce in un'istruzione algoritmica (ad esempio: \textit{"E' valido scambiare il nodo di indice 4 col nodo di indice 1 in un Max Heap?"}) e interroga/aggiorna il \textbf{Modello}.
+    \item Il Modello, puramente matematico, applica lo scambio (Swap dell'array) e conferma al \textbf{Presenter} il completamento dell'operazione.
+    \item Il Presenter riprende il controllo logico e ordina esplicitamente (tramite binding o chiamate procedurali) alla \textbf{Vista} di aggiornare l'interfaccia (eseguire l'animazione di movimento sui DOM element specifici) in totale asincronia ed accoppiamento indiretto.
+\end{enumerate}
+
+Questa severa partizione logica (Separation of Concerns) permette per esempio un \textit{Test Unitario} perfetto del Modello: gli algoritmi sui nodi corrono esclusivamente su Array numerici off-screen e Node objects, permettendo in futuro al sorgente model-oriented di servire perfino interfacce testuali o API esterne.
+
+\section{Struttura dei Dati e Logica di Dominio (Model Layer)}
+Rispettando il pattern MVP, il Livello Modello è l'unico deputato al mantenimento della veridicità e consistenza matematica dell'informazione. Le regole algoritmiche (costruzione, ricerca del minimo/massimo, validazione, estrazione) risiedono esclusivamente qui.
+
+\subsection{Incapsulamento dello Stato: \texttt{Node.js}}
+L'informazione atomica dell'albero è rappresentata dalla classe \texttt{Node}. Invece di memorizzare nel vettore dei semplici interi primitivi, la scelta di creare un oggetto \texttt{Node} ha permesso di legare in un'unica entità logica il \textit{valore numerico} algoritmico (es. 42) e un \textit{identificativo univoco costante} (\texttt{id}).
+L'\texttt{id} è fondamentale affinché la Vista, in fase di rendering successiva all'ordinamento, sappia tracciare inequivocabilmente *quale* DOM element muovere sullo schermo fisicamente, garantendo continuità nell'animazione CSS nonostante il nodo si sposti continuamente lungo l'array.
+
+\subsection{Astrazione Array-Albero: \texttt{Heap.js}}
+La classe principale del dominio applicativo è \texttt{Heap}. L'Algoritmo Heap Sort richiede una struttura ad Albero Binario (Quasi) Completo, tuttavia, a differenza della manipolazione standard tramite referenze parentali a puntatori (es. nell'implementazione classica di un Albero Binario di Ricerca), l'Heap è architettato per esistere logisticamente in un array monodimensionale e \textit{compresso} in memoria.
+
+Questo risparmio computazionale notevole deriva dall'indicizzazione basata sul posizionamento spaziale dell'informazione, senza alcuno spreco di bytes per i puntatori sinistra/destra.
+
+Il file \texttt{Heap.js} espone tre moduli cardinali essenziali per la scansione spaziale. Tali metodi mappano matematicamente un indice lineare \textit{i} negli indici \textit{relati} dei nodi collegati:
+\begin{lstlisting}[language=JavaScript, breaklines=true, basicstyle=\footnotesize\ttfamily, frame=single, caption={Estrazione delle relazioni topologiche nell'array (\texttt{Heap.js})}, keywordstyle=\color{blue}]
+export default class Heap {
+    // ... costruttori e variabili ...
+    
+    // Ritorna l'indice del padre del nodo in posizione i
+    parent(i) { return Math.floor((i - 1) / 2); }
+    
+    // Ritorna l'indice del figlio sinistro del nodo i
+    left(i) { return 2 * i + 1; }
+    
+    // Ritorna l'indice del figlio destro del nodo i
+    right(i) { return 2 * i + 2; }
+    
+    // Esecuzione dello scambio atomico tra gli slot i e j dell'array
+    swap(i, j) {
+        [this.nodes[i], this.nodes[j]] = [this.nodes[j], this.nodes[i]];
+    }
+}
+\end{lstlisting}
+
+Se per esempio si desidera validare la proprietà di Max Heap per il nodo posizionato all'indice $2$, i figli si troveranno agli indici $2 \times 2 + 1 = 5$ (Figlio sinistro) e $2 \times 2 + 2 = 6$ (Figlio destro).
+
+Un ulteriore responsabilità architetturale di \texttt{Heap.js} verte nell'estrazione della Radice (\textbf{Extraction}) al momento del raggiungimento dell'Heap Property globale. In quel momento:
+\begin{enumerate}
+    \item Il nodo all'indice 0 (Radice) viene estirpato come elemento definitivo estratto o "ordinato".
+    \item L'ultima foglia dell'albero (ultimo indice dell'array \texttt{nodes}) prende fisicamente il posto della radice in posizione 0.
+    \item L'array originario \texttt{nodes} perde un elemento di lunghezza, rinegoziando automaticamente il layer fogliare inferiore.
+    \item La nuova radice è temporaneamente "illegale"; inizia la sequenza asincrona degli swap verso il basso ("Sift/Bubble Down").
+\end{enumerate}
+
+\section{Comportamento Dinamico: Il Pattern Strategy}
+Una caratteristica avanzata di questa implementazione è la possibilità, per l'utente, di scegliere tra l'esecuzione di un \textbf{Min-Heap} (l'elemento radicato è sempre e comunque minore o uguale a tutti i nodi limitrofi) o \textbf{Max-Heap} (l'esatto speculare). 
+
+Aggiungere al codice degli espliciti blocchi condizionali monolitici (es. \texttt{if (this.type == "max") \{...\} else \{...\}}) in profondità alle logiche dei cicli di controllo avrebbe rapidamente innalzato la Complessità Ciclomatica, infrangendo il paradigma Open/Closed (Principio OCP del SOLID - Aperte per estensione, chiuse per modifica).
+La soluzione ingegneristica elegante tradotta in JavaScript Vanilla si fonda sul Design pattern comportamentale, il \textbf{Strategy Pattern}.
+
+La classe \texttt{Heap} ignora totalmente la policy di comparazione: possiede una dipendenza astratta (iniettata dal \texttt{GamePresenter} via costruttore) di un oggetto puramente formale \texttt{strategy}.
+\begin{lstlisting}[language=JavaScript, breaklines=true, basicstyle=\footnotesize\ttfamily, frame=single, caption={Definizione separata delle regole di comparazione (Pattern Strategy)}, keywordstyle=\color{blue}]
+// ./Model/MinHeapStrategy.js
+export default class MinHeapStrategy {
+    constructor() {
+        this.type = 'min';
+    }
+    shouldSwap(parentVal, childVal) {
+        // Obbliga la decrescita del genitore
+        return parentVal > childVal; 
+    }
+    isValid(parentVal, childVal) {
+        return parentVal <= childVal;
+    }
+}
+
+// ./Model/MaxHeapStrategy.js
+export default class MaxHeapStrategy {
+    constructor() {
+        this.type = 'max';
+    }
+    shouldSwap(parentVal, childVal) {
+        // Obbliga la crescita genitoriale
+        return parentVal < childVal;
+    }
+    isValid(parentVal, childVal) {
+        return parentVal >= childVal;
+    }
+}
+\end{lstlisting}
+
+La valutazione si declina in puro polimorfismo. L'intero schema computazionale globale dell'Heap interroga esclusivamente: \texttt{this.strategy.isValid(...)} sgravandosi dalle singole definizioni implementative formali interne.
+
+\section{Motore Decisionale e Logica dell'Avversario}
+Il nucleo competitivo dell'applicazione è guidato dal file \texttt{Computer.js}. Affinché la sfida risultasse stimolante, ma non punitiva, è stato essenziale progettare un'entità digitale che non risolvesse l'intero intero Heap in una frazione di millisecondo, ma bensì simulasse un comportamento a "turni" passo-passo visibile ad occhio umano.
+
+La funzione \texttt{makeMove()} incapsula l'euristica decisionale dell'avversario. Il sistema dà priorità cronologica assoluta all'\textbf{estrazione} (Extraction): se l'albero è momentaneamente un heap perfetto, la macchina procede all'estrazione della radice.
+In caso contrario, l'algoritmo non esegue un banale controllo lineare o un bubble-up casuale. Al fine di mantenere alta la sfida con l'utente umano, la macchina cerca proattivamente di individuare l'estremo globale sbagliato.
+
+\begin{lstlisting}[language=JavaScript, breaklines=true, basicstyle=\footnotesize\ttfamily, frame=single, caption={Euristica dell'Avversario per l'individuazione del nodo migliore (\texttt{Computer.js})}, keywordstyle=\color{blue}]
+        // Priorità 2: Migliorare la competitività.
+        // Troviamo il target globale (Minimo o Massimo globale a seconda della Strategia)
+        // e lo muoviamo coercitivamente verso la radice. 
+        let bestIndex = 0;
+        let bestValue = this.heap.nodes[0].value;
+        const isMin = this.heap.type === 'min';
+
+        for (let i = 1; i < this.heap.nodes.length; i++) {
+            const val = this.heap.nodes[i].value;
+            if (isMin) {
+                if (val < bestValue) {
+                    bestValue = val;
+                    bestIndex = i;
+                }
+            } else { ... }
+        }
+
+        // Se l'estremo globale non è già alla radice, esegui lo swap col padre
+        if (bestIndex > 0) {
+            const parentIndex = this.heap.parent(bestIndex);
+            this.heap.swap(bestIndex, parentIndex);
+            return 'swap';
+        }
+\end{lstlisting}
+
+Questa intelligenza artificiale "didattica" compie una scelta aggressiva: tenta sempre di portare il nodo con il valore ottimale assoluto verso la vetta dell'albero ad ogni turno.
+
+\section{Gestione della Rappresentazione Visiva (View Layer)}
+La Vista è gestita primariamente da \texttt{Renderer.js}. In applicazioni in cui lo stato cambia decine di volte in pochi secondi, una manipolazione naïf del DOM (come la ripetuta cancellazione e ristesura dell'\texttt{innerHTML}) distruggerebbe la possibilità di applicare transizioni CSS fluide: il browser ri-disegnerebbe nodi "nuovi" azzerando il feedback sensoriale di moto (lo scambio).
+
+\subsection{Aggiornamento Differenziale nel Render}
+Per preservare la \textit{statefulness} degli elementi visivi, il \texttt{Renderer} è stato progettato per ricalcolare solo le coordinate assolute \textit{(x, y)} dei \texttt{div} esistenti o istanziargli dinamicamente se non ancora presenti nel container. Identificando i nodi tramite \texttt{data-id}, il renderer modifica agilmente solo gli attributi di posizione \texttt{left} e \texttt{top}.
+
+\begin{lstlisting}[language=JavaScript, breaklines=true, basicstyle=\footnotesize\ttfamily, frame=single, caption={Riposizionamento stateful in \texttt{Renderer.js}}, keywordstyle=\color{blue}]
+        heap.nodes.forEach((node, index) => {
+            // Find node by absolute logical ID, not current array index
+            let el = this.container.querySelector(`.node[data-id="${node.id}"]`);
+            
+            // ... (creazione se inesistente) ...
+
+            // Update position (Trigger native CSS transition)
+            el.style.left = `${node.x - 20}px`; // 20px is radius offset
+            el.style.top = `${node.y - 20}px`;
+            el.dataset.index = index; 
+        });
+\end{lstlisting}
+
+\subsection{Trigonometria e Calcolo dei rami (Edges)}
+Il disegno delle linee di collegamento tra padre e figlio non è un'operazione banale in HTML/CSS puro senza HTML Canvas o SVG. Il progetto sfrutta potenti regole trigonometriche per deformare normali rettangoli DIV in \textit{segmenti congiungenti}:
+
+\begin{lstlisting}[language=JavaScript, breaklines=true, basicstyle=\footnotesize\ttfamily, frame=single, caption={Calcolo della distanza euclidea e rotazione (\texttt{Renderer.js})}, keywordstyle=\color{blue}]
+    drawEdge(parent, child) {
+        const edge = document.createElement('div');
+        edge.className = 'edge';
+        
+        // Teorema di Pitagora
+        const dx = child.x - parent.x;
+        const dy = child.y - parent.y;
+        const length = Math.sqrt(dx * dx + dy * dy);
+        
+        // Calcolo rotazione angolo via tangente inversa
+        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+        
+        edge.style.width = `${length}px`;
+        edge.style.transform = `rotate(${angle}deg)`;
+        this.container.appendChild(edge);
+    }
+\end{lstlisting}
+
+\section{Orchestrazione e Ciclo di Gioco (Presenter Layer)}
+Giunti all'apice dell'architettura MVP, la classe \texttt{GamePresenter} assume il ruolo di direttore d'orchestra. Essa detiene e protegge la \textbf{Macchina a Stati Finiti} (State Machine) che regola inderogabilmente l'alternanza asincrona dei turni tra il giocatore umano e l'\texttt{Computer}.
+
+Il cuore operativo è racchiuso nella funzione semantica \texttt{handlePlayerClick(index)}. Tale procedura viene scaturita passivamente dalla Vista ma valuta algoritmicamente numerosi requisiti stretti per arginare comportamenti illegali (es. doppi o multipli click simultanei):
+\begin{enumerate}
+    \item \textbf{Verifica del Turno:} Il click viene respinto brutalmente se \texttt{this.isComputerTurn} è \texttt{true} o il gioco non è attivo (\texttt{this.isPlaying == false}).
+    \item \textbf{Selezione Binaria:} Viene registrata l'intenzione dell'utente in un buffer (\texttt{this.selectedIndices}). Finché il buffer non raggiunge una lunghezza pari a 2 (esattamente due nodi cliccati), non avviene nessuna inferenza matematica nel modello.
+    \item \textbf{La Validazione Architetturale:} Al raggiungimento di 2 nodi cliccati, il \texttt{Presenter} si rivolta sul \texttt{Model}: domanda alla logica algoritmica \textit{"I due nodi sono padre-figlio o estranei?"} limitando forzosamente le interazioni aliene alla pura matematica dell'algoritmo visivo.
+\end{enumerate}
+
+Una volta accertata e completata la singola mossa legittima del giocatore, il \texttt{GamePresenter} impone imperativamente la sua validità tramite la funzione pivotale \texttt{checkAutoExtraction()}:
+\begin{lstlisting}[language=JavaScript, breaklines=true, basicstyle=\footnotesize\ttfamily, frame=single, caption={Transizione di stato e verifica turni (\texttt{GamePresenter.js})}, keywordstyle=\color{blue}]
+    // ... all'interno di handlePlayerClick(index) ...
+    // Esecuzione mossa lecita
+    this.playerHeap.swap(parentIdx, childIdx);
+    this.playerMoves++;
+    this.playerRenderer.render(...);
+    this.checkAutoExtraction();
+    
+    //---------------------------------------------------------
+
+    checkAutoExtraction() {
+        if (!this.isPlaying || this.isComputerTurn) return;
+
+        // Conditione asintotica di vittoria temporanea del round logico
+        if (this.playerHeap.isRootValid()) {
+            this.isComputerTurn = true; 
+            
+            // Ritarda visivamente e cedi il turno all'IA (setTimeout)
+            setTimeout(() => {
+                this.executeComputerExtraction();
+            }, 1000); // Suspance ludica di 1 secondo
+        }
+    }
+\end{lstlisting}
+
+La chiusura di ogni intero flusso di turni termina invariabilmente nella routine \texttt{checkGameOver()}, capace di decretare non solo la fine spaziale degli Heap, ma di confrontare i contatori di mosse (\texttt{playerMoves} vs \texttt{computerMoves}) elargendo messaggi finali modulari in finestre testuali esclusive all'esito computazionale avvenuto.
+
+\section{Validazione e Collaudo Finale}
+La validazione operativa dell'intera struttura informatica è stata condotta attraverso un testing euristico continuo lungo tutto l'arco di sviluppo iterativo:
+\begin{itemize}
+    \item \textbf{Isolamento dell'Ambiente (Coupling Validation):} Avvalendosi primariamente dei Developer Tools del Browser (Inspect Element, Console), si è proceduto alla manipolazione fraudolenta di nodi dalla UI senza che il Modello cedesse, rafforzando quindi il \textit{Data Binding Unidirezionale}. Un nodo cancellato a mano tramite inspector di Chrome non comporta un crash del codice logico interno, permettendo al successore turn-tick visivo rigenerarne l'effigie.
+    \item \textbf{Scalabilità Termale (Stress Test):} Si è sperimentato l'inizializzazione del container logico incrementando esponenziamente i livelli visivi da 3 (7 nodi classici) fino a dimensioni maggiori per comprovare l'adattabilità della \textbf{formula trigonometrica d'angolo}. Il software e i conseguenti CSS responsivi incastonano i punti di ancoraggio vettoriali dinamicamente in ampiezze flessibili senza fuoriuscite perimetrali (Overflow Breakage).
+    \item \textbf{Solidità del Pattern Interlocutore (IA Testing):} Furono svolte prove cieche forzando parametri asincroni (e multiple iniezioni di click in sequenza logica scorretta durante \texttt{setTimeout}) dimostrando che la variabile lock \texttt{this.isComputerTurn} intercetta saldamente Race Conditions superficiali. 
+\end{itemize}
+
+I risultati della fase estensiva di collaudo consentono di ascrivere con orgoglio l'applicativo non come una mera tesi speculativa, bensì come un solido simulatore educativo, perfettamente performante, idoneo fin d'ora all'immersione gamificata per platee universitarie interessate alla genesi strutturale di algoritmi di ordinamento di alto livello.
+
+\section{Dettaglio del Feedback Visivo e Animazioni CSS}
+Un aspetto spesso sottovalutato nello sviluppo di interfacce didattiche è la qualità del feedback visivo. Apprendere un algoritmo complesso come l'Heap Sort richiede che lo studente non solo veda l'inizio e la fine di una mossa, ma ne percepisca intuitivamente lo svolgimento temporale. In questo contesto, l'implementazione delle animazioni non è un mero vezzo estetico, bensì un requisito funzionale cardinale.
+
+\subsection{Transizioni di Stato tramite CSS Variables}
+Al fine di garantire una palette di colori coerente e facilmente manutenibile, il progetto fa un uso estensivo delle \textbf{CSS Custom Properties} (Variabili CSS). Queste permettono di centralizzare le definizioni cromatiche nella \textit{pseudoclasse} \texttt{:root}.
+
+\begin{lstlisting}[language=CSS, breaklines=true, basicstyle=\footnotesize\ttfamily, frame=single, caption={Iniezione logica delle Variabili Cromatiche}, keywordstyle=\color{blue}]
+:root {
+    --bg-color: #f4f7f6;
+    --card-bg: #ffffff;
+    --primary-color: #3498db;
+    --node-bg: #ffffff;
+    --node-border: #3498db;
+    --node-selected: #f1c40f;
+    --node-highlight: #2ecc71;
+    --node-computer: #e74c3c;
+}
+\end{lstlisting}
+
+Quando l'utente seleziona un nodo, o quando l'avversario compie una mossa, il JavaScript non interviene mutando i singoli colori esadecimali \textit{inline}; si limita ad aggiungere o rimuovere classi semantiche (es. \texttt{.selected}, \texttt{.highlight}). Il foglio di stile reinterpreta automaticamente la gerarchia applicando i colori idonei e sfruttando le ombreggiature CSS3 (`box-shadow`) per ricreare effettivi tridimensionali di "sollevamento" dell'oggetto.
+
+\subsection{Interpolazione Cinematica (Cubic Bezier)}
+Il vero fulcro pedagogico visivo è rappresentato dai movimenti traslazionali. Come spiegato nella Sezione 4.6, il \texttt{Renderer} gestisce gli scambi riposizionando vettorialmente le coordinate assolute \texttt{top} e \texttt{left}.
+L'interpolazione spaziale (ovvero il calcolo dei frame intermedi tra la posizione A e la posizione B dello swap) è scaricata interamente sulla GPU (Hardware Acceleration) delegando il calcolo al motore CSS del browser:
+
+\begin{lstlisting}[language=CSS, breaklines=true, basicstyle=\footnotesize\ttfamily, frame=single, caption={Transizione fluida interpolata su curva di Bézier}, keywordstyle=\color{blue}]
+.node {
+    /* Proprietà di transizione per tutti i mutamenti di stato */
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+\end{lstlisting}
+
+La funzione \texttt{cubic-bezier(0.4, 0, 0.2, 1)} applica un accelerazione dinamica (\textit{Ease-out}): l'oggetto scatta velocemente all'inizio della mossa per catturare l'attenzione fisiologica dell'occhio, per poi decelerare morbidamente all'avvicinarsi allo slot di destinazione. Questa precisione micro-interattiva annulla il "salto" improvviso (Jump-cut) tipico delle UI abbozzate, permettendo al cervello dell'alunno di seguire inconsciamente il percorso del dato.
+
+Le animazioni d'estrazione, di contro, fanno affidamento al motore asincrono delle \texttt{@keyframes}, orchestrando ad esempio composti scalari (\texttt{popIn}):
+\begin{lstlisting}[language=CSS, breaklines=true, basicstyle=\footnotesize\ttfamily, frame=single, caption={Animazione Pop-In per i nodi ordinati}, keywordstyle=\color{blue}]
+.sorted-item {
+    animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
+\end{lstlisting}
+Tale animazione ratifica neurologicamente il completamento di una mossa riuscita (Reward psicologico).
+
+\section{Analisi della Complessità Computazionale}
+Un software di questa caratura impone considerazioni rigorose non solo a livello algoritmico, ma d'impatto prestazionale architetturale. L'ecosistema web (V8 Engine per Google Chrome, SpiderMonkey per Firefox) esegue il codice linearmente in Single-Threading. Occorre scongiurare a monte i fenomeni di colli di bottiglia (Bottlenecks) e i famigerati DOM-thrashing (l'ingorgo grafico dovuto a forzati ricalcoli continui dell'albero HTML).
+
+\subsection{Complessità dell'Algoritmo}
+A livello asintotico, la struttura e le strategie (\texttt{MinHeapStrategy} e \texttt{MaxHeapStrategy}) aderiscono rigidamente alla complessità temporale matematica universalmente dimostrata per l'Heap Sort:
+\begin{itemize}
+    \item \textbf{Build-Heap (Creazione):} L'inizializzazione randomizzata dei nodi per popolare l'array consta in un tempo limite teorico di $O(n)$, generato partendo dalle foglie e risalendo per induzione i rami genitoriali inferiori (Metodo di Floyd).
+    \item \textbf{Heapify (Manutenzione):} Ogni operazione atomica di scambio (sia da parte del giocatore che della Logica Avversaria) innesca un propulsivo ribilanciamento radiale. Essendo un albero binario completo, l'altezza massima non eccede in nessun caso $\lfloor \log_2 n \rfloor$. Di conseguenza, il \textit{Sift-Down} impiega sempre un tempo asintotico $O(\log n)$.
+    \item \textbf{Ordinamento Complessivo (Heap Sort globale):} Iterando la riparazione $\log n$ per ogni $n$ elemento estratto dalla radice decapitata, si ottiene un limite teorico assolto per l'equazione temporale $O(n \log n)$. 
+\end{itemize}
+
+\subsection{Complessità di Rendering e DOM Reflow}
+Sebbene il modello si computi in centesimi di millisecondo, il rendering bidimensionale richiede attenzioni speciali. Ogniqualvolta l'Avversario o il giocatore domandano una transizione (ad esempio uno Swap), il Presenter invoca la classe `Renderer`.
+Se il Renderer, in modo ingegneristicamente ingenuo, avesse ricalcolato la griglia distruggendo la RAM e iniettando centinaia di nuovi string-nodes nel DOM (\texttt{container.innerHTML = "..."}), la complessità applicativa sarebbe scaturita in un onerosissimo $O(n)$ per OGNI animazione, bloccando visibilmente l'FPS (Frames Per Second) a valori infimi e generando sfarfallio.
+
+Il design architetturale \textbf{Stateful} (spiegato a fondo in Sez. 4.6), adottando update \textit{differenziali} tramite manipolazione mirata degli offset in CSS puramente traslazionale, abbassa empiricamente il costo dell'operatore DOM a $O(1)$ per singoli swap (dovendo gestire matematicamente un massimo di due nodi coinvolti geometricamente su schermo alla volta), lasciando la rimanente potenza di calcolo della scheda video disponibile per la smussatura dei frame (Target visivo 60/120 FPS costanti).
+
+Ciò convalida l'altissima scalabilità globale della stesura: è empiricamente possibile, grazie a questi accorgimenti uniti all'hardware modernamente disponibile (device mobili inclusi), giocare sfide computazionali con profondità di \textit{Tree Depth} spropositate rispetto ai classici limiti educativi, preservando integrità strutturale asintotica ed estetica vettoriale.
+
+\section{Responsività Multi-Dispositivo e Accessibilità}
+La progettazione di un "Serious Game" a fondamento interamente web obbliga il team di sviluppo a misurarsi sin dall'inizio con un limite fisico non indifferente: la frammentazione degli schermi (\textit{Screen Fragmentation}). Le aule informatiche degli istituti scolastici presentano spesso monitor con risoluzioni e factor ratio (16:9, 4:3, 21:9) eterogenei, per non parlare della possibile fruizione dell'apprendimento su Tablet o Smartphone (Dispositivi portatili).
+
+\subsection{Layout Adattivo tramite Modulo Flexbox}
+Al fine di garantire che la simulazione rimanga perfettamente intelligibile e giocabile su qualsivoglia tela, abbandonando l'uso di vetusti posizionamenti assoluti (eccetto che per i nodi stessi), l'impianto architetturale primario si erge sul Modello \textbf{CSS Flexible Box Layout (Flexbox)}.
+
+Le due arene (La zona del Giocatore e la zona della Macchina) sono incapsulate in due container che si dividono simmetricamente lo spazio orizzontale su Desktop:
+\begin{lstlisting}[language=CSS, breaklines=true, basicstyle=\footnotesize\ttfamily, frame=single, caption={Divisione simmetrica desktop delle aree di gioco}, keywordstyle=\color{blue}]
+.game-board {
+    display: flex;
+    flex: 1;
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.player-zone, .computer-zone {
+    flex: 1; /* Ciascuna zona occupa il 50% matematico */
+    display: flex;
+    flex-direction: column;
+}
+\end{lstlisting}
+
+\subsection{Media Queries per l'Esperienza Mobile}
+Quando il Viewport si restringe sotto una determinata soglia critica (es. 768px in larghezza), impilare due alberi binari uno accanto all'altro genererebbe una restrizione spaziale incompatibile con la formula matematica generatrice dei rami (\texttt{sliceWidth}). Per scongiurare compenetrazioni, il foglio CSS intercetta i dispositivi ristretti (Media Queries) trasformando vettorialmente la griglia da Orizzontale a Verticale, rimpaginando dinamicamente e senza necessità di ricaricamenti JavaScript:
+
+\begin{lstlisting}[language=CSS, breaklines=true, basicstyle=\footnotesize\ttfamily, frame=single, caption={Rigenerazione layout in verticale (Mobile-Friendly)}, keywordstyle=\color{blue}]
+@media (max-width: 768px) {
+    .game-board {
+        flex-direction: column;
+    }
+    .central-controls {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+}
+\end{lstlisting}
+Questa adattabilità estende l'orizzonte didattico non solo come strumento per la Lim (Lavagna Interattiva Multimediale) di classe, ma come *homework* direttamente dal telefono dello studente.
+
+\section{Sviluppi Futuri e Manutenibilità Architetturale}
+Progettare in aderenza al paradigma SOLID (incluso il Single Responsibility Principle garantito dall'approccio MVP e dalle \textbf{Strategies}) assicura che il volume del codice scritto adempia alla funzione corrente e rimanga aperto a flessibili iterazioni future.
+
+\subsection{Intercambiabilità degli Algoritmi Algoritmici}
+Il presentatore (\texttt{GamePresenter.js}) orchestra ciclicamente "Scambi", "Input Utente" e "Validazioni Matematiche", delegando interamente al \texttt{Model} il come e perché la transizione topologica debba avvenire. 
+
+Dal punto di vista della manutenibilità, questo significa che lo scheletro frontend dell'applicazione Web non è limitato ontologicamente alla sola e unica dimostrazione dell'Heap Sort. Volendo, in una prospettiva di espansione scolastica successiva, risulterebbe possibile affiancare al file \texttt{Heap.js} nuovi agglomerati matematici (ad esempio, \texttt{QuickSortTree.js} o \texttt{BinarySearchTree.js}) conservando immutato oltre l'80\% dell'ecosistema visivo (Il motore \texttt{Renderer.js}, il sistema dei bottoni e delle transizioni CSS) ed istanziando al caricamento della route semplicemente un modello matematico piuttosto dell'altro.
+
+\subsection{Estensioni in Scenari Multiplayer Rete}
+La disconnessione tra Vista attiva e Decisioni Logiche rende l'Applicazione eccezionalmente recettiva qualora si volesse aggiungere una funzionalità di Web Socket in tempo reale (ad esempio via libreria \textit{Socket.IO}).
+Invece di chiamare \texttt{this.executeComputerExtraction()} ed invocare l'entità deterministica artificiale, il Presenter potrebbe unicamente emettere il JSON dell'avvenuto swap al Server Node.js centrale (Backend) e rimanere in fecondo ascolto del pacchetto risposta dallo Sfidante situato remotamente in rete su di un altro terminale, estendendo l'Heap Sort Challenge in un autentico Multiplayer sincrono su scala Internet.
+
+\chapter{Risultati}
+
+Questo capitolo raccoglie ed espone visivamente gli esiti finali dell'implementazione. Attraverso la schermata catturata direttamente dal simulatore web in esecuzione, viene dimostrata l'efficacia didattica e l'interattività del software progettato conformemente agli scopi educativi della Gamification.
+
+\section{Analisi dell'Interfaccia Interattiva}
+L'interfaccia principale del gioco mette a disposizione dell'utente tutti gli strumenti necessari per l'apprendimento dell'algoritmo Heap Sort. Dalla schermata si evincono in modo chiaro i controlli centrali, sviluppati per configurare in tempo reale il livello di difficoltà della sfida (profondità dell'albero binario e tipologia strategica dell'Heap). 
+
+Ai lati si stagliano le due arene simmetriche (La \textit{Player Zone} e la \textit{Computer Zone}) che offrono allo studente un feedback paritetico istantaneo rispetto alle mosse generate dall'intelligenza asincrona del sistema.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth,height=0.4\textheight,keepaspectratio]{Result_images/Result.png}
+    \caption{Panoramica Generale dell'Interfaccia Web Operativa e Risultati a schermo}
+    \label{fig:result_generale}
+\end{figure}
+
+\section{Configurazione e Personalizzazione}
+Un elemento fondamentale dell'applicativo è la capacità di adattarsi alle diverse esigenze didattiche attraverso un pannello di controllo dedicato. Come mostrato nella Figura \ref{fig:impostazioni}, l'utente può configurare parametri chiave prima di avviare la sfida.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth,height=0.35\textheight,keepaspectratio]{Result_images/impostazioni.png}
+    \caption{Pannello di Configurazione e Impostazioni del Gioco}
+    \label{fig:impostazioni}
+\end{figure}
+
+\section{Guida all'Utilizzo}
+Per agevolare l'approccio iniziale dell'utente alla sfida, l'applicativo integra una guida rapida interattiva. Come mostrato nelle Figure \ref{fig:howtoplay} e \ref{fig:howtoplay1}, queste schermate forniscono le direttive necessarie per comprendere le regole del gioco e le modalità di interazione con la struttura dati Heap.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth,height=0.35\textheight,keepaspectratio]{Result_images/howtoplay.png}
+    \caption{Prima parte della guida: Regole e obiettivo del gioco}
+    \label{fig:howtoplay}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth,height=0.35\textheight,keepaspectratio]{Result_images/howtoplay1.png}
+    \caption{Seconda parte della guida: Profondità}
+    \label{fig:howtoplay1}
+\end{figure}
+
+\section{Avvio della Sessione di Gioco e Analisi dell'Interfaccia}
+Una volta completata la configurazione iniziale attraverso il pannello centrale e consultata la guida interattiva, l'utente può avviare la sfida cliccando sull'icona di "Play". Questo momento segna la transizione critica dall'interfaccia di configurazione all'ambiente operativo di gioco. Come illustrato nella Figura \ref{fig:avviogioco}, l'interfaccia si trasforma per ospitare le strutture dati attive, organizzate secondo un layout simmetrico progettato per massimizzare la comprensione del confronto algoritmico.
+
+\subsection{Organizzazione Visiva della Schermata}
+L'interfaccia utente è stata concepita seguendo principi di ergonomia cognitiva, suddividendo lo spazio di lavoro in tre macro-aree funzionali che permettono un monitoraggio costante dell'avanzamento della sessione:
+
+\begin{itemize}
+    \item \textbf{Area Centrale di Controllo}: Posta esattamente al centro della visuale, questa colonna funge da fulcro dell'applicazione. Oltre a ospitare i selettori per la profondità dell'albero e la modalità di gioco (Min/Max Heap), presenta una serie di icone intuitive per la gestione del ciclo di vita della partita:
+    \begin{itemize}
+        \item \textit{Info}: Per richiamare in ogni momento la guida alle regole.
+        \item \textit{Play}: Per generare un nuovo set di dati e avviare la sfida.
+        \item \textit{Home}: Per navigare rapidamente verso le altre sezioni del portale didattico.
+        \item \textit{Reset}: Per rimescolare i nodi mantenendo le impostazioni correnti, utile in caso di stallo logico.
+    \end{itemize}
+    Un elemento testuale dinamico, il \textit{Feedback di Stato}, informa costantemente l'utente su di chi sia il turno attuale o se siano state violate delle proprietà dell'heap.
+
+    \item \textbf{Player Zone (Destra)}: Questa sezione, intitolata "Il Tuo Albero", rappresenta lo spazio d'azione diretto dell'utente. Qui l'albero binario viene renderizzato in tempo reale, con i nodi che appaiono come cerchi contenenti i valori numerici da ordinare. Sotto l'albero, una barra orizzontale rappresenta l'array di destinazione dove i numeri vengono gradualmente "estratti" e posizionati una volta che la proprietà dell'heap è stata soddisfatta per l'intero albero.
+
+    \item \textbf{Computer Zone (Sinistra)}: Speculare alla zona del giocatore, questa area mostra l'albero gestito dall'intelligenza artificiale. La sua funzione è puramente osservativa e comparativa: l'utente può vedere come il computer risolve lo stesso problema algoritmico in tempo reale, comprendendo visivamente le euristiche di ottimizzazione utilizzate dalla macchina.
+\end{itemize}
+
+\subsection{Interazione e Feedback Dinamico}
+L'esperienza d'uso si basa su un paradigma di interazione "point-and-click" estremamente semplificato ma rigoroso dal punto di vista logico. Per eseguire uno \textit{Swap} (scambio) tra due nodi, l'utente deve selezionare prima il nodo genitore e successivamente il nodo figlio (o viceversa). 
+
+Il sistema di feedback visivo gioca un ruolo fondamentale per guidare l'utente attraverso gli stati del gioco:
+\begin{itemize}
+    \item \textbf{Stato di Selezione}: Quando un utente clicca su un nodo, questo cambia colore (solitamente assumendo una tonalità più scura o un bordo evidenziato), indicando che il sistema è in attesa di un secondo clic per completare l'azione di scambio.
+    \item \textbf{Validazione della Posizione}: Se un nodo occupa una posizione corretta rispetto alla regola Min/Max Heap impostata (ovvero se tutti i suoi figli rispettano la gerarchia di valore), esso viene evidenziato con un gradiente verde brillante. Al contrario, se le proprietà sono violate, il nodo rimane nel suo stato neutro, segnalando implicitamente la necessità di un'ulteriore manipolazione.
+    \item \textbf{Contatore delle Mosse}: In alto sopra ogni arena, un contatore digitale traccia il numero di scambi effettuati. Questo introduce un elemento di \textit{Gamification}: l'obiettivo non è solo risolvere l'algoritmo, ma farlo con il minor numero di mosse possibile, cercando di eguagliare o superare l'efficienza della CPU.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth,height=0.4\textheight,keepaspectratio]{Result_images/avviogioco.png}
+    \caption{Layout operativo della sessione di gioco attiva, con evidenza del sistema di feedback visivo sui nodi.}
+    \label{fig:avviogioco}
+\end{figure}
+
+\subsection{Flusso d'Uso Tipico}
+Il percorso dell'utente all'interno della sessione di gioco può essere riassunto nei seguenti passaggi operativi:
+\begin{enumerate}
+    \item \textbf{Inizializzazione}: L'utente preme "Play". Gli alberi vengono popolati con numeri casuali non duplicati.
+    \item \textbf{Analisi Visiva}: Lo studente deve scansionare l'albero partendo dai livelli più bassi (le foglie) per risalire verso la radice, individuando le violazioni della proprietà Heap.
+    \item \textbf{Risoluzione Locale}: Attraverso clic successivi, i nodi vengono scambiati. Ad ogni scambio corretto, il sistema colora di verde i nodi che ora soddisfano la proprietà.
+    \item \textbf{Estrazione}: Una volta che la radice contiene il valore massimo (o minimo), questa viene "estratta" e spostata nell'array inferiore, riducendo la dimensione dell'albero e avviando un nuovo ciclo di ordinamento.
+\end{enumerate}
+Questo ciclo si ripete fino a quando l'albero è vuoto e l'array sottostante è completamente ordinato, momento in cui appare un messaggio di vittoria che riassume le performance ottenute.
+
+La combinazione di questi elementi trasforma una spiegazione astratta in un'esperienza multisensoriale, dove il colore, il movimento e la competizione cooperano per fissare nella memoria dello studente i meccanismi profondi dell'Heap Sort.
+
+
+\section{Esito della Partita e Feedback di Fine Sessione}
+Il ciclo di apprendimento si conclude con la visualizzazione di un feedback esplicito basato sulle performance dell'utente rispetto a quelle del computer. Come mostrato nelle Figure \ref{fig:vinto} e \ref{fig:perso}, il sistema utilizza dei "modali" (finestre sovrapposte) per comunicare il risultato finale in modo chiaro e coinvolgente.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth,height=0.35\textheight,keepaspectratio]{Result_images/vinto.png}
+    \caption{Messaggio di vittoria visualizzato quando l'utente completa l'ordinamento per primo.}
+    \label{fig:vinto}
+\end{figure}
+
+Il messaggio di vittoria (Figura \ref{fig:vinto}) non si limita a dichiarare il successo, ma fornisce una gratificazione visiva che rinforza l'apprendimento positivo. Al contrario, in caso di sconfitta (Figura \ref{fig:perso}), il sistema incoraggia lo studente a riprovare, sottolineando che l'errore è parte integrante del processo di comprensione algoritmica.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth,height=0.35\textheight,keepaspectratio]{Result_images/perso.png}
+    \caption{Messaggio di sconfitta visualizzato in caso di performance superiore della CPU.}
+    \label{fig:perso}
+\end{figure}
+
+\chapter*{Conclusioni}
+\addcontentsline{toc}{chapter}{Conclusioni}
+
+Il percorso di sviluppo intrapreso in questo progetto di tesi ha permesso di trasformare una sfida puramente algoritmica in un'applicazione didattica interattiva moderna e performante. L'obiettivo primario — ovvero l'abbattimento della barriera di astrazione tipica dello studio delle strutture dati lineari e non lineari — è stato perseguito attraverso la fusione di rigore logico, architettura software solida e principi di gamification.
+
+\section*{Riflessioni Tecniche e Architetturali}
+Dal punto di vista dell'implementazione, la scelta di adottare il pattern \textbf{Model-View-Presenter (MVP)} si è rivelata determinante. Questa separazione netta delle responsabilità ha garantito che la logica matematica dell'Heap Sort (il Model) rimanesse incontaminata dalle necessità di visualizzazione (la View), permettendo al Presenter di agire come un orchestratore fluido e facilmente manutenibile.
+
+L'utilizzo di tecnologie standard come \textbf{HTML5, CSS3 e Vanilla JavaScript (ES6)}, senza l'ausilio di framework esterni pesanti, ha dimostrato come sia possibile ottenere una manipolazione del DOM ad alta efficienza e una reattività visiva eccellente anche per strutture dati complesse come i grafi bidimensionali. La gestione manuale delle transizioni e delle posizioni assolute dei nodi tramite coordinate polari e cartosiane ha conferito al software un carattere distintivo di "leggerezza" e velocità di caricamento, critiche in contesti educativi online.
+
+\section*{L'Approccio Pedagogico: Gamification e Visualizzazione}
+L'integrazione di elementi ludici ha trasformato l'apprendimento in un'esperienza competitiva e coinvolgente. La possibilità di sfidare un'intelligenza artificiale asincrona non solo stimola l'interesse dello studente, ma offre un termine di paragone oggettivo sull'efficienza delle proprie scelte algoritmiche. Il sistema di feedback visivo basato sul colore (verde per la correttezza, evidenziazione per la selezione) agisce come un tutor silenzioso che guida l'utente verso la risoluzione corretta del problema, riducendo la frustrazione derivante dall'errore cieco.
+
+L'esperienza ha confermato che la rappresentazione grafica dinamica di un array sotto forma di albero binario permette di interiorizzare i concetti di "parent-child relationship" in modo quasi intuitivo, rendendo immediata la comprensione di operazioni complesse come lo \textit{Sift-Up} e lo \textit{Sift-Down}.
+
+\section*{Traguardi Raggiunti e Competenze Acquisite}
+Lo sviluppo di questo applicativo ha rappresentato una sfida significativa non solo tecnica, ma anche metodologica. È stato necessario trovare un equilibrio costante tra la precisione matematica richiesta dall'algoritmo e l'estetica necessaria per un'interfaccia utente premium. Il superamento di ostacoli quali la prevenzione dei duplicati nella generazione dei nodi, la gestione dei turni asincroni e la sincronizzazione millimetrica dei grafi rispetto all'array logico ha contribuito a una crescita professionale profonda nell'ambito del web development moderno.
+
+Il progetto finale si presenta quindi come uno strumento maturo, capace di coprire l'intero spettro didattico: dalla teoria pura alla pratica interattiva, fino alla valutazione delle performance.
+
+\section*{Sviluppi Futuri e Prospettive}
+Sebbene l'attuale versione del software sia completa e funzionale, il framework architetturale creato è intrinsecamente scalabile. In futuro, il sistema potrebbe essere esteso per includere:
+\begin{itemize}
+    \item \textbf{Nuovi Algoritmi}: L'implementazione di Quick Sort o Merge Sort seguendo la stessa logica visiva.
+    \item \textbf{Multiplayer Online}: Una vera sfida 1vs1 tra utenti connessi in rete tramite WebSocket.
+    \item \textbf{Analisi Statistica Avanzata}: Un pannello per il docente capace di tracciare i tempi medi di risoluzione e le difficoltà riscontrate dagli studenti.
+    \item \textbf{Supporto Mobile}: Un'ottimizzazione dell'interfaccia per il completamento delle sfide su dispositivi touch.
+\end{itemize}
+
+In conclusione, questo lavoro dimostra che l'informatica educativa può e deve evolversi verso strumenti che non solo spiegano "come" funziona un sistema, ma permettono di "vivere" la logica che lo sottende. L'informatica è, per sua natura, una disciplina dinamica; è giusto che anche il modo di insegnarla rifletta questa vitalità, ponendo lo studente al centro di un ecosistema digitale interattivo, stimolante e, soprattutto, gratificante.
+
+\chapter*{Bibliografia}
+\addcontentsline{toc}{chapter}{Bibliografia}
+
 \end{document}
-
-
