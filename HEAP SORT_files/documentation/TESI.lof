@@ -1,0 +1,27 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagramma dei Casi d'Uso per UC01 - Selezione Tipo Heap}}{16}{figure.caption.5}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Diagramma dei Casi d'Uso per UC02 - Inizio Partita}}{18}{figure.caption.6}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Diagramma dei Casi d'Uso per UC03 - Swap Nodi}}{19}{figure.caption.7}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Diagramma dei Casi d'Uso per UC04 - Estrazione Radice}}{21}{figure.caption.8}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Diagramma dei Casi d'Uso per UC05 - Reset Gioco}}{22}{figure.caption.9}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Diagramma dei Casi d'Uso per UC06 - Vittoria/Sconfitta}}{23}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Diagramma delle Attivit - Flusso di Gioco}}{25}{figure.caption.11}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Diagramma delle Classi - Architettura MVP}}{27}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Diagramma di Sequenza - Scenario: Selezione e Swap Utente}}{33}{figure.caption.21}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Diagramma di Sequenza - Comunicazione tra Classi (Turno Computer)}}{36}{figure.caption.27}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Diagramma dei Componenti - Architettura Three-Tier}}{40}{figure.caption.35}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Diagramma Architetturale a Livelli (Layered Architecture)}}{42}{figure.caption.39}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Struttura del File System del Progetto}}{42}{figure.caption.40}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Panoramica Generale dell'Interfaccia Web Operativa e Risultati a schermo}}{62}{figure.caption.41}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Pannello di Configurazione e Impostazioni del Gioco}}{62}{figure.caption.42}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Prima parte della guida: Regole e obiettivo del gioco}}{63}{figure.caption.43}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Seconda parte della guida: Profondit }}{63}{figure.caption.44}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Layout operativo della sessione di gioco attiva, con evidenza del sistema di feedback visivo sui nodi.}}{66}{figure.caption.45}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Messaggio di vittoria visualizzato quando l'utente completa l'ordinamento per primo.}}{67}{figure.caption.46}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Messaggio di sconfitta visualizzato in caso di performance superiore della CPU.}}{68}{figure.caption.47}%

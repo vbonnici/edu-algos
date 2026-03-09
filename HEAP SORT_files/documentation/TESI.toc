@@ -1,0 +1,113 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {chapter}{Elenco delle figure}{v}{section*.2}%
+\contentsline {chapter}{Introduzione}{1}{chapter*.4}%
+\contentsline {chapter}{\numberline {1}Orientamento al Pensiero Computazionale}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Cos' il pensiero computazionale}{3}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}I quattro pilastri del Pensiero Computazionale}{3}{subsection.1.1.1}%
+\contentsline {section}{\numberline {1.2}Perché insegnarlo: obiettivi educativi e formativi}{4}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Metodologie didattiche per l'orientamento}{4}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Programmazione visuale e attività unplugged}{5}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Learning-by-doing e problem solving}{5}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Gamification e Ambienti Interattivi}{5}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}Game-based learning (GBL)}{5}{subsection.1.3.4}%
+\contentsline {section}{\numberline {1.4}L'algoritmo Heap Sort come strumento didattico}{6}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Fondamenti teorici dell'Heap}{6}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Analisi dell'Algoritmo}{6}{subsection.1.4.2}%
+\contentsline {subsubsection}{\numberline {1.4.2.1}Fase 1: Build-Max-Heap (Costruzione)}{6}{subsubsection.1.4.2.1}%
+\contentsline {subsubsection}{\numberline {1.4.2.2}Fase 2: Sorting (Ordinamento)}{7}{subsubsection.1.4.2.2}%
+\contentsline {subsection}{\numberline {1.4.3}Analisi della Complessit (Big O Notation)}{7}{subsection.1.4.3}%
+\contentsline {chapter}{\numberline {2}Descrizione e Analisi del Progetto}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Obiettivi del Progetto di Tirocinio}{9}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}1. Obiettivi Didattici e Cognitivi}{9}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}2. Obiettivi Tecnici e Architetturali}{10}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}3. Obiettivi di User Experience (Gamification)}{10}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Descrizione Dettagliata dell'Applicazione}{11}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Interfaccia Utente (UI) e Layout}{11}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Flusso di Interazione (User Journey)}{11}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Strumenti e Tecnologie: Analisi Tecnica}{12}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}HTML5: Semantica e Accessibilit }{12}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}CSS3 Avanzato: Grid, Flexbox e Variabili}{12}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}JavaScript (ES6+) Moderno}{13}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}Analisi Approfondita dei Requisiti}{13}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Requisiti Funzionali (RF)}{13}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Requisiti Non Funzionali (RNF)}{14}{subsection.2.4.2}%
+\contentsline {chapter}{\numberline {3}Progettazione tramite Diagrammi UML}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Diagrammi dei Casi d'Uso}{15}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Casi d'Uso Principali}{15}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Dettaglio Casi d'Uso}{16}{subsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.2.1}UC01 - Selezione Tipo Heap}{16}{subsubsection.3.1.2.1}%
+\contentsline {subsubsection}{\numberline {3.1.2.2}UC02 - Inizio Partita}{18}{subsubsection.3.1.2.2}%
+\contentsline {subsubsection}{\numberline {3.1.2.3}UC03 - Swap Nodi}{19}{subsubsection.3.1.2.3}%
+\contentsline {subsubsection}{\numberline {3.1.2.4}UC04 - Estrazione Radice}{21}{subsubsection.3.1.2.4}%
+\contentsline {subsubsection}{\numberline {3.1.2.5}UC05 - Reset Gioco}{22}{subsubsection.3.1.2.5}%
+\contentsline {subsubsection}{\numberline {3.1.2.6}UC06 - Vittoria/Sconfitta}{23}{subsubsection.3.1.2.6}%
+\contentsline {subsection}{\numberline {3.1.3}Matrice di Tracciabilit }{24}{subsection.3.1.3}%
+\contentsline {section}{\numberline {3.2}Diagramma delle Attivit }{25}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Attivit Principali}{25}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Dettaglio del Flusso Principale (Workflow)}{26}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Diagramma delle Classi}{27}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}GamePresenter (Presenter)}{28}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Heap (Model)}{29}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Renderer (View)}{30}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Computer}{31}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Node}{31}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.3.6}Interfaccia Strategy}{31}{subsection.3.3.6}%
+\contentsline {section}{\numberline {3.4}Diagramma di Sequenza}{32}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Sequenza Principale del Gioco}{33}{subsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.1.1}Gestione degli Eventi e Selezione (View -> Presenter)}{34}{subsubsection.3.4.1.1}%
+\contentsline {subsubsection}{\numberline {3.4.1.2}Validazione Logica (Presenter -> Model)}{34}{subsubsection.3.4.1.2}%
+\contentsline {subsubsection}{\numberline {3.4.1.3}Manipolazione dei Dati e Coerenza (Model)}{35}{subsubsection.3.4.1.3}%
+\contentsline {subsubsection}{\numberline {3.4.1.4}Riconciliazione della Vista (Presenter -> View)}{35}{subsubsection.3.4.1.4}%
+\contentsline {subsubsection}{\numberline {3.4.1.5}Verifica Post-Mossa e Automazione (Chain Reaction)}{35}{subsubsection.3.4.1.5}%
+\contentsline {subsection}{\numberline {3.4.2}Interazione tra Classi - Turno Computer}{36}{subsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.2.1}Orchestrazione Temporale e Infinesco (Timer -> Presenter)}{37}{subsubsection.3.4.2.1}%
+\contentsline {subsubsection}{\numberline {3.4.2.2}Analisi Strategica e Scansione del Modello (Computer -> Heap)}{37}{subsubsection.3.4.2.2}%
+\contentsline {subsubsection}{\numberline {3.4.2.3}Il Pattern Strategy in Azione (Model -> Strategy)}{37}{subsubsection.3.4.2.3}%
+\contentsline {subsubsection}{\numberline {3.4.2.4}Esecuzione della Mutazione e Integrit del Modello (Model Execution)}{38}{subsubsection.3.4.2.4}%
+\contentsline {subsubsection}{\numberline {3.4.2.5}Feedback Loop e Ritorno del Controllo (Computer -> Presenter)}{38}{subsubsection.3.4.2.5}%
+\contentsline {subsubsection}{\numberline {3.4.2.6}Sincronizzazione della Vista e Rendering Differenziale (View Phase)}{39}{subsubsection.3.4.2.6}%
+\contentsline {subsubsection}{\numberline {3.4.2.7}Considerazioni Finali sul Flusso Computer}{39}{subsubsection.3.4.2.7}%
+\contentsline {section}{\numberline {3.5}Diagramma dei Componenti}{39}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Presentation Layer}{40}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Business Logic Layer}{41}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Data Layer}{41}{subsection.3.5.3}%
+\contentsline {section}{\numberline {3.6}Architettura del Progetto}{42}{section.3.6}%
+\contentsline {chapter}{\numberline {4}Implementazione e Validazione}{44}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduzione alle Scelte Tecnologiche}{44}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Architettura Model-View-Presenter (MVP)}{45}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Distinzione dal framework MVC (Model-View-Controller)}{45}{subsection.4.2.1}%
+\contentsline {section}{\numberline {4.3}Struttura dei Dati e Logica di Dominio (Model Layer)}{46}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Incapsulamento dello Stato: \texttt {Node.js}}{46}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Astrazione Array-Albero: \texttt {Heap.js}}{47}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Comportamento Dinamico: Il Pattern Strategy}{48}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Motore Decisionale e Logica dell'Avversario}{49}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Gestione della Rappresentazione Visiva (View Layer)}{50}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Aggiornamento Differenziale nel Render}{51}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Trigonometria e Calcolo dei rami (Edges)}{51}{subsection.4.6.2}%
+\contentsline {section}{\numberline {4.7}Orchestrazione e Ciclo di Gioco (Presenter Layer)}{52}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Validazione e Collaudo Finale}{53}{section.4.8}%
+\contentsline {section}{\numberline {4.9}Dettaglio del Feedback Visivo e Animazioni CSS}{54}{section.4.9}%
+\contentsline {subsection}{\numberline {4.9.1}Transizioni di Stato tramite CSS Variables}{55}{subsection.4.9.1}%
+\contentsline {subsection}{\numberline {4.9.2}Interpolazione Cinematica (Cubic Bezier)}{55}{subsection.4.9.2}%
+\contentsline {section}{\numberline {4.10}Analisi della Complessit Computazionale}{56}{section.4.10}%
+\contentsline {subsection}{\numberline {4.10.1}Complessit dell'Algoritmo}{56}{subsection.4.10.1}%
+\contentsline {subsection}{\numberline {4.10.2}Complessit di Rendering e DOM Reflow}{57}{subsection.4.10.2}%
+\contentsline {section}{\numberline {4.11}Responsivit Multi-Dispositivo e Accessibilit }{57}{section.4.11}%
+\contentsline {subsection}{\numberline {4.11.1}Layout Adattivo tramite Modulo Flexbox}{58}{subsection.4.11.1}%
+\contentsline {subsection}{\numberline {4.11.2}Media Queries per l'Esperienza Mobile}{58}{subsection.4.11.2}%
+\contentsline {section}{\numberline {4.12}Sviluppi Futuri e Manutenibilit Architetturale}{59}{section.4.12}%
+\contentsline {subsection}{\numberline {4.12.1}Intercambiabilit degli Algoritmi Algoritmici}{59}{subsection.4.12.1}%
+\contentsline {subsection}{\numberline {4.12.2}Estensioni in Scenari Multiplayer Rete}{59}{subsection.4.12.2}%
+\contentsline {chapter}{\numberline {5}Risultati}{61}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Analisi dell'Interfaccia Interattiva}{61}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Configurazione e Personalizzazione}{62}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Guida all'Utilizzo}{63}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Avvio della Sessione di Gioco e Analisi dell'Interfaccia}{64}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Organizzazione Visiva della Schermata}{64}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Interazione e Feedback Dinamico}{65}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Flusso d'Uso Tipico}{66}{subsection.5.4.3}%
+\contentsline {section}{\numberline {5.5}Esito della Partita e Feedback di Fine Sessione}{67}{section.5.5}%
+\contentsline {chapter}{Conclusioni}{69}{chapter*.48}%
+\contentsline {chapter}{Bibliografia}{72}{section*.53}%
+\contentsline {chapter}{Ringraziamenti}{73}{chapter*.55}%

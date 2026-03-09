@@ -1,0 +1,55 @@
+\begin{thebibliography}{}
+
+\bibitem[Bell et~al., 2015]{csunplugged}
+Bell, T., Witten, I.~H., and Fellows, M. (2015).
+\newblock {\em Computer Science Unplugged: An Enriching Program of Activities
+  for Primary-aged Children}.
+
+\bibitem[Cormen et~al., 2009]{cormen2009}
+Cormen, T.~H., Leiserson, C.~E., Rivest, R.~L., and Stein, C. (2009).
+\newblock {\em Introduction to Algorithms}.
+\newblock MIT Press, 3rd edition.
+
+\bibitem[Deterding et~al., 2011]{deterding2011}
+Deterding, S., Dixon, D., Khaled, R., and Nacke, L. (2011).
+\newblock From game design elements to gamefulness: Defining "gamification".
+\newblock In {\em Proceedings of the 15th International Academic MindTrek
+  Conference}.
+
+\bibitem[Duckett, 2011]{duckett2011}
+Duckett, J. (2011).
+\newblock {\em HTML and CSS: Design and Build Websites}.
+\newblock Wiley.
+
+\bibitem[Flanagan, 2020]{flanagan2020}
+Flanagan, D. (2020).
+\newblock {\em JavaScript: The Definitive Guide}.
+\newblock O'Reilly Media, 7th edition.
+
+\bibitem[{Mozilla Developer Network}, 2024]{mdn}
+{Mozilla Developer Network} (2024).
+\newblock Web technology for developers.
+\newblock \url{https://developer.mozilla.org}.
+
+\bibitem[Nielsen, 1994]{nielsen1994}
+Nielsen, J. (1994).
+\newblock {\em Usability Engineering}.
+\newblock Morgan Kaufmann.
+
+\bibitem[Papert, 1980]{papert1980}
+Papert, S. (1980).
+\newblock {\em Mindstorms: Children, Computers, and Powerful Ideas}.
+\newblock Basic Books.
+
+\bibitem[Potel, 1996]{mvp}
+Potel, M. (1996).
+\newblock Mvp: Model-view-presenter: The taligent programming model for c++ and
+  java.
+\newblock Technical report, Taligent Inc.
+
+\bibitem[Wing, 2006]{wing2006}
+Wing, J.~M. (2006).
+\newblock Computational thinking.
+\newblock {\em Communications of the ACM}, 49(3):33--35.
+
+\end{thebibliography}

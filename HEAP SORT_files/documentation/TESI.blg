@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99e (TeX Live 2026)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: TESI.aux
+The style file: apalike.bst
+Database file #1: Bibliografia.bib
+Warning--empty publisher in csunplugged
+You've used 10 entries,
+            1935 wiz_defined-function locations,
+            523 strings with 4747 characters,
+and the built_in function-call counts, 3093 in all, are:
+= -- 288
+> -- 113
+< -- 7
++ -- 36
+- -- 36
+* -- 225
+:= -- 576
+add.period$ -- 29
+call.type$ -- 10
+change.case$ -- 65
+chr.to.int$ -- 10
+cite$ -- 11
+duplicate$ -- 137
+empty$ -- 229
+format.name$ -- 46
+if$ -- 593
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 14
+newline$ -- 52
+num.names$ -- 30
+pop$ -- 78
+preamble$ -- 1
+purify$ -- 68
+quote$ -- 0
+skip$ -- 96
+stack$ -- 0
+substring$ -- 139
+swap$ -- 8
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 48
+warning$ -- 1
+while$ -- 22
+width$ -- 0
+write$ -- 124
+(There was 1 warning)

@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.4)  7 MAR 2026 15:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.4)  9 MAR 2026 12:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**introduzione.tex
-(./introduzione.tex
+**TESI.tex
+(./TESI.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (./theme/uniprthesis.cls
@@ -278,7 +278,7 @@ port
 (/usr/local/texlive/2026/texmf-dist/tex/latex/pdfx/8bit.def
 File: 8bit.def 2008/03/30 v1.1d Input encoding file
 )
-** pdfx: No file introduzione.xmpdata . Metadata will be incomplete!
+** pdfx: No file TESI.xmpdata . Metadata will be incomplete!
 <<sRGB.icc>> (/usr/local/texlive/2026/texmf-dist/tex/latex/pdfx/8bit.def
 File: 8bit.def 2008/03/30 v1.1d Input encoding file
 )
@@ -1453,27 +1453,27 @@ File: pgflibraryarrows.meta.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count374
 )
-(./introduzione.aux)
-\openout1 = `introduzione.aux'.
+(./TESI.aux)
+\openout1 = `TESI.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
 
 (/usr/local/texlive/2026/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1497,11 +1497,11 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 29.
+Package hyperref Info: Link coloring OFF on input line 58.
 
-(./introduzione.out) (./introduzione.out)
+(./TESI.out) (./TESI.out)
 \@outlinefile=\write5
-\openout5 = `introduzione.out'.
+\openout5 = `TESI.out'.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
@@ -1542,8 +1542,8 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \it@ocap on input line 29.
-LaTeX Info: Redefining \it@ccap on input line 29.
+LaTeX Info: Redefining \it@ocap on input line 58.
+LaTeX Info: Redefining \it@ccap on input line 58.
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: pdftex
 * paper: <default>
@@ -1577,10 +1577,10 @@ LaTeX Info: Redefining \it@ccap on input line 29.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<theme/logo_unipr.pdf, id=449, 156.79077pt x 142.01357pt>
+<theme/logo_unipr.pdf, id=453, 156.79077pt x 142.01357pt>
 File: theme/logo_unipr.pdf Graphic file (type pdf)
 <use theme/logo_unipr.pdf>
-Package pdftex.def Info: theme/logo_unipr.pdf  used on input line 31.
+Package pdftex.def Info: theme/logo_unipr.pdf  used on input line 60.
 (pdftex.def)             Requested size: 172.78856pt x 156.49014pt.
 [1
 
@@ -1589,7 +1589,7 @@ Package pdftex.def Info: theme/logo_unipr.pdf  used on input line 31.
 ./theme/logo_unipr.pdf>] [2
 
 
-] (./introduzione.toc [1
+] (./TESI.toc [1
 
 
 ] [2]
@@ -1600,20 +1600,21 @@ Overfull \hbox (2.04044pt too wide) in paragraph at lines 79--79
 
 [3])
 \tf@toc=\write6
-\openout6 = `introduzione.toc'.
+\openout6 = `TESI.toc'.
 
- [4] (./introduzione.lof)
+ [4] (./TESI.lof)
 \tf@lof=\write7
-\openout7 = `introduzione.lof'.
+\openout7 = `TESI.lof'.
 
  [5
+
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.64 
+l.94 
       [1
 
 ]
@@ -1621,906 +1622,386 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.81 \newpage
-              [2]
+l.111 \newpage
+               [2]
 Capitolo 1.
 [3
 
 ] [4{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.e
-nc}] [5]
-Overfull \hbox (1.56175pt too wide) in paragraph at lines 149--150
-[]\T1/cmr/bx/n/12 Max-Heap\T1/cmr/m/n/12 : Ogni no-do � mag-gio-re o ugua-le ai
- suoi fi-gli ($\OML/cmm/m/it/12 A\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 parent\OT1/c
-mr/m/n/12 (\OML/cmm/m/it/12 i\OT1/cmr/m/n/12 )] \OMS/cmsy/m/n/12 ^^U
- []
-
-[6]
+nc}] [5] [6]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 185.
+put line 215.
  [7] [8]
 Capitolo 2.
 [9
 
 ] [10] [11] [12]
-Overfull \hbox (54.0135pt too wide) in paragraph at lines 315--316
+Overfull \hbox (54.0135pt too wide) in paragraph at lines 345--346
 []\T1/cmr/bx/n/12 CSS Va-ria-bles (Cu-stom Pro-per-ties)\T1/cmr/m/n/12 : De-fi-
 ni-re co-lo-ri co-me \T1/cmtt/m/n/12 --primary-color:
  []
 
 
-Overfull \hbox (8.14008pt too wide) in paragraph at lines 316--317
+Overfull \hbox (8.14008pt too wide) in paragraph at lines 346--347
 []\T1/cmr/bx/n/12 Hardware Ac-ce-le-ra-tion\T1/cmr/m/n/12 : Per le ani-ma-zio-n
 i di mo-vi-men-to (\T1/cmtt/m/n/12 transform:
  []
 
-[13] [14] [15]
+[13] [14]
 Capitolo 3.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [16
+ [15
 
 ]
-Underfull \hbox (badness 5696) in paragraph at lines 453--453
+Underfull \hbox (badness 5696) in paragraph at lines 483--483
 []\T1/cmr/m/n/12 L'area di gio-co vie-ne re-set-ta-ta per
  []
 
 
-Underfull \hbox (badness 6220) in paragraph at lines 453--453
-[]\T1/cmr/m/n/12 Il feed-back vi-si-vo del-la mo-da-li-t� �
- []
-
-
-Underfull \hbox (badness 1874) in paragraph at lines 453--453
+Underfull \hbox (badness 1874) in paragraph at lines 483--483
 []\T1/cmr/m/n/12 Il si-ste-ma cat-tu-ra l'e-ven-to di cam-bio
  []
 
 
-ignored: Infinite glue shrinkage found in box being split [17]
+ignored: Infinite glue shrinkage found in box being split [16]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [18]
-Underfull \hbox (badness 2073) in paragraph at lines 523--523
+ [17]
+Underfull \hbox (badness 2073) in paragraph at lines 553--553
 []\T1/cmr/m/n/12 L'utente pre-me il pul-san-te "Start" o
  []
 
 
-ignored: Infinite glue shrinkage found in box being split [19]
-Underfull \hbox (badness 4048) in paragraph at lines 591--591
+ignored: Infinite glue shrinkage found in box being split [18]
+Underfull \hbox (badness 4048) in paragraph at lines 621--621
 []\T1/cmr/m/n/12 L'utente clic-ca nuo-va-men-te sul no-do
  []
 
 
-ignored: Infinite glue shrinkage found in box being split [20]
+ignored: Infinite glue shrinkage found in box being split [19]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [21]
-Underfull \hbox (badness 5460) in paragraph at lines 659--659
+ [20]
+Underfull \hbox (badness 5460) in paragraph at lines 689--689
 []\T1/cmr/m/n/12 La ra-di-ce vie-ne ri-mos-sa e spo-sta-ta
  []
 
 
-ignored: Infinite glue shrinkage found in box being split [22]
+ignored: Infinite glue shrinkage found in box being split [21]
 ignored: Infinite glue shrinkage fo
-und in box being split [23]
-Underfull \hbox (badness 2662) in paragraph at lines 783--783
+und in box being split [22]
+Underfull \hbox (badness 2662) in paragraph at lines 813--813
 []\T1/cmr/m/n/12 L'array di-ven-ta vuo-to (tut-ti ele-men-ti
  []
 
 
-ignored: Infinite glue shrinkage found in box being split [24]
+ignored: Infinite glue shrinkage found in box being split [23]
 Underfull \vbox (badness 2418) has occurred while \output is active []
 
- [25]
-<Diagrams/.ActivityDiagram.pdf, id=840, 324.7613pt x 311.13438pt>
-File: Diagrams/.ActivityDiagram.pdf Graphic file (type pdf)
-<use Diagrams/.ActivityDiagram.pdf>
-Package pdftex.def Info: Diagrams/.ActivityDiagram.pdf  used on input line 816.
-
+ [24]
+<Diagrams/ActivityDiagram_new.pdf, id=842, 324.7613pt x 311.13438pt>
+File: Diagrams/ActivityDiagram_new.pdf Graphic file (type pdf)
+<use Diagrams/ActivityDiagram_new.pdf>
+Package pdftex.def Info: Diagrams/ActivityDiagram_new.pdf  used on input line 8
+46.
 (pdftex.def)             Requested size: 312.00119pt x 298.91824pt.
 
-[26 <./Diagrams/.ActivityDiagram.pdf>] [27]
-<Diagrams/ClassDiagram.png, id=859, 934.49126pt x 756.8275pt>
+[25 <./Diagrams/ActivityDiagram_new.pdf>] [26]
+<Diagrams/ClassDiagram.png, id=861, 934.49126pt x 756.8275pt>
 File: Diagrams/ClassDiagram.png Graphic file (type png)
 <use Diagrams/ClassDiagram.png>
-Package pdftex.def Info: Diagrams/ClassDiagram.png  used on input line 860.
+Package pdftex.def Info: Diagrams/ClassDiagram.png  used on input line 890.
 (pdftex.def)             Requested size: 350.99762pt x 284.27155pt.
 
-Overfull \hbox (8.56085pt too wide) in paragraph at lines 865--866
+Overfull \hbox (8.56085pt too wide) in paragraph at lines 895--896
 \T1/cmr/m/n/12 den-zia l'a-do-zio-ne del pat-tern ar-chi-tet-to-na-le \T1/cmr/b
 x/n/12 Model-View-Presenter (MVP)
  []
 
-[28 <./Diagrams/ClassDiagram.png>]
+[27 <./Diagrams/ClassDiagram.png>]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 880.
- [29]
-Overfull \hbox (28.67262pt too wide) in paragraph at lines 895--896
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 910.
+ [28]
+Overfull \hbox (28.67262pt too wide) in paragraph at lines 925--926
 []\T1/cmtt/m/n/12 strategy\T1/cmr/m/n/12 : Ri-fe-ri-men-to al-l'i-stan-za del-l
 a stra-te-gia cor-ren-te (\T1/cmtt/m/n/12 MinHeapStrategy
  []
 
 
-Overfull \hbox (3.85498pt too wide) in paragraph at lines 901--902
+Overfull \hbox (3.85498pt too wide) in paragraph at lines 931--932
 []\T1/cmr/m/n/12 Popola l'heap con $\OML/cmm/m/it/12 N$ \T1/cmr/m/n/12 nu-me-ri
  in-te-ri uni-ci ge-ne-ra-ti pseudo-
  []
 
-[30]
-Overfull \hbox (6.46559pt too wide) in paragraph at lines 928--929
+[29]
+Overfull \hbox (6.46559pt too wide) in paragraph at lines 958--959
 \T1/cmr/m/n/12 un'ap-pli-ca-zio-ne edu-ca-ti-va, il com-pu-ter de-ve si-mu-la-r
 e un com-por-ta-men-to "com-
  []
 
-[31]
-Overfull \hbox (1.79865pt too wide) in paragraph at lines 949--950
+[30]
+Overfull \hbox (1.79865pt too wide) in paragraph at lines 979--980
 []\T1/cmr/bx/n/12 MinHeapStrategy\T1/cmr/m/n/12 : Im-ple-men-ta \T1/cmtt/m/n/12
  shouldSwap(a, b) \T1/cmr/m/n/12 re-sti-tuen-do \T1/cmtt/m/n/12 true
  []
 
 
-Overfull \hbox (5.55461pt too wide) in paragraph at lines 950--951
+Overfull \hbox (5.55461pt too wide) in paragraph at lines 980--981
 []\T1/cmr/bx/n/12 MaxHeapStrategy\T1/cmr/m/n/12 : In-ver-te la lo-gi-ca, re-sti
 -tuen-do \T1/cmtt/m/n/12 shouldSwap = true
  []
 
-[32]
-<Diagrams/sequenceDiagram1.png, id=895, 2055.68pt x 2055.68pt>
+[31]
+<Diagrams/sequenceDiagram1.png, id=897, 2055.68pt x 2055.68pt>
 File: Diagrams/sequenceDiagram1.png Graphic file (type png)
 <use Diagrams/sequenceDiagram1.png>
-Package pdftex.def Info: Diagrams/sequenceDiagram1.png  used on input line 969.
+Package pdftex.def Info: Diagrams/sequenceDiagram1.png  used on input line 999.
 
 (pdftex.def)             Requested size: 370.49881pt x 370.47694pt.
 
 Underfull \vbox (badness 2213) has occurred while \output is active []
 
- [33]
+ [32]
 Underfull \vbox (badness 6316) has occurred while \output is active []
 
- [34 <./Diagrams/sequenceDiagram1.png>]
-Overfull \hbox (96.68938pt too wide) in paragraph at lines 988--989
+ [33 <./Diagrams/sequenceDiagram1.png>]
+Overfull \hbox (96.68938pt too wide) in paragraph at lines 1018--1019
 []\T1/cmr/m/n/12 Il con-trol-lo vie-ne pas-sa-to al \T1/cmtt/m/n/12 GamePresent
 er \T1/cmr/m/n/12 tra-mi-te il me-to-do \T1/cmtt/m/n/12 handlePlayerClick(idxA)
 \T1/cmr/m/n/12 . 
  []
 
 
-Overfull \hbox (13.43456pt too wide) in paragraph at lines 1004--1005
-[]\T1/cmr/m/n/12 In un \T1/cmr/m/it/12 Min-Heap\T1/cmr/m/n/12 , se il fi-glio �
- mi-no-re del pa-dre ($\OML/cmm/m/it/12 A\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 chil
-d\OT1/cmr/m/n/12 ] \OML/cmm/m/it/12 < A\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 parent
+Overfull \hbox (17.89732pt too wide) in paragraph at lines 1033--1034
+[]\T1/cmr/m/n/12 In un \T1/cmr/m/it/12 Max-Heap\T1/cmr/m/n/12 , se il fi-glio m
+ag-gio-re del pa-dre ($\OML/cmm/m/it/12 A\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 chil
+d\OT1/cmr/m/n/12 ] \OML/cmm/m/it/12 > A\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 parent
 \OT1/cmr/m/n/12 ]$\T1/cmr/m/n/12 ),
  []
 
-[35]
-Overfull \hbox (3.53584pt too wide) in paragraph at lines 1026--1027
+
+Overfull \hbox (5.6031pt too wide) in paragraph at lines 1034--1035
+[]\T1/cmr/m/n/12 In un \T1/cmr/m/it/12 Min-Heap\T1/cmr/m/n/12 , se il fi-glio m
+i-no-re del pa-dre ($\OML/cmm/m/it/12 A\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 child\
+OT1/cmr/m/n/12 ] \OML/cmm/m/it/12 < A\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 parent\O
+T1/cmr/m/n/12 ]$\T1/cmr/m/n/12 ),
+ []
+
+[34]
+Overfull \hbox (3.53584pt too wide) in paragraph at lines 1056--1057
 []\T1/cmr/m/n/12 Viene ap-pli-ca-ta una tran-si-zio-ne CSS (\T1/cmtt/m/n/12 tra
 nsition: transform 0.5s\T1/cmr/m/n/12 ). 
  []
 
 
-Overfull \hbox (84.37587pt too wide) in paragraph at lines 1032--1034
+Overfull \hbox (84.37587pt too wide) in paragraph at lines 1062--1064
 \T1/cmr/m/n/12 Il dia-gram-ma ter-mi-na con una fa-se di ve-ri-fi-ca glo-ba-le 
 (\T1/cmtt/m/n/12 isRootValid \T1/cmr/m/n/12 e \T1/cmtt/m/n/12 checkAutoExtracti
 on\T1/cmr/m/n/12 ).
  []
 
-[36]
-<Diagrams/ClassCommunication.png, id=924, 818.05624pt x 603.25375pt>
+[35]
+<Diagrams/ClassCommunication.png, id=925, 818.05624pt x 603.25375pt>
 File: Diagrams/ClassCommunication.png Graphic file (type png)
 <use Diagrams/ClassCommunication.png>
 Package pdftex.def Info: Diagrams/ClassCommunication.png  used on input line 10
-50.
+80.
 (pdftex.def)             Requested size: 370.49881pt x 273.2198pt.
- [37 <./Diagrams/ClassCommunication.png>]
-Overfull \hbox (47.84921pt too wide) in paragraph at lines 1065--1066
+ [36 <./Diagrams/ClassCommunication.png>]
+Overfull \hbox (47.84921pt too wide) in paragraph at lines 1095--1096
 []\T1/cmr/bx/n/12 State Ma-na-ge-ment\T1/cmr/m/n/12 : Il Pre-sen-ter im-po-sta 
 in-ter-na-men-te il flag \T1/cmtt/m/n/12 isComputerTurn
  []
 
-[38]
-Overfull \hbox (11.13657pt too wide) in paragraph at lines 1101--1101
+[37]
+Overfull \hbox (11.13657pt too wide) in paragraph at lines 1131--1131
 []\T1/cmr/bx/n/12 Sincronizzazione del-la Vi-sta e Ren-de-ring Dif-fe-ren-zia-l
 e (View
  []
 
-[39]
-<Diagrams/ComponentDiagram.png, id=946, 590.205pt x 1225.57875pt>
+[38]
+<Diagrams/ComponentDiagram.png, id=948, 590.205pt x 1225.57875pt>
 File: Diagrams/ComponentDiagram.png Graphic file (type png)
 <use Diagrams/ComponentDiagram.png>
-Package pdftex.def Info: Diagrams/ComponentDiagram.png  used on input line 1125
+Package pdftex.def Info: Diagrams/ComponentDiagram.png  used on input line 1155
 .
 (pdftex.def)             Requested size: 171.056pt x 355.20303pt.
- [40] [41 <./Diagrams/ComponentDiagram.png>] [42]
-Overfull \hbox (13.91534pt too wide) in paragraph at lines 1235--1235
+ [39] [40 <./Diagrams/ComponentDiagram.png>] [41]
+Overfull \hbox (13.91534pt too wide) in paragraph at lines 1265--1265
  []\T1/cmr/bx/n/12 (Presentation) 
  []
 
-[43] [44]
+[42] [43]
 Capitolo 4.
-[45
+[44
 
 ]
-Overfull \hbox (4.72218pt too wide) in paragraph at lines 1305--1305
+Overfull \hbox (4.72218pt too wide) in paragraph at lines 1335--1335
 []\T1/cmr/bx/n/17.28 Architettura Model-View-Presenter (MVP) 
  []
 
 
-Overfull \hbox (54.60805pt too wide) in paragraph at lines 1308--1308
+Overfull \hbox (54.60805pt too wide) in paragraph at lines 1338--1338
 []\T1/cmr/bx/n/14.4 Distinzione dal fra-mework MVC (Model-View-Controller) 
  []
 
-[46]
-Overfull \hbox (4.94368pt too wide) in paragraph at lines 1322--1322
+[45]
+Overfull \hbox (4.94368pt too wide) in paragraph at lines 1352--1352
 []\T1/cmr/bx/n/17.28 Struttura dei Da-ti e Lo-gi-ca di Do-mi-nio (Mo-
  []
 
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1325.
-[47] (/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang2.sty
-File: lstlang2.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang3.sty
-File: lstlang3.sty 2025/11/14 1.11b listings language file
-)
-
-! Package Listings Error: Couldn't load requested language.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1335 ...t{Heap.js})}, keywordstyle=\color{blue}]
-                                                  
-The following languages weren't loadable:
-    ,javascript$
-This may cause errors in the sequel.
-
-
-! Package Listings Error: language javascript undefined.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1335 ...t{Heap.js})}, keywordstyle=\color{blue}]
-                                                  
-The language is not loadable. Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1355.
+[46]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 1335.
-[48]
-Overfull \hbox (2.8441pt too wide) in paragraph at lines 1365--1365
+nput line 1365.
+ [47]
+Overfull \hbox (2.8441pt too wide) in paragraph at lines 1395--1395
 []\T1/cmr/bx/n/17.28 Comportamento Di-na-mi-co: Il Pat-tern Stra-
  []
 
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang2.sty
-File: lstlang2.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang3.sty
-File: lstlang3.sty 2025/11/14 1.11b listings language file
-)
-
-! Package Listings Error: Couldn't load requested language.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1372 ...n Strategy)}, keywordstyle=\color{blue}]
-                                                  
-The following languages weren't loadable:
-    ,javascript$
-This may cause errors in the sequel.
-
-
-! Package Listings Error: language javascript undefined.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1372 ...n Strategy)}, keywordstyle=\color{blue}]
-                                                  
-The language is not loadable. Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[49]
-Overfull \hbox (29.07397pt too wide) in paragraph at lines 1402--1403
+[48]
+Overfull \hbox (29.07397pt too wide) in paragraph at lines 1432--1433
 \T1/cmr/m/n/12 zio-na-le glo-ba-le del-l'Heap in-ter-ro-ga esclu-si-va-men-te: 
 \T1/cmtt/m/n/12 this.strategy.isValid(...)
  []
 
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang2.sty
-File: lstlang2.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang3.sty
-File: lstlang3.sty 2025/11/14 1.11b listings language file
-)
-
-! Package Listings Error: Couldn't load requested language.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1410 ...mputer.js})}, keywordstyle=\color{blue}]
-                                                  
-The following languages weren't loadable:
-    ,javascript$
-This may cause errors in the sequel.
-
-
-! Package Listings Error: language javascript undefined.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1410 ...mputer.js})}, keywordstyle=\color{blue}]
-                                                  
-The language is not loadable. Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[50]
-
-! LaTeX Error: Invalid UTF-8 byte sequence (�\expandafter).
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1411         // Priorità 
-                            2: Migliorare la competitività.
-The document does not appear to be in UTF-8 encoding.
-Try adding \UseRawInputEncoding as the first line of the file
-or specify an encoding such as \usepackage [latin1]{inputenc}
-in the document preamble.
-Alternatively, save the file in UTF-8 using your editor or another tool
-
-
-! LaTeX Error: Invalid UTF-8 byte "A0.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1411         // Priorità 
-                            2: Migliorare la competitività.
-The document does not appear to be in UTF-8 encoding.
-Try adding \UseRawInputEncoding as the first line of the file
-or specify an encoding such as \usepackage [latin1]{inputenc}
-in the document preamble.
-Alternatively, save the file in UTF-8 using your editor or another tool
-
-
-! LaTeX Error: Invalid UTF-8 byte sequence (�\expandafter).
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1411 ...iorità 2: Migliorare la competitività.
-                                                  
-The document does not appear to be in UTF-8 encoding.
-Try adding \UseRawInputEncoding as the first line of the file
-or specify an encoding such as \usepackage [latin1]{inputenc}
-in the document preamble.
-Alternatively, save the file in UTF-8 using your editor or another tool
-
-
-! LaTeX Error: Invalid UTF-8 byte "A0.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1411 ...iorità 2: Migliorare la competitività.
-                                                  
-The document does not appear to be in UTF-8 encoding.
-Try adding \UseRawInputEncoding as the first line of the file
-or specify an encoding such as \usepackage [latin1]{inputenc}
-in the document preamble.
-Alternatively, save the file in UTF-8 using your editor or another tool
-
-
-! LaTeX Error: Invalid UTF-8 byte sequence (�\lst@FillFixed@).
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1428         // Se l'estremo globale non è 
-                                              già alla radice, esegui lo sw...
-
-The document does not appear to be in UTF-8 encoding.
-Try adding \UseRawInputEncoding as the first line of the file
-or specify an encoding such as \usepackage [latin1]{inputenc}
-in the document preamble.
-Alternatively, save the file in UTF-8 using your editor or another tool
-
-
-! LaTeX Error: Invalid UTF-8 byte "A8.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1428         // Se l'estremo globale non è 
-                                              già alla radice, esegui lo sw...
-
-The document does not appear to be in UTF-8 encoding.
-Try adding \UseRawInputEncoding as the first line of the file
-or specify an encoding such as \usepackage [latin1]{inputenc}
-in the document preamble.
-Alternatively, save the file in UTF-8 using your editor or another tool
-
-
-! LaTeX Error: Invalid UTF-8 byte sequence (�\expandafter).
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1428 ...    // Se l'estremo globale non è già 
-                                                  alla radice, esegui lo swa...
-
-The document does not appear to be in UTF-8 encoding.
-Try adding \UseRawInputEncoding as the first line of the file
-or specify an encoding such as \usepackage [latin1]{inputenc}
-in the document preamble.
-Alternatively, save the file in UTF-8 using your editor or another tool
-
-
-! LaTeX Error: Invalid UTF-8 byte "A0.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1428 ...    // Se l'estremo globale non è già 
-                                                  alla radice, esegui lo swa...
-
-The document does not appear to be in UTF-8 encoding.
-Try adding \UseRawInputEncoding as the first line of the file
-or specify an encoding such as \usepackage [latin1]{inputenc}
-in the document preamble.
-Alternatively, save the file in UTF-8 using your editor or another tool
-
-
-Overfull \hbox (20.50085pt too wide) in paragraph at lines 1438--1438
+[49]
+Overfull \hbox (20.50085pt too wide) in paragraph at lines 1468--1468
 []\T1/cmr/bx/n/17.28 Gestione del-la Rap-pre-sen-ta-zio-ne Vi-si-va (View
  []
 
-[51] (/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang2.sty
-File: lstlang2.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang3.sty
-File: lstlang3.sty 2025/11/14 1.11b listings language file
-)
-
-! Package Listings Error: Couldn't load requested language.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1444 ...enderer.js}}, keywordstyle=\color{blue}]
-                                                  
-The following languages weren't loadable:
-    ,javascript$
-This may cause errors in the sequel.
-
-
-! Package Listings Error: language javascript undefined.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1444 ...enderer.js}}, keywordstyle=\color{blue}]
-                                                  
-The language is not loadable. Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang2.sty
-File: lstlang2.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang3.sty
-File: lstlang3.sty 2025/11/14 1.11b listings language file
-)
-
-! Package Listings Error: Couldn't load requested language.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1461 ...nderer.js})}, keywordstyle=\color{blue}]
-                                                  
-The following languages weren't loadable:
-    ,javascript$
-This may cause errors in the sequel.
-
-
-! Package Listings Error: language javascript undefined.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1461 ...nderer.js})}, keywordstyle=\color{blue}]
-                                                  
-The language is not loadable. Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[52]
-Overfull \hbox (52.95145pt too wide) in paragraph at lines 1483--1484
-[]\T1/cmr/m/n/12 Il cuo-re ope-ra-ti-vo � rac-chiu-so nel-la fun-zio-ne se-man-
-ti-ca \T1/cmtt/m/n/12 handlePlayerClick(index)\T1/cmr/m/n/12 .
+[50] [51]
+Overfull \hbox (45.12pt too wide) in paragraph at lines 1513--1514
+[]\T1/cmr/m/n/12 Il cuo-re ope-ra-ti-vo rac-chiu-so nel-la fun-zio-ne se-man-ti
+-ca \T1/cmtt/m/n/12 handlePlayerClick(index)\T1/cmr/m/n/12 .
  []
 
 
-Overfull \hbox (53.92615pt too wide) in paragraph at lines 1485--1486
+Overfull \hbox (53.92615pt too wide) in paragraph at lines 1515--1516
 []\T1/cmr/bx/n/12 Verifica del Tur-no: \T1/cmr/m/n/12 Il click vie-ne re-spin-t
 o bru-tal-men-te se \T1/cmtt/m/n/12 this.isComputerTurn
  []
 
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang2.sty
-File: lstlang2.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang3.sty
-File: lstlang3.sty 2025/11/14 1.11b listings language file
-)
-
-! Package Listings Error: Couldn't load requested language.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1491 ...senter.js})}, keywordstyle=\color{blue}]
-                                                  
-The following languages weren't loadable:
-    ,javascript$
-This may cause errors in the sequel.
-
-
-! Package Listings Error: language javascript undefined.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1491 ...senter.js})}, keywordstyle=\color{blue}]
-                                                  
-The language is not loadable. Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[53]
-Overfull \hbox (17.0357pt too wide) in paragraph at lines 1499--1501
+[52]
+Overfull \hbox (17.0357pt too wide) in paragraph at lines 1529--1531
 [][][][] 
  []
 
 
-Overfull \hbox (6.93782pt too wide) in paragraph at lines 1516--1517
+Overfull \hbox (6.93782pt too wide) in paragraph at lines 1546--1547
 \T1/cmr/m/n/12 Heap, ma di con-fron-ta-re i con-ta-to-ri di mos-se (\T1/cmtt/m/
 n/12 playerMoves \T1/cmr/m/n/12 vs \T1/cmtt/m/n/12 computerMoves\T1/cmr/m/n/12 
 )
  []
 
-[54]
+[53]
 Underfull \vbox (badness 1371) has occurred while \output is active []
 
- [55]
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang2.sty
-File: lstlang2.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang3.sty
-File: lstlang3.sty 2025/11/14 1.11b listings language file
-)
-
-! Package Listings Error: Couldn't load requested language.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1534 ... Cromatiche}, keywordstyle=\color{blue}]
-                                                  
-The following languages weren't loadable:
-    ,css$
-This may cause errors in the sequel.
-
-
-! Package Listings Error: language css undefined.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1534 ... Cromatiche}, keywordstyle=\color{blue}]
-                                                  
-The language is not loadable. Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang2.sty
-File: lstlang2.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang3.sty
-File: lstlang3.sty 2025/11/14 1.11b listings language file
-)
-
-! Package Listings Error: Couldn't load requested language.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1553 ... di Bézier}, keywordstyle=\color{blue}]
-                                                  
-The following languages weren't loadable:
-    ,css$
-This may cause errors in the sequel.
-
-
-! Package Listings Error: language css undefined.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1553 ... di Bézier}, keywordstyle=\color{blue}]
-                                                  
-The language is not loadable. Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-! LaTeX Error: Invalid UTF-8 byte sequence (�\expandafter).
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1555     /* Proprietà 
-                         di transizione per tutti i mutamenti di stato */
-The document does not appear to be in UTF-8 encoding.
-Try adding \UseRawInputEncoding as the first line of the file
-or specify an encoding such as \usepackage [latin1]{inputenc}
-in the document preamble.
-Alternatively, save the file in UTF-8 using your editor or another tool
-
-
-! LaTeX Error: Invalid UTF-8 byte "A0.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1555     /* Proprietà 
-                         di transizione per tutti i mutamenti di stato */
-The document does not appear to be in UTF-8 encoding.
-Try adding \UseRawInputEncoding as the first line of the file
-or specify an encoding such as \usepackage [latin1]{inputenc}
-in the document preamble.
-Alternatively, save the file in UTF-8 using your editor or another tool
-
-[56] (/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang2.sty
-File: lstlang2.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang3.sty
-File: lstlang3.sty 2025/11/14 1.11b listings language file
-)
-
-! Package Listings Error: Couldn't load requested language.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1565 ...di ordinati}, keywordstyle=\color{blue}]
-                                                  
-The following languages weren't loadable:
-    ,css$
-This may cause errors in the sequel.
-
-
-! Package Listings Error: language css undefined.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1565 ...di ordinati}, keywordstyle=\color{blue}]
-                                                  
-The language is not loadable. Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \hbox (40.38806pt too wide) in paragraph at lines 1581--1582
+ [54]
+[55]
+Overfull \hbox (40.38806pt too wide) in paragraph at lines 1611--1612
 \T1/cmr/m/n/12 A li-vel-lo asin-to-ti-co, la strut-tu-ra e le stra-te-gie (\T1/
 cmtt/m/n/12 MinHeapStrategy \T1/cmr/m/n/12 e \T1/cmtt/m/n/12 MaxHeapStrategy\T1
 /cmr/m/n/12 )
  []
 
-[57] [58] (/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang2.sty
-File: lstlang2.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang3.sty
-File: lstlang3.sty 2025/11/14 1.11b listings language file
-)
-
-! Package Listings Error: Couldn't load requested language.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1603 ...ee di gioco}, keywordstyle=\color{blue}]
-                                                  
-The following languages weren't loadable:
-    ,css$
-This may cause errors in the sequel.
+[56] [57] [58]
+Overfull \hbox (3.9108pt too wide) in paragraph at lines 1672--1673
+\T1/cmr/m/n/12 me-ra-ti ma-te-ma-ti-ci (ad esem-pio, \T1/cmtt/m/n/12 QuickSortT
+ree.js \T1/cmr/m/n/12 o \T1/cmtt/m/n/12 BinarySearchTree.js\T1/cmr/m/n/12 )
+ []
 
 
-! Package Listings Error: language css undefined.
+Overfull \hbox (18.83197pt too wide) in paragraph at lines 1672--1673
+\T1/cmr/m/n/12 con-ser-van-do im-mu-ta-to ol-tre l'80% del-l'e-co-si-ste-ma vi-
+si-vo (Il mo-to-re \T1/cmtt/m/n/12 Renderer.js\T1/cmr/m/n/12 ,
+ []
 
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1603 ...ee di gioco}, keywordstyle=\color{blue}]
-                                                  
-The language is not loadable. Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang2.sty
-File: lstlang2.sty 2025/11/14 1.11b listings language file
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstlang3.sty
-File: lstlang3.sty 2025/11/14 1.11b listings language file
-)
-
-! Package Listings Error: Couldn't load requested language.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1621 ...e-Friendly)}, keywordstyle=\color{blue}]
-                                                  
-The following languages weren't loadable:
-    ,css$
-This may cause errors in the sequel.
-
-
-! Package Listings Error: language css undefined.
-
-See the Listings package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1621 ...e-Friendly)}, keywordstyle=\color{blue}]
-                                                  
-The language is not loadable. Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[59]
-Underfull \vbox (badness 2142) has occurred while \output is active []
-
- [60]
-[61]
+[59] [60]
 Capitolo 5.
-<Result_images/Result.png, id=1241, 1798.72pt x 915.42pt>
+<Result_images/Result.png, id=1243, 1798.72pt x 915.42pt>
 File: Result_images/Result.png Graphic file (type png)
 <use Result_images/Result.png>
-Package pdftex.def Info: Result_images/Result.png  used on input line 1659.
+Package pdftex.def Info: Result_images/Result.png  used on input line 1689.
 (pdftex.def)             Requested size: 350.98228pt x 178.62491pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [62
+ [61
 
 ]
-<Result_images/impostazioni.png, id=1247, 224.84pt x 743.77875pt>
+<Result_images/impostazioni.png, id=1249, 224.84pt x 743.77875pt>
 File: Result_images/impostazioni.png Graphic file (type png)
 <use Result_images/impostazioni.png>
-Package pdftex.def Info: Result_images/impostazioni.png  used on input line 166
+Package pdftex.def Info: Result_images/impostazioni.png  used on input line 169
 9.
 (pdftex.def)             Requested size: 62.6357pt x 207.20116pt.
 
-[63 <./Result_images/Result.png> <./Result_images/impostazioni.png>]
-<Result_images/howtoplay.png, id=1256, 605.26125pt x 921.4425pt>
+[62 <./Result_images/Result.png> <./Result_images/impostazioni.png>]
+<Result_images/howtoplay.png, id=1258, 605.26125pt x 921.4425pt>
 File: Result_images/howtoplay.png Graphic file (type png)
 <use Result_images/howtoplay.png>
-Package pdftex.def Info: Result_images/howtoplay.png  used on input line 1679.
+Package pdftex.def Info: Result_images/howtoplay.png  used on input line 1709.
 (pdftex.def)             Requested size: 136.104pt x 207.20314pt.
-<Result_images/howtoplay1.png, id=1257, 594.22pt x 464.73625pt>
+<Result_images/howtoplay1.png, id=1259, 594.22pt x 464.73625pt>
 File: Result_images/howtoplay1.png Graphic file (type png)
 <use Result_images/howtoplay1.png>
-Package pdftex.def Info: Result_images/howtoplay1.png  used on input line 1686.
+Package pdftex.def Info: Result_images/howtoplay1.png  used on input line 1716.
 
 (pdftex.def)             Requested size: 264.93028pt x 207.20055pt.
- [64 <./Result_images/howtoplay.png> <./Result_images/howtoplay1.png>] [65]
-<Result_images/avviogioco.png, id=1269, 1789.68625pt x 912.40875pt>
+ [63 <./Result_images/howtoplay.png> <./Result_images/howtoplay1.png>] [64]
+<Result_images/avviogioco.png, id=1271, 1789.68625pt x 912.40875pt>
 File: Result_images/avviogioco.png Graphic file (type png)
 <use Result_images/avviogioco.png>
-Package pdftex.def Info: Result_images/avviogioco.png  used on input line 1724.
+Package pdftex.def Info: Result_images/avviogioco.png  used on input line 1754.
 
 (pdftex.def)             Requested size: 350.99458pt x 178.94228pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [66]
-[67 <./Result_images/avviogioco.png>]
-<Result_images/vinto.png, id=1286, 1761.58125pt x 884.30376pt>
+ [65]
+[66 <./Result_images/avviogioco.png>]
+<Result_images/vinto.png, id=1288, 1761.58125pt x 884.30376pt>
 File: Result_images/vinto.png Graphic file (type png)
 <use Result_images/vinto.png>
-Package pdftex.def Info: Result_images/vinto.png  used on input line 1747.
+Package pdftex.def Info: Result_images/vinto.png  used on input line 1777.
 (pdftex.def)             Requested size: 311.9907pt x 156.61755pt.
-<Result_images/perso.png, id=1289, 1775.63374pt x 908.39375pt>
+<Result_images/perso.png, id=1291, 1775.63374pt x 908.39375pt>
 File: Result_images/perso.png Graphic file (type png)
 <use Result_images/perso.png>
-Package pdftex.def Info: Result_images/perso.png  used on input line 1756.
+Package pdftex.def Info: Result_images/perso.png  used on input line 1786.
 (pdftex.def)             Requested size: 311.98688pt x 159.60889pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [68 <./Result_images/vinto.png>] [69 <./Result_images/perso.png>] [70
+ [67 <./Result_images/vinto.png>] [68 <./Result_images/perso.png>] [69
 
-] [71] [72] [73
+] [70] [71]
+(./TESI.bbl) [72
 
-]
-(./introduzione.aux)
+
+] [73
+
+
+] (./TESI.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
-Package rerunfilecheck Info: File `introduzione.out' has not changed.
-(rerunfilecheck)             Checksum: 374DA9DF6221B2DEA2BA7252019BE056;26627.
+Package rerunfilecheck Info: File `TESI.out' has not changed.
+(rerunfilecheck)             Checksum: 500309FCA03C120B572ECDB6C60DE307;26674.
  ) 
 Here is how much of TeX's memory you used:
- 33105 strings out of 467525
- 610049 string characters out of 5418983
- 1499097 words of memory out of 5000000
- 60889 multiletter control sequences out of 15000+600000
+ 33014 strings out of 467525
+ 605215 string characters out of 5418983
+ 1321803 words of memory out of 5000000
+ 60850 multiletter control sequences out of 15000+600000
  644401 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 107i,10n,109p,1476b,3479s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 107i,10n,109p,1468b,3506s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
 ></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><
 /usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
@@ -2543,9 +2024,9 @@ st/fonts/type1/public/cm-super/sfti1728.pfb></usr/local/texlive/2026/texmf-dist
 /fonts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/2026/texmf-dist/f
 onts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2026/texmf-dist/fon
 ts/type1/public/cm-super/sftt1440.pfb>
-Output written on introduzione.pdf (80 pages, 2011260 bytes).
+Output written on TESI.pdf (80 pages, 2016162 bytes).
 PDF statistics:
- 1521 PDF objects out of 1728 (max. 8388607)
- 509 named destinations out of 1000 (max. 500000)
- 970 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1541 PDF objects out of 1728 (max. 8388607)
+ 522 named destinations out of 1000 (max. 500000)
+ 978 words of extra memory for PDF output out of 10000 (max. 10000000)
 
