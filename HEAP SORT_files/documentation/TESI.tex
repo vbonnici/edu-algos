@@ -107,148 +107,36 @@ Il \textbf{Capitolo 4} entrerà nel dettaglio dell'Implementazione tecnica. Verr
 Infine, nel \textbf{Capitolo 5}, verranno tratte le Conclusioni, analizzando i risultati ottenuti rispetto agli obiettivi prefissati, discutendo le limitazioni attuali del sistema e proponendo possibili sviluppi futuri per estendere la piattaforma ad altri algoritmi o modalità di gioco.
 
 
-\vspace*{\fill}
 \newpage
 
+\chapter{Approcci per l'Orientamento e la Didattica dell'Informatica}
 
+\section{L'orientamento nell'era digitale: un processo continuo}
+L'insegnamento dell'informatica ha subito una profonda trasformazione negli ultimi decenni, evolvendosi da disciplina prettamente tecnica e riservata agli specialisti a competenza trasversale e fondamentale per l'esercizio della cittadinanza digitale. In questo contesto, l'orientamento scolastico e universitario legato alle discipline STEM (Science, Technology, Engineering, and Mathematics) non è più concepito come un evento episodico confinato al termine di un ciclo di studi, ma come un processo formativo continuo. 
 
-\chapter{Orientamento al Pensiero Computazionale}
+\subsection{Dalla scelta isolata al percorso di consapevolezza STEM}
+L'approccio moderno all'orientamento mira a supportare lo studente nell'acquisizione di una consapevolezza profonda delle proprie inclinazioni e abilità. Piuttosto che mostrare passivamente le opportunità professionali del settore ICT, le metodologie orientative contemporanee integrano laboratori pratici e simulazioni già all'interno dei curricula scolastici. L'obiettivo è permettere agli alunni di "toccare con mano" la complessità dei sistemi informatici, abbattendo pregiudizi diffusi e riducendo il tasso di abbandono precoce nei corsi di laurea di natura informatica. In questa visione, la didattica stessa diventa il principale strumento di orientamento: un insegnamento efficace, capace di rendere tangibili concetti astratti, si traduce automaticamente in una motivazione più solida e consapevole nello studente.
 
-\section{Cos' il pensiero computazionale}
-Il pensiero computazionale, termine reso celebre da Jeannette Wing nel 2006, rappresenta "un approccio fondamentale per la risoluzione di problemi, la progettazione di sistemi e la comprensione del comportamento umano che attinge ai concetti fondamentali dell'informatica".
-Non si tratta semplicemente di "pensare come un computer", che è un mero esecutore di istruzioni, ma piuttosto di pensare con i livelli di astrazione necessari per rendere un problema risolvibile da una macchina.
-È un processo cognitivo che coinvolge diverse dimensioni chiave:
+\section{Paradigmi dell'insegnamento dell'informatica}
+Affinché l'informatica possa fungere da veicolo di orientamento, le metodologie tradizionali di tipo trasmissivo ("Istruzionismo", caratterizzato da lezioni frontali puramente teoriche) mostrano limiti evidenti, soprattutto quando si affrontano argomenti di complessa visualizzazione mentale come le strutture dati dinamiche e gli algoritmi di ordinamento.
 
-\subsection{I quattro pilastri del Pensiero Computazionale}
-\begin{enumerate}
-    \item \textbf{Astrazione}: È la capacità di filtrare i dettagli superflui per concentrarsi sugli aspetti essenziali di un problema. 
-    \textit{Esempio nel progetto}: Nel gioco Heap Sort, l'astrazione è rappresentata dal modo in cui i numeri vengono visualizzati come nodi di un albero. I dettagli di basso livello (come i bit che compongono il numero in memoria) sono nascosti; ciò che conta è la relazione logica padre-figlio.
-    
-    \item \textbf{Decomposizione}: Consiste nel suddividere un problema complesso in sotto-problemi più piccoli e gestibili.
-    \textit{Esempio nel progetto}: L'ordinamento di un intero array viene decomposto in due fasi principali (Heapify e Sorting), e a sua volta ogni fase è composta da singole operazioni atomiche di "swap" e "confronto". Lo studente impara che risolvere un problema grande significa risolverne tanti piccoli in sequenza.
-    
-    \item \textbf{Riconoscimento di pattern}: La capacità di identificare somiglianze, tendenze e regolarità nei dati.
-    \textit{Esempio nel progetto}: Riconoscere che ogni sotto-albero deve soddisfare la stessa proprietà (es. Max-Heap) permette di applicare la stessa logica ricorsivamente a tutta la struttura.
-    
-    \item \textbf{Algoritmica}: La definizione di una serie di passi ordinati e precisi (un algoritmo) per raggiungere un obiettivo. Non basta "sapere" la soluzione, bisogna saperla descrivere in modo che sia replicabile.
-\end{enumerate}
+\subsection{Dal Costruzionismo all'Apprendimento Attivo}
+In contrasto con i vecchi paradigmi, l'approccio costruttivista e, più specificamente, il Costruzionismo teorizzato da Seymour Papert \cite{papert1980}, pone lo studente al centro di un processo di costruzione attiva della conoscenza. Secondo tale teoria, l'apprendimento risulta particolarmente efficace quando il discente è impegnato nella costruzione di "entità pubbliche", interattive e manipolabili. Nell'ambito dell'informatica, ciò si traduce nell'abbandono del codice scritto alla lavagna in favore di piattaforme digitali in cui lo studente può agire, sbagliare, testare ipotesi e ricevere un riscontro oggettivo dalle proprie azioni.
 
-\section{Perché insegnarlo: obiettivi educativi e formativi}
-L'introduzione del pensiero computazionale nelle scuole risponde alla necessità di formare cittadini consapevoli in una società digitale (Digital Literacy). 
-Tuttavia, il valore educativo trascende l'alfabetizzazione informatica:
-\begin{itemize}
-    \item \textbf{Meta-cognizione}: Imparare a programmare o a simulare algoritmi aiuta gli studenti a riflettere sul proprio modo di pensare ("thinking about thinking").
-    \item \textbf{Problem Solving Trasversale}: Le tecniche apprese (decomposizione, astrazione) sono applicabili in matematica, scienze, linguistica e persino nella gestione di progetti quotidiani.
-    \item \textbf{Gestione dell'Errore}: In informatica, l'errore (bug) non è un fallimento, ma un'informazione utile per correggere il processo. Questo approccio favorisce una "Growth Mindset" (mentalità di crescita), riducendo l'ansia da prestazione scolastica.
-    \item \textbf{Creatività Computazionale}: Fornire gli strumenti per passare da consumatori passivi di tecnologia (fruitori di app) a creatori attivi, capaci di esprimere le proprie idee attraverso il codice o la logica algoritmica.
-\end{itemize}
+\subsection{Gestione del carico cognitivo in algoritmi e strutture dati}
+Un ostacolo rilevante nella didattica algoritmica è descritto dalla Teoria del Carico Cognitivo (Cognitive Load Theory) di John Sweller \cite{sweller1988}. Richiedere a uno studente alle prime armi di elaborare mentalmente i passaggi logici dell'algoritmo Heap Sort tenendo traccia simultaneamente sia della struttura lineare dell'array, sia della sua interpretazione ad albero binario gerarchico, genera un sovraccarico della memoria di lavoro. Le moderne metodologie didattiche affrontano questo problema esternalizzando parte del carico cognitivo interfacce visive: il software si fa carico del calcolo mnemonico delle posizioni, liberando risorse mentali nello studente che può così concentrarsi esclusivamente sulla logica (la "semantics") dell'algoritmo.
 
-\section{Metodologie didattiche per l'orientamento}
-Per insegnare efficacemente questi concetti,  necessario allontanarsi dalla lezione frontale trasmissiva ("Instructionism") per abbracciare metodologie costruttiviste ("Constructionism" di Seymour Papert).
+\section{Metodologie e strumenti innovativi}
+L'integrazione di strumenti multimediali dedicati all'orientamento e alla didattica richiede strategie specifiche per favorire l'engagement e il problem-solving.
 
-\subsection{Programmazione visuale e attività unplugged}
-La programmazione visuale (es. Scratch, Blockly) riduce il carico cognitivo legato alla sintassi del codice (punti e virgola, parentesi), permettendo di concentrarsi sulla semantica e sulla logica. 
-Le attività \textit{CS Unplugged} (senza computer) utilizzano giochi fisici, carte, corda o movimenti corporei per introdurre concetti informatici. Ad esempio, ordinare una fila di studenti per altezza è un modo fisico per spiegare un algoritmo di sorting. Queste attività rendono l'informatica accessibile anche in contesti con scarse risorse tecnologiche.
+\subsection{Laboratori interattivi e problem-solving situato}
+A differenza del problem-solving astratto, il "problem-solving situato" immerge l'allievo in un contesto operativo ben definito. Invece di dover ordinare manualmente a mente una sequenza di numeri, all'alunno viene fornita una piattaforma in cui i numeri sono nodi cliccabili e in cui le regole matematiche (ad esempio, le proprietà di Max-Heap) agiscono come vincoli fisici dell'ambiente di lavoro.
 
-\subsection{Learning-by-doing e problem solving}
-L'approccio "imparare facendo" è fondamentale. Invece di memorizzare definizioni astratte di "ciclo" o "variabile", gli studenti affrontano problemi reali. La conoscenza emerge come sottoprodotto dell'attività di risoluzione del problema. Nel contesto del nostro progetto, lo studente non "studia" l'Heap Sort, ma lo "esegue", internalizzando le regole attraverso la pratica.
+\subsection{Implicazioni orientative della Gamification e del Game-Based Learning}
+L'adozione del \textit{Game-Based Learning} (GBL) si è rivelata una delle strategie più promettenti nell'ambito STEM. Utilizzare le dinamiche ludiche (punteggi, sfide a tempo, competizione contro un'Intelligenza Artificiale) all'interno di un contesto educativo promuove la motivazione intrinseca dello studente. Dal punto di vista orientativo, superare sfide complesse all'interno di un gioco di natura algoritmica incrementa la \textit{Self-Efficacy} (l'autoefficacia percepita) dell'utente, incoraggiandolo a intraprendere con maggiore sicurezza studi informatici avanzati.
 
-\subsection{Gamification e Ambienti Interattivi}
-La \textit{gamification} applica meccaniche di gioco (punti, livelli, classifiche, sfide a tempo) a contesti non ludici per aumentare la motivazione intrinseca ed estrinseca. 
-Gli ambienti interattivi offrono un \textbf{feedback immediato}. Nel modello tradizionale (compito in classe), il feedback (voto) arriva giorni dopo l'esecuzione, quando ormai il momento di apprendimento è passato. In un software educativo, se lo studente sbaglia un passaggio, il sistema lo notifica istantaneamente (es. nodo rosso), permettendo una correzione in tempo reale. Questo ciclo di feedback rapido è essenziale per l'apprendimento profondo.
-
-\subsection{Game-based learning}
-A differenza della gamification che "aggiunge" elementi di gioco a un processo esistente, il \textit{Game-Based Learning} utilizza veri e propri giochi come veicolo principale per l'apprendimento. Il gioco diventa il "libro di testo" interattivo. In "Heap Sort Challenge", il contenuto didattico (l'algoritmo)  intrinseco alle meccaniche di gioco: per vincere, devi necessariamente comprendere l'algoritmo.
-
-\section{L'algoritmo Heap Sort come strumento didattico}
-L'Heap Sort è stato scelto come oggetto di questo progetto per la sua ricchezza concettuale. Non è il più semplice (come il Bubble Sort) né sempre il più veloce nella pratica (come il QuickSort), ma offre spunti didattici unici sulla gestione efficiente dei dati.
-
-\subsection{Fondamenti teorici dell'Heap}
-Un \textbf{Binary Heap}  una struttura dati che può essere vista come un albero binario quasi completo. Un albero si dice "quasi completo" se tutti i livelli sono riempiti completamente, tranne eventualmente l'ultimo, che viene riempito da sinistra a destra.
-Questa proprietà strutturale è cruciale perché permette di memorizzare l'albero in un array compatto senza l'uso di puntatori espliciti, garantendo un'efficienza spaziale ottimale.
-
-Dato un nodo all'indice $i$ (0-indexed):
-\begin{itemize}
-    \item Il figlio sinistro è a: $2i + 1$
-    \item Il figlio destro è a: $2i + 2$
-    \item Il genitore è a: $\lfloor \frac{i-1}{2} \rfloor$
-\end{itemize}
-
-Oltre alla proprietà strutturale, l'Heap deve soddisfare la \textit{Proprietà di Ordine}:
-\begin{itemize}
-    \item \textbf{Max-Heap}: Ogni nodo è maggiore o uguale ai suoi figli ($A[parent(i)] \ge A[i]$). Di conseguenza, l'elemento massimo è sempre nella radice.
-    \item \textbf{Min-Heap}: Ogni nodo è minore o uguale ai suoi figli ($A[parent(i)] \le A[i]$). L'elemento minimo è nella radice.
-\end{itemize}
-
-\subsection{Analisi dell'Algoritmo}
-L'algoritmo Heap Sort procede in due fasi distinte, entrambe visualizzate nel software:
-
-\subsubsection{Fase 1: Build-Max-Heap}
-Si parte da un array disordinato. Si interpretano i dati come un albero binario. Partendo dall'ultimo nodo non-foglia (indice $n/2 - 1$) e risalendo fino alla radice (indice 0), si applica la procedura \texttt{Heapify} verso il basso.
-Questa fase trasforma l'array caotico in un Max-Heap valido.
-La complessità di questa fase, con un'analisi attenta, risulta essere lineare: $O(n)$.
-
-\subsubsection{Fase 2: Sorting}
-Una volta costruito l'Heap:
-\begin{enumerate}
-    \item Si scambia la radice (massimo attuale) con l'ultimo elemento dell'heap ($A[n-1]$).
-    \item Si riduce la dimensione considerata dell'heap di 1 (l'elemento massimo è ora "congelato" nella sua posizione finale corretta).
-    \item La nuova radice probabilmente viola la proprietà di Max-Heap, quindi si esegue \texttt{Heapify} sulla radice per far "affondare" il valore nella posizione corretta.
-    \item Si ripete fino a quando l'heap ha dimensione 1.
-\end{enumerate}
-
-\subsection{Analisi della Complessità}
-Uno degli obiettivi formativi avanzati è far comprendere agli studenti l'efficienza degli algoritmi.
-\begin{itemize}
-    \item \textbf{Tempo}: La procedura \texttt{Heapify} su un nodo richiede tempo proporzionale all'altezza dell'albero, ovvero $O(\log n)$. Poiché nella fase di sorting eseguiamo \texttt{Heapify} $n$ volte, la complessità totale  $O(n \log n)$.
-    Questo vale per tutti i casi:
-    \begin{itemize}
-        \item \textbf{Best Case}: $O(n \log n)$ (o $O(n)$ se le chiavi sono uguali, ma generalmente domina il logaritmo).
-        \item \textbf{Average Case}: $O(n \log n)$.
-        \item \textbf{Worst Case}: $O(n \log n)$. Questa è una proprietà molto importante rispetto al QuickSort, che nel caso peggiore degrada a $O(n^2)$.
-    \end{itemize}
-    \item \textbf{Spazio}: L'Heap Sort è un algoritmo \textbf{in-place}. Richiede solo una quantità costante di memoria ausiliaria $O(1)$ per lo scambio delle variabili, a differenza del MergeSort che richiede $O(n)$ spazio extra per gli array di appoggio.
-    \item \textbf{Stabilità }: È un algoritmo \textbf{instabile}. Lo scambio di elementi distanti può alterare l'ordine relativo di elementi con chiavi uguali. Questo è un dettaglio tecnico importante che viene spesso discusso in corsi universitari.
-\end{itemize}
-
-\begin{algorithm}
-\caption{Max-Heapify (Versione Ricorsiva)}
-\begin{algorithmic}[1]
-\Require Array $A$, indice $i$
-\Ensure Sottoalbero radicato in $i$ conforme alla proprietà di Max-Heap
-\State $left \gets 2i + 1$
-\State $right \gets 2i + 2$
-\State $largest \gets i$
-\If{$left < A.heapSize \land A[left] > A[largest]$}
-    \State $largest \gets left$
-\EndIf
-\If{$right < A.heapSize \land A[right] > A[largest]$}
-    \State $largest \gets right$
-\EndIf
-\If{$largest \neq i$}
-    \State Swap $A[i]$ with $A[largest]$
-    \State Heapify($A, largest$)
-\EndIf
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}
-\caption{Heap Sort Completo}
-\begin{algorithmic}[1]
-\Require Array $A$ da ordinare
-\Ensure Array $A$ ordinato in senso crescente
-\State \emph{Fase 1: Costruzione dell'Heap}
-\For{$i \gets \lfloor A.length / 2 \rfloor - 1$ \textbf{downto} $0$}
-    \State Max-Heapify($A, i$)
-\EndFor
-\State \emph{Fase 2: Estrazione e Ordinamento}
-\For{$i \gets A.length - 1$ \textbf{downto} $1$}
-    \State Swap $A[0]$ with $A[i]$
-    \State $A.heapSize \gets A.heapSize - 1$
-    \State Max-Heapify($A, 0$)
-\EndFor
-\end{algorithmic}
-\end{algorithm}
+\section{Simulatori algoritmici come ponte educativo}
+La creazione di simulatori interattivi basati sul web colma definitivamente il divario tra l'astrattezza matematica e l'indagine empirica. Il presente progetto di tirocinio si configura esattamente in questo filone accademico: attraverso la progettazione di "Heap Sort Challenge", si mira a fornire alle istituzioni uno strumento didattico concreto in cui l'orientamento alle discipline algoritmiche avviene in maniera naturale, dinamica ed esperienziale.
 
 
 \newpage
@@ -333,9 +221,9 @@ Immaginiamo una sessione tipica di uno studente:
 \end{enumerate}
 
 \section{Strumenti e Tecnologie: Analisi Tecnica}
-La scelta dello stack tecnologico non è stata casuale, ma guidata dal requisito di \textit{Universalità } e \textit{Longevità }.
+La scelta dello stack tecnologico non è stata casuale, ma guidata dal requisito di \textit{Universalità} e \textit{Longevità}.
 
-\subsection{HTML5: Semantica e Accessibilità }
+\subsection{HTML5: Semantica e Accessibilità}
 Non abbiamo usato `div` generici per tutto. L'uso di tag come `<main>`, `<section>`, `<header>` e `<button>` garantisce che l'applicazione sia interpretabile correttamente anche dagli Screen Reader per utenti ipovedenti. Ogni nodo dell'albero ha attributi `aria-label` e `data-value` per esporre il proprio contenuto sia agli strumenti di assistenza che agli script di test.
 
 \subsection{CSS3 Avanzato: Grid, Flexbox e Variabili}
@@ -350,7 +238,7 @@ Il layout dell'albero binario è una delle parti più complesse.
 Il codice è scritto aderendo allo standard ECMAScript 2015+.
 \begin{itemize}
     \item \textbf{Classi e OOP}: Il paradigma a oggetti mappa perfettamente la realtà del problema. \texttt{class Node} ha proprietà \texttt{value} e \texttt{element} (riff. DOM). \texttt{class Heap} contiene la logica matematica.
-    \item \textbf{Async/Await e Promises}: La gestione del tempo è cruciale. L'animazione dura 500ms. Il codice JavaScript non può "bloccarsi" aspettando l'animazione. Abbiamo usato le \texttt{Promise} per dire al codice: "Aspetta che la transizione CSS finisca prima di aggiornare logico i dati".
+    \item \textbf{Async/Await e Promises}: La gestione del tempo è cruciale. L'animazione dura 500ms. Il codice JavaScript non può "bloccarsi" aspettando l'animazione. Abbiamo usato le \texttt{Promise} per dire al codice: "Aspetta che la transizione CSS finisca prima di aggiornare logicamente i dati".
     \item \textbf{Modularity}: L'uso di \texttt{import/export} nativi permette di avere file piccoli e focalizzati (\texttt{Heap.js}, \texttt{Renderer.js}, \texttt{Game.js}) invece di un unico file monolitico ("Spaghetti Code"), facilitando enormemente il debugging.
 \end{itemize}
 
@@ -392,9 +280,9 @@ Il sistema deve verificare la condizione di vittoria ad ogni completamento di un
 \subsection{Requisiti Non Funzionali}
 \begin{itemize}
     \item \textbf{RNF01 - Performance}: Il Time-to-Interactive (TTI) all'avvio deve essere sotto 1 secondo. Le animazioni non devono scendere sotto i 30fps su mobile.
-    \item \textbf{RNF02 - Usabilità }: Il design deve seguire il principio di "Affordance": ciò che è cliccabile deve sembrare cliccabile (cursor pointer, hover effects). I colori devono essere distinguibili anche da utenti daltonici (uso di simboli o pattern oltre al colore rosso/verde).
+    \item \textbf{RNF02 - Usabilità}: Il design deve seguire il principio di "Affordance": ciò che è cliccabile deve sembrare cliccabile (cursor pointer, hover effects). I colori devono essere distinguibili anche da utenti daltonici (uso di simboli o pattern oltre al colore rosso/verde).
     \item \textbf{RNF03 - Portabilit }: Il layout Grid deve "collassare" in modo grazioso su tablet (Responsive Breakpoints).
-    \item \textbf{RNF04 - Manutenibilità }: Il codice deve essere commentato seguendo lo standard JSDoc. Non devono esserci "Magic Numbers" nel codice; tutti i parametri di configurazione (velocità animazione, colori, dimensione heap) devono essere in costanti o file di configurazione.
+    \item \textbf{RNF04 - Manutenibilità}: Il codice deve essere commentato seguendo lo standard JSDoc. Non devono esserci "Magic Numbers" nel codice; tutti i parametri di configurazione (velocità animazione, colori, dimensione heap) devono essere in costanti o file di configurazione.
 \end{itemize}
 
 \chapter{Progettazione tramite Diagrammi UML}
@@ -814,7 +702,7 @@ Di seguito vengono riportati i dettagli formali del caso d'uso:
 
 
 \subsection{Matrice di Tracciabilit }
-La matrice di tracciabilit   uno strumento fondamentale per verificare la completezza dell'analisi. Essa mette in relazione i Requisiti Funzionali (RF) definiti nel Capitolo 2 con i Casi d'Uso (UC) progettati in questo capitolo, garantendo che ogni funzionalità richiesta sia effettivamente coperta da un flusso di interazione utente.
+La matrice di tracciabilità  uno strumento fondamentale per verificare la completezza dell'analisi. Essa mette in relazione i Requisiti Funzionali (RF) definiti nel Capitolo 2 con i Casi d'Uso (UC) progettati in questo capitolo, garantendo che ogni funzionalità richiesta sia effettivamente coperta da un flusso di interazione utente.
 
 \begin{xltabular}{\textwidth}{|l| *{5}{>{\centering\arraybackslash}X|}}
 \hline
@@ -835,7 +723,7 @@ UC06 - Fine Gioco & & & & \textbf{X} & \textbf{X} \\
 \hline
 \end{xltabular}
 
-\section{Diagramma delle Attività }
+\section{Diagramma delle Attività}
 Il Diagramma delle Attività (Activity Diagram)  un diagramma comportamentale UML che descrive il flusso di lavoro (workflow) o di operazioni step-by-step di un sistema. A differenza dei Diagrammi dei Casi d'Uso che si concentrano su "chi fa cosa", gli Activity Diagram dettagliano "come" si susseguono le azioni, evidenziando decisioni, parallelismi e loop. È particolarmente utile per modellare la logica algoritmica e le regole di transizione di stato del gioco.
 
 \subsection{Attività Principali}
@@ -974,7 +862,7 @@ La classe \texttt{Node}  una struttura dati semplice (POJO - Plain Old JavaScrip
 \end{itemize}
 
 \subsection{Interfaccia Strategy}
-Il pattern Strategy è cruciale per la flessibilit è del gioco.
+Il pattern Strategy è cruciale per la flessibilità del gioco.
 \begin{itemize}
     \item \textbf{MinHeapStrategy}: Implementa \texttt{shouldSwap(a, b)} restituendo \texttt{true} se $a > b$ (il padre è maggiore del figlio, violazione Min-Heap). Implementa \texttt{isValid} verificando $parent \leq child$.
     \item \textbf{MaxHeapStrategy}: Inverte la logica, restituendo \texttt{shouldSwap = true} se $a < b$.
@@ -1042,7 +930,7 @@ Se la validazione ha successo (il percorso marcato come \texttt{true} nel diagra
 Questa è un'operazione critica che modifica lo stato persistente dell'applicazione:
 \begin{itemize}
     \item L'array sottostante viene aggiornato: i valori alle posizioni $A$ e $B$ vengono scambiati.
-    \item Gli oggetti \texttt{Node} mantengono i loro ID univoci ma cambiano posizione nell'array. Questo è fondamentale per permettere al framework di rendering di tracciare l'identit è degli elementi (Object Identity) e animarli correttamente.
+    \item Gli oggetti \texttt{Node} mantengono i loro ID univoci ma cambiano posizione nell'array. Questo è fondamentale per permettere al framework di rendering di tracciare l'identità degli elementi (Object Identity) e animarli correttamente.
 \end{itemize}
 
 \phantomsection
@@ -1060,7 +948,7 @@ Durante questa fase di animazione, l'input utente viene temporaneamente disabili
 \phantomsection
 \subsubsection{Verifica Post-Mossa e Automazione}
 Il diagramma termina con una fase di verifica globale (\texttt{isRootValid} e \texttt{checkAutoExtraction}).
-Dopo uno scambio, la nuova configurazione potrebbe aver sbloccato nuove possibilità :
+Dopo uno scambio, la nuova configurazione potrebbe aver sbloccato nuove possibilità:
 \begin{itemize}
     \item La radice potrebbe essere diventata il massimo/minimo assoluto. In tal caso, il sistema deve procedere all'estrazione automatica.
     \item Potrebbero essersi create nuove violazioni a cascata nei sotto-alberi (anche se nel caso del giocatore singolo, le mosse sono puntuali).
@@ -1108,7 +996,7 @@ Ricevuto il comando dal Presenter (\texttt{makeMove()}), la classe \texttt{Compu
 Il diagramma evidenzia il ruolo cruciale del \textbf{Pattern Strategy} (passaggi 5 e 6). Lo \texttt{Heap} riceve la richiesta di validazione dal Computer e la delega immediatamente alla strategia attiva:
 \begin{itemize}
     \item \textbf{Delegazione Pura}: Lo \texttt{Heap} possiede un riferimento a un'interfaccia \texttt{Strategy}. Se la strategia  \texttt{MinHeapStrategy}, il confronto restituir  \texttt{true} se il figlio è minore del padre. Se  \texttt{MaxHeapStrategy}, la logica sarà opposta.
-    \item \textbf{Separazione delle Preoccupazioni}: Questa fase dimostra come la logica matematica pura sia isolata dalla struttura dati. Lo Heap gestisce l'albero (posizioni, indici), mentre la Strategy gestisce la verit è matematica (confronto).
+    \item \textbf{Separazione delle Preoccupazioni}: Questa fase dimostra come la logica matematica pura sia isolata dalla struttura dati. Lo Heap gestisce l'albero (posizioni, indici), mentre la Strategy gestisce la verità matematica (confronto).
 \end{itemize}
 
 \phantomsection
@@ -1116,7 +1004,7 @@ Il diagramma evidenzia il ruolo cruciale del \textbf{Pattern Strategy} (passaggi
 Una volta ottenuta la conferma (\texttt{boolean: true}), il Computer passa all'azione (passaggio 8). Invocando \texttt{swap(i, j)}, il computer modifica lo stato interno del sistema:
 \begin{itemize}
     \item \textbf{Atomicit }: Lo scambio dei valori nell'array è un'operazione atomica che garantisce che il Modello sia sempre in uno stato consistente prima di passare alla fase successiva.
-    \item \textbf{Preservazione dell'Identità }: Nonostante i valori vengano scambiati, gli oggetti \texttt{Node} coinvolti mantengono il loro ID univoco. Questo permetter è successivamente al Renderer di tracciare il movimento "fisico" del nodo sullo schermo invece di limitarsi a cambiare un testo.
+    \item \textbf{Preservazione dell'Identità}: Nonostante i valori vengano scambiati, gli oggetti \texttt{Node} coinvolti mantengono il loro ID univoco. Questo permetter è successivamente al Renderer di tracciare il movimento "fisico" del nodo sullo schermo invece di limitarsi a cambiare un testo.
 \end{itemize}
 
 \phantomsection
@@ -1137,7 +1025,7 @@ L'ultima fase del diagramma descrive il passaggio dal dato logico all'immagine v
 
 \phantomsection
 \subsubsection{Considerazioni Finali sul Flusso Computer}
-In conclusione, la densit è di messaggi mostrata in Figura \ref{fig:class_comm} riflette la robustezza dell'architettura. Suddividere il turno del computer in 11 passaggi permette di:
+In conclusione, la densità di messaggi mostrata in Figura \ref{fig:class_comm} riflette la robustezza dell'architettura. Suddividere il turno del computer in 11 passaggi permette di:
 \begin{itemize}
     \item \textbf{Testability}: Ogni passaggio (validazione, scambio, rendering) può essere testato unitariamente.
     \item \textbf{Scalability}: È possibile aggiungere nuove strategie di gioco o nuovi tipi di computer (es. un computer "difficile") semplicemente implementando nuove sottoclassi di \texttt{Computer} o \texttt{Strategy}, senza mai toccare il codice del Presenter o del Renderer.
@@ -1325,7 +1213,7 @@ La realizzazione di un'applicazione web interattiva richiede un'attenta valutazi
 
 Questa scelta architetturale è motivata da diverse ragioni didattiche ed ingegneristiche:
 \begin{enumerate}
-    \item \textbf{Leggerezza e Accessibilità :} L'applicazione deve essere fruibile da qualsiasi dispositivo (anche mobile o scolastico datato) senza tempi di caricamento dovuti allo scaricamento di voluminose librerie JavaScript. L'assenza di framework abbatte il \textit{bundle size} a pochi kilobyte, garantendo tempi di esecuzione praticamente istantanei.
+    \item \textbf{Leggerezza e Accessibilità:} L'applicazione deve essere fruibile da qualsiasi dispositivo (anche mobile o scolastico datato) senza tempi di caricamento dovuti allo scaricamento di voluminose librerie JavaScript. L'assenza di framework abbatte il \textit{bundle size} a pochi kilobyte, garantendo tempi di esecuzione praticamente istantanei.
     \item \textbf{Trasparenza Didattica:} In un progetto focalizzato sull'insegnamento degli algoritmi e delle logiche di programmazione nuda, l'impiego di un framework che astrae pesantemente l'interazione con il \textit{Document Object Model (DOM)} rischierebbe di offuscare la purezza algoritmica. Con Vanilla JS, il flusso di controllo è palese e tracciabile linearmente: dalla logica puramente matematica allo stato visivo finale, non esistono meccanismi "magici" (come il Virtual DOM di React o la digest cycle di AngularJS) a frapporsi.
     \item \textbf{Potenziale Espressivo nativo:} Gli standard moderni di JavaScript (come ECMAScript 6 e versioni successive) hanno introdotto feature native (Classi, Map/Set, Destructuring assignment, Arrow functions, Modules) che colmano in gran parte le lacune architetturali del passato, consentendo lo sviluppo di script perfettamente organizzati, testabili e modulari, in modo totalmente object-oriented, rendendo superflua la sovrascrittura fornita dalle librerie in molti scenari limitati.
 \end{enumerate}
@@ -1333,7 +1221,7 @@ Questa scelta architetturale è motivata da diverse ragioni didattiche ed ingegn
 Le \textbf{Web API} native (precisamente \texttt{document.createElement}, \texttt{dataset}, \texttt{classList}, \texttt{requestAnimationFrame}) sono risultate sufficienti ed estremamente performanti per la gestione della scacchiera algoritmica che anima questo progetto.
 
 \section{Architettura Model-View-Presenter}
-In assenza dell'infrastruttura rigida di un framework, l'intera onere di strutturare logicamente il codice ricade sullo sviluppatore. Affinché il software possieda caratteristiche di \textit{manutenibilità }, \textit{scalabilità } e \textit{basso accoppiamento} (loose coupling), si è deciso di implementare un'architettura rigorosa seguendo il Pattern Architetturale \textbf{Model-View-Presenter (MVP)}, storicamente usato nella costruzione di applicazioni desktop (es. in ambienti Microsoft .NET, Java Swing) ed estremamente efficace in Vanilla JS.
+In assenza dell'infrastruttura rigida di un framework, l'intera onere di strutturare logicamente il codice ricade sullo sviluppatore. Affinché il software possieda caratteristiche di \textit{manutenibilità}, \textit{scalabilità} e \textit{basso accoppiamento} (loose coupling), si è deciso di implementare un'architettura rigorosa seguendo il Pattern Architetturale \textbf{Model-View-Presenter (MVP)}, storicamente usato nella costruzione di applicazioni desktop (es. in ambienti Microsoft .NET, Java Swing) ed estremamente efficace in Vanilla JS.
 
 \subsection{Distinzione dal framework MVC}
 Sebbene fortemente affine al pattern MVC largamente standardizzato sul web (Specialmente via Back-End), il pattern MVP fornisce una topografia d'interazione \textit{strettamente gerarchica}.
@@ -1350,7 +1238,7 @@ Al contrario, nell'MVP adottato, la Vista è rigorosamente identificata come \te
 Questa severa partizione logica (Separation of Concerns) permette per esempio un \textit{Test Unitario} perfetto del Modello: gli algoritmi sui nodi corrono esclusivamente su Array numerici off-screen e Node objects, permettendo in futuro al sorgente model-oriented di servire perfino interfacce testuali o API esterne.
 
 \section{Struttura dei Dati e Logica di Dominio}
-Rispettando il pattern MVP, il Livello Modello è l'unico deputato al mantenimento della veridicit è e consistenza matematica dell'informazione. Le regole algoritmiche (costruzione, ricerca del minimo/massimo, validazione, estrazione) risiedono esclusivamente qui.
+Rispettando il pattern MVP, il Livello Modello è l'unico deputato al mantenimento della veridicità e consistenza matematica dell'informazione. Le regole algoritmiche (costruzione, ricerca del minimo/massimo, validazione, estrazione) risiedono esclusivamente qui.
 
 \subsection{Incapsulamento dello Stato: \texttt{Node.js}}
 L'informazione atomica dell'albero è rappresentata dalla classe \texttt{Node}. Invece di memorizzare nel vettore dei semplici interi primitivi, la scelta di creare un oggetto \texttt{Node} ha permesso di legare in un'unica entità logica il \textit{valore numerico} algoritmico (es. 42) e un \textit{identificativo univoco costante} (\texttt{id}).
@@ -1393,7 +1281,7 @@ Un ulteriore responsabilità architetturale di \texttt{Heap.js} verte nell'estra
 \end{enumerate}
 
 \section{Comportamento Dinamico: Il Pattern Strategy}
-Una caratteristica avanzata di questa implementazione è la possibilità , per l'utente, di scegliere tra l'esecuzione di un \textbf{Min-Heap} (l'elemento radicato è sempre e comunque minore o uguale a tutti i nodi limitrofi) o \textbf{Max-Heap} (l'esatto speculare). 
+Una caratteristica avanzata di questa implementazione è la possibilità, per l'utente, di scegliere tra l'esecuzione di un \textbf{Min-Heap} (l'elemento radicato è sempre e comunque minore o uguale a tutti i nodi limitrofi) o \textbf{Max-Heap} (l'esatto speculare). 
 
 Aggiungere al codice degli espliciti blocchi condizionali monolitici (es. \texttt{if (this.type == "max") \{...\} else \{...\}}) in profondità alle logiche dei cicli di controllo avrebbe rapidamente innalzato la Complessità Ciclomatica, infrangendo il paradigma Open/Closed (Principio OCP del SOLID - Aperte per estensione, chiuse per modifica).
 La soluzione ingegneristica elegante tradotta in JavaScript Vanilla si fonda sul Design pattern comportamentale, il \textbf{Strategy Pattern}.
@@ -1434,7 +1322,7 @@ La valutazione si declina in puro polimorfismo. L'intero schema computazionale g
 \section{Motore Decisionale e Logica dell'Avversario}
 Il nucleo competitivo dell'applicazione è guidato dal file \texttt{Computer.js}. Affinché la sfida risultasse stimolante, ma non punitiva, è stato essenziale progettare un'entità digitale che non risolvesse l'intero intero Heap in una frazione di millisecondo, ma bensì simulasse un comportamento a "turni" passo-passo visibile ad occhio umano.
 
-La funzione \texttt{makeMove()} incapsula l'euristica decisionale dell'avversario. Il sistema d è priorit è cronologica assoluta all'\textbf{estrazione} (Extraction): se l'albero è momentaneamente un heap perfetto, la macchina procede all'estrazione della radice.
+La funzione \texttt{makeMove()} incapsula l'euristica decisionale dell'avversario. Il sistema dà priorità cronologica assoluta all'\textbf{estrazione} (Extraction): se l'albero è momentaneamente un heap perfetto, la macchina procede all'estrazione della radice.
 In caso contrario, l'algoritmo non esegue un banale controllo lineare o un bubble-up casuale. Al fine di mantenere alta la sfida con l'utente umano, la macchina cerca proattivamente di individuare l'estremo globale sbagliato.
 
 \begin{lstlisting}[language=JavaScript, breaklines=true, basicstyle=\footnotesize\ttfamily, frame=single, caption={Euristica dell'Avversario per l'individuazione del nodo migliore (\texttt{Computer.js})}, keywordstyle=\color{blue}]
@@ -1455,7 +1343,7 @@ In caso contrario, l'algoritmo non esegue un banale controllo lineare o un bubbl
             } else { ... }
         }
 
-        // Se l'estremo globale non e' gia' alla radice, esegui lo swap col padre
+        // Se l'estremo globale non è già alla radice, esegui lo swap col padre
         if (bestIndex > 0) {
             const parentIndex = this.heap.parent(bestIndex);
             this.heap.swap(bestIndex, parentIndex);
@@ -1623,7 +1511,7 @@ Il design architetturale \textbf{Stateful} (spiegato a fondo in Sez. 4.6), adott
 
 Ciò convalida l'altissima scalabilità globale della stesura:  empiricamente possibile, grazie a questi accorgimenti uniti all'hardware modernamente disponibile (device mobili inclusi), giocare sfide computazionali con profondità di \textit{Tree Depth} spropositate rispetto ai classici limiti educativi, preservando integrità strutturale asintotica ed estetica vettoriale.
 
-\section{Responsività Multi-Dispositivo e Accessibilità }
+\section{Responsività Multi-Dispositivo e Accessibilità}
 La progettazione di un "Serious Game" a fondamento interamente web obbliga il team di sviluppo a misurarsi sin dall'inizio con un limite fisico non indifferente: la frammentazione degli schermi (\textit{Screen Fragmentation}). Le aule informatiche degli istituti scolastici presentano spesso monitor con risoluzioni e factor ratio (16:9, 4:3, 21:9) eterogenei, per non parlare della possibile fruizione dell'apprendimento su Tablet o Smartphone (Dispositivi portatili).
 
 \subsection{Layout Adattivo tramite Modulo Flexbox}
@@ -1666,7 +1554,7 @@ Questa adattabilità estende l'orizzonte didattico non solo come strumento per l
 \section{Sviluppi Futuri e Manutenibilità Architetturale}
 Progettare in aderenza al paradigma SOLID (incluso il Single Responsibility Principle garantito dall'approccio MVP e dalle \textbf{Strategies}) assicura che il volume del codice scritto adempia alla funzione corrente e rimanga aperto a flessibili iterazioni future.
 
-\subsection{Intercambiabilit è degli Algoritmi Algoritmici}
+\subsection{Intercambiabilità degli Algoritmi Algoritmici}
 Il presentatore (\texttt{GamePresenter.js}) orchestra ciclicamente "Scambi", "Input Utente" e "Validazioni Matematiche", delegando interamente al \texttt{Model} il come e perché la transizione topologica debba avvenire. 
 
 Dal punto di vista della manutenibilità, questo significa che lo scheletro frontend dell'applicazione Web non è limitato ontologicamente alla sola e unica dimostrazione dell'Heap Sort. Volendo, in una prospettiva di espansione scolastica successiva, risulterebbe possibile affiancare al file \texttt{Heap.js} nuovi agglomerati matematici (ad esempio, \texttt{QuickSortTree.js} o \texttt{BinarySearchTree.js}) conservando immutato oltre l'80\% dell'ecosistema visivo (Il motore \texttt{Renderer.js}, il sistema dei bottoni e delle transizioni CSS) ed istanziando al caricamento della route semplicemente un modello matematico piuttosto dell'altro.
@@ -1714,7 +1602,7 @@ Per agevolare l'approccio iniziale dell'utente alla sfida, l'applicativo integra
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth,height=0.35\textheight,keepaspectratio]{Result_images/howtoplay1.png}
-    \caption{Seconda parte della guida: Profondità }
+    \caption{Seconda parte della guida: Profondità}
     \label{fig:howtoplay1}
 \end{figure}
 
@@ -1744,7 +1632,7 @@ L'esperienza d'uso si basa su un paradigma di interazione "point-and-click" estr
 
 Il sistema di feedback visivo gioca un ruolo fondamentale per guidare l'utente attraverso gli stati del gioco:
 \begin{itemize}
-    \item \textbf{Stato di Selezione}: Quando un utente clicca su un nodo, questo cambia colore (solitamente assumendo una tonalit è più scura o un bordo evidenziato), indicando che il sistema è in attesa di un secondo clic per completare l'azione di scambio.
+    \item \textbf{Stato di Selezione}: Quando un utente clicca su un nodo, questo cambia colore (solitamente assumendo una tonalità più scura o un bordo evidenziato), indicando che il sistema è in attesa di un secondo clic per completare l'azione di scambio.
     \item \textbf{Validazione della Posizione}: Se un nodo occupa una posizione corretta rispetto alla regola Min/Max Heap impostata (ovvero se tutti i suoi figli rispettano la gerarchia di valore), esso viene evidenziato con un gradiente verde brillante. Al contrario, se le proprietà sono violate, il nodo rimane nel suo stato neutro, segnalando implicitamente la necessità di un'ulteriore manipolazione.
     \item \textbf{Contatore delle Mosse}: In alto sopra ogni arena, un contatore digitale traccia il numero di scambi effettuati. Questo introduce un elemento di \textit{Gamification}: l'obiettivo non è solo risolvere l'algoritmo, ma farlo con il minor numero di mosse possibile, cercando di eguagliare o superare l'efficienza della CPU.
 \end{itemize}
