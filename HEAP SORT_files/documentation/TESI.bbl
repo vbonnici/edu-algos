@@ -2,19 +2,32 @@
 
 \bibitem[Bell et~al., 2015]{csunplugged}
 Bell, T., Witten, I.~H., and Fellows, M. (2015).
-\newblock {\em Computer Science Unplugged: An Enriching Program of Activities
-  for Primary-aged Children}.
+\newblock {\em Computer Science Unplugged: An Enriching Program of Activities for Primary-aged Children}.
+
+\bibitem[Brennan and Resnick, 2012]{brennan2012new}
+Brennan, K. and Resnick, M. (2012).
+\newblock New frameworks for studying and assessing the development of computational thinking.
+\newblock In {\em Proceedings of the 2012 annual meeting of the American educational research association}, volume~1, pages 1--25. Vancouver, BC, Canada.
+
+\bibitem[Caspersen and Bennedsen, 2007]{caspersen2007instructional}
+Caspersen, M.~E. and Bennedsen, J. (2007).
+\newblock Instructional design of a first programming course.
+\newblock In {\em Proceedings of the third international workshop on Computing education research}, pages 111--122.
 
 \bibitem[Cormen et~al., 2009]{cormen2009}
 Cormen, T.~H., Leiserson, C.~E., Rivest, R.~L., and Stein, C. (2009).
 \newblock {\em Introduction to Algorithms}.
 \newblock MIT Press, 3rd edition.
 
+\bibitem[Denning, 2017]{denning2017remaining}
+Denning, P.~J. (2017).
+\newblock Remaining trouble spots with computational thinking.
+\newblock {\em Communications of the ACM}, 60(6):33--39.
+
 \bibitem[Deterding et~al., 2011]{deterding2011}
 Deterding, S., Dixon, D., Khaled, R., and Nacke, L. (2011).
 \newblock From game design elements to gamefulness: Defining "gamification".
-\newblock In {\em Proceedings of the 15th International Academic MindTrek
-  Conference}.
+\newblock In {\em Proceedings of the 15th International Academic MindTrek Conference}.
 
 \bibitem[Duckett, 2011]{duckett2011}
 Duckett, J. (2011).
@@ -25,6 +38,36 @@ Duckett, J. (2011).
 Flanagan, D. (2020).
 \newblock {\em JavaScript: The Definitive Guide}.
 \newblock O'Reilly Media, 7th edition.
+
+\bibitem[Gal-Ezer and Stephenson, 2014]{gal2014tale}
+Gal-Ezer, J. and Stephenson, C. (2014).
+\newblock A tale of two countries: Successes and challenges in k-12 computer science education in israel and the united states.
+\newblock {\em ACM Transactions on Computing Education (TOCE)}, 14(2):1--18.
+
+\bibitem[Gee, 2003]{gee2003video}
+Gee, J.~P. (2003).
+\newblock {\em What video games have to teach us about learning and literacy}.
+\newblock Palgrave Macmillan.
+
+\bibitem[Hazzan et~al., 2014]{hazzan2014guide}
+Hazzan, O., Lapidot, T., and Ragonis, N. (2014).
+\newblock {\em Guide to teaching computer science: An activity-based approach}.
+\newblock Springer, 2nd edition.
+
+\bibitem[Hundhausen et~al., 2002]{hundhausen2002meta}
+Hundhausen, C.~D., Douglas, S.~A., and Stasko, J.~T. (2002).
+\newblock A meta-study of algorithm visualization effectiveness.
+\newblock {\em Journal of Visual Languages \& Computing}, 13(3):259--290.
+
+\bibitem[Kolb, 1984]{kolb1984experiential}
+Kolb, D.~A. (1984).
+\newblock {\em Experiential learning: Experience as the source of learning and development}.
+\newblock Prentice-Hall, Englewood Cliffs, NJ.
+
+\bibitem[Mayer, 2005]{mayer2005cognitive}
+Mayer, R.~E. (2005).
+\newblock Cognitive theory of multimedia learning.
+\newblock In Mayer, R.~E., editor, {\em The Cambridge handbook of multimedia learning}, pages 31--48. Cambridge University Press.
 
 \bibitem[{Mozilla Developer Network}, 2024]{mdn}
 {Mozilla Developer Network} (2024).
@@ -43,14 +86,18 @@ Papert, S. (1980).
 
 \bibitem[Potel, 1996]{mvp}
 Potel, M. (1996).
-\newblock Mvp: Model-view-presenter: The taligent programming model for c++ and
-  java.
+\newblock Mvp: Model-view-presenter: The taligent programming model for c++ and java.
 \newblock Technical report, Taligent Inc.
 
 \bibitem[Sweller, 1988]{sweller1988}
 Sweller, J. (1988).
 \newblock Cognitive load during problem solving: Effects on learning.
 \newblock {\em Cognitive Science}, 12(2):257--285.
+
+\bibitem[Vuorikari et~al., 2022]{vuorikari2022digcomp}
+Vuorikari, R., Kluzer, S., and Punie, Y. (2022).
+\newblock Digcomp 2.2: The digital competence framework for citizens - with new examples of knowledge, skills and attitudes.
+\newblock Technical report, Publications Office of the European Union.
 
 \bibitem[Wing, 2006]{wing2006}
 Wing, J.~M. (2006).

@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex TESI"] 1773575115.48153 "TESI.aux" "TESI.bbl" "TESI" 1773575115.72795 2
-  "./Bibliografia.bib" 1773052594.13012 2043 08854f931624b4379a771677a7602e37 ""
+["bibtex TESI"] 1776067151.75168 "TESI.aux" "TESI.bbl" "TESI" 1776067159.53431 0
+  "./Bibliografia.bib" 1776067038.43173 5519 4f9f48f2aea254c99666a96f7d7692b6 ""
   "/usr/local/texlive/2026/texmf-dist/bibtex/bst/base/apalike.bst" 1292289607 24635 604dafcc79f521a11ea73e506e1fbd98 ""
-  "TESI.aux" 1773575107.47585 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "TESI.aux" 1776067158.42103 27395 3bcc72780c1f61aa3b625d6fc10f59fd "pdflatex"
   (generated)
   "TESI.bbl"
   "TESI.blg"
   (rewritten before read)
-["pdflatex"] 1773575110.01205 "/Users/nnaminkoussekennethjames/Desktop/stage/edu-algos/HEAP SORT_files/documentation/TESI.tex" "TESI.pdf" "TESI" 1773575115.23946 2
-  "/Users/nnaminkoussekennethjames/Desktop/stage/edu-algos/HEAP SORT_files/documentation/TESI.tex" 1773575107.09799 130085 e11e2735008f9136a8d06631161046d0 ""
+["pdflatex"] 1776067152.10454 "/Users/nnaminkoussekennethjames/Desktop/stage/edu-algos/HEAP SORT_files/documentation/TESI.tex" "TESI.pdf" "TESI" 1776067159.53469 0
+  "/Users/nnaminkoussekennethjames/Desktop/stage/edu-algos/HEAP SORT_files/documentation/TESI.tex" 1776067136.83581 138339 23a647d26a4d92db8025b1d0fcffa4e7 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -45,12 +45,10 @@
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1248133631 36741 fa121aac0049305630cf160b86157ee4 ""
-  "/usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1248133631 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "/usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
-  "/usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
   "/usr/local/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb" 1215737283 140176 d4962f948b4cc0adf4d3dde77a128c95 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb" 1215737283 135942 859a90cad7494a1e79c94baf546d7de5 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb" 1215737283 139826 9213617a7cb78635fc326b859c0b2273 ""
@@ -263,13 +261,13 @@
   "Result_images/impostazioni.png" 1772888551.38756 121637 5f95169b601a375466090390c4827d9b ""
   "Result_images/perso.png" 1772891313.5427 327627 562a5560d7d5854364f8ddbc9b41fdfd ""
   "Result_images/vinto.png" 1772891221.71893 300345 59ccb8ed7dec93847319cda6d2afb223 ""
-  "TESI.aux" 1773575107.47585 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
-  "TESI.bbl" 1773575115.72555 0 d41d8cd98f00b204e9800998ecf8427e "bibtex TESI"
-  "TESI.lof" 0 -1 0 "pdflatex"
-  "TESI.out" 0 -1 0 "pdflatex"
-  "TESI.tex" 1773575107.09799 130085 e11e2735008f9136a8d06631161046d0 ""
-  "TESI.toc" 0 -1 0 "pdflatex"
-  "pdfa.xmpi" 1773575110.96504 5042 a7585f02790a41e148d04e4bb4d71e88 "pdflatex"
+  "TESI.aux" 1776067158.42103 27395 3bcc72780c1f61aa3b625d6fc10f59fd "pdflatex"
+  "TESI.bbl" 1776067152.09276 4428 a14d8e5ccc20e02c27c980b63fbf0cfc "bibtex TESI"
+  "TESI.lof" 1776067158.43104 2933 c30e6eaf59a8981e6ff275ec43df1f7e "pdflatex"
+  "TESI.out" 1776067158.42997 27798 e1da7e1859a7dd6ea8bb2e1cb1cde17d "pdflatex"
+  "TESI.tex" 1776067136.83581 138339 23a647d26a4d92db8025b1d0fcffa4e7 ""
+  "TESI.toc" 1776067158.43085 11929 c060dafa6178fda43367112e800182a6 "pdflatex"
+  "pdfa.xmpi" 1776067153.49751 5042 89f8b873dfff69d1bb867f83fc89d269 "pdflatex"
   "theme/logo_unipr.pdf" 1770932625.88612 75556 9f0bfc860584234a8195cd47491e3fa6 ""
   "theme/uniprthesis.cls" 1770932625.88658 7819 04578d174764ee053ab627942f886ec6 ""
   (generated)
@@ -281,3 +279,4 @@
   "TESI.toc"
   "pdfa.xmpi"
   (rewritten before read)
+  "pdfa.xmpi"
